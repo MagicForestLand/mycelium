@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "kind": "MYCELIUM_VERIFIED_DEPLOYMENT",
+  "releaseStatus": "CURRENT_RELEASE",
+  "network": "mainnet",
+  "chainId": 1,
+  "sourceCommit": "5b7d890039dc0c660fabaa8b03c5f0b5a8654e86",
+  "releaseDigest": "bf164a80af6f614241126ad0959777f013c494c3327064db353e5647dde5eb1e",
+  "deploymentTransaction": "0x7c2f5374aa3ae175164229e6524c6524b5d373db75563988aa0e3b82d397582e",
+  "deploymentBlock": 26259980,
+  "deploymentHash": "0xd089980e5841d001beec21f17e0d1ac188510d0e74c5f9060ea03dde1c75b7c4",
+  "deployer": "0x2aDfb96a87e6F7cf8bec3312e73aD2480dD7fF30",
+  "finality": {
+    "blockNumber": 26260035,
+    "blockHash": "0xdbea3573aa20f8c15082b6be04b17fcc74c63201251eae2a23ea893d64ed2f9a"
+  },
+  "collection": {
+    "name": "Mycelium Friends",
+    "symbol": "MYFRIENDS",
+    "address": "0x49f3A83a8EE0B1BB4334c5Fa997565926234648F",
+    "runtimeHash": "0xcd2f3ade8e8fc5991ce159587bad0a0585ef20f5ec978869e5c9e105dc4850f8",
+    "catalogHash": "ad69c978eda3b3e19bfd2e7911bc73e261865b2259b328850991767fa03db509",
+    "saleCap": 268435456,
+    "initialSalePhase": "PAUSED"
+  },
+  "roles": {
+    "owner": "0x61942881D7ED31aE8935De4d454820d4214443f8",
+    "treasury": "0x61942881D7ED31aE8935De4d454820d4214443f8",
+    "royaltyReceiver": "0x61942881D7ED31aE8935De4d454820d4214443f8",
+    "royaltyBps": 500
+  },
+  "protocol": {
+    "mint": "commit-reveal-v1",
+    "saleLifecycle": "phased-v1",
+    "minimumCommitmentAgeSeconds": 60,
+    "maximumCommitmentAgeSeconds": 86400
+  },
+  "contracts": {
+    "StemBankPage0": "0xb5A1099C9562b221fEc38F1f6fb15b762EeDbcAd",
+    "StemBankPage1": "0x947287aFf42848C2BBCCaD7f7DE1bdE77e958298",
+    "StemBank": "0xa7a91B8C24Ad5FEA35DAB9D9ca31880Cd307d7c8",
+    "CapBankPage0": "0xE25048192D6E886ac35B55c4635DA5Bcce69a69F",
+    "CapBankPage1": "0x0a58a121bD8BfBA1a7aC3B8166E70bf29dF17Dc9",
+    "CapBankPage2": "0x24B567AADb1d342854C8d752d10425aaB8F87A71",
+    "CapBankPage3": "0xee71592fDF6131c5bC705D1ED4f14eB3ec982047",
+    "CapBankPage4": "0x4c17FB7B78A14fdbCF98834e8E2A434B27Dd5fD8",
+    "CapBankPage5": "0xe7307fB32c8440E935fcCBeb1baab296Ec44d449",
+    "CapBankPage6": "0xd4968c92fF94E5a19c40030Edb63f6b424F58B3C",
+    "CapBankPage7": "0x1AaA038ecF4A9911Ac6147fACe2a8b341ab865b6",
+    "CapBankPage8": "0x29d30305B56C866359bC3187c943067F4A28E5D0",
+    "CapBankPage9": "0x88D9Eb3F2988c8D3656D15Ba448550b910286250",
+    "CapBankPage10": "0x78369a37e007e5d46B6C6B08c9F06813e801CC02",
+    "CapBankPage11": "0x7fcFa3f9FB292DE0fBdABD77a1Bba170E8313B2b",
+    "CapBank": "0x62654FBBB8F6Dceb64625AEE73b9F348Ff9969bA",
+    "TemperamentBank": "0x904665D92444B86B765A50c94254f6D04bEF7ADC",
+    "GlassesBank": "0x142A70B586D1B7774F2681145a6202E2719dC8E6",
+    "AccessoryBank": "0xF919e14A44BD4Ac3073627162732b7a3BF71e7D9",
+    "HobbyBankPage0": "0xf5e3A0B3cc5E94248606c124187B4E6D8B669A0A",
+    "HobbyBankPage1": "0xC154032275b0Fc5881cc9648bE9Fa4d8FaC7d3E9",
+    "HobbyBank": "0xa964724BE93D9f85a531149b0ebaa4F9AB2783E6",
+    "MetadataEncoder": "0x78015626e28f41e4544525a50CDeB66C5B2C38F0",
+    "GenotypeDescriptor": "0xd8f8187186998A4EAd8792922e8BC5DA4a2DFb4d",
+    "PhenotypeRenderer": "0xD19f8CcE36B1853A4A711187d5aE319357bf9855",
+    "MyceliumFriends": "0x49f3A83a8EE0B1BB4334c5Fa997565926234648F",
+    "SVGHeaderStore": "0x7A01D45F133B879b6910CCF0064e5eC68a53A74b",
+    "SVGHeaderPage0": "0x936682733f2f0c3a78acCB6C129B79b8D5b79669",
+    "SVGHeaderPage1": "0x5690bBfac62A5f66E1100FDaA8866E4D25b4A5DD"
+  },
+  "verification": {
+    "broadcastReceiptCount": 26,
+    "internalContractCount": 3,
+    "finalized": true,
+    "independentRpcProviders": 2
+  },
+  "public": {
+    "id": "mycelium-friends-mainnet",
+    "label": "Mycelium Friends",
+    "networkName": "Ethereum",
+    "explorerUrl": "https://etherscan.io"
+  }
+}
