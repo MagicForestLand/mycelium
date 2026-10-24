@@ -1,0 +1,1479 @@
+{
+  "format": 2,
+  "kind": "MYCELIUM_SOURCE_VERIFICATION_BUNDLE",
+  "releaseDigest": "bf164a80af6f614241126ad0959777f013c494c3327064db353e5647dde5eb1e",
+  "compiler": "0.8.37+commit.f401782d.Emscripten.clang",
+  "storageLayoutHashPolicy": "SEMANTIC_STORAGE_LAYOUT_V1_EXCLUDES_SOLC_AST_IDS",
+  "compilerSettings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200,
+      "details": {
+        "yul": false
+      }
+    },
+    "viaIR": false,
+    "evmVersion": "shanghai",
+    "outputSelection": {
+      "*": {
+        "": [
+          "ast"
+        ],
+        "*": [
+          "abi",
+          "evm.bytecode.object",
+          "evm.deployedBytecode.object",
+          "evm.deployedBytecode.immutableReferences",
+          "storageLayout"
+        ]
+      }
+    }
+  },
+  "standardInputSha256": "3230a0ce080cbf52f7bf0f4aa4a4875923fd91ec8db851e6716a2cd001c4d243",
+  "sourceHashes": {
+    "@openzeppelin/contracts/access/Ownable.sol": "38578bd71c0a909840e67202db527cc6b4e6b437e0f39f0c909da32c1e30cb81",
+    "@openzeppelin/contracts/access/Ownable2Step.sol": "c75345d7b9feef17ae29f2a800ca2f65f8021cf80436a41d6ec00f57f5180f36",
+    "@openzeppelin/contracts/interfaces/draft-IERC6093.sol": "df936240c9a5d342582cbda70dd773b1c1d0e0dda3042b1c17b902ef0c36827b",
+    "@openzeppelin/contracts/interfaces/IERC2981.sol": "ea5f52ef580b9cb7c97091fd8164ec3ff211f5bdec359d18191eac4fcf7fcf76",
+    "@openzeppelin/contracts/token/ERC721/ERC721.sol": "330a87f2bf94083df8ddd341735d712866455042aaca58d33ee1799773e1cae1",
+    "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": "33223782ea652dca413702ce92f9f59d91d758a035065b24bbedb7dc60c63a78",
+    "@openzeppelin/contracts/token/ERC721/IERC721.sol": "ff0eb9902bf0ac099205615fac90eacf34fae637571b05aab3ea35dea53d5f17",
+    "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": "eafee3ffdc7cb2fba4bf6bd16fb28f8e5b4679742e81c2ad42a1b1df5c179feb",
+    "@openzeppelin/contracts/token/ERC721/utils/ERC721Utils.sol": "f2041b1685dcf0cf6b968d9b8454e5a46068b1df5ab0e82ba0b269fa2f3099a8",
+    "@openzeppelin/contracts/utils/Context.sol": "847fda5460fee70f56f4200f59b82ae622bb03c79c77e67af010e31b7e2cc5b6",
+    "@openzeppelin/contracts/utils/introspection/ERC165.sol": "61a2b12c96857aaa35f48aeda67a4281637a42494c0b3795be0ae976aa7b3793",
+    "@openzeppelin/contracts/utils/introspection/IERC165.sol": "9055c2994b37dea1a41b7b7926dcb510f05dbe2540b0aafc5fbee9558fffd0ca",
+    "@openzeppelin/contracts/utils/math/Math.sol": "92fee281fd46a1b058b190cf21d6b1a528f0433a907850ae1c9bcf36c5c0cd98",
+    "@openzeppelin/contracts/utils/math/SafeCast.sol": "9769274bf53f26a7c7896c526ea1980dc9bea5bf5c2a5fd04870008c4afc1de9",
+    "@openzeppelin/contracts/utils/math/SignedMath.sol": "1ed50b1056af886752f0fb48a0165d381e69bb4a4b18b893b066dc144a7e08d7",
+    "@openzeppelin/contracts/utils/Panic.sol": "270fc8401c1a13fae6a7a4a2dd6e381b95d658896701e51f0d3e2688acab3dec",
+    "@openzeppelin/contracts/utils/ReentrancyGuard.sol": "32fbb1c908ec1b4de85cc1bb10091aebd5816ffe80dfdd5ca5e084fbea67a462",
+    "@openzeppelin/contracts/utils/Strings.sol": "2db7d21151644c57f75ed3ab55e87f3cf7fbf587a65345650fd740e2cfd50be3",
+    "contracts/core/BeadCodec.sol": "e4f214c68a63d2a3146f4b55a2f613648653aa257f5a9ffffdf95f00780a970b",
+    "contracts/core/BubbleText.sol": "94c8443aa2b8983435b15e301c71edffd5e6c75d0264d6cc692353e3538fb9fe",
+    "contracts/core/generated/ArtBanks.sol": "978fe67024b9d356263bce2b8a2ad43f5fa46e8cce7b6ee55397018ceea1a206",
+    "contracts/core/generated/GenomeSchema.sol": "9467883a00d495c5eb415dec1c436ed929f21d67d587d3a2edfbd5c4ce0a25b4",
+    "contracts/core/generated/MetadataContent.sol": "a6345727b543804858a3342f193bfe8598baa4906baa065f461ce2fb266e9eba",
+    "contracts/core/generated/SVGConstants.sol": "914921b77fd220fb8c118916d5f76931d66a63f4d3b58c78e81675307dbf6231",
+    "contracts/core/GenotypeDescriptor.sol": "f7001c4f693648f8e8a0d2cb3594532477f69ad0aa084556781813b895dd31a7",
+    "contracts/core/IArtBank.sol": "eb189314df23723531f85c94ef3e45d247b4334bba7c3758942e846482d49c43",
+    "contracts/core/ICreatorToken.sol": "6dd40a3710aff3f31889acba91e01d1a5a5a20116a8b826ff37352f7906eac5e",
+    "contracts/core/IPhenotypeSource.sol": "9635b06ff8cdf1d6f992e9c2a340e769296336e95e2324e85ecf276a8b4ff22f",
+    "contracts/core/MetadataEncoder.sol": "f3916014f2bfd8dcf8cfd03dfd68733392d412f8a4f58f711f9d6ac4e0500178",
+    "contracts/core/MintPricing.sol": "14ba25a55b0355bd122ba5e478206fb3c42fbd0793a6a97f1673daf21b55c0e5",
+    "contracts/core/MintSettlement.sol": "6bcc38aaf82d461a41f81a63869e5f0aaf346ae403e259662ce2678668baf366",
+    "contracts/core/MyceliumFriends.sol": "1d09f957af164adcea118671de17866e005bf4bae9cf34450285f824d5f77369",
+    "contracts/core/PairBase64.sol": "42ebc69a29b1ab78e4ee02c4725c1cadb42600e8369c6ed5a6176d758ae83899",
+    "contracts/core/PhenotypeRenderer.sol": "8e4c0efa44265fe8fd4fcb38e6306fc8722d40f6b85e89a482c04ad0e50f270a"
+  },
+  "contracts": [
+    {
+      "name": "StemBankPage0",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0xb5A1099C9562b221fEc38F1f6fb15b762EeDbcAd",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:StemBankPage0",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "4b8d260dd09ba636cbf630a70c23d0cb2fb2e3dbbf5c41e54ee603e0a3d07a40",
+      "runtimeTemplateSha256": "57cc26730f33ad02f324822a31b7bbb3694e4c5b705782fa18166901baddcca6",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0x4af85c34c746f20a39c46748b67eaa64c24cc85ed453519107b9098c342ad723",
+      "initcodeHash": "0x4af85c34c746f20a39c46748b67eaa64c24cc85ed453519107b9098c342ad723",
+      "runtimeHash": "0x0ead4bd17dc730a35d4fa68f2c13fb45f20bd007eabc99b02a643143b8997ebf"
+    },
+    {
+      "name": "StemBankPage1",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0x947287aFf42848C2BBCCaD7f7DE1bdE77e958298",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:StemBankPage1",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "3766f352830ebd611d4f8d554c1c32cde452f4e445ed55f3bf007081c4eefdda",
+      "runtimeTemplateSha256": "8ebb1f4768a979ef334ca97aa87e499eb2e6b368383d0d135ee8175fe7b4db21",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0x65b8c60b73db36bfd849fe95c2f1ff0cb27ca1ba5bcf535372eab57c43646ae9",
+      "initcodeHash": "0x65b8c60b73db36bfd849fe95c2f1ff0cb27ca1ba5bcf535372eab57c43646ae9",
+      "runtimeHash": "0x46b0dd5e3953e45fb4615d68f11de0dc79bfb2d7864319958cad1ae1ca0c4428"
+    },
+    {
+      "name": "StemBank",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0xa7a91B8C24Ad5FEA35DAB9D9ca31880Cd307d7c8",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:StemBank",
+      "abiSha256": "f490ef0a76c8d80d87e28f4c9a0f184eebfe1225c0e438d62acd78eb45bd8866",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "313c69cd3982aac5bc8120b6c513a0bb6fef4a3bfe79b4293281376e37defb78",
+      "runtimeTemplateSha256": "504dded127554614a463c633ad2da9ab4df2b287288311754f5f6e0b800d8e50",
+      "constructorArguments": "0x000000000000000000000000b5a1099c9562b221fec38f1f6fb15b762eedbcad000000000000000000000000947287aff42848c2bbccad7f7de1bde77e958298",
+      "creationCodeHash": "0x2b2bf46769d69f95991b59b3e9548f8688c319be6e53ba96d11d2e6aa5a6df1f",
+      "initcodeHash": "0x6f3b4177dd747d7e587dd7d7c4b96e382cc842e0f751d85f1308ee72b74b19e3",
+      "runtimeHash": "0xf83eeb02afc759b39314ece8ed1f054b18fa9d92ed7f1ebc9578e5a987eb4815"
+    },
+    {
+      "name": "CapBankPage0",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0xE25048192D6E886ac35B55c4635DA5Bcce69a69F",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:CapBankPage0",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "15dbcd2cb7bf1ff97c9ce252d23ee000134b65aac2124fd1d8928d68ee124c02",
+      "runtimeTemplateSha256": "4c9b6509f36d253b13a835d2e632c0d500a4977f0ec4eb67138dee6bd3e4ab0d",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0x1dab39928947bd24bf1e8b181890c74382910c540688a6001068a9d0e0204db6",
+      "initcodeHash": "0x1dab39928947bd24bf1e8b181890c74382910c540688a6001068a9d0e0204db6",
+      "runtimeHash": "0xda60b0d3252a869a95aec71710bd2d9e392c88ffa95676c88915ec9e9c8664a2"
+    },
+    {
+      "name": "CapBankPage1",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0x0a58a121bD8BfBA1a7aC3B8166E70bf29dF17Dc9",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:CapBankPage1",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "210ed0d8b82457755c6457d1e132e36a015fff9c5d83b70e1a8b21de06cf14e2",
+      "runtimeTemplateSha256": "486c53cd236e64b6330dbef434e5a27ed0f23694daaf837ed448d7ca1b317bf6",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0x6d51b5856f28e9c7d67d898c49fa5664f0c2fb09b6611769a8fc219946338661",
+      "initcodeHash": "0x6d51b5856f28e9c7d67d898c49fa5664f0c2fb09b6611769a8fc219946338661",
+      "runtimeHash": "0xac426192a89fddc9128b6536d4d740ce205367727ac0ca8a30082682866b791d"
+    },
+    {
+      "name": "CapBankPage2",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0x24B567AADb1d342854C8d752d10425aaB8F87A71",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:CapBankPage2",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "ac3c427757d5788c9f0f4802b7df23700355d8afd18e7fce3dee6ed57430261c",
+      "runtimeTemplateSha256": "899ac92b76e0e79f21c25729fc51c39689e6908f8739d64577b05afe041f3ba3",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0x2bbc8a312aa918470981afb27dba70ae2e4c9d37fe4306471e844afdb896ed35",
+      "initcodeHash": "0x2bbc8a312aa918470981afb27dba70ae2e4c9d37fe4306471e844afdb896ed35",
+      "runtimeHash": "0x43754e3f3ed238d6213c50482893dcd78d47c08ef8c92c69f0d0481cc7340c8c"
+    },
+    {
+      "name": "CapBankPage3",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0xee71592fDF6131c5bC705D1ED4f14eB3ec982047",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:CapBankPage3",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "c44eacb7d76d7ecdbcd49d581a67a65ee5c777c362c89662d87aa638b2e5b31e",
+      "runtimeTemplateSha256": "d823f57257df85ead67d3675bca2e0f6e8d9ed0d09d7001735c919118997b13f",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0x52507865043550a6dfbaf0309fbfa691580f79f7e904694dc9bcae228ffac37d",
+      "initcodeHash": "0x52507865043550a6dfbaf0309fbfa691580f79f7e904694dc9bcae228ffac37d",
+      "runtimeHash": "0xf3fe0ece76692507f05f393fc82b5dd181be738d3490ac55f9546d34952a73ea"
+    },
+    {
+      "name": "CapBankPage4",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0x4c17FB7B78A14fdbCF98834e8E2A434B27Dd5fD8",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:CapBankPage4",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "f5497f73ef9d2fd4599f6b0753839d51a4b51268037637b758abda0d346f4905",
+      "runtimeTemplateSha256": "8f6a5b911f4ef21e996dd057eb437ca3db608411053178dbddbdcf21f82fe991",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0xef589ed9c0f7ea2ca30ffeb2f94069f56e94c6ced6f6691e6fd1910a89b3af06",
+      "initcodeHash": "0xef589ed9c0f7ea2ca30ffeb2f94069f56e94c6ced6f6691e6fd1910a89b3af06",
+      "runtimeHash": "0x8482323506ac557bfa1a33fc0087151e4edb492e076174162c3366bbef5db6f2"
+    },
+    {
+      "name": "CapBankPage5",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0xe7307fB32c8440E935fcCBeb1baab296Ec44d449",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:CapBankPage5",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "eb13ae10d616b8c634f1b68b725ccac6530a712726e22c8a795de5d504a421fc",
+      "runtimeTemplateSha256": "158fc2a9984410486b8a90ded9060df34af7c0ab3c9e26ab3667359721372bb1",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0x3e9331ff098568362843f032461e6e610fb55666828193c53b853e60c1f01ff6",
+      "initcodeHash": "0x3e9331ff098568362843f032461e6e610fb55666828193c53b853e60c1f01ff6",
+      "runtimeHash": "0xa832339b7542c028e00c4a534aaad2a0bcc326a9bc0c7f264e6332375814de77"
+    },
+    {
+      "name": "CapBankPage6",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0xd4968c92fF94E5a19c40030Edb63f6b424F58B3C",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:CapBankPage6",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "8d0050b65ce3ff6454672e2d50ed412507fa67708431b234cc63f42d10a60fac",
+      "runtimeTemplateSha256": "010098161da79e8cb2095ebc73ea3415e77f2337bbf974a60fb8fdb6a84e1ad6",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0xf8a1fc8b5b70f92d6ec22bb1ef8f1b2a8dd25d3fa95a689439a9401b5a10ff96",
+      "initcodeHash": "0xf8a1fc8b5b70f92d6ec22bb1ef8f1b2a8dd25d3fa95a689439a9401b5a10ff96",
+      "runtimeHash": "0x86de33eb756449f27c29bdc32601a9bca51d49cac9e9f8367630e1a9695450a0"
+    },
+    {
+      "name": "CapBankPage7",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0x1AaA038ecF4A9911Ac6147fACe2a8b341ab865b6",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:CapBankPage7",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "5fffdb7cb1f71fa50550d7abeaf24304621231d19d5311ea9e73732b073048f2",
+      "runtimeTemplateSha256": "82e55dcc0711089536f6946f5c8cbefd26a61bb430d05a1dbe540ba6fa131218",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0x56f5197772bcd77a4196874e2c403b3672c1541252adad0faede83aa2daecdbe",
+      "initcodeHash": "0x56f5197772bcd77a4196874e2c403b3672c1541252adad0faede83aa2daecdbe",
+      "runtimeHash": "0x412f93ff524824aa49d4bbc8acc145d8c4b58ba69aaceaf1c06e25b2afa7cda9"
+    },
+    {
+      "name": "CapBankPage8",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0x29d30305B56C866359bC3187c943067F4A28E5D0",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:CapBankPage8",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "1da9af5198d1402e46f26f4f29dbf0ba55873c5203c65177dd8e3a0e07939b60",
+      "runtimeTemplateSha256": "4dfc8eca938e6cfc56c476a7282fd266bdb297f0ab4e938b79dc17f505d39bf6",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0xe8dad901b9d27fe5e7542aa7c59baa81aec4f8e73f3c392bf494f012bba2b759",
+      "initcodeHash": "0xe8dad901b9d27fe5e7542aa7c59baa81aec4f8e73f3c392bf494f012bba2b759",
+      "runtimeHash": "0x9b09fafb164a633863b423819d48c558e24f48ff428136252d399028584c3814"
+    },
+    {
+      "name": "CapBankPage9",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0x88D9Eb3F2988c8D3656D15Ba448550b910286250",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:CapBankPage9",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "0693cd81d0e5a56b94a3cc6ccc140d221193a8b81c5288756de5b8833d39595d",
+      "runtimeTemplateSha256": "6e1367b727ef15835626dba7f4683fc0366657e0d8af37c28d7d539f66686737",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0x9e25f8274c9ff94d9f14fe58ba26b5dbd5a316547ef5f3c94556a56b253819c7",
+      "initcodeHash": "0x9e25f8274c9ff94d9f14fe58ba26b5dbd5a316547ef5f3c94556a56b253819c7",
+      "runtimeHash": "0x12719a1566832c0d80a99d77e20f63fbdad487d07442023b4fd81853a6e7bbbe"
+    },
+    {
+      "name": "CapBankPage10",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0x78369a37e007e5d46B6C6B08c9F06813e801CC02",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:CapBankPage10",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "ffe5ed2cf2028ccd02a175017d880750aae777937c61010d7227af6b8134d8af",
+      "runtimeTemplateSha256": "c8fb6644f600cfe0b90cff0999c4b9dbe03d7d4b685a7a68e731cf4db994c44a",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0x8a0c60a5a37d8cb72cf4eeb9c9407f9f62945b639c89f6eb4765ed977610a993",
+      "initcodeHash": "0x8a0c60a5a37d8cb72cf4eeb9c9407f9f62945b639c89f6eb4765ed977610a993",
+      "runtimeHash": "0x4682f0cd3777d9c15837a70eded2c225364746279f7fc61e32f5f86a14ad97df"
+    },
+    {
+      "name": "CapBankPage11",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0x7fcFa3f9FB292DE0fBdABD77a1Bba170E8313B2b",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:CapBankPage11",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "fee76faa1a149355a0bf66b5ae85a0cf3b91102d14b648625fcafc5d182238ec",
+      "runtimeTemplateSha256": "713d59c73541866540a3015f18fcadca4fb6d8fe77be46b26d61a8a5dd45c684",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0xd3fae18c506754766629a022a2fc188dfc363132401f5df68aea127191afaa06",
+      "initcodeHash": "0xd3fae18c506754766629a022a2fc188dfc363132401f5df68aea127191afaa06",
+      "runtimeHash": "0xbb11336560b61c91887094db4527cf0711aa7353d6be19608fe965b90987b2dd"
+    },
+    {
+      "name": "CapBank",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0x62654FBBB8F6Dceb64625AEE73b9F348Ff9969bA",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:CapBank",
+      "abiSha256": "51496ead6809eb09da0e1ca4d0f44477448787e1b898d19c5731b3ab35cbc08e",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "6dea7a94eae2e05445f84df29b491920834a487668e6576c709906afcd4046d0",
+      "runtimeTemplateSha256": "6aa1a9fdfa2c0dc1ecd0562fed758b92126a56d2e7a1401217fab6f9f8648f34",
+      "constructorArguments": "0x000000000000000000000000e25048192d6e886ac35b55c4635da5bcce69a69f0000000000000000000000000a58a121bd8bfba1a7ac3b8166e70bf29df17dc900000000000000000000000024b567aadb1d342854c8d752d10425aab8f87a71000000000000000000000000ee71592fdf6131c5bc705d1ed4f14eb3ec9820470000000000000000000000004c17fb7b78a14fdbcf98834e8e2a434b27dd5fd8000000000000000000000000e7307fb32c8440e935fccbeb1baab296ec44d449000000000000000000000000d4968c92ff94e5a19c40030edb63f6b424f58b3c0000000000000000000000001aaa038ecf4a9911ac6147face2a8b341ab865b600000000000000000000000029d30305b56c866359bc3187c943067f4a28e5d000000000000000000000000088d9eb3f2988c8d3656d15ba448550b91028625000000000000000000000000078369a37e007e5d46b6c6b08c9f06813e801cc020000000000000000000000007fcfa3f9fb292de0fbdabd77a1bba170e8313b2b",
+      "creationCodeHash": "0xcb51146e50946e0e8da93854ac5e854fdde2b91e0b0de599c5df78c5bdedc950",
+      "initcodeHash": "0x3d3f5740a0376a7bb99ba0c889d923d5ee68dd439aa9be71fb9864acb2c1dc88",
+      "runtimeHash": "0x8b191ad2779afd897b04da5ee821b706f9b85512df04bc07dfc5c2f772b35d84"
+    },
+    {
+      "name": "TemperamentBank",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0x904665D92444B86B765A50c94254f6D04bEF7ADC",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:TemperamentBank",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "bdf7ab52374f061342881c4c42d2bdd46f7b11bb10b05c2b9e56e311fe895da3",
+      "runtimeTemplateSha256": "d18660629e464cb62f78271bebf306b6dd1ba59d769ceb980b6bbec39928e57f",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0xe2a20c68536517adbe7307cbac3f3f85aeca94f52e192b0bda20d8d4acdc966b",
+      "initcodeHash": "0xe2a20c68536517adbe7307cbac3f3f85aeca94f52e192b0bda20d8d4acdc966b",
+      "runtimeHash": "0x30b8e9e4d5a09a750fb7045e14bcac5bb4c941c3088a81426cd285c89ece92d6"
+    },
+    {
+      "name": "GlassesBank",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0x142A70B586D1B7774F2681145a6202E2719dC8E6",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:GlassesBank",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "0ea86a0e13b41ddeccbe7085eaf28314a3c33546dee17a94b7662858cbae866f",
+      "runtimeTemplateSha256": "28febbf94a42e4e957bca166582944b2d4c89c37cb1d392a50cb61cdf1c2c044",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0xe9d48176e4207745ae7103840ac35bc14c87f695b238fcc19791e697edb875b9",
+      "initcodeHash": "0xe9d48176e4207745ae7103840ac35bc14c87f695b238fcc19791e697edb875b9",
+      "runtimeHash": "0x3f2c6489a8f886fcfb07f6f170f9a96d7db20279906f5d5d5ad0a0e5dbb79c1a"
+    },
+    {
+      "name": "AccessoryBank",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0xF919e14A44BD4Ac3073627162732b7a3BF71e7D9",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:AccessoryBank",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "21ce03eab7b4a04835695833d68a21f55a05000f3b8770958bb5396e7a0af1b7",
+      "runtimeTemplateSha256": "c0b202526b4c4bd63a39a7d679fcd1a1040f97d7e3552a4687e4640e312bc41a",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0x75005a5e7746ee43af97791171899543c519fdc7030d949589bef89d17ed87ae",
+      "initcodeHash": "0x75005a5e7746ee43af97791171899543c519fdc7030d949589bef89d17ed87ae",
+      "runtimeHash": "0x32b7c07df83ac1ae6102fb4191fb1d632d69e98428ab3bad71d94880cce06cc8"
+    },
+    {
+      "name": "HobbyBankPage0",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0xf5e3A0B3cc5E94248606c124187B4E6D8B669A0A",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:HobbyBankPage0",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "686e5b730bd5d15beddd703a5a8f9ac7f52ddb308b832d997013e5577256b849",
+      "runtimeTemplateSha256": "c8baac49050507bbd91f3300d06a486c591d4ce249ddfa195843a1a5ecb344f8",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0x02b71944aacc21ecf2a63c34678cdf5dc438dc1ed82a34c45232dbd4143e918e",
+      "initcodeHash": "0x02b71944aacc21ecf2a63c34678cdf5dc438dc1ed82a34c45232dbd4143e918e",
+      "runtimeHash": "0xba50b770ccab17eb2ff9b663c2114f17a90e3379129e4dff3ababbcc3620a70a"
+    },
+    {
+      "name": "HobbyBankPage1",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0xC154032275b0Fc5881cc9648bE9Fa4d8FaC7d3E9",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:HobbyBankPage1",
+      "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "58ff9c7c81804882cf5e7319a74c8852953fd513911b389fb2eeb0c82727b1ec",
+      "runtimeTemplateSha256": "a190cbe459e456e68aceb1a9c549f6f1c6d902f450099eced51635d811a0dfac",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0xae3f831350e663dee6f482c745b536278fa0c54b1d3c52f7ea4ac5014937726a",
+      "initcodeHash": "0xae3f831350e663dee6f482c745b536278fa0c54b1d3c52f7ea4ac5014937726a",
+      "runtimeHash": "0xa62302e3153a69307f90cfdd06101ed857faca546973b2e7895aa53576938c2b"
+    },
+    {
+      "name": "HobbyBank",
+      "source": "contracts/core/generated/ArtBanks.sol",
+      "address": "0xa964724BE93D9f85a531149b0ebaa4F9AB2783E6",
+      "compilerContract": "contracts/core/generated/ArtBanks.sol:HobbyBank",
+      "abiSha256": "f490ef0a76c8d80d87e28f4c9a0f184eebfe1225c0e438d62acd78eb45bd8866",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "c531b4712896627ea3191831312328e11482667fbfa1ec6793a45a7e2a6dcc9a",
+      "runtimeTemplateSha256": "672898024a4c1adce47ffb0a24a40653cb8a3ea42707b6830425c28dee6f198c",
+      "constructorArguments": "0x000000000000000000000000f5e3a0b3cc5e94248606c124187b4e6d8b669a0a000000000000000000000000c154032275b0fc5881cc9648be9fa4d8fac7d3e9",
+      "creationCodeHash": "0x420e7423eee6ed9e9f1f67f34f7fc24a2b22adc3b53d3f7633d0b3465ba639ed",
+      "initcodeHash": "0xa9e7296340ace0f481a06cde0c847ed434651accaa809046d667ca9a5dc529ef",
+      "runtimeHash": "0xc77b8b3fe23ca03cd2bc41a62e83adda257615420147be31b7b400bd0c230e6a"
+    },
+    {
+      "name": "MetadataEncoder",
+      "source": "contracts/core/MetadataEncoder.sol",
+      "address": "0x78015626e28f41e4544525a50CDeB66C5B2C38F0",
+      "compilerContract": "contracts/core/MetadataEncoder.sol:MetadataEncoder",
+      "abiSha256": "8878abfae87e057b2e3ab7734f7b28e733a7dd508e99f556637168af1be6a297",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "0d610eda8520311a1aae428fd2eb94e5452ece2a9f60931d56a971bbfe5e19b1",
+      "runtimeTemplateSha256": "839a1ab0266e4b07c72e1e43556728266ed59265c86545b3878da2cd43a56b69",
+      "constructorArguments": "0x",
+      "creationCodeHash": "0xc21b777d700a3f727a96cd133902afa77f5943d2a980857bfaec44874532dfae",
+      "initcodeHash": "0xc21b777d700a3f727a96cd133902afa77f5943d2a980857bfaec44874532dfae",
+      "runtimeHash": "0x5a9f12cef7aa8347d5b1e04eab7e02fc05ec0da2f04bdfff39ee6bd66a73f14d"
+    },
+    {
+      "name": "GenotypeDescriptor",
+      "source": "contracts/core/GenotypeDescriptor.sol",
+      "address": "0xd8f8187186998A4EAd8792922e8BC5DA4a2DFb4d",
+      "compilerContract": "contracts/core/GenotypeDescriptor.sol:GenotypeDescriptor",
+      "abiSha256": "9a2b56f87532527db6ba92385e12b0906e466d575d3fcf1c00a6d8f44f6dfb36",
+      "storageLayoutSha256": "843774d87b72f624dc12a1522f0d3048c8f93dc0bc40cff564cdd0793bbe3e09",
+      "creationBytecodeSha256": "471f58f4a8db68ee91ca8e51fa76bbc6b88e4dcd287702e871bdd422ce679e5a",
+      "runtimeTemplateSha256": "251b01a1ba89977156213750206fa06de2bdaa54318b3a90eb26ef6e9ac1a1b2",
+      "constructorArguments": "0x000000000000000000000000a7a91b8c24ad5fea35dab9d9ca31880cd307d7c800000000000000000000000062654fbbb8f6dceb64625aee73b9f348ff9969ba000000000000000000000000904665d92444b86b765a50c94254f6d04bef7adc000000000000000000000000142a70b586d1b7774f2681145a6202e2719dc8e6000000000000000000000000f919e14a44bd4ac3073627162732b7a3bf71e7d9000000000000000000000000a964724be93d9f85a531149b0ebaa4f9ab2783e600000000000000000000000078015626e28f41e4544525a50cdeb66c5b2c38f0",
+      "creationCodeHash": "0x86f7146f98f2e96b0869bbc98127c815b7f8c5898e20fd59927cd679318785d8",
+      "initcodeHash": "0x87fa540ffed942e373e31a0361c1250ce49a23299f0e62aa81ac5f8c1d15da68",
+      "runtimeHash": "0x55d4946705e1dba2e6f66645e9a3c5528d5ca7afd8a506972cd460125b8b6eaa"
+    },
+    {
+      "name": "PhenotypeRenderer",
+      "source": "contracts/core/PhenotypeRenderer.sol",
+      "address": "0xD19f8CcE36B1853A4A711187d5aE319357bf9855",
+      "compilerContract": "contracts/core/PhenotypeRenderer.sol:PhenotypeRenderer",
+      "abiSha256": "c07376a046a6996dbc8feefa29096cc05d2311ba17e7c97577866583503a117e",
+      "storageLayoutSha256": "b34c56562299e2888769d032bae42dcb6b735e0dfbe2c922868ce7f4c5da0ce9",
+      "creationBytecodeSha256": "63fa50291fc070cc41a361837f8e8c279e2f35f8fbe6ca30749390e407459d3f",
+      "runtimeTemplateSha256": "d124a21962de1eb02db21c0265c89d8aceac089821661da4ec159af9af0f32f2",
+      "constructorArguments": "0x000000000000000000000000d8f8187186998a4ead8792922e8bc5da4a2dfb4d",
+      "creationCodeHash": "0x0dc8d7ffc6819f4a8f665263b5a9c0fdbf5f48e655cdf9d3bc080cd09fd7f311",
+      "initcodeHash": "0x955258e0f53c57cb31b5ecb22d7a9afba1121087118ff905259f564be61605dd",
+      "runtimeHash": "0x0874a5e27ed502e13f0722df48be1403e04d2a9c9da1f7bd0abfceabac382356"
+    },
+    {
+      "name": "MyceliumFriends",
+      "source": "contracts/core/MyceliumFriends.sol",
+      "address": "0x49f3A83a8EE0B1BB4334c5Fa997565926234648F",
+      "compilerContract": "contracts/core/MyceliumFriends.sol:MyceliumFriends",
+      "abiSha256": "c139b909a7ac96ca79672ca7e6f6db989e7303d24201c9a921bc375707303321",
+      "storageLayoutSha256": "38c8f9921fa32e8abb0012355ae7beeb780cca5d1687acc90fcd599115abb5ec",
+      "creationBytecodeSha256": "d4087f8f3c0b59d04bab0d42014515947430eb3ae283a857d5e075b3f2c4bd59",
+      "runtimeTemplateSha256": "38b0d0683b305a68c2aaa81dfd14688dccbe0565feb253e1d17b1af726598383",
+      "constructorArguments": "0x000000000000000000000000d8f8187186998a4ead8792922e8bc5da4a2dfb4d000000000000000000000000d19f8cce36b1853a4a711187d5ae319357bf985500000000000000000000000061942881d7ed31ae8935de4d454820d4214443f800000000000000000000000061942881d7ed31ae8935de4d454820d4214443f8000000000000000000000000000000000000000000000000000000001000000000000000000000000000000061942881d7ed31ae8935de4d454820d4214443f8",
+      "creationCodeHash": "0x8ee8d0a5b775e6d7be07721b4d868eaf37420966254915da6db8d96e71435f50",
+      "initcodeHash": "0x09bb2901c21e739818fa21cb42e87702ab712f09f936561ca8020d1cc9519e49",
+      "runtimeHash": "0xcd2f3ade8e8fc5991ce159587bad0a0585ef20f5ec978869e5c9e105dc4850f8"
+    }
+  ],
+  "status": "PREDEPLOYMENT_SOURCE_CAPSULE",
+  "sourceSnapshotSha256": "642839f7277df105abdf033b620e490a299292a33fe9ec797b6ce15be1a7089c",
+  "metadataFreeEquivalence": {
+    "format": 1,
+    "kind": "MYCELIUM_ARCHITECTURE_EQUIVALENCE",
+    "baselineCommit": "46cd481bb741c2566fc3290b98b1395255c186c1",
+    "candidateCommit": "5b7d890039dc0c660fabaa8b03c5f0b5a8654e86",
+    "comparison": "STRUCTURAL_PATH_MIGRATION_METADATA_FREE_EXECUTABLE_EQUIVALENCE",
+    "pathMapping": {
+      "baseline": "contracts/",
+      "candidate": "contracts/core/"
+    },
+    "toolchain": {
+      "compiler": "0.8.37+commit.f401782d.Emscripten.clang",
+      "soljsonSha256": "221d7a667378b5068d913e75fe092507e061363cd1d23b64c49ae82febabad4c",
+      "compilerSettings": {
+        "optimizer": {
+          "enabled": true,
+          "runs": 200,
+          "details": {
+            "yul": false
+          }
+        },
+        "viaIR": false,
+        "evmVersion": "shanghai",
+        "outputSelection": {
+          "*": {
+            "": [
+              "ast"
+            ],
+            "*": [
+              "abi",
+              "evm.bytecode.object",
+              "evm.deployedBytecode.object",
+              "evm.deployedBytecode.immutableReferences",
+              "storageLayout"
+            ]
+          }
+        },
+        "metadata": {
+          "bytecodeHash": "none",
+          "appendCBOR": false
+        }
+      },
+      "dependencies": {
+        "solc": {
+          "version": "0.8.37",
+          "integrity": "sha512-ieUYdPDRGNKMsZpCfi9tY64Q+ASoL8tyhLuvf9cFiqDs+6ijlx8Wn2CRi0N71AlCvRx0V092rlUYu3b3PuxWlA=="
+        },
+        "openzeppelin": {
+          "version": "5.4.0",
+          "integrity": "sha512-eCYgWnLg6WO+X52I16TZt8uEjbtdkgLC0SUX/xnAksjjrQI4Xfn4iBRoI5j55dmlOhDv1Y7BoR3cU7e3WWhC6A=="
+        }
+      },
+      "dependencySourcesSha256": "5d6cca6d1e04b594b3dcb33b54721c137f49a77aac6b270170ad5f22a9d62eb1"
+    },
+    "sourcePairCount": 16,
+    "gates": {
+      "productionSoliditySources": {
+        "equivalent": true,
+        "count": 16,
+        "files": [
+          {
+            "baseline": "contracts/BeadCodec.sol",
+            "candidate": "contracts/core/BeadCodec.sol",
+            "sha256": "e4f214c68a63d2a3146f4b55a2f613648653aa257f5a9ffffdf95f00780a970b"
+          },
+          {
+            "baseline": "contracts/BubbleText.sol",
+            "candidate": "contracts/core/BubbleText.sol",
+            "sha256": "94c8443aa2b8983435b15e301c71edffd5e6c75d0264d6cc692353e3538fb9fe"
+          },
+          {
+            "baseline": "contracts/GenotypeDescriptor.sol",
+            "candidate": "contracts/core/GenotypeDescriptor.sol",
+            "sha256": "f7001c4f693648f8e8a0d2cb3594532477f69ad0aa084556781813b895dd31a7"
+          },
+          {
+            "baseline": "contracts/IArtBank.sol",
+            "candidate": "contracts/core/IArtBank.sol",
+            "sha256": "eb189314df23723531f85c94ef3e45d247b4334bba7c3758942e846482d49c43"
+          },
+          {
+            "baseline": "contracts/ICreatorToken.sol",
+            "candidate": "contracts/core/ICreatorToken.sol",
+            "sha256": "6dd40a3710aff3f31889acba91e01d1a5a5a20116a8b826ff37352f7906eac5e"
+          },
+          {
+            "baseline": "contracts/IPhenotypeSource.sol",
+            "candidate": "contracts/core/IPhenotypeSource.sol",
+            "sha256": "9635b06ff8cdf1d6f992e9c2a340e769296336e95e2324e85ecf276a8b4ff22f"
+          },
+          {
+            "baseline": "contracts/MetadataEncoder.sol",
+            "candidate": "contracts/core/MetadataEncoder.sol",
+            "sha256": "f3916014f2bfd8dcf8cfd03dfd68733392d412f8a4f58f711f9d6ac4e0500178"
+          },
+          {
+            "baseline": "contracts/MintPricing.sol",
+            "candidate": "contracts/core/MintPricing.sol",
+            "sha256": "14ba25a55b0355bd122ba5e478206fb3c42fbd0793a6a97f1673daf21b55c0e5"
+          },
+          {
+            "baseline": "contracts/MintSettlement.sol",
+            "candidate": "contracts/core/MintSettlement.sol",
+            "sha256": "6bcc38aaf82d461a41f81a63869e5f0aaf346ae403e259662ce2678668baf366"
+          },
+          {
+            "baseline": "contracts/MyceliumFriends.sol",
+            "candidate": "contracts/core/MyceliumFriends.sol",
+            "sha256": "1d09f957af164adcea118671de17866e005bf4bae9cf34450285f824d5f77369"
+          },
+          {
+            "baseline": "contracts/PairBase64.sol",
+            "candidate": "contracts/core/PairBase64.sol",
+            "sha256": "42ebc69a29b1ab78e4ee02c4725c1cadb42600e8369c6ed5a6176d758ae83899"
+          },
+          {
+            "baseline": "contracts/PhenotypeRenderer.sol",
+            "candidate": "contracts/core/PhenotypeRenderer.sol",
+            "sha256": "8e4c0efa44265fe8fd4fcb38e6306fc8722d40f6b85e89a482c04ad0e50f270a"
+          },
+          {
+            "baseline": "contracts/generated/ArtBanks.sol",
+            "candidate": "contracts/core/generated/ArtBanks.sol",
+            "sha256": "978fe67024b9d356263bce2b8a2ad43f5fa46e8cce7b6ee55397018ceea1a206"
+          },
+          {
+            "baseline": "contracts/generated/GenomeSchema.sol",
+            "candidate": "contracts/core/generated/GenomeSchema.sol",
+            "sha256": "9467883a00d495c5eb415dec1c436ed929f21d67d587d3a2edfbd5c4ce0a25b4"
+          },
+          {
+            "baseline": "contracts/generated/MetadataContent.sol",
+            "candidate": "contracts/core/generated/MetadataContent.sol",
+            "sha256": "a6345727b543804858a3342f193bfe8598baa4906baa065f461ce2fb266e9eba"
+          },
+          {
+            "baseline": "contracts/generated/SVGConstants.sol",
+            "candidate": "contracts/core/generated/SVGConstants.sol",
+            "sha256": "914921b77fd220fb8c118916d5f76931d66a63f4d3b58c78e81675307dbf6231"
+          }
+        ]
+      },
+      "generatedSoliditySources": {
+        "equivalent": true,
+        "count": 4,
+        "files": [
+          {
+            "baseline": "contracts/generated/ArtBanks.sol",
+            "candidate": "contracts/core/generated/ArtBanks.sol",
+            "sha256": "978fe67024b9d356263bce2b8a2ad43f5fa46e8cce7b6ee55397018ceea1a206"
+          },
+          {
+            "baseline": "contracts/generated/GenomeSchema.sol",
+            "candidate": "contracts/core/generated/GenomeSchema.sol",
+            "sha256": "9467883a00d495c5eb415dec1c436ed929f21d67d587d3a2edfbd5c4ce0a25b4"
+          },
+          {
+            "baseline": "contracts/generated/MetadataContent.sol",
+            "candidate": "contracts/core/generated/MetadataContent.sol",
+            "sha256": "a6345727b543804858a3342f193bfe8598baa4906baa065f461ce2fb266e9eba"
+          },
+          {
+            "baseline": "contracts/generated/SVGConstants.sol",
+            "candidate": "contracts/core/generated/SVGConstants.sol",
+            "sha256": "914921b77fd220fb8c118916d5f76931d66a63f4d3b58c78e81675307dbf6231"
+          }
+        ]
+      },
+      "compilerArtifacts": {
+        "equivalent": true,
+        "count": 42,
+        "artifacts": [
+          {
+            "baselineSource": "contracts/BeadCodec.sol",
+            "candidateSource": "contracts/core/BeadCodec.sol",
+            "contract": "BeadCodec",
+            "abiSha256": "e329ec4fea5336dccc8689697294cdfc0dedebb6354169a7c536a38d0aeed097",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "2a6f420f6cf1b1c16e64c4c3549b4dfce04fd34b7eb6c32a23e7f2d262da485f",
+            "metadataFreeCreationBytes": 81,
+            "metadataFreeRuntimeSha256": "206ecc66939f1552618d20b2df9d9cfcf26aa0645d846f4aa8a00d138b315b50",
+            "metadataFreeRuntimeBytes": 31
+          },
+          {
+            "baselineSource": "contracts/BubbleText.sol",
+            "candidateSource": "contracts/core/BubbleText.sol",
+            "contract": "BubbleText",
+            "abiSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "2a6f420f6cf1b1c16e64c4c3549b4dfce04fd34b7eb6c32a23e7f2d262da485f",
+            "metadataFreeCreationBytes": 81,
+            "metadataFreeRuntimeSha256": "206ecc66939f1552618d20b2df9d9cfcf26aa0645d846f4aa8a00d138b315b50",
+            "metadataFreeRuntimeBytes": 31
+          },
+          {
+            "baselineSource": "contracts/GenotypeDescriptor.sol",
+            "candidateSource": "contracts/core/GenotypeDescriptor.sol",
+            "contract": "GenotypeDescriptor",
+            "abiSha256": "9a2b56f87532527db6ba92385e12b0906e466d575d3fcf1c00a6d8f44f6dfb36",
+            "storageLayoutSha256": "4cdfdd7aa74f051cd89754cdbfd38576536642a1a6f6329658f79d18c8f4251e",
+            "immutableReferencesSha256": "ac56b0672299053626d8ad540073366da3a3c6278c91880ee1c4274ffe6d92f1",
+            "constructorDefinitionSha256": "485d14a11a89222bc7735b4058e9a47921ecfaf4de9e18d8bf31f0fa19f67e0a",
+            "metadataFreeCreationSha256": "d995bd9c6039d3be1dc88a7f3804365fa40b2752f25c6c48086e7b459cdf27e7",
+            "metadataFreeCreationBytes": 36023,
+            "metadataFreeRuntimeSha256": "832cbc519b3825762f788aed29f0e8d7a4285f2eeaa1c49ee081f68ae9e5cacc",
+            "metadataFreeRuntimeBytes": 4404
+          },
+          {
+            "baselineSource": "contracts/IArtBank.sol",
+            "candidateSource": "contracts/core/IArtBank.sol",
+            "contract": "IArtBank",
+            "abiSha256": "f402b3f9caf4827540bd0020b2e8f0d87421a52bccd16aa38962b2d49ac44ad4",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "metadataFreeCreationBytes": 0,
+            "metadataFreeRuntimeSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "metadataFreeRuntimeBytes": 0
+          },
+          {
+            "baselineSource": "contracts/ICreatorToken.sol",
+            "candidateSource": "contracts/core/ICreatorToken.sol",
+            "contract": "ICreatorToken",
+            "abiSha256": "76b5e475c7a5109fb97440aa442cc569a0b8015ac54d5ab96ae72ade327e1fd7",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "metadataFreeCreationBytes": 0,
+            "metadataFreeRuntimeSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "metadataFreeRuntimeBytes": 0
+          },
+          {
+            "baselineSource": "contracts/ICreatorToken.sol",
+            "candidateSource": "contracts/core/ICreatorToken.sol",
+            "contract": "ITransferValidator",
+            "abiSha256": "ae2ba7a5d66e40cd5955169093dc256bba7237ebd048bdf3b2dde37e473769a6",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "metadataFreeCreationBytes": 0,
+            "metadataFreeRuntimeSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "metadataFreeRuntimeBytes": 0
+          },
+          {
+            "baselineSource": "contracts/ICreatorToken.sol",
+            "candidateSource": "contracts/core/ICreatorToken.sol",
+            "contract": "ITransferValidatorSetTokenType",
+            "abiSha256": "fe3092f2ea4f65b54707e73d78fab19a7dad1b1f00edd8848ed4afa194b2e3f6",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "metadataFreeCreationBytes": 0,
+            "metadataFreeRuntimeSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "metadataFreeRuntimeBytes": 0
+          },
+          {
+            "baselineSource": "contracts/IPhenotypeSource.sol",
+            "candidateSource": "contracts/core/IPhenotypeSource.sol",
+            "contract": "IPhenotypeSource",
+            "abiSha256": "384a23f91f7654831f0c65cabffefbdbce4226805325a45b077a702ebccf0ff2",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "metadataFreeCreationBytes": 0,
+            "metadataFreeRuntimeSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "metadataFreeRuntimeBytes": 0
+          },
+          {
+            "baselineSource": "contracts/MetadataEncoder.sol",
+            "candidateSource": "contracts/core/MetadataEncoder.sol",
+            "contract": "MetadataEncoder",
+            "abiSha256": "8878abfae87e057b2e3ab7734f7b28e733a7dd508e99f556637168af1be6a297",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "4e8c3ae84fd0bc2f928de6805fb936ba84c0ba4c14a40f5c4db4d20ccefbb3a5",
+            "metadataFreeCreationBytes": 17805,
+            "metadataFreeRuntimeSha256": "4ac0581bdf24462388fceb730b2dfad256d62246e9e61e5cffb193b3920066c8",
+            "metadataFreeRuntimeBytes": 17777
+          },
+          {
+            "baselineSource": "contracts/MintPricing.sol",
+            "candidateSource": "contracts/core/MintPricing.sol",
+            "contract": "MintPricing",
+            "abiSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "2a6f420f6cf1b1c16e64c4c3549b4dfce04fd34b7eb6c32a23e7f2d262da485f",
+            "metadataFreeCreationBytes": 81,
+            "metadataFreeRuntimeSha256": "206ecc66939f1552618d20b2df9d9cfcf26aa0645d846f4aa8a00d138b315b50",
+            "metadataFreeRuntimeBytes": 31
+          },
+          {
+            "baselineSource": "contracts/MintSettlement.sol",
+            "candidateSource": "contracts/core/MintSettlement.sol",
+            "contract": "MintSettlement",
+            "abiSha256": "22cdc2973d886c3659d97d991159a7c4da1dce8333127163cd7a17c77279dded",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "metadataFreeCreationBytes": 0,
+            "metadataFreeRuntimeSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "metadataFreeRuntimeBytes": 0
+          },
+          {
+            "baselineSource": "contracts/MyceliumFriends.sol",
+            "candidateSource": "contracts/core/MyceliumFriends.sol",
+            "contract": "MyceliumFriends",
+            "abiSha256": "c139b909a7ac96ca79672ca7e6f6db989e7303d24201c9a921bc375707303321",
+            "storageLayoutSha256": "896231bf2773bdda6dfeb1c578a6d802bd7c70a687d5b16daf2760696b49e580",
+            "immutableReferencesSha256": "e4b12b0e6163de0b6ab89f1d4bc92956c4d3279804e4b0604b7c892933aee276",
+            "constructorDefinitionSha256": "1d7967fd85b79e165e81e09d0d2a2f8c4c94718f03f83fcd30b94a475d559b1b",
+            "metadataFreeCreationSha256": "9f9199e74807af800d3a866e7f69c0592dc48ff9292d175815510d4b11897083",
+            "metadataFreeCreationBytes": 19032,
+            "metadataFreeRuntimeSha256": "9af6bbdac07bae48e3222cd67cfc569b3a57cc0a04dabd8637b165edfa775420",
+            "metadataFreeRuntimeBytes": 16147
+          },
+          {
+            "baselineSource": "contracts/PairBase64.sol",
+            "candidateSource": "contracts/core/PairBase64.sol",
+            "contract": "PairBase64",
+            "abiSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "2a6f420f6cf1b1c16e64c4c3549b4dfce04fd34b7eb6c32a23e7f2d262da485f",
+            "metadataFreeCreationBytes": 81,
+            "metadataFreeRuntimeSha256": "206ecc66939f1552618d20b2df9d9cfcf26aa0645d846f4aa8a00d138b315b50",
+            "metadataFreeRuntimeBytes": 31
+          },
+          {
+            "baselineSource": "contracts/PhenotypeRenderer.sol",
+            "candidateSource": "contracts/core/PhenotypeRenderer.sol",
+            "contract": "PhenotypeRenderer",
+            "abiSha256": "c07376a046a6996dbc8feefa29096cc05d2311ba17e7c97577866583503a117e",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "b467059bb26f42a0c1d721670fea43d77862d64921dd531faf972de1e5953c7c",
+            "constructorDefinitionSha256": "65c17e49e5b48a855ead9fbdad3b2af772af33ab619fcfb40c00465048f879a0",
+            "metadataFreeCreationSha256": "e7bca9c6424133e23b3fdebfa5c632344807717b2ca26a3a388d70c9881b17b2",
+            "metadataFreeCreationBytes": 9012,
+            "metadataFreeRuntimeSha256": "6e6806d8ce27d87c57a98d32180914aa2e1b3ba5cfa50742a8b281efc06973be",
+            "metadataFreeRuntimeBytes": 8686
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "AccessoryBank",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "c2b02c1542ded610c35034567442a3f02424975c9eac7376999c67003c1214dd",
+            "metadataFreeCreationBytes": 2687,
+            "metadataFreeRuntimeSha256": "a03d876fe5458a972ae3619cfa6875caa94d7bf7478e0ab1b1a360417317ded1",
+            "metadataFreeRuntimeBytes": 2659
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "CapBank",
+            "abiSha256": "51496ead6809eb09da0e1ca4d0f44477448787e1b898d19c5731b3ab35cbc08e",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "a8b9e3b7c44a17f6831a8f17149f10bf69995e2010b73109cac44c35a2f0b886",
+            "constructorDefinitionSha256": "a7c8951ae4c010dcf5eccaa18293009b64155dc56a25ad8643e0f3dc69d43071",
+            "metadataFreeCreationSha256": "372fbf83ffd873b7784064c21bbdf21f30526a53a93a87494a32a6bfac00f838",
+            "metadataFreeCreationBytes": 8067,
+            "metadataFreeRuntimeSha256": "dcff079878f071f02de9d50e3683507f1c77b7c41b22b8479e4aaa6c0005caa5",
+            "metadataFreeRuntimeBytes": 5017
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "CapBankPage0",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "3c343d51225c1414a8eaddd4010f0ab1df0cdf845c55c44585e3ac244998f8d1",
+            "metadataFreeCreationBytes": 20839,
+            "metadataFreeRuntimeSha256": "b5b94dd6c9614958a00061d4b2b4fc122d042e95a2fd2f267ba8f3adc78b209a",
+            "metadataFreeRuntimeBytes": 20811
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "CapBankPage1",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "4be6d6ac248a087d1eae9a7cb821ad9f3f0207bf0d74e60cd3fb5ddb3b29e442",
+            "metadataFreeCreationBytes": 21359,
+            "metadataFreeRuntimeSha256": "6224716536509644a675840c7f055f5080508f6d5c53576ef356f35944273d19",
+            "metadataFreeRuntimeBytes": 21331
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "CapBankPage10",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "2389566eb8d0877c9fec977b18a3119b6067f5d0147895aab8862337504e35e6",
+            "metadataFreeCreationBytes": 20272,
+            "metadataFreeRuntimeSha256": "c06bcbe8ee123f3d037c3cb28fe46f195dbfbc56e09f20fd3a7640f10f2fd208",
+            "metadataFreeRuntimeBytes": 20244
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "CapBankPage11",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "4f3635ac614b51f0e70b6f45cc6cb5348b8a0de061db610bb56aee98e48e719f",
+            "metadataFreeCreationBytes": 21413,
+            "metadataFreeRuntimeSha256": "ff2ce3ee584a0a22e5863c06abb477e0ac2e11cf8caf82eda7a37f119d64cb24",
+            "metadataFreeRuntimeBytes": 21385
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "CapBankPage2",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "6e833693df18d7e2e1f28696b1f2270003cb25cc8bb3430cb0e63cbba3722ad1",
+            "metadataFreeCreationBytes": 21639,
+            "metadataFreeRuntimeSha256": "2c4ef8390032acca25f6296a00adc6d5dbc7ab60b3c1d4103db4dfaab5e130ad",
+            "metadataFreeRuntimeBytes": 21611
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "CapBankPage3",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "7cee2edc7d7762498c4152ca730ec7c55f653ab913bcd32f9cb8f07426d6ffdb",
+            "metadataFreeCreationBytes": 21287,
+            "metadataFreeRuntimeSha256": "92c1c42252c817bf9be65cb1a7172905e7f6b1282e403929124226ebe0b2d94f",
+            "metadataFreeRuntimeBytes": 21259
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "CapBankPage4",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "fd9fc83ef8a39c567a2da76c53f0f50d3d73112fc4beb9cafe3895ea260a01f2",
+            "metadataFreeCreationBytes": 21497,
+            "metadataFreeRuntimeSha256": "53ac32105c8bb4c5fcc5b21952f2c3c05b0b61c9457d3c83866ef50835677057",
+            "metadataFreeRuntimeBytes": 21469
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "CapBankPage5",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "a3e8459dbf08ec51172d75b5ea4a55d0d884efbbe481aab4483d11bc5ade5785",
+            "metadataFreeCreationBytes": 20454,
+            "metadataFreeRuntimeSha256": "eadabfa0d281ec42c1b166eca2416e3a66355271eabcdadbd2e579e18bd58a99",
+            "metadataFreeRuntimeBytes": 20426
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "CapBankPage6",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "ed36f36fa6df5d69727c8c07e7d719c6253b259b199c128672fec2164879e85f",
+            "metadataFreeCreationBytes": 21240,
+            "metadataFreeRuntimeSha256": "0015a6e109e8b48d69d291909ccf74e7a2070c892912cb3b6da7e7e401e3a793",
+            "metadataFreeRuntimeBytes": 21212
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "CapBankPage7",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "2e79495798a9b0a290483e2c6f92ef60939f99145a8972b2634a04c45a23dd34",
+            "metadataFreeCreationBytes": 21947,
+            "metadataFreeRuntimeSha256": "7c20dc486200c380b6d997e277c5e91b6b79e02f9f072507c177ed3adcbed211",
+            "metadataFreeRuntimeBytes": 21919
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "CapBankPage8",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "3b9d95d6bb2a934d608d718eee429807d929aab056dec53fee00b378ac6ddf34",
+            "metadataFreeCreationBytes": 19868,
+            "metadataFreeRuntimeSha256": "b96640b3802b5c15bfd82b8f9b9d668978668dd4b368e34d963943222d273009",
+            "metadataFreeRuntimeBytes": 19840
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "CapBankPage9",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "eb1040e98967948f812766cd85a0d125b275c6082dcd8c8b72d9533b0ef3d8a1",
+            "metadataFreeCreationBytes": 20891,
+            "metadataFreeRuntimeSha256": "24ab030927e852095f6aebf2a6cafca2d7d3e030a3bf7e5bc448f21c3e891ad4",
+            "metadataFreeRuntimeBytes": 20863
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "GlassesBank",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "124917a44484afc741e19961fd2641a95a3187bae54eb8c70a85379a1e322263",
+            "metadataFreeCreationBytes": 6137,
+            "metadataFreeRuntimeSha256": "c811821ae32f86188c2ed0fee5d9e27c9e67bd91a84402a2ed5f012580075bb6",
+            "metadataFreeRuntimeBytes": 6109
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "HobbyBank",
+            "abiSha256": "f490ef0a76c8d80d87e28f4c9a0f184eebfe1225c0e438d62acd78eb45bd8866",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "f3edcdf0239aa3e5e7935f8857b48307d31d7975d165e5272704d74a1e7f028f",
+            "constructorDefinitionSha256": "ae26ee4803d11d980aae17330dc2629ab214ba75d0671fb10f12404a8377db7a",
+            "metadataFreeCreationSha256": "4bec5a914cca5c7c20fc6df920c670cacb2d9db83fbc3168ab7e10c918e2893f",
+            "metadataFreeCreationBytes": 2600,
+            "metadataFreeRuntimeSha256": "1a45f6f5f1e6e5d299cde0e0bb428ed7596538418bb9aefa6703b589ee4d8d23",
+            "metadataFreeRuntimeBytes": 1687
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "HobbyBankPage0",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "7126797ca20e7ed849fd1c61a71f6380af30c6a934b6e75e055a26b2818224c3",
+            "metadataFreeCreationBytes": 18254,
+            "metadataFreeRuntimeSha256": "d41bfcba386c8bca7c2acccfab88ac52afd359650a103a8a0f80e1a41737c9ca",
+            "metadataFreeRuntimeBytes": 18226
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "HobbyBankPage1",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "b3da267d1621aae84785c620a668b9dc6b802d81a66d760b015f0fc4b63d614d",
+            "metadataFreeCreationBytes": 2140,
+            "metadataFreeRuntimeSha256": "0362bf78e50dfbca35d5148ab2d08203917ec6a064d6f5e3f5b29053f82e1b93",
+            "metadataFreeRuntimeBytes": 2112
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "StemBank",
+            "abiSha256": "f490ef0a76c8d80d87e28f4c9a0f184eebfe1225c0e438d62acd78eb45bd8866",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "f3edcdf0239aa3e5e7935f8857b48307d31d7975d165e5272704d74a1e7f028f",
+            "constructorDefinitionSha256": "ae26ee4803d11d980aae17330dc2629ab214ba75d0671fb10f12404a8377db7a",
+            "metadataFreeCreationSha256": "a2542efa4afe31c39f12e80c0d72ce7b2ab206caf5c7d32067fa6c48701626c7",
+            "metadataFreeCreationBytes": 2600,
+            "metadataFreeRuntimeSha256": "ccfde4b1f200f122c004af16f8a140959f91ae8ceafcb623c60cca4924e7aa02",
+            "metadataFreeRuntimeBytes": 1687
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "StemBankPage0",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "517253aff11e619a812b960861bafd084d43e9d1d6911cd50b02c7df1c378f96",
+            "metadataFreeCreationBytes": 19834,
+            "metadataFreeRuntimeSha256": "ea524419795976e3ebf74f06c5df947016676c9c6238b26bddf8a7a7047a85f3",
+            "metadataFreeRuntimeBytes": 19806
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "StemBankPage1",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "d640e22d998941e638bb05b6776605a83051de3407d912ced6355622cca3db61",
+            "metadataFreeCreationBytes": 8386,
+            "metadataFreeRuntimeSha256": "de7922cf2a8ff55c3dc3957d578e2c23276706673676ad67ec2522b2bb0c0b3e",
+            "metadataFreeRuntimeBytes": 8358
+          },
+          {
+            "baselineSource": "contracts/generated/ArtBanks.sol",
+            "candidateSource": "contracts/core/generated/ArtBanks.sol",
+            "contract": "TemperamentBank",
+            "abiSha256": "eda4a6914bc9f97a72c2ffe149dfb4b0d710c67d184c3b81c10fd2a132b68a6b",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "158bc1a4a077a03943036e8ba1c0220439ee6afd21ab754bfc1140aaac1739e4",
+            "metadataFreeCreationBytes": 9479,
+            "metadataFreeRuntimeSha256": "8853c325ae9098cb5fd2290f4d28f414f50b35ab365dfc09750b48e00f264a12",
+            "metadataFreeRuntimeBytes": 9451
+          },
+          {
+            "baselineSource": "contracts/generated/GenomeSchema.sol",
+            "candidateSource": "contracts/core/generated/GenomeSchema.sol",
+            "contract": "GenomeSchema",
+            "abiSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "2a6f420f6cf1b1c16e64c4c3549b4dfce04fd34b7eb6c32a23e7f2d262da485f",
+            "metadataFreeCreationBytes": 81,
+            "metadataFreeRuntimeSha256": "206ecc66939f1552618d20b2df9d9cfcf26aa0645d846f4aa8a00d138b315b50",
+            "metadataFreeRuntimeBytes": 31
+          },
+          {
+            "baselineSource": "contracts/generated/MetadataContent.sol",
+            "candidateSource": "contracts/core/generated/MetadataContent.sol",
+            "contract": "MetadataContent",
+            "abiSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "2a6f420f6cf1b1c16e64c4c3549b4dfce04fd34b7eb6c32a23e7f2d262da485f",
+            "metadataFreeCreationBytes": 81,
+            "metadataFreeRuntimeSha256": "206ecc66939f1552618d20b2df9d9cfcf26aa0645d846f4aa8a00d138b315b50",
+            "metadataFreeRuntimeBytes": 31
+          },
+          {
+            "baselineSource": "contracts/generated/SVGConstants.sol",
+            "candidateSource": "contracts/core/generated/SVGConstants.sol",
+            "contract": "SVGConstants",
+            "abiSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "metadataFreeCreationSha256": "2a6f420f6cf1b1c16e64c4c3549b4dfce04fd34b7eb6c32a23e7f2d262da485f",
+            "metadataFreeCreationBytes": 81,
+            "metadataFreeRuntimeSha256": "206ecc66939f1552618d20b2df9d9cfcf26aa0645d846f4aa8a00d138b315b50",
+            "metadataFreeRuntimeBytes": 31
+          },
+          {
+            "baselineSource": "contracts/generated/SVGConstants.sol",
+            "candidateSource": "contracts/core/generated/SVGConstants.sol",
+            "contract": "SVGHeaderPage0",
+            "abiSha256": "cb6c2168b0fc7af6e3e78161f4bf88edce25e7a4347ae5cab58f977cb4039eae",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "0e1953d92ccc70cdc3d4aa70a08691f1b140f4f5c6218ff811039661d307a472",
+            "metadataFreeCreationSha256": "e0034f775706e64ccac723bda3e547ecc83069a1dca7b47c88c85f81cf0e6d56",
+            "metadataFreeCreationBytes": 20056,
+            "metadataFreeRuntimeSha256": "f3c6fc43c1f10289edb55b06a8f672e7addb0955487f8eb7a308e2e347995b6c",
+            "metadataFreeRuntimeBytes": 8
+          },
+          {
+            "baselineSource": "contracts/generated/SVGConstants.sol",
+            "candidateSource": "contracts/core/generated/SVGConstants.sol",
+            "contract": "SVGHeaderPage1",
+            "abiSha256": "cb6c2168b0fc7af6e3e78161f4bf88edce25e7a4347ae5cab58f977cb4039eae",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "constructorDefinitionSha256": "0e1953d92ccc70cdc3d4aa70a08691f1b140f4f5c6218ff811039661d307a472",
+            "metadataFreeCreationSha256": "c685a0954a318ad76fbcf7c919167ec4792537de9bf46e3715f213e2d3bd9421",
+            "metadataFreeCreationBytes": 9724,
+            "metadataFreeRuntimeSha256": "f3c6fc43c1f10289edb55b06a8f672e7addb0955487f8eb7a308e2e347995b6c",
+            "metadataFreeRuntimeBytes": 8
+          },
+          {
+            "baselineSource": "contracts/generated/SVGConstants.sol",
+            "candidateSource": "contracts/core/generated/SVGConstants.sol",
+            "contract": "SVGHeaderStore",
+            "abiSha256": "1b58e69d8c16c312ff7634796a163ab63e05347ebf919e88bf6aff1bdee03b4a",
+            "storageLayoutSha256": "f846b023549275be2e0c1636ca4bec256cd67a0365c39781e76ec879398473a8",
+            "immutableReferencesSha256": "7ecb7faa66ef4732f856ad9109ebf35691b2f8a84439dea4bc024c7fcd7c30fc",
+            "constructorDefinitionSha256": "0e1953d92ccc70cdc3d4aa70a08691f1b140f4f5c6218ff811039661d307a472",
+            "metadataFreeCreationSha256": "6d26b46f203876cdb67a1a73c97ce952cc7a83b7ebfb9384f8d2c18ad0c6d55c",
+            "metadataFreeCreationBytes": 30427,
+            "metadataFreeRuntimeSha256": "eb8981745ef1ab5e41f641e913068aa5fa4b5ca3adf16e7f64609206f8bb0226",
+            "metadataFreeRuntimeBytes": 456
+          }
+        ]
+      },
+      "deploymentSemantics": {
+        "equivalent": true,
+        "baselineSource": "tooling/lib/deployment-plan.mjs",
+        "candidateSource": "tooling/lib/deployment-plan.mjs",
+        "normalizedSourceSha256": "cc96324b09f6b1b377ccbf2c0c67f553574eb958e9186ea28ccff04b9524fd49",
+        "normalizedPlanSha256": "5702c0e4dcdc828ab54e0999e7345a521cf2f5bc76558af10a5423162432f39b",
+        "deploymentSteps": 26,
+        "normalizedPlan": {
+          "banks": [
+            {
+              "key": "stem",
+              "name": "StemBank",
+              "count": 32,
+              "pages": [
+                {
+                  "name": "StemBankPage0",
+                  "count": 24,
+                  "offset": 0
+                },
+                {
+                  "name": "StemBankPage1",
+                  "count": 8,
+                  "offset": 24
+                }
+              ]
+            },
+            {
+              "key": "cap",
+              "name": "CapBank",
+              "count": 128,
+              "pages": [
+                {
+                  "name": "CapBankPage0",
+                  "count": 14,
+                  "offset": 0
+                },
+                {
+                  "name": "CapBankPage1",
+                  "count": 13,
+                  "offset": 14
+                },
+                {
+                  "name": "CapBankPage2",
+                  "count": 11,
+                  "offset": 27
+                },
+                {
+                  "name": "CapBankPage3",
+                  "count": 12,
+                  "offset": 38
+                },
+                {
+                  "name": "CapBankPage4",
+                  "count": 11,
+                  "offset": 50
+                },
+                {
+                  "name": "CapBankPage5",
+                  "count": 10,
+                  "offset": 61
+                },
+                {
+                  "name": "CapBankPage6",
+                  "count": 9,
+                  "offset": 71
+                },
+                {
+                  "name": "CapBankPage7",
+                  "count": 9,
+                  "offset": 80
+                },
+                {
+                  "name": "CapBankPage8",
+                  "count": 11,
+                  "offset": 89
+                },
+                {
+                  "name": "CapBankPage9",
+                  "count": 12,
+                  "offset": 100
+                },
+                {
+                  "name": "CapBankPage10",
+                  "count": 10,
+                  "offset": 112
+                },
+                {
+                  "name": "CapBankPage11",
+                  "count": 6,
+                  "offset": 122
+                }
+              ]
+            },
+            {
+              "key": "temperament",
+              "name": "TemperamentBank",
+              "count": 32,
+              "pages": []
+            },
+            {
+              "key": "glasses",
+              "name": "GlassesBank",
+              "count": 16,
+              "pages": []
+            },
+            {
+              "key": "accessory",
+              "name": "AccessoryBank",
+              "count": 4,
+              "pages": []
+            },
+            {
+              "key": "hobby",
+              "name": "HobbyBank",
+              "count": 32,
+              "pages": [
+                {
+                  "name": "HobbyBankPage0",
+                  "count": 31,
+                  "offset": 0
+                },
+                {
+                  "name": "HobbyBankPage1",
+                  "count": 1,
+                  "offset": 31
+                }
+              ]
+            }
+          ],
+          "steps": [
+            {
+              "name": "StemBankPage0",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "StemBankPage1",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "StemBank",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": [
+                [
+                  "$StemBankPage0",
+                  "$StemBankPage1"
+                ]
+              ]
+            },
+            {
+              "name": "CapBankPage0",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "CapBankPage1",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "CapBankPage2",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "CapBankPage3",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "CapBankPage4",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "CapBankPage5",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "CapBankPage6",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "CapBankPage7",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "CapBankPage8",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "CapBankPage9",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "CapBankPage10",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "CapBankPage11",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "CapBank",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": [
+                [
+                  "$CapBankPage0",
+                  "$CapBankPage1",
+                  "$CapBankPage2",
+                  "$CapBankPage3",
+                  "$CapBankPage4",
+                  "$CapBankPage5",
+                  "$CapBankPage6",
+                  "$CapBankPage7",
+                  "$CapBankPage8",
+                  "$CapBankPage9",
+                  "$CapBankPage10",
+                  "$CapBankPage11"
+                ]
+              ]
+            },
+            {
+              "name": "TemperamentBank",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "GlassesBank",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "AccessoryBank",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "HobbyBankPage0",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "HobbyBankPage1",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": []
+            },
+            {
+              "name": "HobbyBank",
+              "file": "contracts/generated/ArtBanks.sol",
+              "args": [
+                [
+                  "$HobbyBankPage0",
+                  "$HobbyBankPage1"
+                ]
+              ]
+            },
+            {
+              "name": "MetadataEncoder",
+              "file": "contracts/MetadataEncoder.sol",
+              "args": []
+            },
+            {
+              "name": "GenotypeDescriptor",
+              "file": "contracts/GenotypeDescriptor.sol",
+              "args": [
+                [
+                  "$StemBank",
+                  "$CapBank",
+                  "$TemperamentBank",
+                  "$GlassesBank",
+                  "$AccessoryBank",
+                  "$HobbyBank"
+                ],
+                "$MetadataEncoder"
+              ]
+            },
+            {
+              "name": "PhenotypeRenderer",
+              "file": "contracts/PhenotypeRenderer.sol",
+              "args": [
+                "$GenotypeDescriptor"
+              ]
+            },
+            {
+              "name": "MyceliumFriends",
+              "file": "contracts/MyceliumFriends.sol",
+              "args": [
+                "$GenotypeDescriptor",
+                "$PhenotypeRenderer",
+                "0x2000000000000000000000000000000000000002",
+                "0x1000000000000000000000000000000000000001",
+                1000,
+                "0x2000000000000000000000000000000000000002"
+              ]
+            }
+          ]
+        }
+      },
+      "canonicalArtwork": {
+        "equivalent": true,
+        "fileCount": 227,
+        "inventorySha256": "9b18397c46b6c7a441ec34a9692638aa35e036b000d67adb0218cd527f79be97"
+      },
+      "artworkReleaseLock": {
+        "equivalent": true,
+        "format": 3,
+        "status": "CURRENT_RELEASE_LOCK",
+        "catalogSha256": "3226455540efcccb14606487533b0f3de8bedef68bab94b57c5cecf234e00032"
+      }
+    },
+    "allEquivalent": true,
+    "evidenceSha256": "528f63d4096b4acfafff6ab9b9c4c29e2fb0d99d0748a330d0730b4dfdfe136a"
+  }
+}

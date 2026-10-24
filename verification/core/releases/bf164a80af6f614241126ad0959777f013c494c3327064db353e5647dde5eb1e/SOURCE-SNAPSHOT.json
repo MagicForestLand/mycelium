@@ -1,0 +1,44 @@
+{
+  "format": 1,
+  "kind": "MYCELIUM_RELEASE_SOURCE_SNAPSHOT",
+  "status": "PREDEPLOYMENT_SOURCE_CAPSULE",
+  "releaseDigest": "bf164a80af6f614241126ad0959777f013c494c3327064db353e5647dde5eb1e",
+  "developmentSource": {
+    "commit": "5b7d890039dc0c660fabaa8b03c5f0b5a8654e86",
+    "tree": "d9815bcc0878afb93643350f4c3175cee3e46c2f"
+  },
+  "identityPolicy": "CAPSULE_GIT_IDENTITY_IS_SEPARATE_AND_NOT_PREDICTED",
+  "exportPolicy": {
+    "profile": "minimal-source-verification-capsule",
+    "excludedBoundary": "internal/"
+  },
+  "standardInputSha256": "3230a0ce080cbf52f7bf0f4aa4a4875923fd91ec8db851e6716a2cd001c4d243",
+  "files": {
+    "contracts/core/BeadCodec.sol": "e4f214c68a63d2a3146f4b55a2f613648653aa257f5a9ffffdf95f00780a970b",
+    "contracts/core/BubbleText.sol": "94c8443aa2b8983435b15e301c71edffd5e6c75d0264d6cc692353e3538fb9fe",
+    "contracts/core/generated/ArtBanks.sol": "978fe67024b9d356263bce2b8a2ad43f5fa46e8cce7b6ee55397018ceea1a206",
+    "contracts/core/generated/GenomeSchema.sol": "9467883a00d495c5eb415dec1c436ed929f21d67d587d3a2edfbd5c4ce0a25b4",
+    "contracts/core/generated/MetadataContent.sol": "a6345727b543804858a3342f193bfe8598baa4906baa065f461ce2fb266e9eba",
+    "contracts/core/generated/SVGConstants.sol": "914921b77fd220fb8c118916d5f76931d66a63f4d3b58c78e81675307dbf6231",
+    "contracts/core/GenotypeDescriptor.sol": "f7001c4f693648f8e8a0d2cb3594532477f69ad0aa084556781813b895dd31a7",
+    "contracts/core/IArtBank.sol": "eb189314df23723531f85c94ef3e45d247b4334bba7c3758942e846482d49c43",
+    "contracts/core/ICreatorToken.sol": "6dd40a3710aff3f31889acba91e01d1a5a5a20116a8b826ff37352f7906eac5e",
+    "contracts/core/IPhenotypeSource.sol": "9635b06ff8cdf1d6f992e9c2a340e769296336e95e2324e85ecf276a8b4ff22f",
+    "contracts/core/MetadataEncoder.sol": "f3916014f2bfd8dcf8cfd03dfd68733392d412f8a4f58f711f9d6ac4e0500178",
+    "contracts/core/MintPricing.sol": "14ba25a55b0355bd122ba5e478206fb3c42fbd0793a6a97f1673daf21b55c0e5",
+    "contracts/core/MintSettlement.sol": "6bcc38aaf82d461a41f81a63869e5f0aaf346ae403e259662ce2678668baf366",
+    "contracts/core/MyceliumFriends.sol": "1d09f957af164adcea118671de17866e005bf4bae9cf34450285f824d5f77369",
+    "contracts/core/PairBase64.sol": "42ebc69a29b1ab78e4ee02c4725c1cadb42600e8369c6ed5a6176d758ae83899",
+    "contracts/core/PhenotypeRenderer.sol": "8e4c0efa44265fe8fd4fcb38e6306fc8722d40f6b85e89a482c04ad0e50f270a",
+    "contracts/LICENSE": "f332adeff26e9bb99fd41b825b872d33215b8cdcb62ae5c9deb5a142def4af86",
+    "verification/core/releases/bf164a80af6f614241126ad0959777f013c494c3327064db353e5647dde5eb1e/standard-json-input.json": "98adbf2255b5f3beb66514a713b981224bb930edf04dddb0f4980902b0b7d3e4",
+    "verification/core/releases/bf164a80af6f614241126ad0959777f013c494c3327064db353e5647dde5eb1e/THIRD-PARTY-NOTICES.md": "f79d8986677c096fa383ce1bec85422093b44f33c0e70f8d62bba19a8bc146fa",
+    "verification/README.md": "e9df5504f62f20c16c2c5c2151a5a256060e5cc065af4aa2d3f79154e66e8b6e",
+    "verification/storage-layout.mjs": "b626a6604f3b3a6e2859dfb27444c3006f8a71e676dc2708c71c4e307ef5b3be",
+    "verification/verify-standard-json.mjs": "eb250b99d4a2a893e46d63c0f42bf2607de1057bdda4efa5ab096f4e9a38d96c"
+  },
+  "derivedFiles": [
+    "verification/core/releases/bf164a80af6f614241126ad0959777f013c494c3327064db353e5647dde5eb1e/SOURCE-SNAPSHOT.json",
+    "verification/core/releases/bf164a80af6f614241126ad0959777f013c494c3327064db353e5647dde5eb1e/verification-summary.json"
+  ]
+}
