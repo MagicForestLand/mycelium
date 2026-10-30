@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "kind": "MYCELIUM_PUBLIC_SITE_CONFIG",
+  "mode": "wallet",
+  "projectId": "af9a42ca86143a3950d516dfa6e8b824",
+  "walletMetadata": {
+    "name": "mycelium Friends",
+    "description": "myFriends by Magic Forest",
+    "url": "https://mycelium.magicforest.land/",
+    "icons": [
+      "https://mycelium.magicforest.land/output/branding/avatar.svg"
+    ]
+  },
+  "deployment": {
+    "id": "mycelium-friends-mainnet",
+    "label": "Mycelium Friends",
+    "networkName": "Ethereum",
+    "rpcUrl": "https://ethereum-rpc.publicnode.com",
+    "snapshotUrl": "https://magicforest.land/api/mycelium/snapshot",
+    "mintEvidenceUrl": "https://magicforest.land/api/mycelium/mint-events",
+    "explorers": {
+      "etherscan": "https://etherscan.io",
+      "evmNow": "https://evm.now"
+    }
+  }
+}

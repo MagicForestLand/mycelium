@@ -1,0 +1,17 @@
+node_modules/
+.DS_Store
+.env
+.env.*
+!.env.example
+.dev/
+output/
+dist/
+*.log
+mycelium.bundle.js
+apps/web/assets/web3/
+internal/testnet/web3/
+chain-config.json
+internal/testnet/testnet-config.json
+ui_context.txt
+mycelium-code-review.zip
+*.ui-backup

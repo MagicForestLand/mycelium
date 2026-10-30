@@ -1,0 +1,32 @@
+{
+  "format": 2,
+  "kind": "MYCELIUM_PUBLIC_REPOSITORY_EXPORT",
+  "includeFiles": [
+    ".env.example",
+    ".gitignore",
+    ".node-version",
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "LICENSING.md",
+    "README.md",
+    "SECURITY.md",
+    "package-lock.json",
+    "package.json"
+  ],
+  "includeDirectories": [
+    ".github",
+    "apps",
+    "collection",
+    "contracts",
+    "deployments",
+    "docs",
+    "infra",
+    "tooling",
+    "tests",
+    "verification"
+  ],
+  "optionalIncludeFiles": ["PROJECT-EXPORT.json"],
+  "excludeDirectories": ["internal"]
+}

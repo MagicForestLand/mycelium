@@ -1,0 +1,21 @@
+{
+  "format": 1,
+  "kind": "MYCELIUM_SOURCE_VERIFICATION_RELEASE_INDEX",
+  "releases": {
+    "bf164a80af6f614241126ad0959777f013c494c3327064db353e5647dde5eb1e": {
+      "sourceCommit": "5b7d890039dc0c660fabaa8b03c5f0b5a8654e86",
+      "sourceTree": "d9815bcc0878afb93643350f4c3175cee3e46c2f",
+      "capsule": {
+        "repository": "https://github.com/MagicForestLand/mycelium",
+        "commit": "33483b50ab97f0c47d3309262700156e1467672b",
+        "path": "verification/core/releases/bf164a80af6f614241126ad0959777f013c494c3327064db353e5647dde5eb1e",
+        "files": {
+          "SOURCE-SNAPSHOT.json": "642839f7277df105abdf033b620e490a299292a33fe9ec797b6ce15be1a7089c",
+          "THIRD-PARTY-NOTICES.md": "f79d8986677c096fa383ce1bec85422093b44f33c0e70f8d62bba19a8bc146fa",
+          "standard-json-input.json": "98adbf2255b5f3beb66514a713b981224bb930edf04dddb0f4980902b0b7d3e4",
+          "verification-summary.json": "67739dee38cd9f76725b86453ca61093f5634d6d702234ba43933c9c8c7f6176"
+        }
+      }
+    }
+  }
+}

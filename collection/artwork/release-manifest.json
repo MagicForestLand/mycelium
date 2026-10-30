@@ -1,0 +1,2119 @@
+{
+  "format": 3,
+  "status": "CURRENT_RELEASE_LOCK",
+  "approvedAt": "2026-10-23T17:11:16.716Z",
+  "reason": "Correct canonical public editedSource paths; generated collection data and approved artwork unchanged",
+  "catalogSha256": "3226455540efcccb14606487533b0f3de8bedef68bab94b57c5cecf234e00032",
+  "catalog": {
+    "layerOrder": [
+      "stem",
+      "cap",
+      "temperament",
+      "glasses",
+      "accessory",
+      "hobby"
+    ],
+    "renderOrder": [
+      "stem",
+      "temperament",
+      "glasses",
+      "cap",
+      "accessory",
+      "hobby"
+    ],
+    "paletteSha256": "700934c1a1999cf1b8b078be4ea844d18a0656bfa4d875bdaa51705bb4ef161c",
+    "layers": {
+      "stem": [
+        {
+          "id": "fresh-snow",
+          "name": "Snow",
+          "svgSha256": "e86f4f353c3816c9eba26ef9c481c66ab6687cfec19c0b38d513231f62c3e48e",
+          "dataSha256": "e1f933f6aba98c64053329ec2dcd86b805f71ca42ff8a6d7f875b2b5ee06594e"
+        },
+        {
+          "id": "silver",
+          "name": "Silver",
+          "svgSha256": "854a80158a2002ef8ca2f5b27d56de6052fb9712282273789ec6fe2a9e79855f",
+          "dataSha256": "70e8b23fdc9bf4b9520363199b40774276ce61d768b985d3952f1094030cf736"
+        },
+        {
+          "id": "ash-spark",
+          "name": "Ash",
+          "svgSha256": "359e786f43fbc2f3a3aba69929ccc3abfeadc4173b02f08ee388b4c5e295bc87",
+          "dataSha256": "86d70f8240af6dc6d71d68e5eb7e2680cd83be133a9ee48e5aee601146b03ed6"
+        },
+        {
+          "id": "porcelain",
+          "name": "Porcelain",
+          "svgSha256": "0e0881ae3507a833ec348bf87c6cb26cede36bd5aae0ab9f23b5be748166cd36",
+          "dataSha256": "ecfaf11d7706a8b01fb9bd91abcd14420aa6dfbaa368f2b80d393e444ec675b8"
+        },
+        {
+          "id": "vanilla",
+          "name": "Vanilla",
+          "svgSha256": "ff242a966bbaed360ad9d6b2e30f0777ccf0bc08b1c2611c2c484710a0a9f86d",
+          "dataSha256": "4e4016cd53922e6bd4662fb91ceca2651256b833b75dde9c539ed40080aa81bf"
+        },
+        {
+          "id": "peach",
+          "name": "Peach",
+          "svgSha256": "eb37c6aa5469cda27fde1b2d438be1bc7bbc0a7f1cd4005ce960ff61d1fadf9b",
+          "dataSha256": "282736462e4917b065939db23d40c672ef1fd412333afb6c8f3f0e3c6d14e09c"
+        },
+        {
+          "id": "terracotta",
+          "name": "Clay",
+          "svgSha256": "996656d428677390c4a35f9d39deda977330bf1e5015257a0d27f218995956fa",
+          "dataSha256": "032c54c672f8d6b9e88600bc77bf988f62a013038fd7702518e575ccaa062f61"
+        },
+        {
+          "id": "cocoa",
+          "name": "Cocoa",
+          "svgSha256": "2bb58c483a85b72a667b85de24e8a5a5cc36292a3fd866bf1bfefa5e79c836cd",
+          "dataSha256": "843d6fd09c1ff26baab538d3a0412d4fce60a577714c8eeb59f8b454667120c9"
+        },
+        {
+          "id": "red-wine",
+          "name": "Wine",
+          "svgSha256": "eaf8b6961d51627c5b8c2557da26337918dc95baec4f4c1e594549dfacbd4c91",
+          "dataSha256": "2c96902e0b92c9e12aad6728684a33e339297431102030920924d0515cf54c6d"
+        },
+        {
+          "id": "lemon",
+          "name": "Lemon",
+          "svgSha256": "797fb74058c8aaa8fde91e84ee98c98c258b67a3d06957af0c2aa899b5daf92f",
+          "dataSha256": "659cbe46ef619ac3261912db93773dee7e4789a59e706ffbb0edd8f4a248cece"
+        },
+        {
+          "id": "honey",
+          "name": "Honey",
+          "svgSha256": "a3b10fbc15cf66c5e6632c152829109b4de48de895de0f2077fee8ba8c4dbe65",
+          "dataSha256": "786b45a19927334664487938c55ba4bf2afbcf1e96a753e291cb6924adf66e2b"
+        },
+        {
+          "id": "tangerine",
+          "name": "Tangerine",
+          "svgSha256": "72b3d93f7fdca072f046ee512d0ce53be88066100a9ff8673a1302caeaa4693d",
+          "dataSha256": "78c29723751bf22d422fce3bc108782c38a850daea4f5d02433f56207470bdb4"
+        },
+        {
+          "id": "red-letter",
+          "name": "Scarlet",
+          "svgSha256": "98394feff7cf91e05cebb0bfb2185bd978263e135a13ef6ec09a9b14ef974a33",
+          "dataSha256": "26f48dfa38d33dd930170e5581f019044ea26a83ee465b3816b76da04e415b89"
+        },
+        {
+          "id": "blush",
+          "name": "Strawberry",
+          "svgSha256": "4afd0c79ddbbbcfd2543949cd9085dc14cdd31a245591e31551a3d5d499b1fc8",
+          "dataSha256": "3c416d6af41a359171fdf032958a2ad0857b30674ccebbd77aab766966485f38"
+        },
+        {
+          "id": "orchid",
+          "name": "Orchid",
+          "svgSha256": "9695b8e8981016a716578655f13b9377d950df665958d82ab2c3cb925833ce98",
+          "dataSha256": "69f5961600b2e7e1bf541f2660a198b358d5439a72db6e9d273afd007c12d287"
+        },
+        {
+          "id": "lavender",
+          "name": "Lavender",
+          "svgSha256": "2b5fe96c96816af37d450d59615ff57d50a6885cb65a0744072e5772bb1365c9",
+          "dataSha256": "ba3796713d2ea8131b0fbb35f82fb5586446b48c27d8c89bef82f7bf3e9d1a75"
+        },
+        {
+          "id": "amethyst",
+          "name": "Violet",
+          "svgSha256": "5f23dba9067df6cbcd52d62c11bfc83eeb5ba6678018b11b512ceed86873b940",
+          "dataSha256": "b258b86ff5ffdf3d2e2f16923d9311514baa07c8ca4676004fadd5b87ce32cbb"
+        },
+        {
+          "id": "ink",
+          "name": "Slate",
+          "svgSha256": "dc62106d249a4adfad5c20f777ef3329d6046350f41ea0f4ceaacde865706bd1",
+          "dataSha256": "f75c6f1ef6ef5ecf24c81776c73b15a7da87b2be05fd753defd2426bfa34a393"
+        },
+        {
+          "id": "blue-voltage",
+          "name": "Electric Blue",
+          "svgSha256": "8880de62d290cb2489e87016efa7e5e0f76f941be73dffcf40ea61f687865068",
+          "dataSha256": "bd9e5170b389434c2134e19901e111bcabc5d57640c6164ec0443c2e4a96c549"
+        },
+        {
+          "id": "cobalt",
+          "name": "Cobalt",
+          "svgSha256": "9e621435db3fb293cf4d80f62024a218cc54677dab54735261bb258fa5ad6c4d",
+          "dataSha256": "020af021d861f8eea26e08a23850a73a209900d9129b86c65c8827df82f4abb8"
+        },
+        {
+          "id": "cyan-current",
+          "name": "Cyan",
+          "svgSha256": "526c2292f2ed6d5997a2209e472aed6dc7caeb34f3e0731228d433738c880d12",
+          "dataSha256": "1e4e50eba19203f87ebbd0e023f30fe6b4d53ef757f906f975c9978b32b404dd"
+        },
+        {
+          "id": "blue",
+          "name": "Sky Blue",
+          "svgSha256": "3e8e4649076bfb35d3a6c01facf6f6ea40a5e59718595bd630adb9a2bcfaf0ab",
+          "dataSha256": "bbe9f65488c6bd3178ddc1b45178fe23717f56f2d90b12d132ede5ae6616d06d"
+        },
+        {
+          "id": "turquoise",
+          "name": "Teal",
+          "svgSha256": "eed9494dec5c5d484cb2cd9d68f95f70d45faaf9094cea33c227ed588261effe",
+          "dataSha256": "6ceb117732b68b36f30e248c2cf49a5d50e92f9b4b10e471925329ca9f13c637"
+        },
+        {
+          "id": "mint",
+          "name": "Mint",
+          "svgSha256": "c5544ec77c74bf21fd6bf6e743ff6739c832f267d3ce9ab56f9ff395adf28fd1",
+          "dataSha256": "bc337b28e7e1ab49ea96b3249a8cf15b3ba21d595d54ad363b8cdb02be923b39"
+        },
+        {
+          "id": "jade",
+          "name": "Jade",
+          "svgSha256": "c440a8b2b45d5393b4d5a6acb9cfc7874de4e347e1d5dd158e90ea2d4f78b89f",
+          "dataSha256": "1127335cc94739a60e8b18a326d22f76d1c5d965be70d9ae956de1b3de2f3402"
+        },
+        {
+          "id": "matcha",
+          "name": "Moss",
+          "svgSha256": "6e9b7aefa24ae8acb8f4983466ff3068a64a142e9143125e3b9876b2413e3491",
+          "dataSha256": "db28e6dd647dd3375b58398f6a50f30b0294b5c0136eb42f3219dd872200edb1"
+        },
+        {
+          "id": "acid",
+          "name": "Lime",
+          "svgSha256": "1a720a8487ece8e98e2217ac335f7b697eb7316468784cbb72b018b242c2c45d",
+          "dataSha256": "0098cf8c2451cd925461d78ac1cdcbf1cb3e7c026d03335b94d5d9770382a9c4"
+        },
+        {
+          "id": "golden-anatomy",
+          "name": "X-Ray",
+          "svgSha256": "feca9b232d7500e473b92c95614232a56bc0387abf817fca1c57ab68b0b2efbf",
+          "dataSha256": "4a4db4b77319ec809d6e6442a112e658dedcd44d9367518658fa8e7fbffc5cad"
+        },
+        {
+          "id": "nuclear-ember",
+          "name": "Nuclear Core",
+          "svgSha256": "620865ed6d19ab8750e99648679b40087649300a9694efba3d034956300c4148",
+          "dataSha256": "cdb75903fe657c4dbc8fbfe47df6bd23655b616e3c2a42ab27720ccfc2527da7"
+        },
+        {
+          "id": "frankenstem",
+          "name": "Frankenstem",
+          "svgSha256": "d3e1910613839dd51d09bfad54107d557a1f3638b48041f488048edf215068f1",
+          "dataSha256": "5bb83582818e41cbecfd972656bcdf4de1f7e8fd333f7899770516477d3df22d"
+        },
+        {
+          "id": "cocoa-stomp",
+          "name": "Cocoa Stomp",
+          "svgSha256": "d984baf6bcb36f8e01721e045b776cbfa232b4b8a56498421f3accefa33c97b4",
+          "dataSha256": "5e34465718467cccf696e32cc26ebfbd5496422c3cdda42fddba4fcecf915843"
+        },
+        {
+          "id": "blush-stomp",
+          "name": "Blush Stomp",
+          "svgSha256": "7ead8a1de60a501f81cd8cc6677f2a116b0f8b788794c8c1a11a529631c3501a",
+          "dataSha256": "50683e75ccf0962f4c76531bc9adb4b1b7fd3a129ad3f49704505ebc016430bc"
+        }
+      ],
+      "cap": [
+        {
+          "id": "amanita",
+          "name": "Wonderland",
+          "svgSha256": "5f747975e4f6594203fbf3ec429b9b68cc443d706e18066f5de47735764d3e7d",
+          "dataSha256": "b81db4d71802db9657e3c0433dbbd2b38f43766b16f3dae0deb88fddaf52746e"
+        },
+        {
+          "id": "apricot",
+          "name": "Magic Hour",
+          "svgSha256": "82ab3d768a8839c616a3df726f38c2f204371f3c5ce4d0e2c697172a15300df9",
+          "dataSha256": "0143538da9b432364e03f0e5a2f1bd0c446711dda1f5fc5be75abbae022bf033"
+        },
+        {
+          "id": "slime",
+          "name": "Jelly Weather",
+          "svgSha256": "1a4675c8fcc540313993c40e4a1e949d2a016a7eeb231e5568cd03cd62a21d8a",
+          "dataSha256": "22c129dcf7fe1d16bd68b21d529a45428a44e04c82dcbf5139a2fa5b2b5f2785"
+        },
+        {
+          "id": "aqua",
+          "name": "Lagoon",
+          "svgSha256": "3ff78433180088a06c3f5e67a6b44bea8c5bb46d4ab0f190efa2ed4b74ebb4e1",
+          "dataSha256": "972054684a422f312756f8af89109c74230369086d9a72018346daf5bc6fda24"
+        },
+        {
+          "id": "scarlet-amanita",
+          "name": "King Crimson",
+          "svgSha256": "d4f44e996ed5a24f343e1bf99406a2bd3065698a3eb067bbfe781c65f8f6145b",
+          "dataSha256": "31d198e5c0bc4fb36b8aa28f9efa603243fc06e3dfa1515573df012f76709b7d"
+        },
+        {
+          "id": "dark-truffle",
+          "name": "Truffle Club",
+          "svgSha256": "36cc6999afa1ad590c3dc2e375e357d187caacd8a431098178698bba31bd9e35",
+          "dataSha256": "c786cd37339373d8072518cc7f543570c17929cf30a4dc7d6c688dbf22a6b131"
+        },
+        {
+          "id": "scarlet-ladybird",
+          "name": "Ladybird Landing",
+          "svgSha256": "b4aa45e60ad759eb01e340a3ca7794182b3367d51198bebdb2e56ec0213e2cf0",
+          "dataSha256": "970b67086da33de45311f07d0681e55b974b95158f072ca9ecbc415e932c41c6"
+        },
+        {
+          "id": "hearts",
+          "name": "Love Letter",
+          "svgSha256": "a7033a4d1b13d79f671dd3d75e7e8cedaba6ba7b669aeda41a8473fd3d91147f",
+          "dataSha256": "491258b0c15648d384f6e4b5a16bd1dbb2d8931f4a43297e49e48a8caf5380d0"
+        },
+        {
+          "id": "candy-hearts",
+          "name": "Proof of Love",
+          "svgSha256": "85d0bc93f0b8f02a72195e64f51dabff1805933a3c7c25046bffcd3c63936600",
+          "dataSha256": "58c8e92344e3c0b610abd274b130bb10b5ea132fec759e0cfb9d54b4b43eb50f"
+        },
+        {
+          "id": "flower-hearts",
+          "name": "Touch the Grass",
+          "svgSha256": "95ca4e23f21469a5459c1782d29df2523f2b65eef7dcd8fe6fa3b204506090ff",
+          "dataSha256": "822dbb7470178994175086b874ee5e3e6f1cbdbe2b2e0f0fc3260c33cd05c286"
+        },
+        {
+          "id": "pistachio",
+          "name": "Pistachio Cloud",
+          "svgSha256": "9f033d5bbdc6104c5094b65b8b29d696566b58b524be3422c830bce3f4493bd1",
+          "dataSha256": "a524b73cb2ec14409869eb6be1305e9a67ee0be50219d2bf6d6f644ad560c5c2"
+        },
+        {
+          "id": "forest",
+          "name": "Mr. Moss",
+          "svgSha256": "a0ea7cce63219ce3dbe47756ec8d9087d413177e995d1538dd948878975edf9b",
+          "dataSha256": "0af7eeb12f0e03a01db6bc01fd5f97fcbd33cf60b2e056567b6023e5f41fe629"
+        },
+        {
+          "id": "daisy-meadow",
+          "name": "Garden Party",
+          "svgSha256": "21426cd523147220b614cec71bd6e9c05c63308fed63468d122b79b993cc095a",
+          "dataSha256": "d4daca9883b2c6546d89368f68775deee509e1f909c8264faa77713fad31c18c"
+        },
+        {
+          "id": "blue-daisies",
+          "name": "Daisy Bell",
+          "svgSha256": "04a517893a4d0ca3a0918d9768e08a4fd0d0b1f4eeed0395975bc6eaa2d2e587",
+          "dataSha256": "1564f0fe63d6ea32e8635664488801062076fadba95c3cd52abba7a0ebc8df07"
+        },
+        {
+          "id": "straw-garden",
+          "name": "Sun Dust",
+          "svgSha256": "c0613cbbf41175f10430a3dc0784248233ead61cc06fcbe021060336f496e3b9",
+          "dataSha256": "44ff9e13c49b70be7b5a0d5c77fd988de45e89b65a35f7d2d25dc2daf3db8aaa"
+        },
+        {
+          "id": "reaction-garden",
+          "name": "Blue Lines",
+          "svgSha256": "f4e1dddd78908a2f5a5320d553f13398157a124c9a3d43fbbb9ede6c92c906e0",
+          "dataSha256": "bd79b4a65c4deabeb0e5b22a2cf13ed5f266232ab58e693988bf4db94a22e6c8"
+        },
+        {
+          "id": "reaction-coral",
+          "name": "Technicolor Dream",
+          "svgSha256": "bb42981f569fccc511f7647f3aff4153c122468aeab9d4784c4aa1f0f24ddfa2",
+          "dataSha256": "0ad8bafccde50ef5759e9e28b78af42cf4d9ecb195d78f50e87aed0cc49ea882"
+        },
+        {
+          "id": "tidepool-treasures",
+          "name": "Under the Sea",
+          "svgSha256": "22d17b9ce1096851a06a9e0274e68a643ae47721c5dfb98b6a7e57f3a1e5a67d",
+          "dataSha256": "7a66a64fab937ea70a643db8264ca99e43a0d999563143b9a39aef8a52cd4909"
+        },
+        {
+          "id": "cactus-bloom",
+          "name": "Mescalito",
+          "svgSha256": "bc9183c54b92fd61dab6648cea45c6182842464f0310943b843e5b32d770cf37",
+          "dataSha256": "bf36c474b7d8981d478569c760f18a420561c170d26a5720412466cb2923f54e"
+        },
+        {
+          "id": "shaggy",
+          "name": "Sunday Shag",
+          "svgSha256": "bc371adc17760109b212b836e19ffa39fb9472a1fc9a2f52be169b2239775fdb",
+          "dataSha256": "161a73abbf7b361d1153f043a384864dc34a173d69b1b1cfe9eafa01558f42e1"
+        },
+        {
+          "id": "velvet-shelf",
+          "name": "Rare Frog",
+          "svgSha256": "574c1e0bbffb52cc0a346d469d03735ff4a0d40cfa27a81804e4815fa727272f",
+          "dataSha256": "5be8c773e017ec8942dca9bc56e4c66aafd886df452b90b357b3fa0ea298def3"
+        },
+        {
+          "id": "porcini-cream",
+          "name": "Deep Water",
+          "svgSha256": "a46eb04ab28633a6e74e131561b385a3d9df655f625d5353aec7525f4967c55c",
+          "dataSha256": "9e27ebaf709424432f5869adca11b61051e1cf033a4090037d968750d9c9ee69"
+        },
+        {
+          "id": "deep-water-cobalt",
+          "name": "Sky of Blue",
+          "svgSha256": "100029bcaeb034a0e8c1334dfa124cfb7f80e897fae8fab70326abc8b43909a4",
+          "dataSha256": "878a9323363cd9a30e72f69db8b34b07c5343bb95d9691e0a1955b2eeb87140e"
+        },
+        {
+          "id": "deep-water-violet",
+          "name": "Velvet Morning",
+          "svgSha256": "dde53f545e794f07aad3287e748967fbd9abe4ff9cd79dfb36482f2c6b312924",
+          "dataSha256": "358b1355663d84d89babaf5cbe43539fa31ba03a2b2db1c81329b30e9acbed96"
+        },
+        {
+          "id": "deep-water-kelp",
+          "name": "Sea of Green",
+          "svgSha256": "760790e008aaabd2112fe9b732ef8916dc4a0fbc5926ef8cb37beda7687fc460",
+          "dataSha256": "6ad8c91fd0fc227d4dd9b6642c1a77c60a4b0e1b398a4da34695e04d585bfaa7"
+        },
+        {
+          "id": "porcelain-button",
+          "name": "Porcelain",
+          "svgSha256": "15c45e92710fa6638c6eae32a7481677348820802561eb4ec1b94de2d7fd12f5",
+          "dataSha256": "ff7d5fa456e032f5dd6e5aebeefdd8ba57ab25c946017fbb68e3e16fb5ae138d"
+        },
+        {
+          "id": "emerald-canopy",
+          "name": "Emerald City",
+          "svgSha256": "5565b8a322cc86a439184e5d276d51d0ecff2be20f60687900a9552f7191da78",
+          "dataSha256": "280235a730339057cb6a702d43399a0abcf24fd4fc7dc5a40079151aff8a0b53"
+        },
+        {
+          "id": "crimson-dawn",
+          "name": "Red Shift",
+          "svgSha256": "de7285b2c0d24cab5603d2aea3aaa4c8f4c3a8adeaa5372218d534e9c1b6e2ef",
+          "dataSha256": "483ebb729811eff4a2a5bba3cfb8fb586229b61d2f8b445f8fdf3ba0b13dac04"
+        },
+        {
+          "id": "cobalt-twilight",
+          "name": "Blue Hour",
+          "svgSha256": "1dda10a33516c8fa5252ab14cad069f6591048131d558f03246d45a650fca64c",
+          "dataSha256": "649508fe6fc73ea77211fce7a5002e047a68d9342f26c3d04deaf36abc2f7243"
+        },
+        {
+          "id": "woodland-brown",
+          "name": "Pink",
+          "svgSha256": "11198644605da31da81a75186fe42c9ddd25b0fba5bad39e220b347d4a7b8b44",
+          "dataSha256": "79a2efbf7cff568c86c5da744edb14f26146cd5387813313266a4dd5f00ce290"
+        },
+        {
+          "id": "chestnut-cap",
+          "name": "Chestnut",
+          "svgSha256": "9717e8bb41f6c6f32e5d903be3b9ab305e643799632966825d7332a5105d488e",
+          "dataSha256": "3292b31d89ce6ac84e286f9daf6ebe2e2eb12d57f4d03b0c8fe9de4a184de700"
+        },
+        {
+          "id": "saffron-button",
+          "name": "Saffron",
+          "svgSha256": "4b4f3db05017a171fb9333df7000f3d4548f2043b1e45c4d724bf2ce633ea4d9",
+          "dataSha256": "ada95f01083228640fdb08bc8c0dd7c03ad27fb434a5918dedb1de9ffc5d70a8"
+        },
+        {
+          "id": "chanterelle",
+          "name": "Chanterelle",
+          "svgSha256": "ae5227494726f32ae0df4f94d7b8f2d5566c0f0f82eeee2bd036f12f799e7814",
+          "dataSha256": "118cb2524da8a23759bee91dde667f063fd4bc9fe429a15a670d0ce34582b740"
+        },
+        {
+          "id": "amber-chanterelle",
+          "name": "Amber King",
+          "svgSha256": "d8572bad5a5bf865a1961f2c6db00586599992acaf3b9820aa6b51bebc1b934e",
+          "dataSha256": "206d564f7b34c4158e74d3a0b603d3f23a01b10cea17aa36283eb4da72d4d1b1"
+        },
+        {
+          "id": "morel-honeycomb",
+          "name": "Morel",
+          "svgSha256": "a6f28a6d8769aec91f3c6bf3757e0b166e3e10c43b3cbeba768723d193c2a3d9",
+          "dataSha256": "d376448b4d5950fdebb66cc620654b305a7efcdc44b040213e1fa4b5d89c18ea"
+        },
+        {
+          "id": "honeycomb-morel",
+          "name": "Bee Beautiful",
+          "svgSha256": "1f34e0de05b8422d5840c71e0c7c6982f726e892d72fef8bf7e4b6957001bd9e",
+          "dataSha256": "7e5cfbb52b3fcb481ea8129055ff1b6f39ebb9165a52bb6d34f637d0e3c4e546"
+        },
+        {
+          "id": "jewel-morel",
+          "name": "Parajanov",
+          "svgSha256": "bd5bc64d0cf636538051e27abab9d6c1fedbb4e6cbda2c1a5ba0b8d1c19a2765",
+          "dataSha256": "24c551c9e030a477401d87c7beb5b6f5c8e3ca9c1ee39a42b34dd0b54e330b3c"
+        },
+        {
+          "id": "oyster-fan",
+          "name": "Purple Rain",
+          "svgSha256": "3176ea9f20bb9462594fae82c182f0d560caf7b83f33e7efa6c84477fed36961",
+          "dataSha256": "9ea642c07f2dcd1ee6fa101555cb32767065fbbb43c8afc6642b21b13553f391"
+        },
+        {
+          "id": "tropical-oyster",
+          "name": "Tropical Overture",
+          "svgSha256": "89bba1a01f869e3b690e99634e5c463053649bafd2e11608ea587281a659498c",
+          "dataSha256": "ae3398273d3dcf205fbb7a4bf3beed85bdc3c8c9ed88e0346de9d01e4c3b4aa0"
+        },
+        {
+          "id": "lilac-oyster",
+          "name": "Lavender Haze",
+          "svgSha256": "80c3fdb377573689dfa59ea97f788b2e900f509050661efe10458694929deb4a",
+          "dataSha256": "572511d72b7d26719d67e05074b43c2293a6b87404982ea74a429d6a93148c0a"
+        },
+        {
+          "id": "turkey-tail-fan",
+          "name": "Bifrost",
+          "svgSha256": "27daf93ab91ca1e88d145ac72957194594fc8392cae5e20005cdbe8d0d93ba2a",
+          "dataSha256": "46ad674ac1703aaacc1294933d03a79a74be6a2942dfb4160404eb246aac72b9"
+        },
+        {
+          "id": "croissant",
+          "name": "Croissant",
+          "svgSha256": "ba9301addce7fd41a6216f90776f7f18928d7e1f72cb72da6ac69d2d7f94b8f9",
+          "dataSha256": "a2c8b9885a8a61263ca0903c45a5112ebe440d587a340d8e4f334f226ee5f279"
+        },
+        {
+          "id": "casefile-tweed",
+          "name": "Baker Street",
+          "svgSha256": "d93b89a70e000a9380eb1990fa918cb3810eb9ddb391d34dbd25caa35689427d",
+          "dataSha256": "eeb6021c350ba472b767a4444691ace90e908a612fc0225c176c6b564dcaf13e"
+        },
+        {
+          "id": "scarlet-pom-beret",
+          "name": "Beatnik",
+          "svgSha256": "6aa2b78596d2a164f2b694633994af87ba7110e094f456a0fc9f15d0d042a0bf",
+          "dataSha256": "929bf6810fee78230165f82292c6db425385d86d795069dabb8073214ad3a3b9"
+        },
+        {
+          "id": "acid-spiral",
+          "name": "Aurora Loop",
+          "svgSha256": "1d91e644935b0f22aa83bc4d11f531fda5ee86e50a7ca282df6efd22798e9599",
+          "dataSha256": "bde040adaebadb4ba823ae1d761b7a9534dae250c9389965d2dbc9b66ff4fa0e"
+        },
+        {
+          "id": "acid-carousel",
+          "name": "Electric Carousel",
+          "svgSha256": "104025a45021123dcc10e06eb71ce272bdbbf215e2d42681d127ad60067cb82c",
+          "dataSha256": "3ac4c8ee4071e07b60208f7d4aa56a368b67921d4b1da65edc5e5ce68b44bedd"
+        },
+        {
+          "id": "rainbow-swirl",
+          "name": "Spin Art",
+          "svgSha256": "ab2ccc7c2d4b719c6bf8cccc11d9f2dfdda16cb50384479815330701fafdb8df",
+          "dataSha256": "7e5a5ef8e041246f3de0ec90838b8731f24e12b8ee501ff91ae978c0d4539d16"
+        },
+        {
+          "id": "peppermint-vortex",
+          "name": "Peppermint Twist",
+          "svgSha256": "17d95c0936b16e0e13c1ce8a8cd056a87de58b4dea5b5b56f21d21c5d8b35dbd",
+          "dataSha256": "53db7bea17c63b55cf317ab5422bbb19fda10c9b0e8ad607cfcfff1cbc37f9c5"
+        },
+        {
+          "id": "hypnosis",
+          "name": "Vertigo",
+          "svgSha256": "452a3596f38735824cf56583f09033a7ad31b25d5676623c6af17731b4dd54fd",
+          "dataSha256": "f7de331ecbf8439311ff0d45edadafca831886f7d03bbd0e8ed81afa85fa5da2"
+        },
+        {
+          "id": "candy-corn",
+          "name": "WIP",
+          "svgSha256": "8bfe3315452747a1500dbf32f1cc94247ae192cbdac770b1474ddce6188edcfc",
+          "dataSha256": "a926dc94f9e8171e52474c709b32695556541b69b0573dabd03b97d6e2176435"
+        },
+        {
+          "id": "red-striped",
+          "name": "White Stripes",
+          "svgSha256": "2b0f355c205fbf170266156a8d5432b2aacbd43df8e660f8e94e6112d4a39fbf",
+          "dataSha256": "e63bb51f1139bd67c55605f1661157b18f087c596228704ad1b5c85dfd62f072"
+        },
+        {
+          "id": "reggae-stripes",
+          "name": "One Love",
+          "svgSha256": "6b775b8002d11a6b9ee16a5d4a53dac70de89aef0c7aa99cd79324ee54acf958",
+          "dataSha256": "18cc604574974f6b0fed23308ebb4898f54b736740115e879de57b6b0b291614"
+        },
+        {
+          "id": "rainbow-waves",
+          "name": "Rainbow Flow",
+          "svgSha256": "717368be58fa4cf4fe18e7a3875c89fb9d6062bbc9e88389d01a746cab03a2b2",
+          "dataSha256": "d37729160c0966719a5bfbe130bab3bc24fc1bf8cc0ebaad793ab41215d2b57d"
+        },
+        {
+          "id": "neon-ribbons",
+          "name": "Airwaves",
+          "svgSha256": "7929f574b40c07e03c6551a6b56006e1593655887b222452d9f3e719a2c0b095",
+          "dataSha256": "c1f4408a9d41df382b964f3c5cd1a78527901d14b807acdc2ff28f32fff1c37a"
+        },
+        {
+          "id": "pastel-bands",
+          "name": "Soft Frequencies",
+          "svgSha256": "e7a9230bd585aa73597ea352747572679b43cb5823438513ab8b061d63764cdc",
+          "dataSha256": "8aff5ac7d07a366f60059a57ab4d110d4334dcce730a7d58a90d86e307bd4922"
+        },
+        {
+          "id": "holographic",
+          "name": "Pastel Perspective",
+          "svgSha256": "fc5e66bba227a29f2705ccca3957f50f161743b1abde433b0afa4fbbdd71aff1",
+          "dataSha256": "32f1c98f37049b419eed338393a6d58b2f66a089fb8b9c7cfb1a5d4834331b89"
+        },
+        {
+          "id": "candy-shaggy",
+          "name": "Synergy",
+          "svgSha256": "ce270cfe70cf654388333ccabb594e2ab976a9a78431e678709976f6d25d424b",
+          "dataSha256": "134752462b92d8d134977d3f4c318f8529ee0a03a9f5edf6ec548e31ffa2e4f7"
+        },
+        {
+          "id": "g16-warped-ribbons-ion",
+          "name": "Electric Avenue",
+          "svgSha256": "47580d2eaea03e6074074418c5ac2f26ac0ef351cc68d0add72e484a0300413f",
+          "dataSha256": "1c3952dc79f2ee69330588454f4e04c404b1d3bc4dd53ad004477e297817bfd6"
+        },
+        {
+          "id": "g16-warped-ribbons-orchid",
+          "name": "Bubblegum",
+          "svgSha256": "fc64d83a8da1f1033ad5e558210d9b8c76a7e3ffb36a1c71759f999f46391a82",
+          "dataSha256": "30559c9e5e6fccd66fb44f41d5051a995e9fd353107faaa159f29fac679771bb"
+        },
+        {
+          "id": "g16-moire-lens-copper-mint",
+          "name": "Copper Mirage",
+          "svgSha256": "595a4d17dbcf8daf85dd172ef56e3269bb3593535bd594d0a18a5d5ce6ecc980",
+          "dataSha256": "07550e9c338ba46e9feb5756e698e02ac289243bb39051c93e18a4ff0c92fc0f"
+        },
+        {
+          "id": "piano-keys",
+          "name": "Hendrix Chord",
+          "svgSha256": "daf5f81b7d63e882a1b2f290af66a000ff8c465c051b80103e71ce3b6d5d9681",
+          "dataSha256": "a7ac772f1a14f5f442862fc7c3371bdee031a47ed45221237bd7d88d15556e05"
+        },
+        {
+          "id": "neon-melody",
+          "name": "Neon Nocturne",
+          "svgSha256": "f4d4f6e55b64b62015b86a43485300a83a80b7a08ce6004169fb226d73ef676d",
+          "dataSha256": "68f28235394ce11571f9893cebde673f722c16a3e26872ae1523d45153240298"
+        },
+        {
+          "id": "harmonic-shell",
+          "name": "Shell Music",
+          "svgSha256": "321590e1e85ee1d46cea6ec09c1df179ba2a1e910cc9d9d192315e71a91ab242",
+          "dataSha256": "d9c50cc82c88d781fc3b1c9b8dfa88a7720d276ada767f543ada3f8e4a7f7d59"
+        },
+        {
+          "id": "neon-equalizer",
+          "name": "Sound Check",
+          "svgSha256": "4ae6905cf9284106b2dd2dcaf314534b9b51a2bb47dc30287ce6deeb5c095543",
+          "dataSha256": "8ce02ba99078d790721ffc07ab47ab6f7154d8e6d117693328a6f4bdc7ba40f8"
+        },
+        {
+          "id": "chladni-resonance",
+          "name": "Visible Music",
+          "svgSha256": "e3529450c422008b042c99e0a4db403be60c086fa6342c575480285622e4c700",
+          "dataSha256": "4d35addac5a69fefd88b93cd9e22f2747c1a6d8c202b3479b8ed63860438493c"
+        },
+        {
+          "id": "vinyl-pulse",
+          "name": "DJ",
+          "svgSha256": "9fa2cab4ca9c1d5e61c1080f01ed8d74eddc93f5ccc6c5d29c0bd0b1b28fee61",
+          "dataSha256": "eaa3a10eefee509303055bcfb093a5b9ff30b99d9a13fc6aa6c3d16508cceead"
+        },
+        {
+          "id": "disco-lattice",
+          "name": "Afterparty",
+          "svgSha256": "6067dd03ae471514d2c9dafb79f2d86f7070e42c27392539381fe315763e8ecc",
+          "dataSha256": "a76d22158a4d2d30063b853a8e9a806f2a6d76841c4dc0ac75dafa554c9c0bf8"
+        },
+        {
+          "id": "disco-mosaic",
+          "name": "Picnic",
+          "svgSha256": "fa7ac0073d0ce310aa566795a00930684bb5adde44431ec8d6cc0cf19deada51",
+          "dataSha256": "e4f765edd963a44944bf4c678ebcd8477f04bcd30a849684ed110e8f9dca69bd"
+        },
+        {
+          "id": "action-weave",
+          "name": "Pollock",
+          "svgSha256": "504d05a3fadd9efd1b090008bb5da93236193acf9b2489d9b53dfd35cfe38ebd",
+          "dataSha256": "f7ae05df38ce6e0cee7783e1bc22f8829ffc5d312547cc8bef84c2a9cf23813b"
+        },
+        {
+          "id": "suprematist-flight",
+          "name": "Malevich",
+          "svgSha256": "4b7aaef2dc075e0526dba6308bedeb00c1795cda6f56f8dfad52abcdce36d396",
+          "dataSha256": "240a56cfb2e299675dd7d85c16d333549734b44bc3740a5d0facd11ade401143"
+        },
+        {
+          "id": "stitched-lilac",
+          "name": "Xcopystein",
+          "svgSha256": "5597200e05f7e2ce6cb787f4a22448fb5ec46ffc33f565e884ee4d659f0b2aaa",
+          "dataSha256": "9bc3ba64b13a1486b141bb7d51154285a57d33641162a1699d29fce350f9058d"
+        },
+        {
+          "id": "recursive-quilt",
+          "name": "Mondrian",
+          "svgSha256": "6936516c48bc5021e69072cc511274ac910a9380e35428d7858f77b7afba8ffe",
+          "dataSha256": "d4833183fd0c32ee244e412e523eea06274f6adf9a77e59d538acef2b4fc6b37"
+        },
+        {
+          "id": "checkerboard",
+          "name": "Check, Please",
+          "svgSha256": "bbebe5245f9dc9aa1475fba4f12db5224051e6e01372de324c88a9f00a28ca3b",
+          "dataSha256": "92933fb4a99d1820e4b246cadbf4d102a62c431e95756508a0b9f5e36f97e8ed"
+        },
+        {
+          "id": "rule-90",
+          "name": "Fractal",
+          "svgSha256": "87cc7b5ee1ddd289bcf4676aba89c0eda9b6db2dd6d176179accc776fbf77739",
+          "dataSha256": "6b9312e409ecba4fa1328458314bd3a56f89b6c6f3fd2fcabe73b3b10d5863d4"
+        },
+        {
+          "id": "truchet-ribbon",
+          "name": "Truchet",
+          "svgSha256": "1e0b90d4a1f0dfa4a9dd387f666a58c87c80abf22c25582b573c45f47999dcf7",
+          "dataSha256": "57689247ef02fca42c20bd0048a14d33a91f7e50e074d6d84b17aa3843c9472f"
+        },
+        {
+          "id": "g16-isometric-quilt-ice-quartz",
+          "name": "Blue Quartz",
+          "svgSha256": "638453bd8f156437d065583a54569ac1b25c5b55567753b839730d815be05491",
+          "dataSha256": "25e71dc6511c45e8dd84388ddc7dca26f319796daae69a265d19ff44deb8aa40"
+        },
+        {
+          "id": "g16-truchet-braid-ink-pearl",
+          "name": "String Theory",
+          "svgSha256": "67b35544f264626d8779bd34959719676e7a2137c73cd737934f8d57a2df651a",
+          "dataSha256": "91e2d37a8f4e23e25bcb24191a6aef9d687bd1d6ecc153302b4f9fe01100a834"
+        },
+        {
+          "id": "wave-interference",
+          "name": "Tiffany",
+          "svgSha256": "17d5e4b4613520b2c233e867444afeb3fd19998f82a5c2b4cc31eedf1d4cc918",
+          "dataSha256": "78bbe9bc86f7509b7f4a61324cacccaf6cdc5b063c8dca90b7f5337dad079910"
+        },
+        {
+          "id": "contour-atlas",
+          "name": "Neverland",
+          "svgSha256": "babd424f1f6f1c7c0594ab54a6ad71176a8a15c4c2cfd1459991169bb7a22bb9",
+          "dataSha256": "41d4e1100f899feafcddaced09ecb66c2c599e5277b272cff59718ad97397d72"
+        },
+        {
+          "id": "opal-islands",
+          "name": "Matisse",
+          "svgSha256": "0b1672b632cb6c59e0abb6f164327287386ec116af3a551ce4046da38342f128",
+          "dataSha256": "e8acbbf44a0b4e6ac31dbe2d01ab2c688c9c299a64de9e8f41789605fb36850c"
+        },
+        {
+          "id": "g16-reaction-silk-copper-mint",
+          "name": "Sheldon Lee Copper",
+          "svgSha256": "dffd0410693910e8ffdcdbe8a379cf3fb0b300acfc1a227845eee2fd660972d7",
+          "dataSha256": "be179c0b5968f4cc2cd3b441d873335dbf23cdc1d2776aed799dc0e310cb5513"
+        },
+        {
+          "id": "g16-reaction-silk-magma",
+          "name": "Lava Lamp",
+          "svgSha256": "4c4645777113fb91068539e8da538bff4b25c9285dd06b006bba3a98fbba03fe",
+          "dataSha256": "b7c92ef2d88d6963a86c583f3434c0b74cdcff6cfe604e1346ddf631d45dafeb"
+        },
+        {
+          "id": "g16-reaction-silk-lagoon",
+          "name": "Liquid Sky",
+          "svgSha256": "5f12f5e04be229208180f0aecc80fa2e734cc6ee05f61510194f51bd374c9fef",
+          "dataSha256": "3b7f38307e9d27dde20ce968405bcb8ea2503fd679c23a41ffa2f800e1a9c5d4"
+        },
+        {
+          "id": "g16-reaction-silk-cobalt-gold",
+          "name": "Great Wave",
+          "svgSha256": "8eacebf2cd2a1c8a27a0181e075712ec2f30af2ff9fe5688d8e71745076b2b37",
+          "dataSha256": "e3e0ac5d8220acd7ec90b22a888d5722f0265e4785be447359d2eb8b5c728265"
+        },
+        {
+          "id": "g16-contour-brocade-jade-rose",
+          "name": "Pink Mint",
+          "svgSha256": "ba355a5dc49b490eb8873c8e22982c5aa89e2f8248f4969b6e7b0ee70d4fc752",
+          "dataSha256": "7539587386e5e8638d233f3bef6d16e717c2348f821a275adce1588666b22a78"
+        },
+        {
+          "id": "g16-contour-brocade-ice-quartz",
+          "name": "Winter Atlas",
+          "svgSha256": "e249b7ccb380ee750316798d7361d045e728abcbc666620c9ae919801c86b5a8",
+          "dataSha256": "16e50ba193fab3dd5dcf188ee692f8864f5626d62d7fc837a5c56a37284fdd5b"
+        },
+        {
+          "id": "g16-contour-brocade-ink-pearl",
+          "name": "Wave Function",
+          "svgSha256": "e7e8ea2c797d94a979dfc8662ecea0e4fa034fa5e3ff7f6062e383cf77e232aa",
+          "dataSha256": "1d10d21145b8852db09a948612be4e3b45fafac5a78765d53704f4bb0079ad4d"
+        },
+        {
+          "id": "g16-cellular-enamel-festival",
+          "name": "Block Party",
+          "svgSha256": "09801fef9f27dc4fd52d993c67332985f5319f2c0a9dbfe701b5ff42f6758bfd",
+          "dataSha256": "abdb62e080ece3f313c5069a99da92f6179d2a24355845f723e791602ea5b5a7"
+        },
+        {
+          "id": "g16-resonance-mesh-ion",
+          "name": "Electric Lace",
+          "svgSha256": "54167298a98505005b6cca20e19609c791963759ca5957798c42887722325678",
+          "dataSha256": "a84527a726cf2af8e03d157b7d55d525eca28e1f3013d674beb982756681e89a"
+        },
+        {
+          "id": "witch",
+          "name": "Velvet Witch",
+          "svgSha256": "9e1da8b0ecb933541fa47a10604e1f49a8f2881c567f1375d37278d2b11f4a80",
+          "dataSha256": "5e1a52a3d572b99aedc944918d52f221d0fd214d9cd217d97b6f205f161a0b5f"
+        },
+        {
+          "id": "moon-oracle",
+          "name": "Moonchild",
+          "svgSha256": "5433d991488381187a9b0be594c45813f9ea03ea244d77e9f8e6e6d87420e965",
+          "dataSha256": "0c169afb8e4bcaa88033639a9e072b0d4c9bdd636ff2b4ed50da38a0cf3ee49e"
+        },
+        {
+          "id": "chrome-saucer",
+          "name": "Area 51",
+          "svgSha256": "e8cd4a5941905c704181d415a2bf0d39fd946dd4d708737f6741148427006212",
+          "dataSha256": "8ccf4deade5fca114fc57fd4a2cd3f1dc44f3121b1d2bd97114eda5fc02244b0"
+        },
+        {
+          "id": "all-seeing-eye",
+          "name": "Emerald Eye",
+          "svgSha256": "eb7f4e4860beec86ae33aa2bdbb862b031523e4845d960ffd8a4df92d159c245",
+          "dataSha256": "45b2a491b5f40ececdd428ca14711a2acb04fe377483c735444d8a39a5631d53"
+        },
+        {
+          "id": "blue-all-seeing-eye",
+          "name": "Sapphire Eye",
+          "svgSha256": "a0141952c167da7167b51dd5dc4fc5ed3a461e500c48cdcc0420aa9d55eb72ed",
+          "dataSha256": "79b54517c74c1a16820dd88c248415a60af0daea7b6323be2dda0cfa5986f7da"
+        },
+        {
+          "id": "iridescent-wizard",
+          "name": "Prism Wizard",
+          "svgSha256": "4d4cf24ba04b3f112248c5abb55697c397ce8720e912d84cd10e7f40029d314e",
+          "dataSha256": "9dc8bb242168f2b86b185218f04c200a113c7672d85dbaa9bd2e3aab7a6a57f4"
+        },
+        {
+          "id": "opal-wizard",
+          "name": "Rainbow",
+          "svgSha256": "cfc8cfc1cef90172019deeb95dc9517dc47f76a947c06103d1caf8d11e5808fb",
+          "dataSha256": "9c5adad8704a433930bb31f10908cdac9d9d7d4373aec7a3bde3f2a194a3a37f"
+        },
+        {
+          "id": "cheese-wizard",
+          "name": "The Great Fromage",
+          "svgSha256": "936e27f880efaf65a47a492c6f37929b751352968a0d9ea49e980e95126555a5",
+          "dataSha256": "8c62442e85aaeb4cd0b7fa565f047b958d789bd3eed02745754ba0b4c0e78f0e"
+        },
+        {
+          "id": "opal-jellyfish",
+          "name": "Medusa",
+          "svgSha256": "f972c392d91899b1973eef8200d74c789d56b337f334da9dc80b3ec9ffd2e8ce",
+          "dataSha256": "3af6a992179ac47cec02914bd673b2aa6b6c3d7596e28ecb1ad56b904e0a3f79"
+        },
+        {
+          "id": "mushroom-cloud",
+          "name": "Cold War",
+          "svgSha256": "8a28019e84ecc19a8fed6894390f171b5a689e2f3c0bdc909936d9df40e40ab0",
+          "dataSha256": "a07d1fd4cdc161060e50f99368feef5dd77aa63ea07863ddc65fc251a34d4ad6"
+        },
+        {
+          "id": "skull-punk",
+          "name": "Punks Not Dead",
+          "svgSha256": "fdfcb88a6fefd4c6f990ce682a3a9bf9cb580a9613d6558faf8536ef28ddc3a2",
+          "dataSha256": "d2e072c91dc59d4a743fd39560aeee53e7275d9f12a02532e58c661812ae494c"
+        },
+        {
+          "id": "curious-chemist",
+          "name": "Good Chemistry",
+          "svgSha256": "34bc08764ce07e96afd9f42372c31e1071e85f4780e4ba04bb74e06401196b75",
+          "dataSha256": "37c92c493e1f15d76e16cc8cfb782b3660c63de0358ebaf73a54a4ab9ba68555"
+        },
+        {
+          "id": "electric-bolts",
+          "name": "Aladdin Sane",
+          "svgSha256": "82412b59674f60cfbe1edf4e68e808dbcc1067d2ca66c38febc0e48a445d6c29",
+          "dataSha256": "70d9e5da622c6f5ab81cc60f35e4800ad62461265306c77065b92ac2f198cf4c"
+        },
+        {
+          "id": "game-invader",
+          "name": "Tomohiro Nishikado",
+          "svgSha256": "daae9147ea8c2004c778a1f2843f69a2107d34fe5d80a443886c3d0dad96a62e",
+          "dataSha256": "9cfcd50c5c84f47f46e69eefbeea56ec072719ae13a5b8decd71ed2071f94d6e"
+        },
+        {
+          "id": "code-shell",
+          "name": "Open Source",
+          "svgSha256": "cfc1ae86ccf8ae2801d0d65a093e2a5a67de42a3d0119c9224bd79d11ec83f34",
+          "dataSha256": "acaf5a4ba150ff04d76e323d88d776f32fc1cb6105a6f45442b0623925089fbe"
+        },
+        {
+          "id": "matrix-rain",
+          "name": "Rabbit Hole",
+          "svgSha256": "8968e0e8ad202eefd7c500e90b4a9b572bf78f0c847d257847e87e657dd16e8a",
+          "dataSha256": "3a9e02d4c074533e9b5a960d82c13326a395f9f2ee6c596b4f8ee65a3eff3f7a"
+        },
+        {
+          "id": "ceremonial-red",
+          "name": "Amanita Dreams",
+          "svgSha256": "dd78cf252e5050cc18fa2963805d1882ace772c96dea0311d9bf2be471f1b836",
+          "dataSha256": "d5aff42ea5637593e74de3110685174b2274d6affc53c8937eff4983b42b7b7b"
+        },
+        {
+          "id": "neon-graffiti",
+          "name": "Gift Shop",
+          "svgSha256": "7923852045489cead0da23c4fc4ab7529d08ffbe8a448407a7b709d59afe69a1",
+          "dataSha256": "745a77373f54da24ac932d98f9a3a90bbfb81ad27f48d252aa91011c8cedcc19"
+        },
+        {
+          "id": "firestarter",
+          "name": "Light My Fire",
+          "svgSha256": "9bf3b14116920b7cb340a54f6613371abe47c674cec80954ab162f33a638ea93",
+          "dataSha256": "d6734773880ed7ad44198ca06d026ee4eb827c0b02d05995cc10f6899e166541"
+        },
+        {
+          "id": "molten-crater",
+          "name": "El Teide",
+          "svgSha256": "96d5f9eb0e7ebca14ddaf312fd44db33faa84bc00e5a050b65acbe172e22caed",
+          "dataSha256": "8b23c23db12309ba08e2da8978452b86473ec0af3b621552b62c9b270b423c7a"
+        },
+        {
+          "id": "zombie-olive",
+          "name": "Fulci",
+          "svgSha256": "41f99e77ec9cf3693217ad69e78cd81bb225150fc32ef45565e498b0b2db7a2b",
+          "dataSha256": "b008a7885564eb577f92290948a3db5c4873e3e3668bd0f2422da3091ee546c2"
+        },
+        {
+          "id": "toxic-drip",
+          "name": "Romero",
+          "svgSha256": "f177f0f43df2b104fcd884b36c541d33cacfc19aaaa1a82db301ae6c8e9c2d58",
+          "dataSha256": "2080fb5b866c7894c948508c76c7ed9b30acc06e97eb780f794cf15200c976bb"
+        },
+        {
+          "id": "big-top",
+          "name": "Big Top",
+          "svgSha256": "31e472200c145c78a32b779058dcf6110c718f5b0323264c2e0f0dfe6eb3b681",
+          "dataSha256": "c99a47978b2c362f4eb0a929572e98a23d270ebba98b0483e9066ce867d0a90d"
+        },
+        {
+          "id": "confetti-clown",
+          "name": "Bozo Higgs",
+          "svgSha256": "3b9572b1cd79bbfc33142cecf6d0847d814058164197e5a7b486b2c49093572f",
+          "dataSha256": "ae5eed389d645ea80b5e40639699ea40ae2444011b287061466f71f7eedd11e7"
+        },
+        {
+          "id": "tiny-parade",
+          "name": "Small Parade",
+          "svgSha256": "e9692fc88da9a4be695260edb3a162b79a4d1b57a0055762f2ae742d9189e132",
+          "dataSha256": "9b8e684299ea988cd787de0b9e81046abefe4a7caf4367f5bccfb5d89600cde3"
+        },
+        {
+          "id": "dinosaur",
+          "name": "Deep Time",
+          "svgSha256": "0af051f7f38be9bd39386a4d54d185ac076611da6bba8e381a38464bb9ffdc9e",
+          "dataSha256": "c3ea863d86fd5e5c75f22fb769ebe8f02eab1c307facc728ebae39e94b1f9561"
+        },
+        {
+          "id": "brainwave",
+          "name": "Brainwave",
+          "svgSha256": "11b479e341a2de0b3541e26a2c440b6107a09c5b9b17eabae8787f2628f682ba",
+          "dataSha256": "138c69900a307c1340cd888e8327ba99f59521ea5e5c69fd123f9a9d5a57d555"
+        },
+        {
+          "id": "event-horizon",
+          "name": "Event Horizon",
+          "svgSha256": "444c87d658b28a2ae6bc5d0ef7b6baa8b74418e7704a58f8d8c9a6e8a4dab80e",
+          "dataSha256": "e4f3b265a96be584fcc249a40ac0b504ce8b62ae16f1c2de125e23c1cccad725"
+        },
+        {
+          "id": "penrose-triangle",
+          "name": "Penrose",
+          "svgSha256": "04e13b1757d8c0461d3a74c9a7d22836cc3d7c8f56c4c7cf44546dc8fe8e93f8",
+          "dataSha256": "eb8f3ea7ff0e3a44007f570c7399165a97ef1f5fde26c7defc2ab7d9131e0bdf"
+        },
+        {
+          "id": "lunar-maria",
+          "name": "Dark Side",
+          "svgSha256": "e1d82207d025e1cfe6e2a86ed9f842edb67572d960e2ccec02a00f7efebdd206",
+          "dataSha256": "3c12f9b7751ab84291dd3a37f644fd369083818b59d6a87a721e73b53fbf5f8b"
+        },
+        {
+          "id": "skull-cairn",
+          "name": "Memento Mori",
+          "svgSha256": "a629fe93a409695886315fa0d4d0f95a2b2a5e69be354947aa4d3de0ed9e56bd",
+          "dataSha256": "38a3ceb10c403d3e45e939df8d50ffdda4e1746a48a7fb7deda4f3a2dc05a984"
+        },
+        {
+          "id": "sleepy-hand",
+          "name": "Hand of God",
+          "svgSha256": "200590789a950447b6e7e5f64e314e826300509779f2a8b249ee408d5ed9b870",
+          "dataSha256": "09e7462c12684fbae1f29c8a2d763a12579bcc222970c62b1121cdb2bbf32078"
+        },
+        {
+          "id": "velvet-lips",
+          "name": "Rocky Horror",
+          "svgSha256": "d664fe241d17677d4c4ec4f0fc4de2141a37abb3466a15b257ac5eb45e0b85ed",
+          "dataSha256": "c2ed94c3162e1ced7b5c881e77d160d649b5cbf3bf1a4007f2c880cd8ce12bec"
+        },
+        {
+          "id": "parachute-day",
+          "name": "Drop Zone",
+          "svgSha256": "44a7ef25e5855ef7435120277461ae46d3dfc2118e784ca0cbea3a44fc3dcb12",
+          "dataSha256": "90875bfd099567d0b6ddcde6e171ad97bbd8669e20b7498b9f548c424b67e5f7"
+        },
+        {
+          "id": "melting-golden-hour",
+          "name": "Spacetime",
+          "svgSha256": "ef8dd5741da9703126bdf05f424e06d8534d7fee45ea17441fe008ff5f25be39",
+          "dataSha256": "68608ce56226640690fc43bb75f468971bc000d8140be4b00ee8ee3a3b7e87ee"
+        },
+        {
+          "id": "diamond-crown",
+          "name": "Lucy in the Sky",
+          "svgSha256": "f12304a56e2c564a67d56ec946ad3db45e45ac63a766c9c94a757c9e974b1234",
+          "dataSha256": "b693e9eca1f8790a76068fd6ac2b28a2a7de6bb8bc4ff4b1fd79c53bcc8a587d"
+        },
+        {
+          "id": "cinnamon-curls",
+          "name": "Being John Karpovich",
+          "svgSha256": "e55e23bfd2b6d33945087d50d810e82d28ee0867a718263df2d26751afe717c1",
+          "dataSha256": "c8c1473d65e41f7a66535991c6404758574f33590e8985d4ef7d6e99f9a62c55"
+        },
+        {
+          "id": "space-rift",
+          "name": "Wormhole",
+          "svgSha256": "42f22d522e4801d8a4930d0db1609b272627b19451555e8d220ef9b40a32f61d",
+          "dataSha256": "fd00b3293a4be22e0918f46c6473ed268d4d0ea9586867d98d128a301a4f1b32"
+        },
+        {
+          "id": "pond-lilac",
+          "name": "Art Basil",
+          "svgSha256": "48db9f0e8a0ccb02324256c3960d782790f189a7717ab41c1c7230c83d81f2f9",
+          "dataSha256": "9ddf66590b696bd57c96549695d414e8bc94ae20908a5201085f593514696ea7"
+        }
+      ],
+      "temperament": [
+        {
+          "id": "happy",
+          "name": "Welcoming",
+          "svgSha256": "d0e30b56b9e680ff57c7440291d40aa3182072dcb940b7a0e9836df403dfb8d0",
+          "dataSha256": "5c3d0d3461be8330767f6249106b56b5b82468bdd0655456633527dcf3e3c63c"
+        },
+        {
+          "id": "sleepy",
+          "name": "Dreamy",
+          "svgSha256": "2cea81c813d8a899095f4f03f0d5090310294a548775cbbf38dffdc7de6beb92",
+          "dataSha256": "7a10e867439fd97df32f310964a0bd8e3e4264634730ee5fd8d23ecaf8954849"
+        },
+        {
+          "id": "wink",
+          "name": "Bashful",
+          "svgSha256": "ed8d6650e1689d95fcc6fcfe54d7fcf4a5661c077abad273a142fd435f3b54d1",
+          "dataSha256": "de8b0f0bb5a8ab1d02ca22972aaacee4bcaeb5db81aa32c87c992e9fe5d5b361"
+        },
+        {
+          "id": "chill",
+          "name": "Grumpy",
+          "svgSha256": "29de2e87abd6d4cc87cbeea439ae9b5234e5c0ac421ad99e966d4f55af72addf",
+          "dataSha256": "463de642f2279caa3f779acdfad555577fd33c78bd07e39a6595826b3092aeb1"
+        },
+        {
+          "id": "joy",
+          "name": "Enthusiastic",
+          "svgSha256": "4a9c86e15b9eb4d395fb61f76649ee469f0e7ba27190fae7d8ab67e59b14fc41",
+          "dataSha256": "f773bf49773fb4a46849629ec78b03fe419fd9cf0b53a1570add2ffe426082eb"
+        },
+        {
+          "id": "oh",
+          "name": "Skittish",
+          "svgSha256": "64568be48da10d191f6ca7614b4dc3a54cdfd7ee4b9a040b38ce9278e8166dc9",
+          "dataSha256": "0e548e4238114907e5901d7339c6f52679b6f768a07ca8a95daa2fd1ae6d3d84"
+        },
+        {
+          "id": "bright-smile",
+          "name": "Cheerful",
+          "svgSha256": "e3cd2ddc69320439942848b4df213d8a5dfef543d5fe0064d5372b42634f58c3",
+          "dataSha256": "f01e74785290f8eb1326962c93f310b37ba38a988c1e4489d247617bb5c10d71"
+        },
+        {
+          "id": "closed-joy",
+          "name": "Peaceful",
+          "svgSha256": "a08188be96a6d2fbd63679d50d85c38208964b576dbeaea32b1555aa5232dfa0",
+          "dataSha256": "7878f96ed9d44ba7b3a69684c0c98e696c73c37eed52b9cd26178265cc9bcd9b"
+        },
+        {
+          "id": "tiny-tongue",
+          "name": "Playful",
+          "svgSha256": "0842749f028bb39422de6f3ed2d25f09211d90c816fbdfe9321ff26162e92285",
+          "dataSha256": "40f56628fc0e2ba61d14ec2ccbf2d2d26aaa242de4435188e2fab5b82568fd54"
+        },
+        {
+          "id": "cheeky",
+          "name": "Mischievous",
+          "svgSha256": "d9bab9d1ede3c514857993546e43adc9d2b909324fd98000bf5507781b7f6481",
+          "dataSha256": "3f095eb224b4bd3a23f0de1de2e5010e6bf0e14be00ee2f54c8b34d6bb6a82b4"
+        },
+        {
+          "id": "heart-eyes",
+          "name": "Affectionate",
+          "svgSha256": "596d20a6eba9df9d15217e84b058e63dd8db3384ec43b67d6cfa5d4fc91ac173",
+          "dataSha256": "3f0d70438b51cdf2855a103a3e50efb796e1a13df96f5be10b6ad536ad57b5aa"
+        },
+        {
+          "id": "starry-eyes",
+          "name": "Otherworldly",
+          "svgSha256": "28e436289ae9ef3f428bf9464c7e143a3383405179bc607dcdd6ebd35cec7701",
+          "dataSha256": "df523367f219b618af9f5785974a6fc0207e6b27655bd9e9230f59156276f306"
+        },
+        {
+          "id": "wide-eyed",
+          "name": "Curious",
+          "svgSha256": "8607b2fec302b2480c8f587eaf071955fa196b07476804a4b3ff5bf6720d9010",
+          "dataSha256": "a28e22193df537302fc5a9bb7fd45a67ca2f9a0f12bfdfde139092b3ebb44b0e"
+        },
+        {
+          "id": "gasp",
+          "name": "Dramatic",
+          "svgSha256": "7fb26b0d47dfc065af0f94fbde17c0f26f2a145f9770a2b3661562a90799dc29",
+          "dataSha256": "1739e4368446ddbbf216f6177e36ed5b5ae20bccb671e62dc5158bfd96a8e13d"
+        },
+        {
+          "id": "content",
+          "name": "Contented",
+          "svgSha256": "288e17b31364f2c4d9c0bca781462f338ee6375c67089951b80a75331cf6c3c5",
+          "dataSha256": "79176ae57929a8fbc7d89b66a2cd7ae7c29d7b35a36ae9be274600fa702ddef3"
+        },
+        {
+          "id": "soft-smirk",
+          "name": "Tender-hearted",
+          "svgSha256": "4573c610deaf9c0a71658490c2dea58082871228ec11010aac232080a2e5d66c",
+          "dataSha256": "5a53fa4b2b7b8a7ae0c91b8a082a525d219b65a47ecf7ea330a7488738b1873b"
+        },
+        {
+          "id": "fierce",
+          "name": "Determined",
+          "svgSha256": "5d1342d303c24b3d1c9d7f6805a6434de71161bafe0eadf603218d64d1dc1965",
+          "dataSha256": "fe72c2f573187456626fa864bfd6070c1596036a1ebb807930f99baf0f2b8a26"
+        },
+        {
+          "id": "deadpan",
+          "name": "Deadpan",
+          "svgSha256": "ad69705caa260329560b15b1fbf23bc14e2e0e2a5a11dd3b30196fa1c21c168a",
+          "dataSha256": "f47a351da37eba8b19e594942e24102e281004ae9feb4b7be33bbc6b83781362"
+        },
+        {
+          "id": "cross-eyed",
+          "name": "Wild",
+          "svgSha256": "afe992513e41464f7c5bdebc7bc8c46884dde4c1a6871d646a1bde48171cdf67",
+          "dataSha256": "afc14e97a0e511961f5aa9b6736d8ff4d2e27787177362772556b1d1d246dbd0"
+        },
+        {
+          "id": "clown-nose",
+          "name": "Jovial",
+          "svgSha256": "005c125cbe37f034bcc513e5a376f63f343e2cb6bb973e7ec4258e4f98cbf303",
+          "dataSha256": "979bb8f5e1848719e60dcc7e1a227f4f639a00103eb96926b4f5dc7ed6c2dee6"
+        },
+        {
+          "id": "fanged",
+          "name": "Feisty",
+          "svgSha256": "82f453f73f6ea6304609cddd7adf755adbeda43997fdbc259ab664c3d13d3ddb",
+          "dataSha256": "7aea20d93946714ba01f6d3bbbd0e329182ea0f550e76f31e4e0d9e01bd2b367"
+        },
+        {
+          "id": "gentle-wink",
+          "name": "Sly",
+          "svgSha256": "a08a137e41bd4d4c229728ce9ca7e3dc4c5176ac1626851b8dbe988ba08ff12f",
+          "dataSha256": "960eae816455a7a8032f369357e3ebfdc795f4a0c4aedf5faca4452f81795c13"
+        },
+        {
+          "id": "silent-mime",
+          "name": "Theatrical",
+          "svgSha256": "69e03ff63606d0de9ca097cc59d5f850de5bbf23d1be82d7eac942bbbdb73bee",
+          "dataSha256": "f235c1217b99b447d554ec36aeb1584e7f2476bccab0561f84132018f1418c5a"
+        },
+        {
+          "id": "bleh",
+          "name": "Jaded",
+          "svgSha256": "1d0b28b32f3901f6270f5a07c00f42f0f3664e9fb1e93a11f47b423758afffb5",
+          "dataSha256": "3a3c809b452b597af416a2e9705d62d535a95b48c479b7b7f103c312dec97792"
+        },
+        {
+          "id": "cry-me-a-river",
+          "name": "Cry Me a River",
+          "svgSha256": "552c5ddb5216a1b8081938eba113398a9582f20a1650f588832e0fc8381a435a",
+          "dataSha256": "15b677d97ac077a434fceaa1f6329263c2bb184d68e856aca1fe1792e03100fb"
+        },
+        {
+          "id": "cherry-flirt",
+          "name": "Cherry Flirt",
+          "svgSha256": "5576a5557627996c00998405bc55bd794b5b1a4c9f577dab2d1369c74e513ce3",
+          "dataSha256": "7104c6e29e4175e29041f93b88211d3979d158b927f4e59942c214c87f8ab752"
+        },
+        {
+          "id": "gilded-glam",
+          "name": "Refined",
+          "svgSha256": "12efbe30daa09904267940f6a449e3568225502d9ec7da0518ba80e6eed923b1",
+          "dataSha256": "5d3494e23c828140af8a3caca7b4b9aff804f29723e444e6ab48531ff19c4ed9"
+        },
+        {
+          "id": "glam-girl",
+          "name": "Fabulous",
+          "svgSha256": "7a1de71164713eb750278f6e15f4fe3f40f7d7e41ba91540c578bc1314aa2e63",
+          "dataSha256": "d3317d352e31fa4a73872f71df0b884ded0805c6f5018d276bf6fdab43b64625"
+        },
+        {
+          "id": "i-got-it",
+          "name": "Bemused",
+          "svgSha256": "5ff7e62d6897499d003ea52f8ba6a84538c2b5fdac887f611251e7b74fc54564",
+          "dataSha256": "adbe79e8db2c6a17a0a3fd42727d0bd858187fff63264db63a349578a0cd5bc9"
+        },
+        {
+          "id": "macho-mustache",
+          "name": "Macho Mustache",
+          "svgSha256": "ff175aa66184ec476b29fb2d872ee7d0e2d0d9bf5b83aeb7061fc1f0d473780b",
+          "dataSha256": "65f3e795d0e1342cb71fe93535bab95a2cac5d12a860a153f8a96d0931e91037"
+        },
+        {
+          "id": "marigold-majesty",
+          "name": "Wonderstruck",
+          "svgSha256": "6301126f36f2625182ad5a1e43a21d3343587c670a6893b8b3bef244e28d0f75",
+          "dataSha256": "58adce923461c3a3fdc929894d2be3b7ae4dea486544b59cef311943deebd29b"
+        },
+        {
+          "id": "wait-what",
+          "name": "Skeptical",
+          "svgSha256": "3be6a6045219aa578a3d43e74cb3fa3cd660b4724ae9cc12d894ff4fb7075239",
+          "dataSha256": "91b28dad63fc671fbfa5164888b6374b7b6580136dafedb63a0022f4b17c2067"
+        }
+      ],
+      "glasses": [
+        {
+          "id": "none",
+          "name": "Clear View",
+          "svgSha256": "8969f3e566f9440872a43ed4d84d1f6d931712b435a4b3c900985560e908570e",
+          "dataSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "id": "sunday-shades",
+          "name": "Wayfarers",
+          "svgSha256": "18f608db7ae6f41facbee458c4e6b582643f63739c56c4c07af49f6258025579",
+          "dataSha256": "9855f2a7bc4e94ba5ee49ef91cbb4b6781f663ebb191989fc2e5f912937c2ebc"
+        },
+        {
+          "id": "pixel-shades",
+          "name": "Slim Rectangles",
+          "svgSha256": "bd43a83a917848cb6670d9c5a003272cfd82a9156acf840bb45fb9e1f51ee32b",
+          "dataSha256": "d13081a42af0c72b12c644941f810ca2f5bda40435e9a641c0b7ed07154c7721"
+        },
+        {
+          "id": "pirate-eyepatch",
+          "name": "Eyepatch",
+          "svgSha256": "00fc4b4cba65817e818addf5b078255fca77c0a9ac77637d31921787b59ec25d",
+          "dataSha256": "e9e850582205c6a9ee4a1aadf1d0adc4beedb1c6a366eac8a2d1167bfae6fd7f"
+        },
+        {
+          "id": "garden-rounds",
+          "name": "Panto",
+          "svgSha256": "75458442fa46da2b0ca02ea35e13f91c3f485413e686515c24b69a1c4deaafdd",
+          "dataSha256": "9c59b449d628d7d98d3732333d6a284615d9e2d79730179b0f888975f352e981"
+        },
+        {
+          "id": "tangerine-grid",
+          "name": "Square Frames",
+          "svgSha256": "7d174f88ced7f793e4beee0875fc8ddcccd63cadc75da66c28d3adcc52691134",
+          "dataSha256": "1a81ec8b75110f2bb452fbfac72805bf1338927dc1b2288a574bd0fb376246b8"
+        },
+        {
+          "id": "anaglyph-specs",
+          "name": "Anaglyph",
+          "svgSha256": "98d62cdb66b377c04ca9d54653ae47826fa667ec082ffd962b5fdc3cf850508a",
+          "dataSha256": "ae7d194e114fe324aa7dd63272faa95b13daffc5806c1ffcecc159498a15b0a3"
+        },
+        {
+          "id": "arcade-browline",
+          "name": "Micro Frames",
+          "svgSha256": "6c51face841782819e1f58e8a7d36719b9062dd0eb4a5b4e3888f76d72a4a13c",
+          "dataSha256": "d75c1ea70cb6fee417b3e8a81e7acfbf5159166def7d3b87cb1cd7e1dff662b5"
+        },
+        {
+          "id": "scarlet-shades",
+          "name": "Red Wraparounds",
+          "svgSha256": "8790bd022a92544e9ea653f874f5b6a062526cc5c7e0c35b7dfc67c38b89243d",
+          "dataSha256": "1423a49061730ea4ef1e577d2ce1eefe50249ec7bcc0bdb9ac4fb3cfd9a84d68"
+        },
+        {
+          "id": "sunshine-shades",
+          "name": "Yellow Wraparounds",
+          "svgSha256": "1f40d2744cb9508beb92d6af1284795afe6a1a6222c1ca360d5e92fd3a121b6f",
+          "dataSha256": "ecc363486698e5e24bd09883c276c9fd31cd298721edbe5e2c8821c0b282ea8c"
+        },
+        {
+          "id": "jade-rounds",
+          "name": "Jade Teashades",
+          "svgSha256": "c1eadf2636beb0e4cc95499e64d5068b4860ce4e5207d2dbaf9ff8bf50d133c5",
+          "dataSha256": "be6da066b6052ca4b0fe79490255c4d429e8c4a7aed56a0226390f1918354e1c"
+        },
+        {
+          "id": "midnight-rounds",
+          "name": "Blue Teashades",
+          "svgSha256": "afde251dd491c8c51e2a95c56bffb37cadfd092392030f2fa464d55f0fb4c6c6",
+          "dataSha256": "6404cd62d532498d947fddae5ba04f43494d7c6f09630a593d57b62b39579e89"
+        },
+        {
+          "id": "sweetheart-specs",
+          "name": "Lolita",
+          "svgSha256": "8e5372c40d78aea33430f03e68a921ae94ac673f3945cc56850253593670e923",
+          "dataSha256": "315e344990f61e9e3dbf87418d51283bbe457a4da3ffc125565f4b24a48dd54a"
+        },
+        {
+          "id": "honeycomb-frames",
+          "name": "John Karp",
+          "svgSha256": "35b4694a67216a511124493f72ae5452b2aff823d93cc86a0385b5277b8fb2e5",
+          "dataSha256": "58519e307c1e20d4648ececa0fc29637bb12ed272f75682ef274fa86625a86c4"
+        },
+        {
+          "id": "curious-monocle",
+          "name": "Monocle",
+          "svgSha256": "c50b991c1da0fe31ac21fe5ec7f7c38d6a866f96468e8942cb929cf5d97a4c56",
+          "dataSha256": "5c05aef8a7b3744e25dc68fd8a96c140cc6e25cf629574f58cae15a634d06377"
+        },
+        {
+          "id": "stargazer-specs",
+          "name": "Star Frames",
+          "svgSha256": "deb16593551368a152bfcc5d9a0f8d3ff286a58f49fe9b0b69d92d17d32c9860",
+          "dataSha256": "18dd65af71362a9d7222c1546ae3175864352d58f2c7e8482d3c36da9a9ce13c"
+        }
+      ],
+      "accessory": [
+        {
+          "id": "none",
+          "name": "As You Are",
+          "svgSha256": "8969f3e566f9440872a43ed4d84d1f6d931712b435a4b3c900985560e908570e",
+          "dataSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "id": "daisy-friend",
+          "name": "Flower Power",
+          "svgSha256": "bec020e308a731225155e1633bf88acdb615100375e767d0637e4b108709af76",
+          "dataSha256": "a9af6f35f07597d57dbf611dbd81199b80b00c20e307bfc717cca2a1dba94012"
+        },
+        {
+          "id": "painters-plume",
+          "name": "Paint It Green",
+          "svgSha256": "f88f49437f3c5a692a4b1e1619150f0bd59e7d68500c2c2de9a2793ad6ef0714",
+          "dataSha256": "00477c3724707bef2fd0e1afc37653e3392dbc410483584a4a74fa94ea3ddd34"
+        },
+        {
+          "id": "encore-star",
+          "name": "Starman",
+          "svgSha256": "4f612093555273caa752ca8a2f564834272b14dd020f354b627a101d8ec70d83",
+          "dataSha256": "5e8ddbe65123747c9737dbba3e1eb48701790f9aeeef7569dfe17d89a83eb4b8"
+        }
+      ],
+      "hobby": [
+        {
+          "id": "none",
+          "name": "No Plans",
+          "svgSha256": "8969f3e566f9440872a43ed4d84d1f6d931712b435a4b3c900985560e908570e",
+          "dataSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "id": "curious-detective",
+          "name": "Elementary",
+          "svgSha256": "25ced68e6b5840d357ac0dec5ae3377116e01b5e09f2dea47362096676405796",
+          "dataSha256": "5db9be8c6b4f0f52bab75eee5113183d4b4d20b771f4f4e896bfde7c75f09b03"
+        },
+        {
+          "id": "frog-keeper",
+          "name": "Ribbit",
+          "svgSha256": "d83feeebb4bcea734dfed9d6db01dd22cef17b4162689f45f08010bb4e17535a",
+          "dataSha256": "c48e3e7dce383047732560eca008c073f00e6c6cb794e00ed2c3dbdfade7c3aa"
+        },
+        {
+          "id": "dino-tamer",
+          "name": "Jurassic Friend",
+          "svgSha256": "4154951c77ba28585bffa3944d9d6d18b98984625f2301e5b1e8d956c981edf2",
+          "dataSha256": "7f3c601297dd967312d38d84ef41bb5264cfbc58d433ea4791bb8732a0dda749"
+        },
+        {
+          "id": "sunset-guitarist",
+          "name": "Riff Keeper",
+          "svgSha256": "c67b14da54ac196009d987177f10c2a09d8ceafcd711956d580cf22e8935e8e8",
+          "dataSha256": "6be79d785a6bcf441897af418308e0be333691be3ef7c598209dbb44cddb257e"
+        },
+        {
+          "id": "beat-keeper",
+          "name": "Not My Tempo",
+          "svgSha256": "7e875336734ed84048d29e6a35c6509110285bf4b16d940be97dd1c50130d25f",
+          "dataSha256": "d5fb1cff2abe19290232060b64b9291d994a8c30065753636dbc915218f4679d"
+        },
+        {
+          "id": "woodland-pipe",
+          "name": "This Is Not a Pipe",
+          "svgSha256": "bf959ecc05bd66f49b12f3b53409b6f4d3c8013c89eb45a5df9b6ce26f520669",
+          "dataSha256": "d0166bdacdd37c5dbf5ee4fe7557883bf309466e09e21bcae6473cc622dc1abb"
+        },
+        {
+          "id": "little-roll-up",
+          "name": "420",
+          "svgSha256": "fa5ea9cd2ddcc0d56b143c0be32e9a58bbedf9675b51973ded9a14a2fdd42835",
+          "dataSha256": "86de8447a92bb283e56368e64cbf4908f06fee008e80bebba8beca57880b6ff8"
+        },
+        {
+          "id": "midnight-sax",
+          "name": "Take Five",
+          "svgSha256": "95ad6fd2269e911e43654cb40c7cb16d64304d462c80ac9a2cf6f38bbd79d5e9",
+          "dataSha256": "e5671290a51a00fad14575ba65a6af9cced598aa56b8526bdafe9b4c90bcf4be"
+        },
+        {
+          "id": "snake-charmer",
+          "name": "Salazar",
+          "svgSha256": "c390d7d4857f1b8854650c0ca59273809a14bf6bf65bc7f70fdf816f3e56fb1f",
+          "dataSha256": "31248264bce3f978fde287f0b089599db4cd6d9ced2e7190e5c218adca88ddd1"
+        },
+        {
+          "id": "flamingo-friend",
+          "name": "Flamingo",
+          "svgSha256": "a63579b016648624fa66133e0664043ccc099de8ba3a408c653047777e646fcb",
+          "dataSha256": "c87012e100b3ea9615e0c8cb78de924b4f883a75d220743d7da081b5976c3d30"
+        },
+        {
+          "id": "little-director",
+          "name": "Quiet on Set",
+          "svgSha256": "3e476d7e6aa8549c70a346f94cd70090f2dbc61d214f5d0a143d21301df3fd3d",
+          "dataSha256": "40e814d44875022647290f28b1759df817490649b62bac697ddf18c3265d40b8"
+        },
+        {
+          "id": "mushroom-chemist",
+          "name": "Walter's Lab",
+          "svgSha256": "875811455e33e9fe8df81d16973c35edf8a04556596bf4710eb571988afac50a",
+          "dataSha256": "701d125228e0072ab62ea7ac50a1552b3dd1e3c35eaedd2f39d59a1f3f6e1705"
+        },
+        {
+          "id": "street-artist",
+          "name": "Can Control",
+          "svgSha256": "720896c8e9e53eeb09f973174ca53864dc651b42a99f0fe888219c3ae48531ba",
+          "dataSha256": "a5c001a59f3aabc012626615cfe964566a4151ec7cce299e5c7329e65640f194"
+        },
+        {
+          "id": "red-wine-ritual",
+          "name": "Red Wine",
+          "svgSha256": "483964be9dcb305b6aa373211b49620bcb5c6c9f5f07e56a4da57d1f579720d0",
+          "dataSha256": "8c26b30b734edaf662a1991e5a91dd3e2f47f68df674537c42dd10bfebd26f8b"
+        },
+        {
+          "id": "owl-keeper",
+          "name": "Who Who",
+          "svgSha256": "8021ebd64ff496e1d33f5df8f36686b04619406d62bdc261f64c3d43c91995e0",
+          "dataSha256": "6f8e4d867e1eee3d36e4c6ea4cb3bc8974b6d04aa5564825e9ef20b536ef8d67"
+        },
+        {
+          "id": "ghost-whisperer",
+          "name": "Paranormal Friends",
+          "svgSha256": "25a540b9b6e1355dcbf0053c035dfd002fa632f86b97c574ed212fcea0d9d8c4",
+          "dataSha256": "ac42f2d479fad335c5e3fa93033eff6b22f0ec678d2d908f1fb8bfc4fe61b69e"
+        },
+        {
+          "id": "cactus-keeper",
+          "name": "Leon",
+          "svgSha256": "0a36e216b015f61041308368284227df44993098203bed715b7bcb9fad4b187f",
+          "dataSha256": "e88847ab79e66856976644cf5a7b9f2c5a04795b8e1a48c03a18a906df5cf9d7"
+        },
+        {
+          "id": "night-coder",
+          "name": "Late Commit",
+          "svgSha256": "4ac99e63470dd7a039864a982d7d1f6125931aa5da3f14424312095d3375be2e",
+          "dataSha256": "74bdc7d3e6a70acb05c0f0969b2780c5ff15271b4abf15beaa7fbb8d77eb7c7d"
+        },
+        {
+          "id": "garden-tender",
+          "name": "Green Thumb",
+          "svgSha256": "c2dce1bf8e5e66d5fa26552acf4872682bcef8fcd28f08f5897a465615459e79",
+          "dataSha256": "3bd69ffccda96d5a435a42ca9762f64ba1efa587e4c5e94142afc12bb7297995"
+        },
+        {
+          "id": "movie-night",
+          "name": "Zed's Dead, Baby",
+          "svgSha256": "2df48a074655f40828626f32c45dfc0d3e8cbdccc673c06473c44e3c4e71c9a5",
+          "dataSha256": "2ac013081a07c1f629db13c1cdd912374b38e03d3bce0c2fa4124fc4d0fb31e5"
+        },
+        {
+          "id": "teddy-collector",
+          "name": "Teddy Bear",
+          "svgSha256": "ad3ceec77b05f6e0509121bcfd7afca4a2c06c7e9295179c7b87b80271069018",
+          "dataSha256": "a08ea5f6bba295905635f8d7a2ec69d3065aafc190c877d1582120433b102168"
+        },
+        {
+          "id": "bubble-charmer",
+          "name": "Pop Art",
+          "svgSha256": "25a9a76972fa64154a6d15dee167b222c7ceb12992e32acbba21323be265baa1",
+          "dataSha256": "bf545bd9a7ca1ff97459534e24115a6094aba9863cf394ffa7c091d8fcc64691"
+        },
+        {
+          "id": "forest-photographer",
+          "name": "Decisive Moment",
+          "svgSha256": "84633176cf97301c964a2f9f95b7696a3c27579950c747dd0ca7e9acd2ddcf87",
+          "dataSha256": "7f1a5d247c1d09b522e5c6ffe6c18262e748be81edbbe017d74674d8b09bf75e"
+        },
+        {
+          "id": "pixel-gamer",
+          "name": "Extra Life",
+          "svgSha256": "6c70b25f3a4e6c7d3f5ab5cee6152b7819fe24b0c78d3dbd88ff962ef0604005",
+          "dataSha256": "2ee5c623f7f917f54e722c5e1db2095cd09db03467d93346144c4aeb412ac187"
+        },
+        {
+          "id": "pocket-painter",
+          "name": "Color Theory",
+          "svgSha256": "6cbd8f2087fe48a1214a9800c7f6a8f1d9fd9e2eb02845aea37fa2498b975dcc",
+          "dataSha256": "1899db4bd1d5c76274865abc8f14b5b5c01065e371f810a89adcbc796e7e4e52"
+        },
+        {
+          "id": "street-skater",
+          "name": "Kickflip",
+          "svgSha256": "b0e7e762987bce625111aeb8015803c47874ecdcbb983e7063a380a0b2c2c5f8",
+          "dataSha256": "625ed32dfd7d247fb32096a0f6f04dc5c230bf6d21205813b5d277c0ef9458b8"
+        },
+        {
+          "id": "crystal-gazing",
+          "name": "Oracle",
+          "svgSha256": "e0dbfd458870f309017dd42af3490969f7d17a5570810882699a6e5df50d0b53",
+          "dataSha256": "12f01a60fed5249c6c311f2f7fd4e9e832b3d1de585caad7c00bf3425ac3bffe"
+        },
+        {
+          "id": "trail-wanderer",
+          "name": "Pacific Crest",
+          "svgSha256": "df783d982c02c62df70419f2ed9ab8f2d47869b7b7775bddbd36282bb97a7485",
+          "dataSha256": "f168965bd5498d12c7e603e13fd4c98adec728c72de134fa3b86974d24bd16b0"
+        },
+        {
+          "id": "silent-performer",
+          "name": "Read Only",
+          "svgSha256": "487e19380d60cf4c5bb7f6a89f56143a997565a3584c8529288389ca455f98cb",
+          "dataSha256": "5a92d108f44119e06961c96b6c4a7c0c2eaae2bcce6827cc34fe9aae66436d72"
+        },
+        {
+          "id": "saffron-monk",
+          "name": "Zen Mode",
+          "svgSha256": "a8816b8f05d3b6b684afb76450a985b420d3d694773045a25854aab6957d5a75",
+          "dataSha256": "e5f1033cf999fd67a7859d8a5b3bcb6c8c73ea74753235b1532655ccca2a9805"
+        },
+        {
+          "id": "mermaid-daydream",
+          "name": "Mermaid",
+          "svgSha256": "ca4e6d7b63493d172b11d13b23892275fcb3c833540b156223854375d57ce22e",
+          "dataSha256": "2680ad9240eae4bce59ffc88f8a68ad1a9195c22b8e00a4778b347ccae9637ef"
+        }
+      ]
+    },
+    "editions": [
+      {
+        "slug": "wonderland-vanilla",
+        "name": "Wonderland · Vanilla",
+        "genotype": [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "73a8f30bc8b1e84329e0febbf22618ae0671f883ebeea1f2ba73ea8b2b8977f2"
+      },
+      {
+        "slug": "magic-hour-vanilla",
+        "name": "Magic Hour · Vanilla",
+        "genotype": [
+          4,
+          1,
+          2,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "36451597172a59050861aaa9f3052a9d0052b4ac3c4b51252fd27915ebeb1eb7"
+      },
+      {
+        "slug": "jelly-weather-moss",
+        "name": "Jelly Weather · Moss",
+        "genotype": [
+          25,
+          2,
+          3,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "70b1548c0de1f38c00783f0b52d36eef9f944c20f24f51cdb0b0563a8c9bb8f5"
+      },
+      {
+        "slug": "velvet-witch-vanilla",
+        "name": "Velvet Witch · Vanilla",
+        "genotype": [
+          4,
+          89,
+          1,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "9f75a5a17e4338132ac58c8a33ef65fa3328acd4f6060d888c38efd6d9c165dd"
+      },
+      {
+        "slug": "wonderland-moss",
+        "name": "Wonderland · Moss",
+        "genotype": [
+          25,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "4d574f882c6d43d80e21fe591dedf3823a1e58a9fb8ffe844991745cecae36a5"
+      },
+      {
+        "slug": "sunday-shag-honey",
+        "name": "Sunday Shag · Honey",
+        "genotype": [
+          10,
+          19,
+          0,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "73e39b195a675ff9b46c5d6ecfde733a350c0bc62eb59bd745f166f1759a8101"
+      },
+      {
+        "slug": "lagoon-sky-blue",
+        "name": "Lagoon · Sky Blue",
+        "genotype": [
+          21,
+          3,
+          0,
+          1,
+          0,
+          0
+        ],
+        "svgSha256": "e4c8813ee57715755ba3cc93dc7713c9da6853c3ade86dff833d43620b994ee9"
+      },
+      {
+        "slug": "love-letter-vanilla",
+        "name": "Love Letter · Vanilla",
+        "genotype": [
+          4,
+          7,
+          4,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "31913e4dd6f13975b81611da43f891020d592cbc77187dcf39453a4c07a1a970"
+      },
+      {
+        "slug": "mr-moss-honey",
+        "name": "Mr. Moss · Honey",
+        "genotype": [
+          10,
+          11,
+          0,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "d5f2865d9a2b679ee96ade6b9b858b09b3cf315bdc6348402f2c19643471bf8b"
+      },
+      {
+        "slug": "garden-party-vanilla",
+        "name": "Garden Party · Vanilla",
+        "genotype": [
+          4,
+          12,
+          6,
+          0,
+          0,
+          23
+        ],
+        "svgSha256": "ef8eafdd7ea2b9007951849270ccb2f9b99470b179e4877c3caa04c19447b385"
+      },
+      {
+        "slug": "tomohiro-nishikado-lavender",
+        "name": "Tomohiro Nishikado · Lavender",
+        "genotype": [
+          15,
+          102,
+          4,
+          0,
+          0,
+          24
+        ],
+        "svgSha256": "f578208afcb21df99b8f049e39a38584fa262eb60f094330cd10abe9b53ef771"
+      },
+      {
+        "slug": "art-basil-moss",
+        "name": "Art Basil · Moss",
+        "genotype": [
+          25,
+          127,
+          21,
+          0,
+          0,
+          25
+        ],
+        "svgSha256": "a950bb48fd824ff5e5ff464e9ed471e6cfeaf8355a1eec19ec4e759900777951"
+      },
+      {
+        "slug": "wip-sky-blue",
+        "name": "WIP · Sky Blue",
+        "genotype": [
+          21,
+          49,
+          17,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "e0923e94be2bc500bef36112864975c838c09ba0cbebfcd14b5ef36d52bed3f8"
+      },
+      {
+        "slug": "spin-art-strawberry",
+        "name": "Spin Art · Strawberry",
+        "genotype": [
+          13,
+          46,
+          7,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "03e86d9f3f5edb8421fec1a4bfecb1f153f571e078af53097178d894320a772d"
+      },
+      {
+        "slug": "daisy-bell-sky-blue",
+        "name": "Daisy Bell · Sky Blue",
+        "genotype": [
+          21,
+          13,
+          6,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "358c643c55a110c0a60338635510ba85a7e6d04edc4b873eb07ea40ce7d862af"
+      },
+      {
+        "slug": "sun-dust-honey",
+        "name": "Sun Dust · Honey",
+        "genotype": [
+          10,
+          14,
+          15,
+          0,
+          0,
+          28
+        ],
+        "svgSha256": "cd415879902825a5910e346b85d3296af9fed0eb58c538a29769984d7b7c3950"
+      },
+      {
+        "slug": "chanterelle-vanilla",
+        "name": "Chanterelle · Vanilla",
+        "genotype": [
+          4,
+          32,
+          7,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "af2c7e63f6668a3a303384f054d0cfc6135cfa355fc7aebdcc828392f189c071"
+      },
+      {
+        "slug": "soft-frequencies-vanilla",
+        "name": "Soft Frequencies · Vanilla",
+        "genotype": [
+          4,
+          54,
+          14,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "ef61cc2ba735ce1c6f2b5dfaae10284f4f11634c14ef104cc8b81f5a9b8fea5e"
+      },
+      {
+        "slug": "prism-wizard-lavender",
+        "name": "Prism Wizard · Lavender",
+        "genotype": [
+          15,
+          94,
+          6,
+          0,
+          0,
+          22
+        ],
+        "svgSha256": "db9b379ed339597653d047a9ec29488c4830d16f4641f67fd35a6d8ebaa0ecaa"
+      },
+      {
+        "slug": "saffron-vanilla",
+        "name": "Saffron · Vanilla",
+        "genotype": [
+          4,
+          31,
+          14,
+          0,
+          0,
+          30
+        ],
+        "svgSha256": "85f67de64bcfbb0ffa99f16ee5166082b33a683f6ae7d4a5c9d3f8154ecd992b"
+      },
+      {
+        "slug": "croissant-vanilla",
+        "name": "Croissant · Vanilla",
+        "genotype": [
+          4,
+          41,
+          21,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "7bc6f204a2fa362cabc1e9e50d2250e584e52bde8e002eb76b368a26d923c378"
+      },
+      {
+        "slug": "deep-water-vanilla",
+        "name": "Deep Water · Vanilla",
+        "genotype": [
+          4,
+          21,
+          6,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "eb00628f7d93ddff5e6f1db00d7a4639cc293d8b1f9219b18c5c3906e1ac4a07"
+      },
+      {
+        "slug": "fulci-moss",
+        "name": "Fulci · Moss",
+        "genotype": [
+          25,
+          109,
+          18,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "027352dd6424bf9dab789bd7b24cadcb224bf9b24296e18ff0582ac474752433"
+      },
+      {
+        "slug": "rabbit-hole-lavender",
+        "name": "Rabbit Hole · Lavender",
+        "genotype": [
+          15,
+          104,
+          0,
+          2,
+          0,
+          18
+        ],
+        "svgSha256": "59a2cfd70c87be66c99fb34102cdd692f7e4c512aa5a22422bd7a3bdefa04137"
+      },
+      {
+        "slug": "cold-war-nuclear-core",
+        "name": "Cold War · Nuclear Core",
+        "genotype": [
+          28,
+          98,
+          6,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "120ec53bc6febc6671b0e6d89fd307c4e2c84894c6810236a52701fa4325c46a"
+      },
+      {
+        "slug": "truffle-club-honey",
+        "name": "Truffle Club · Honey",
+        "genotype": [
+          10,
+          5,
+          14,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "4d5d233112bc44597f75ad787e8619dbb4c8bb35e46400fb1c156d5ca8b4c07f"
+      },
+      {
+        "slug": "morel-vanilla",
+        "name": "Morel · Vanilla",
+        "genotype": [
+          4,
+          34,
+          7,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "f05924a27ae1ff355473a440b5903283f5cbced7ab7451d11fa8558737e38343"
+      },
+      {
+        "slug": "check-please-vanilla",
+        "name": "Check, Please · Vanilla",
+        "genotype": [
+          4,
+          72,
+          6,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "4b16a74851f2e369821a6c2b88b14e759636ed6480aacdda42fc73b3ea53a608"
+      },
+      {
+        "slug": "emerald-eye-lavender",
+        "name": "Emerald Eye · Lavender",
+        "genotype": [
+          15,
+          92,
+          14,
+          0,
+          0,
+          0
+        ],
+        "svgSha256": "bdb6c0b6a28cd2100287bd952d9a1a80f9026355f792b749ade89d7752e43d7e"
+      }
+    ],
+    "collectionArtwork": {
+      "generator": "tooling/lib/generate-metadata.mjs",
+      "genotype": [
+        3,
+        0,
+        1,
+        0,
+        0,
+        30
+      ],
+      "avatarSha256": "f654535cd9bfc6bfec6b892d122b3e4db7ad01f4cd4938f43e2a9ad8ef703c07",
+      "bannerSha256": "eb87b726a97acc212e262d865be558aa73d7c37890f1d5a78220a9feb36c62bf"
+    },
+    "sources": {
+      "collection/artwork/traits/accessory/daisy-friend.svg": "bec349d6d768d3133f36bbf1946ee54cda430f5f276c3dbe01e670609288e243",
+      "collection/artwork/traits/accessory/encore-star.svg": "9ff5ad589b73386764a3b2e00da1e06e430e16301aaeb59e8c7b906d4d10edc3",
+      "collection/artwork/traits/accessory/painters-plume.svg": "d9075e016867696c014683c65378d9d633986c421ccd2a766580e324c5e45bca",
+      "collection/artwork/traits/cap/acid-carousel.svg": "7fd42ec6adce2a6481fe5a8e925116dcd56b35c21c2d0a40dc4fcfc4a94ab9f6",
+      "collection/artwork/traits/cap/acid-spiral.svg": "26237f373e07e4b13a0abae3cf92480047848fb2f7108753b51366f7bf1f30f9",
+      "collection/artwork/traits/cap/action-weave.svg": "7ff50180b5bd01cd5c59c3deb10551dda32c37adb49286de381e4088896db396",
+      "collection/artwork/traits/cap/all-seeing-eye.svg": "195e50cb8eaab1d46e5f884fb1555b2a863182c02d9314c1b369d507aff007fd",
+      "collection/artwork/traits/cap/amanita.svg": "9da8cabadd0ea8a82643e473e1f3a9b6d1cda443cc639e734145384eabd4c636",
+      "collection/artwork/traits/cap/amber-chanterelle.svg": "3739c3abfbb4cc290b67ca4388a2ea694367f83f3870c9f350182b5bb33fd07e",
+      "collection/artwork/traits/cap/apricot.svg": "a9c878145831d6ff73949f0fb4eb332c61639377e9f2fba397c5047b93972ee2",
+      "collection/artwork/traits/cap/aqua.svg": "074090e879ab62b32ad4aa38f8a816c9ce690d15e7eab402ece3abff0d6b847c",
+      "collection/artwork/traits/cap/big-top.svg": "4ca0401c70f9ff33fab68e3b9afd75a1cf2cc1bbb2a1ed58e923ab166d593008",
+      "collection/artwork/traits/cap/blue-all-seeing-eye.svg": "31562093aa8f6662350c5b3e78a81b4556829661106f6127209455171c1cb831",
+      "collection/artwork/traits/cap/blue-daisies.svg": "17c867de9f6d43133142408efbcc579e7ea3d2752361812659c73f09dbf50b90",
+      "collection/artwork/traits/cap/brainwave.svg": "b9d32ddc3e8b2b1fc1b199640c0abb02079dec7322bfece6ae4bc21f8cb326d5",
+      "collection/artwork/traits/cap/cactus-bloom.svg": "9d04bd09b39dad59edada9fd14bc05fef96faf0e4ab018d9e30e72d62d3a4683",
+      "collection/artwork/traits/cap/candy-corn.svg": "e26197dd1891ab2db842acf7f9f889bf645f650d89ececdcd101ab8cf96a4ca1",
+      "collection/artwork/traits/cap/candy-hearts.svg": "0f0c95d016041fb591b9a100795dcd4047d4f7187b45442eac4f6c5adc3cb596",
+      "collection/artwork/traits/cap/candy-shaggy.svg": "fe9c35d008e098ba54c28cbbe9f1f19abcab51c5ee38c0821cc4256f7421c6ad",
+      "collection/artwork/traits/cap/casefile-tweed.svg": "05b10edf67be2b69d2c6cafe3b04d1c414bf832aa954676e1c329e91a5b95339",
+      "collection/artwork/traits/cap/ceremonial-red.svg": "25105ee84cf965fb1bd24d728d26236476686671992504c798427bef9136632e",
+      "collection/artwork/traits/cap/chanterelle.svg": "bd84c5abeb0c03a629078d812a81d329091d91f176629c2ddd1bbd3a3dc0cad0",
+      "collection/artwork/traits/cap/checkerboard.svg": "1af1a312143299e29bd014152389db346975e71ecc90554273dad2d93d74e966",
+      "collection/artwork/traits/cap/cheese-wizard.svg": "e7a545f4709f29a3036416b2d1ebd05fc67b5d4da275ab1ef06468bb3e94efe4",
+      "collection/artwork/traits/cap/chestnut-cap.svg": "50ce96e667564fd1b304b6d34ca5905aa35e827f3f9860baea952d9faf0d7847",
+      "collection/artwork/traits/cap/chladni-resonance.svg": "0df1ba247fb6b5e354295bdf16aa190184345dfee3a2d718f4accdd2501bf616",
+      "collection/artwork/traits/cap/chrome-saucer.svg": "4e1b1eb227137d8137679559de330f0f11fc9179b94f14653b705a6e79360fd7",
+      "collection/artwork/traits/cap/cinnamon-curls.svg": "7f761789aca5128e2e46055afb44ffd38817c957521f6df96918e9b0a4155450",
+      "collection/artwork/traits/cap/cobalt-twilight.svg": "33ae928506a8d9125a2f98506305a6af52ba178dc3b3bfaf4df4069b75880e7e",
+      "collection/artwork/traits/cap/code-shell.svg": "3a51fa630cc54193a0a991f2992c5afe0788b591fc6670b50d4691feb3aeb1ea",
+      "collection/artwork/traits/cap/confetti-clown.svg": "f67eddebb8b9bddb1fd44ec70cc66a75dd1c4c84d3bde3782de090f133fc2d09",
+      "collection/artwork/traits/cap/contour-atlas.svg": "4808d1c2dfb94ec12cb6488e3f21e2b4a21b87fa0a0b3876eebc98e9a9cc5564",
+      "collection/artwork/traits/cap/crimson-dawn.svg": "bfb9b6d11675dc1146d28a478aa4daa1ddcad9ac37be1a76d7920097a9f0dfcf",
+      "collection/artwork/traits/cap/croissant.svg": "6390f4e3d9c459f034da76d2a178c0ee5213e8ecb949dbfe549494d5e9250637",
+      "collection/artwork/traits/cap/curious-chemist.svg": "d1092114ee7468b5a1681ca5ddb60c6cb3b606efa135944d2ff30f75ca750e4a",
+      "collection/artwork/traits/cap/daisy-meadow.svg": "219aff68704b538d306e9d2075615a65a467a6ec0b7396ca64391eee76545bd7",
+      "collection/artwork/traits/cap/dark-truffle.svg": "160cf4ff8991803317082b97700e9ee4d6ccf55ec070fcf37d4ffcf4f0362d4d",
+      "collection/artwork/traits/cap/deep-water-cobalt.svg": "c151ed93903f3352c57534c0d551d068647cab874e59d1049bbbe56a1761df3d",
+      "collection/artwork/traits/cap/deep-water-kelp.svg": "71638de8ebdf6e4f98eae19098c924e12f2fb3ba93e94945b20460427ac4d24d",
+      "collection/artwork/traits/cap/deep-water-violet.svg": "d8cb7d9c8caf01828b9c126ae61df362200ad18c39f4611f7ff9e5514b99eb34",
+      "collection/artwork/traits/cap/diamond-crown.svg": "f6dcb431c86f487c93b9e68b2f02d7849994a7f537ed9a9529ed1fefb4f63366",
+      "collection/artwork/traits/cap/dinosaur.svg": "5f735f4fdb5cf51074129f5b746c0751dcb0c241190d7aa27cad092b9a9be3ca",
+      "collection/artwork/traits/cap/disco-lattice.svg": "7a858b0011474219588bec63bcc023e7aaefc6c63a2cdeb59b652c18e8304e46",
+      "collection/artwork/traits/cap/disco-mosaic.svg": "acac993b4933f975e0bf68c23feafeb9810fdbc5b476a146957c4d5910702ba3",
+      "collection/artwork/traits/cap/electric-bolts.svg": "66270dfe90d5267b403129744e07e66b37f78b67393cd3784c957fe753076cdb",
+      "collection/artwork/traits/cap/emerald-canopy.svg": "ccf2008f1f76db7f67606664f6062c14dd87eaf2acd1af8a416dcc6ea83b7957",
+      "collection/artwork/traits/cap/event-horizon.svg": "08891449873785535b4404da51839583ea023d37e9879e54f43db9277557a17a",
+      "collection/artwork/traits/cap/firestarter.svg": "16d404366bca28171104fc0d4081c23cbf2be913be3216fc53bba86f56092af2",
+      "collection/artwork/traits/cap/flower-hearts.svg": "44cf4e36303783e5bea078b82703fcd42ef0ee21b2e602fa5b252232c47aa59a",
+      "collection/artwork/traits/cap/forest.svg": "910bd126424c07fe49e4718a0a75487cd683f2e842a1f690b9eea46cc3e2c512",
+      "collection/artwork/traits/cap/g16-cellular-enamel-festival.svg": "253f886a071a8bfdeded11c6e5f4a038af911c3e92d78ad138fa3cb78bb587d4",
+      "collection/artwork/traits/cap/g16-contour-brocade-ice-quartz.svg": "b0a00c9acab59989ca8f38a77461f36f3a9c2b9960ea63908c818c056c6b7df5",
+      "collection/artwork/traits/cap/g16-contour-brocade-ink-pearl.svg": "fd77068c52c0cb8a1517c116b9f1d5552410a1914b76860527dede0446729371",
+      "collection/artwork/traits/cap/g16-contour-brocade-jade-rose.svg": "caac013719a2256ac8d06eb8647abc6e7474f1e98b0203d4f92b7db7df4651c7",
+      "collection/artwork/traits/cap/g16-isometric-quilt-ice-quartz.svg": "3c746aa130346f158cfae57526611e0fe0d31b50c409c4fa2aa792b31ee2f512",
+      "collection/artwork/traits/cap/g16-moire-lens-copper-mint.svg": "03a2919c8ab359ec27cc001ae2209daf6c7a93a5d27a1654e4174b9191df2aaa",
+      "collection/artwork/traits/cap/g16-reaction-silk-cobalt-gold.svg": "d8fc20d46b695ac18f6fa8b38c97cfccfab405b89bb8498a54ecdbee924a675e",
+      "collection/artwork/traits/cap/g16-reaction-silk-copper-mint.svg": "947f9e95daf6ab646e0c162ce0f66928c5f033be886ffad2f8fa4314a322b69a",
+      "collection/artwork/traits/cap/g16-reaction-silk-lagoon.svg": "d8b9ceb87dcc3c00dd1bb6b40b6a497b58f2ef11402c0d1a9c36df02ab962d64",
+      "collection/artwork/traits/cap/g16-reaction-silk-magma.svg": "e1f0fae803ddf18a619af63de6715b6f57561e57128a18798cad289e94df382c",
+      "collection/artwork/traits/cap/g16-resonance-mesh-ion.svg": "7fa09a824d0560dd1f95e62aeb7162aecc7fd707bbeddc111bc828380114405f",
+      "collection/artwork/traits/cap/g16-truchet-braid-ink-pearl.svg": "c62a07243dde2d485494379e99c766d8d9310ca3c59ce3320339ebbfe3acb240",
+      "collection/artwork/traits/cap/g16-warped-ribbons-ion.svg": "14f000af643ae6a566be04eba1a9bf3efaa41fabe817b47335887736d5f533a4",
+      "collection/artwork/traits/cap/g16-warped-ribbons-orchid.svg": "bf2a41c6d81c336f55769e42cf72fd75bd868d3cee5f4767fc35dfaa9cf592d7",
+      "collection/artwork/traits/cap/game-invader.svg": "5819d2e7fbab6c97d9fa6235f61a2f7450265a6679586b5b6ca278d6f8990023",
+      "collection/artwork/traits/cap/harmonic-shell.svg": "44da776267e4e84567be5214dacfd72b9b29c7dbf832d13ec7bce03c4cc46671",
+      "collection/artwork/traits/cap/hearts.svg": "d7de1f37df1c2e5f92a2065ebc96724bb776f0e0026252fe3bea539219781b85",
+      "collection/artwork/traits/cap/holographic.svg": "043643b7ce9dacfc98434cd0a901054e7c354a60602d2147f856e8677992f381",
+      "collection/artwork/traits/cap/honeycomb-morel.svg": "0b1100a2da154f0947f7a434f70ce0210da28981597b2ebc37708eb0f0b4ffb7",
+      "collection/artwork/traits/cap/hypnosis.svg": "addcc0cd0782a17d7c06018493b06cfe817cc07ff9466cfe5d627185e551e3c0",
+      "collection/artwork/traits/cap/iridescent-wizard.svg": "a8fb3da8ced8b457531ce3d31432016a7d53c0278fe43dbda6c3752b4611e5ce",
+      "collection/artwork/traits/cap/jewel-morel.svg": "d23070a4b25f20cb8bf54f3c509cb32b28924c8368523806c1c0f830bdf83719",
+      "collection/artwork/traits/cap/lilac-oyster.svg": "00de83d9110c522c279c94d87ba6ad713c6b649d941e8e7f3928b62e4b6b2ba6",
+      "collection/artwork/traits/cap/lunar-maria.svg": "38ded82b0f2a487c929dd70c72e836e7f4eecdd67e768951a7f2a5d82e27ada0",
+      "collection/artwork/traits/cap/matrix-rain.svg": "c83ffa7b624fe9d7a616369ed1840341d177472be816ff12f0dbf515ae220811",
+      "collection/artwork/traits/cap/melting-golden-hour.svg": "ace3045a26d13cff4d2835ecc43445ac45de60ec133788b5ea16622bef9358fb",
+      "collection/artwork/traits/cap/molten-crater.svg": "88b191c0a1e0c97ac95524e702a48e305c88ce6390ba928e512303ed988c3dc8",
+      "collection/artwork/traits/cap/moon-oracle.svg": "31484251d142b90c218f3b0d028f627963f787df0bccb51b23fe3f5bb8a478b3",
+      "collection/artwork/traits/cap/morel-honeycomb.svg": "e83bf887f31e04c1972edac45c375b136e4adf724a428feddd1643ba3bddcd3f",
+      "collection/artwork/traits/cap/mushroom-cloud.svg": "a4e619275fd24fb27a34dc5090de0e01150ed3e967c92cc2ea673eb88c76b610",
+      "collection/artwork/traits/cap/neon-equalizer.svg": "7b6f473bd5c361eb4a25ec3554bd9a5928f87b7f81f4549ddcdd807b28be884a",
+      "collection/artwork/traits/cap/neon-graffiti.svg": "255961948b199b2d780aaaf9273d3805a9a7c427691aa153611dc0abdc22aa79",
+      "collection/artwork/traits/cap/neon-melody.svg": "98f67db7df072fcb830976f669ce7d12ac8d180dceea2795dbdc6faa45bcb3dd",
+      "collection/artwork/traits/cap/neon-ribbons.svg": "2de55545e2c15df44c79b881fe225d5a95eae482d835c01419cc1582a2f85e8a",
+      "collection/artwork/traits/cap/opal-islands.svg": "201fcb512e12162d3f422287f2c8b503f3f4dd19f59e6bbdb02f1f65f2d6cfc0",
+      "collection/artwork/traits/cap/opal-jellyfish.svg": "b758cef9adabbf4da336cc20940a13f8604f039d7ee78977759c7e0853a5a8fb",
+      "collection/artwork/traits/cap/opal-wizard.svg": "b8966a02fb21d0e5bb34fd54be6c7a3815c570c126955b876e88a49e844bf8e5",
+      "collection/artwork/traits/cap/oyster-fan.svg": "dd9e91f14f8a70e917a281c1881654675859cff7daddf633de7a42dc93fe3d83",
+      "collection/artwork/traits/cap/parachute-day.svg": "a3893b190746b01e6cc8dd3909a6aef843ce16c02a4b208c49491027620cbde0",
+      "collection/artwork/traits/cap/pastel-bands.svg": "00ee04de7527eef0a383d9dfd699d9c2fc959054fd15c00f1ec3c08812236b54",
+      "collection/artwork/traits/cap/penrose-triangle.svg": "d5effa14b3081684305ece88bcad323e7cdb14f656daa2ec467ab97fb9ee7379",
+      "collection/artwork/traits/cap/peppermint-vortex.svg": "976adf78fabbefb1e0624a844c9f650dedd724ed3d4a696da2b21bdbc99326d7",
+      "collection/artwork/traits/cap/piano-keys.svg": "d32b13f94587d7dca7a1bc27d22fc65a8fca19199d37230a2676805ac336e52c",
+      "collection/artwork/traits/cap/pistachio.svg": "ef8a11b80650696a6d9a413f69c0ef961b955d6f6aad2740446d146585b6cf44",
+      "collection/artwork/traits/cap/pond-lilac.svg": "ca25fc9ca7b7395f510cd33f91245d9181aab1c7cafda866caaf4489e526e4fd",
+      "collection/artwork/traits/cap/porcelain-button.svg": "a9259834b1e4f1a694516a4200138d802a070fae29a908ba54a1b0a0c5ec2b9f",
+      "collection/artwork/traits/cap/porcini-cream.svg": "46916becbb2980b7de06f48799a1431c7c423894b7c1b12509ce72b87e0b6881",
+      "collection/artwork/traits/cap/rainbow-swirl.svg": "027aa711fcdf7cead370a2d9a3433a2d4b9b55aaad8796ca2e0e94a4616dc948",
+      "collection/artwork/traits/cap/rainbow-waves.svg": "7608570f5a66b9865af6e016c39b3990e3b1728f7914b13af7a98a138709379c",
+      "collection/artwork/traits/cap/reaction-coral.svg": "701ef78b9c2fbf75f7291600fdc49ce3258cf234d375b7d06154df274f4818a3",
+      "collection/artwork/traits/cap/reaction-garden.svg": "8b0af0a0420307117ea2c25794f15b10474dd06913758a26620c09489679ed7c",
+      "collection/artwork/traits/cap/recursive-quilt.svg": "fad01836270800467378d4a6a46f6a846907d5bfe112125b21298445475be18d",
+      "collection/artwork/traits/cap/red-striped.svg": "f84806bce2d4a8737e0725d962ef9e18fbafeb3e5b076259cd32cd5dd309a267",
+      "collection/artwork/traits/cap/rule-90.svg": "1c3b8a3d0ded7ef345d8eaa71aa751a4cf894723ad9f1f6dfc4ab106563258b2",
+      "collection/artwork/traits/cap/saffron-button.svg": "bb0fc1c55e311e8c55de7b35b114ecfd5b9f239971910e9ae2f9cd5166436f9d",
+      "collection/artwork/traits/cap/scarlet-amanita.svg": "398f4382820067b27dd538cc6c7001c02cbccac6d4d5e2b8298cf72777068aa8",
+      "collection/artwork/traits/cap/scarlet-ladybird.svg": "8b264b159037a951285082a3fdd2041c549c31ab7b11ee647fb030269578e408",
+      "collection/artwork/traits/cap/scarlet-pom-beret.svg": "4fc22da20f52bc91090592e6de531bdd6a008b1a601d34a10444612ef9f4b709",
+      "collection/artwork/traits/cap/shaggy.svg": "6b88b2cce16e3ce566ed7c1a02f27232063453daf0e4020951795b4f52c6452e",
+      "collection/artwork/traits/cap/skull-cairn.svg": "aa2e04734ac7b9a60b7b50ace0fbdd9b6e4a81aab8afc16c8ddecdb41f709409",
+      "collection/artwork/traits/cap/sleepy-hand.svg": "37df1de36b617ba5e8038abb6f59b2bcd9aa8afd22d46b292efd571784b0641c",
+      "collection/artwork/traits/cap/slime.svg": "95c6a65e48c3a9dae84002fd44a5c80adcc2d57cb6be3ce7af06f25e4d4e86ae",
+      "collection/artwork/traits/cap/space-rift.svg": "948710f2e86cacc50681b5dda173a5c901f894e2c82601628e8496624f93c4f6",
+      "collection/artwork/traits/cap/stitched-lilac.svg": "d3b7b7777d021fc84d3c2bdfb6ed0c4830a5c66d75f2344ae3f14411e2d02a22",
+      "collection/artwork/traits/cap/straw-garden.svg": "a0e764be4e4a7bbffdfbe2d6e728ca600e4797df3c62759cbd9ca3fc32e7fe32",
+      "collection/artwork/traits/cap/suprematist-flight.svg": "5f3553b3aba35e2b5588f8e26ec7018799e9ee8af2fcc73334391ddab33e1d3d",
+      "collection/artwork/traits/cap/tidepool-treasures.svg": "88811f2f6128929d39c97d03ca42278828d6f3e05c8c3ac9a9505b5772bbc83b",
+      "collection/artwork/traits/cap/tiny-parade.svg": "c4f9afc8fa7f6754faa6c6b9e8f1c9a158499ec277a86beb3fb27c8b74e66f9b",
+      "collection/artwork/traits/cap/toxic-drip.svg": "55fdcf96a9de1df8873106680965935cd1420c1cd781e245354c2758ce3f6907",
+      "collection/artwork/traits/cap/tropical-oyster.svg": "bd82f98739e5bb801150584816adf98eff2b591a6aae0849a18ffe3ead29001a",
+      "collection/artwork/traits/cap/truchet-ribbon.svg": "296cf184ad59bd9d7772da4f2efeabfa421cf7750cdd5246cba20d3f123d4dfc",
+      "collection/artwork/traits/cap/turkey-tail-fan.svg": "331be17815a2c8a99ca74bdfdce7552497635547758442e7ba1f909e4be8c021",
+      "collection/artwork/traits/cap/velvet-lips.svg": "b1cf884c95602a59be46697493d553bde69a779731bc3e3081bf237ff852a4f5",
+      "collection/artwork/traits/cap/velvet-shelf.svg": "810ca7b7174830d836e7a3b49876d02cbd9a4f43069340c2b79fb300b57e9c5c",
+      "collection/artwork/traits/cap/vinyl-pulse.svg": "a47bc9841c82830263a98886532de585f77bb4fd55e9022f412d233ee80ad442",
+      "collection/artwork/traits/cap/wave-interference.svg": "7c88b899a3ef3b07feddee30e34b245398e6e179d4df6534cf9689e91b771c2c",
+      "collection/artwork/traits/cap/witch.svg": "88ff178648cfb08b7256e17e107a3e679c4d98096875b8663f2a3a2db47f0bb2",
+      "collection/artwork/traits/cap/woodland-brown.svg": "3b01380e9dd5c39824c4d849362688f0ba8f0b5395d05306a1a91ac57218557f",
+      "collection/artwork/traits/cap/zombie-olive.svg": "d801b009406abd3acffe172a5389b5e2c33753155d3974c79e818c5f17f48760",
+      "collection/artwork/traits/glasses/anaglyph-specs.svg": "350441303eb969859bbe31a63fb43963fd3fb4b44dff66108793b764dabecb43",
+      "collection/artwork/traits/glasses/arcade-browline.svg": "e0c4fb1164b3f7bee2775ebb83b9b3f13d4abf68033db374bc9fb1639ff64fe9",
+      "collection/artwork/traits/glasses/curious-monocle.svg": "9bee50def9ae6c3e91a22277c6dfeb771c135b7f3da7b476091564f394275ad5",
+      "collection/artwork/traits/glasses/garden-rounds.svg": "ad1ced3746e64ed5efbeb7e07581613ac2ef846f42fdae27f25069efb5c72dfc",
+      "collection/artwork/traits/glasses/honeycomb-frames.svg": "8068410af19ea2871dd6b2b55853863500fe158182f7f6b3bf79373af7ba9503",
+      "collection/artwork/traits/glasses/jade-rounds.svg": "e9cb56e9718858100d20a897d1d2c375d4f59df928fcac9e939f4f3599ca8bae",
+      "collection/artwork/traits/glasses/midnight-rounds.svg": "abcfa09c6132f9166a11f1264fe41953d48abec761a01adcb1536f6c2d629c9a",
+      "collection/artwork/traits/glasses/pirate-eyepatch.svg": "d34876a95b6d43c29769a9cffd3e5d00306b5698d0e7817e2892aa3e1db875bf",
+      "collection/artwork/traits/glasses/pixel-shades.svg": "19347de44952c7b99c8aec7439a45f3266cd2d9b7ab498c8484a488393682be4",
+      "collection/artwork/traits/glasses/scarlet-shades.svg": "377efda57682b8b296e6d399afe40eb1a96fef8254071fb300463d3c2fbbf27f",
+      "collection/artwork/traits/glasses/stargazer-specs.svg": "f7b202736e79c0b530acba1a2433140e890a9c6badefde1953d82571062b878d",
+      "collection/artwork/traits/glasses/sunday-shades.svg": "cf08e0d6d91c47cba348238f9ad83d81b207f2832bcfd94cf5c2d94f330e8343",
+      "collection/artwork/traits/glasses/sunshine-shades.svg": "de7ddc932aa9c992febe5d58f53750c12a921bc4ea032be76c6d27ff0c4d5ce3",
+      "collection/artwork/traits/glasses/sweetheart-specs.svg": "1d7c2b5260bdf6f42ca96a452afa736b7eedefcab4c52ff0b58b38e64bdc1358",
+      "collection/artwork/traits/glasses/tangerine-grid.svg": "73b8834656b939dae3b13bc0f9006b9468296e25b8d6ed45e61c26040e00fe41",
+      "collection/artwork/traits/hobby/beat-keeper.svg": "edcf043e9f735bcfae3670fde4696d245f52e94d4e7ab02755a57d113e4e5348",
+      "collection/artwork/traits/hobby/bubble-charmer.svg": "7e12f41b5ad9bd144f218542140f61376882c018acac1719768f35e5735a6a64",
+      "collection/artwork/traits/hobby/cactus-keeper.svg": "e29fe5334404dc4318e01e5ce0aa0827d3452d874245dcac7025d87ed1daddef",
+      "collection/artwork/traits/hobby/crystal-gazing.svg": "39ae0c95d73b149c1312e29134e76384b9afe53f8ba3908bd145fd54d75c60b4",
+      "collection/artwork/traits/hobby/curious-detective.svg": "9d00583934fdf0d5c7d9b11e5764286d409676303f34d3dc3492fbf9c2927001",
+      "collection/artwork/traits/hobby/dino-tamer.svg": "3e7c8ba8d8ba94b59ad0cc7e093613f75bd10af6ba38aea11b7b47d06e4f0cf5",
+      "collection/artwork/traits/hobby/flamingo-friend.svg": "460a3d661b7b33c9b5fdef183417d3f11b1902957d406d0e41b95d3454c860ff",
+      "collection/artwork/traits/hobby/forest-photographer.svg": "03b3282ba0cb3c1284d772c899c428dca639b6a022b28c464af1085b1587dfa0",
+      "collection/artwork/traits/hobby/frog-keeper.svg": "62b2002ea0744107a65f75e164d1a1608ddfbdccb0dc7a4c90593f581c7c5f7b",
+      "collection/artwork/traits/hobby/garden-tender.svg": "f188ddcd0d5b82e50aef753971a7041b40f25a05032dc222ce24741480805c16",
+      "collection/artwork/traits/hobby/ghost-whisperer.svg": "cf403f974d99757325304acdbe7075f37a641e0f40804e3d0c44e6ddf6c9d419",
+      "collection/artwork/traits/hobby/little-director.svg": "bcf71cf08744f6c7572e230125d49c2d0ab33374d99c383ef4e85c4e3b773692",
+      "collection/artwork/traits/hobby/little-roll-up.svg": "5f84469fb555ad1b839f795d8d073d731869294d155af1973808da00cec406a6",
+      "collection/artwork/traits/hobby/mermaid-daydream.svg": "6d431e3a9a711b12221c47f82b247fbdb5deb1af138fa6571862a99813ede4b7",
+      "collection/artwork/traits/hobby/midnight-sax.svg": "6b44f4113a665dba974805b63cec09f8420650b10352fa7e76496554e8a4a916",
+      "collection/artwork/traits/hobby/movie-night.svg": "ec23a7952e8b770dd9423732180c66127c09cbe3b09e55564cc4456ea34f4fac",
+      "collection/artwork/traits/hobby/mushroom-chemist.svg": "e59c71fa6ff804c785d0a4197f1e8e2c66060d64ac4d7772b8946fbeea420d14",
+      "collection/artwork/traits/hobby/night-coder.svg": "b6c2f7e15c7def5196e05c840f3e2505bf0e141e79a2dbbc8bc86acf0bfe3c3c",
+      "collection/artwork/traits/hobby/owl-keeper.svg": "afe41d006c02d68590532b22d36ba49a1f077d4ab69d64369c48d1c675ebd2f0",
+      "collection/artwork/traits/hobby/pixel-gamer.svg": "1a52c59cd786decadfe7bcc4e12d3552767ce5d07e2f4cbbf2eb3dc7feb4648f",
+      "collection/artwork/traits/hobby/pocket-painter.svg": "88ad5a16572faabcdc7ae95b1495c71e0e04faf7001ce85a7956a24f13833b6d",
+      "collection/artwork/traits/hobby/red-wine-ritual.svg": "e90439b7abe673617400ae071f5e0cfa300bc40d3d65b062cebbc5339a5a36f6",
+      "collection/artwork/traits/hobby/saffron-monk.svg": "7b8ea3227d71656f704048f92f36ad49429107088d5cb0943bbcac31443ce2b3",
+      "collection/artwork/traits/hobby/silent-performer.svg": "28941b6fac47172cc9d4451251958c79c919dc2f69c68eab121d0b080b6e6b7c",
+      "collection/artwork/traits/hobby/snake-charmer.svg": "9fe3742637cc1fd90897efcac6d0b3a1329de2c2876ffea545523d57a44852ae",
+      "collection/artwork/traits/hobby/street-artist.svg": "a8ebc6e40a5174ea9bdcab3601adb789566da79127677e40f4cea0fc9dafe1dd",
+      "collection/artwork/traits/hobby/street-skater.svg": "2c787dff451eb91256cda4b5e7c176b0b193a3c39970a24643712c1c0647594f",
+      "collection/artwork/traits/hobby/sunset-guitarist.svg": "5b5faf947ce564c88ffb2d21db1a07af1d2d0752a237340e6818372b1d6af2bb",
+      "collection/artwork/traits/hobby/teddy-collector.svg": "b470ec2172d29a528a332ffeb20ff99d4eefa6e951a024cf25774283bb2871f1",
+      "collection/artwork/traits/hobby/trail-wanderer.svg": "24aebde4575f9a5b797548e3c3a68e89da90e7e3010b2092da42720464c1edf5",
+      "collection/artwork/traits/hobby/woodland-pipe.svg": "b04659ea5c8a3b7e2a245dd51c1447a9c0239ed28554e24d30b939f97ee2e703",
+      "collection/artwork/traits/stem/ash-spark.svg": "60ca2f5a6bafd58240a586423e7555338be73f6405a6cc647c698e751c5bcec5",
+      "collection/artwork/traits/stem/blue-voltage.svg": "c170016c91543f23c76a7f9306955dd7a2884b490c3e95c834a414a2c4bba8bd",
+      "collection/artwork/traits/stem/blush-stomp.svg": "016deb973bd40a6bccd35ada4676d0ff4d8d37dc02a97ef87c037b7d8f8d0db0",
+      "collection/artwork/traits/stem/cocoa-stomp.svg": "d94dfaf88246d8b66352df237f77c09d1fdaf8777c3d2a2577b4ff1f2907feff",
+      "collection/artwork/traits/stem/cyan-current.svg": "df96c54d0fddeb1f3041eddddbbe8a18b51b5f3255ef6bd87c1be4035043f994",
+      "collection/artwork/traits/stem/frankenstem.svg": "3d75426ba942a3b80a7f41b7aa1f379e7c0ecc88014566398afb28cd7c0a749a",
+      "collection/artwork/traits/stem/fresh-snow.svg": "ecf194d31f3de1643e475d7ceaa8714309c7ea5c6073f8a87222974286b67365",
+      "collection/artwork/traits/stem/golden-anatomy.svg": "52d05b79abfb49a4af5d477d98b69616b4683bb4e3f50a2126fa3e8322d81f7e",
+      "collection/artwork/traits/stem/honey.svg": "254a70774cbf3e23fab347754bc85d83d9c5f38323a2800a020e973a7a2b0509",
+      "collection/artwork/traits/stem/peach.svg": "8bd3456925b1939b11fde66ba230ad125e8aabdc050629cd8ba6c599530e263c",
+      "collection/artwork/traits/stem/red-letter.svg": "2cd4ffe4ed64630d6bf57fb6089daf49ac7cd295f6b6a08b51b074b690cced8a",
+      "collection/artwork/traits/stem/silver.svg": "e12c0516171e9e765343c8ef7b79eb3506e8f6e9cd5c250459fc98cc72854604",
+      "collection/artwork/traits/temperament/bleh.svg": "1b1a21a74488e47ed484f1e4dc89a92acc5c5e258d48a0cfa57abbb7a1eaf18d",
+      "collection/artwork/traits/temperament/bright-smile.svg": "0eae859790e810054cb45a975417c73c70c66d3cf896c594e6468d488ac2ef97",
+      "collection/artwork/traits/temperament/cherry-flirt.svg": "69dd645b45949448f49abadb8c699df186e54736e4a9e9e1666bf981ff08e306",
+      "collection/artwork/traits/temperament/chill.svg": "3683b79b202d47a4d1c1a508f2ab986930d849ff4df227b1e0e6591d4ca6a362",
+      "collection/artwork/traits/temperament/closed-joy.svg": "ce9f328c17b607e89eabc15818117435e176e69907206fde6cb2907ea01d4dbd",
+      "collection/artwork/traits/temperament/clown-nose.svg": "6017165584e070cefb557531c032f76806db3e841abf83f3c90a3efd2604bc70",
+      "collection/artwork/traits/temperament/content.svg": "1ad979f2f74c5d02b48bf3e991364e4b783e695a1860c85f3380e373323d4c44",
+      "collection/artwork/traits/temperament/cross-eyed.svg": "b0b1318dcca19780c0653d7d17a8ca43e418dae7ea1ecbd6fa66055e1940b0a9",
+      "collection/artwork/traits/temperament/cry-me-a-river.svg": "47315a5a32f9937f231854347bfdc916163371ea0e6dc8933f55a16a06880921",
+      "collection/artwork/traits/temperament/deadpan.svg": "6de3570a080cc2400331520d47b9e8df71cb14c0d245f35b2667e754d598f4dd",
+      "collection/artwork/traits/temperament/fanged.svg": "097ea9d604f4daee47ab7e1feba81b3bae253805c6ad3e59e33502415b2e0c08",
+      "collection/artwork/traits/temperament/fierce.svg": "c6387b64e3c88b4ae79c8311d9c8f5d763be0e79267ab03434a94b1199c8a96e",
+      "collection/artwork/traits/temperament/gasp.svg": "93c8d3d768ddd6e1b164c24682a627eb47e0a26792441ec048ba724dcd9e07cd",
+      "collection/artwork/traits/temperament/gentle-wink.svg": "fa597593ba10952c77902d1dbd91b35b7ebfe1e739fcf1b45ffba4f09f1dfe76",
+      "collection/artwork/traits/temperament/gilded-glam.svg": "14695d43bc1ebe4221a3680e5f2b07b42fed7be975b8d13f66f3fcd2e7a60199",
+      "collection/artwork/traits/temperament/glam-girl.svg": "20a3439e2da8238051f11a7d2a620f908aaa3ffbc52999ac00eefaaef68e72d3",
+      "collection/artwork/traits/temperament/happy.svg": "6f929e7f227f8351a3706229c8f73f091306c4673c62a9c484d0d43152a32551",
+      "collection/artwork/traits/temperament/heart-eyes.svg": "6b263bfcacbdebbc1d269c51a6bc69f14e1f9f5d844d63b2539eb5dda8645d63",
+      "collection/artwork/traits/temperament/i-got-it.svg": "6af81d8ef31c080b6c6a92d7361cedfca6f22288096128e7d53a47c211916e49",
+      "collection/artwork/traits/temperament/joy.svg": "37a60bca154267ddc36f6d4ca8024d5011b7859018667e84e63c896b8875816f",
+      "collection/artwork/traits/temperament/macho-mustache.svg": "61636dff8077f089ea9f18d10416112992c7ae6e35b93193ca7906a01dfbc0d9",
+      "collection/artwork/traits/temperament/marigold-majesty.svg": "79a5d8779b943423e987c7d932f73ee32db48e4baf029a92949dd191cf556720",
+      "collection/artwork/traits/temperament/oh.svg": "79c030e2a4c225d3a09793dbe6e75a92d5f4690184d9a5bbe685d0dc4b64dc39",
+      "collection/artwork/traits/temperament/silent-mime.svg": "e555927ac5ceb11df99e8d42b4a6e48d4781def74057a58e2ba8dfe06c5974eb",
+      "collection/artwork/traits/temperament/sleepy.svg": "2d9bb9b3644d9779a2fb547be0c6e94d7b5efa7aace2ecbd12e9fb90bf087d05",
+      "collection/artwork/traits/temperament/soft-smirk.svg": "41725690c3032baacded0145711a5eae6428c7040f910ac28123b791e178ff39",
+      "collection/artwork/traits/temperament/starry-eyes.svg": "2dee126beb2a94ea432b6f60d46757528e262f1ddade6c727a42044d888fd28f",
+      "collection/artwork/traits/temperament/tiny-tongue.svg": "aa224da35acc2bf19c9439b4cb29e08df3f235721dce2e4df1a466eb0587955c",
+      "collection/artwork/traits/temperament/wait-what.svg": "9e7390badd48a02c51d131cb551be036de34986c44b6ee5760a31dd9b656ac50",
+      "collection/artwork/traits/temperament/wide-eyed.svg": "ecc1b743460c11c9da9eaea1190cd89c72c6cbaed0242c2130488c772e52a7af",
+      "collection/artwork/traits/temperament/wink.svg": "0cca01737222456e01256b5868b87559e016abb9cb376054326866628d75a35c",
+      "collection/catalog/catalog.json": "7b734ce9ec32b43e0bb26fe1ab94c515b7532e8a1652710857ffe9fc6848d41f",
+      "collection/source/editorial.js": "693590010689e896eec045d4ddf7d251f415647a7dfb325fe2d6faefc4ff279b",
+      "tooling/lib/generate-metadata.mjs": "a5a043db5a5aeefdcd0f360d0084d8a93f58b3b00a6f7509f0bc32b084ccdcd4"
+    }
+  }
+}

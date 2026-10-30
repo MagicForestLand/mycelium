@@ -1,0 +1,76 @@
+name: Release rehearsal
+
+on:
+  workflow_dispatch:
+    inputs:
+      fork_block:
+        description: Finalized Ethereum mainnet block number cross-checked with two providers
+        required: true
+        type: string
+      fork_hash:
+        description: Exact 0x-prefixed hash of fork_block
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-rehearsal-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  synthetic-release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    environment: release-rehearsal
+    env:
+      FORK_BLOCK: ${{ inputs.fork_block }}
+      FORK_HASH: ${{ inputs.fork_hash }}
+      UPSTREAM_MAINNET_RPC: ${{ secrets.MAINNET_FORK_RPC_URL }}
+      SECONDARY_MAINNET_RPC: ${{ secrets.SECONDARY_MAINNET_FORK_RPC_URL }}
+      REHEARSAL_DIR: /tmp/mycelium-release-ci
+      FOUNDRY_DIR: /tmp/foundry-v1.7.1
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          package-manager-cache: false
+      - run: npm ci
+      - name: Validate inputs and prepare synthetic release evidence
+        run: |
+          node -e 'if(!/^[1-9][0-9]*$/.test(process.env.FORK_BLOCK)||!/^0x[0-9a-fA-F]{64}$/.test(process.env.FORK_HASH))throw Error("Invalid pinned block/hash")'
+          node -e 'if(!process.env.UPSTREAM_MAINNET_RPC)throw Error("Configure the release-rehearsal environment secret MAINNET_FORK_RPC_URL")'
+          node -e 'if(!process.env.SECONDARY_MAINNET_RPC)throw Error("Configure the release-rehearsal environment secret SECONDARY_MAINNET_FORK_RPC_URL")'
+          node tooling/testing/prepare-ci-rehearsal.mjs "$REHEARSAL_DIR"
+          npm run build:production
+          node tooling/build/export-site.mjs "$REHEARSAL_DIR/synthetic-deployment.json" "$REHEARSAL_DIR/synthetic-site.json"
+          cp output/site/site-manifest.json "$REHEARSAL_DIR/synthetic-site-manifest.json"
+      - name: Install checksum-pinned Foundry v1.7.1
+        run: |
+          mkdir -p "$FOUNDRY_DIR"
+          curl --fail --location --proto '=https' --tlsv1.2 --output /tmp/foundry.tar.gz https://github.com/foundry-rs/foundry/releases/download/v1.7.1/foundry_v1.7.1_linux_amd64.tar.gz
+          echo 'cf7e688ed0c4c48adffca788b496076e31060b67ac5afe1e43dbb5499c20c88b  /tmp/foundry.tar.gz' | sha256sum --check --strict
+          tar -xzf /tmp/foundry.tar.gz -C "$FOUNDRY_DIR" anvil cast
+          "$FOUNDRY_DIR/anvil" --version
+      - name: Run loopback-only mainnet fork rehearsal
+        run: |
+          set -euo pipefail
+          release_digest=$(node -e 'process.stdout.write(JSON.parse(require("fs").readFileSync(process.env.REHEARSAL_DIR+"/synthetic-manifest.json","utf8")).digest)')
+          anvil_sha=$(sha256sum "$FOUNDRY_DIR/anvil" | cut -d ' ' -f1)
+          npm run release:fork -- "$REHEARSAL_DIR/synthetic-manifest.json" --expected-release "$release_digest" --fork-block "$FORK_BLOCK" --fork-hash "$FORK_HASH" --anvil "$FOUNDRY_DIR/anvil" --expected-anvil-sha256 "$anvil_sha" --port 19546 --report "$REHEARSAL_DIR/mainnet-fork-report.json"
+      - name: Upload non-signing rehearsal reports
+        if: always()
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        with:
+          name: synthetic-release-rehearsal-${{ github.sha }}
+          path: |
+            /tmp/mycelium-release-ci/ci-context.json
+            /tmp/mycelium-release-ci/synthetic-site-manifest.json
+            /tmp/mycelium-release-ci/mainnet-fork-report.json
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 9

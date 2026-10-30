@@ -1,0 +1,153 @@
+services:
+  - type: web
+    name: mycelium-mainnet-staging
+    runtime: static
+    branch: feat/read-only-mainnet-staging
+    buildCommand: npm ci && npm run export:site -- deployments/core/ethereum/mainnet.json apps/web/config/mainnet-staging-site.json
+    staticPublishPath: ./output/site
+    autoDeployTrigger: off
+    envVars:
+      - key: NODE_VERSION
+        value: 24.22.1
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), geolocation=(), microphone=()
+      - path: /*
+        name: X-Robots-Tag
+        value: noindex, nofollow, noarchive
+      - path: /*
+        name: Content-Security-Policy
+        value: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://api.coingecko.com https://magicforest.land https://ethereum-rpc.publicnode.com; frame-src https://www.youtube-nocookie.com; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests
+      - path: /
+        name: Cache-Control
+        value: no-cache
+      - path: /index.html
+        name: Cache-Control
+        value: no-cache
+      - path: /chain-config.json
+        name: Cache-Control
+        value: no-store
+      - path: /site-manifest.json
+        name: Cache-Control
+        value: no-store
+      - path: /mycelium.bundle.*.js
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /assets/web3/*.js
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /assets/*.css
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /output/branding/*
+        name: Cache-Control
+        value: public, max-age=3600, stale-while-revalidate=86400
+  - type: web
+    name: mycelium-wallet-rc
+    runtime: static
+    branch: feat/read-only-mainnet-staging
+    buildCommand: npm ci && npm run export:site -- deployments/core/ethereum/mainnet.json apps/web/config/mainnet-site.json
+    staticPublishPath: ./output/site
+    autoDeployTrigger: off
+    envVars:
+      - key: NODE_VERSION
+        value: 24.22.1
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), geolocation=(), microphone=()
+      - path: /*
+        name: X-Robots-Tag
+        value: noindex, nofollow, noarchive
+      - path: /*
+        name: Content-Security-Policy
+        value: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://api.coingecko.com https://magicforest.land https://ethereum-rpc.publicnode.com; frame-src https://www.youtube-nocookie.com; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests
+      - path: /
+        name: Cache-Control
+        value: no-cache
+      - path: /index.html
+        name: Cache-Control
+        value: no-cache
+      - path: /chain-config.json
+        name: Cache-Control
+        value: no-store
+      - path: /site-manifest.json
+        name: Cache-Control
+        value: no-store
+      - path: /mycelium.bundle.*.js
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /assets/web3/*.js
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /assets/*.css
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /output/branding/*
+        name: Cache-Control
+        value: public, max-age=3600, stale-while-revalidate=86400
+  - type: web
+    name: mycelium-friends
+    runtime: static
+    branch: main
+    buildCommand: npm ci && npm run export:site -- deployments/core/ethereum/mainnet.json apps/web/config/mainnet-site.json
+    staticPublishPath: ./output/site
+    autoDeployTrigger: off
+    domains:
+      - mycelium.magicforest.land
+    envVars:
+      - key: NODE_VERSION
+        value: 24.22.1
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), geolocation=(), microphone=()
+      - path: /index.html
+        name: Cache-Control
+        value: no-cache
+      - path: /chain-config.json
+        name: Cache-Control
+        value: no-store
+      - path: /site-manifest.json
+        name: Cache-Control
+        value: no-store
+      - path: /mycelium.bundle.*.js
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /assets/web3/*.js
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /assets/*.css
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /output/branding/*
+        name: Cache-Control
+        value: public, max-age=3600, stale-while-revalidate=86400

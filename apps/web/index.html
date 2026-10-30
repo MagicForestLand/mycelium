@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mycelium Friends</title>
+<link rel="canonical" href="https://mycelium.magicforest.land/">
+<link id="favicon" rel="icon" type="image/svg+xml" href="output/branding/preview.svg">
+<link rel="preload" as="image" href="output/branding/preview.svg" fetchpriority="high">
+<meta name="description" content="A fully on-chain ERC-721 collection by Magic Forest. Choose six traits to create a unique myFriend; each genotype can be minted only once.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="mycelium Friends">
+<meta property="og:title" content="mycelium Friends — First the mushrooms. Then the forest.">
+<meta property="og:description" content="A fully on-chain ERC-721 collection by Magic Forest. Choose six traits to create a unique myFriend; each genotype can be minted only once.">
+<meta property="og:url" content="https://mycelium.magicforest.land/">
+<meta property="og:image" content="https://mycelium.magicforest.land/output/branding/banner.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="mycelium Friends — First the mushrooms. Then the forest.">
+<meta name="twitter:description" content="A fully on-chain ERC-721 collection by Magic Forest. Choose six traits to create a unique myFriend; each genotype can be minted only once.">
+<meta name="twitter:image" content="https://mycelium.magicforest.land/output/branding/banner.svg">
+<style>
+:root{--bg:#080a08;--sheet:#0d100e;--muted:#929c91;--text:#eff1e9;--lime:#c4ed9c;--gold:#d7c58c;--line:#283027;--panel:#121711;--radius:18px;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;-webkit-font-smoothing:antialiased}button{font:inherit;cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid var(--lime);outline-offset:4px}button:disabled{cursor:not-allowed}a{color:inherit}::selection{background:#4a6540;color:#fff}
+.app{height:100vh;min-height:650px;display:grid;grid-template-rows:78px minmax(0,1fr) 40px;overflow:hidden}.header{border-bottom:1px solid #252d24;display:flex;align-items:center;gap:28px;padding:0 32px;position:relative;z-index:20;background:#090c09ee}.brand{display:flex;align-items:center;gap:13px;min-width:280px}.brandmark{width:40px;height:40px;flex:0 0 auto}.brand-name{font-family:Georgia,Times,serif;letter-spacing:-.8px;font-size:26px;white-space:nowrap}.brand-small{font:9px var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:#a6ad9b;margin-top:1px;white-space:nowrap}.brand-product{text-transform:none}.brand-credit{text-decoration:none}.brand-credit:hover,.brand-credit:focus-visible{color:inherit;text-decoration:underline;text-decoration-color:currentColor;text-underline-offset:3px}.top-links{display:flex;gap:26px;color:#989e94;font-size:12px;letter-spacing:.06em}.top-links span:first-child{color:var(--lime)}.head-right{margin-left:auto;display:flex;align-items:center;gap:17px}.network{font:10px var(--mono);letter-spacing:.7px;color:var(--muted);white-space:nowrap}.status{display:inline-block;width:7px;height:7px;background:#a2e478;border-radius:50%;box-shadow:0 0 0 4px #a2e47819;margin-right:6px}.wallet{padding:12px 17px;border:1px solid #515b43;border-radius:4px;background:transparent;color:var(--text);font-size:12px;font-weight:600;letter-spacing:.03em;white-space:nowrap}.wallet:hover{border-color:var(--lime);color:var(--lime)}.wallet[data-state=checking]{display:inline-flex;align-items:center;gap:9px;opacity:.72}.wallet[data-state=checking]::before{content:"";width:11px;height:11px;border:1px solid #79f7ff55;border-top-color:#79f7ff;border-radius:50%;animation:wallet-spin .8s linear infinite}@keyframes wallet-spin{to{transform:rotate(360deg)}}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 388px;min-height:0}.universe{position:relative;overflow:hidden;background:radial-gradient(ellipse at 48% 49%,#182017 0%,#101510 28%,#090c09 67%,#070907 100%);touch-action:none;cursor:grab}.universe.dragging{cursor:grabbing}.universe:after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 160px 40px #0609068c}.sky{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(#b2e999 0.7px,transparent 1px),radial-gradient(#ceba7d 0.7px,transparent 1px);background-size:83px 91px,127px 101px;background-position:11px 17px,77px 41px;opacity:.15}.intro{position:absolute;z-index:6;left:36px;top:34px;max-width:335px;pointer-events:none}.eyebrow{font:10px var(--mono);letter-spacing:2.2px;text-transform:uppercase;color:var(--lime)}.intro h1{font:normal clamp(30px,3.6vw,52px)/1.08 Georgia,Times,serif;letter-spacing:-1.8px;margin:18px 0 12px}.intro h1 em{color:var(--lime);font-weight:normal}.intro p{font-size:12px;line-height:1.8;color:#aeb8a9;max-width:285px}.micro{font:10px var(--mono);letter-spacing:.5px;color:#95a392}
+.stage{position:absolute;left:50%;top:50%;width:2800px;height:2800px;transform:translate(-50%,-50%) translate(0px,0px) scale(1);transform-origin:center center;will-change:transform;pointer-events:none}.orbit{position:absolute;width:100%;height:100%;overflow:visible}.orbit .main-spiral{fill:none;stroke:#bdb078;stroke-width:1.6;opacity:.68}.orbit .back-spiral{fill:none;stroke:#9abd89;stroke-width:10;opacity:.035}.orbit .orbit-dash{fill:none;stroke:#ada578;stroke-width:1;stroke-dasharray:2 11;opacity:.28}.origin-rings{position:absolute;width:184px;height:184px;top:calc(50% - 92px);left:calc(50% - 92px);border:1px solid #a4ce8539;border-radius:50%;box-shadow:0 0 0 22px #8aa06e0a,0 0 0 42px #8aa06e07;pointer-events:none}.node{position:absolute;left:0;top:0;display:grid;place-items:center;border:1px solid #677b5a6b;border-radius:50%;background:radial-gradient(circle at 50% 50%,#1f2a1d 0%,#0d130d 63%,#0a0d0a 100%);color:var(--text);pointer-events:auto;transform:translate(-50%,-50%);transition:box-shadow .3s,border-color .3s,background .3s;box-shadow:0 8px 24px #0009}.node:hover,.node:focus-visible{border-color:var(--lime);box-shadow:0 0 0 5px #b8db8940,0 0 38px #bce88b2b;z-index:5}.node canvas{width:98%;height:98%;object-fit:contain;pointer-events:none;filter:drop-shadow(0 5px 7px #0007)}.node .index{position:absolute;font:11px var(--mono);color:#c9d7b5;bottom:-24px;left:50%;transform:translateX(-50%);white-space:nowrap;text-shadow:0 2px 6px #000}.node.center{border-color:#bfd8a18c;box-shadow:0 0 0 8px #8eac6742,0 0 0 19px #6c7f5030,0 0 65px #b4df8a33}.node.center .index{bottom:-30px}.node.selected{border-color:var(--lime);box-shadow:0 0 0 4px #b2e88e49,0 0 45px #b5e48b4d}.node.empty{border-style:dashed;background:#151d14aa;border-color:#6d816251;color:#8e9f86}.node.empty .plus{font:28px Georgia,serif;opacity:.55}.node.empty .index{color:#899b87}.node.coming{border-color:#cbe9a5aa;box-shadow:0 0 0 2px #cbe9a522,0 0 22px #9edb685e}.node.coming .plus{color:var(--lime);opacity:1}.node.coming canvas{opacity:.68;filter:grayscale(.1) drop-shadow(0 0 12px #a8d88375)}.node.coming .index{color:var(--lime)}.node.born{animation:born .55s cubic-bezier(.18,.92,.3,1.26)}@keyframes born{from{opacity:.15;scale:.4}to{opacity:1;scale:1}}
+.universe-bottom{position:absolute;left:34px;bottom:26px;z-index:7;display:flex;gap:22px;align-items:end}.stats{display:flex;gap:30px}.stat{border-top:1px solid #62745c70;padding-top:11px;min-width:94px}.stat strong{display:block;font:25px Georgia,serif;letter-spacing:-.5px}.stat span{display:block;font:9px var(--mono);color:#92a28d;letter-spacing:1px;text-transform:uppercase;margin-top:5px}.stage-label{position:absolute;right:28px;top:30px;z-index:8;color:#aebaa6;font:10px var(--mono);letter-spacing:1.5px;text-transform:uppercase}.view-tools{position:absolute;right:26px;bottom:28px;z-index:8;display:flex;gap:6px}.view-tools button{background:#172016dd;color:#cfe9be;border:1px solid #56694d;border-radius:3px;width:33px;height:33px;font:17px var(--mono)}.view-tools button:last-child{font-size:11px;width:62px}.view-tools button:hover{background:#31412b}
+.side{background:#10140f;border-left:1px solid #2b3529;display:flex;flex-direction:column;min-height:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#3c5138 transparent}.side-inner{padding:26px 27px 30px}.side-head{display:flex;align-items:center;justify-content:space-between}.tag{border:1px solid #73836179;padding:6px 8px;font:9px var(--mono);letter-spacing:1px;color:#d0ddc2}.seed{font:10px var(--mono);color:#8a9b81;letter-spacing:1px}.side h2{font:normal 34px/1.04 Georgia,serif;letter-spacing:-1.2px;margin:21px 0 9px}.side-sub{color:#a1ad9b;font-size:12px;line-height:1.65;margin:0 0 20px}.art-card{position:relative;border:1px solid #334333;border-radius:6px;background:radial-gradient(circle at center,#283224 0%,#101510 67%);height:203px;display:flex;align-items:center;justify-content:center;overflow:hidden}.art-card img,.art-card canvas{position:absolute;height:98%;width:95%;object-fit:contain;filter:drop-shadow(0 0 18px #bceba015)}.art-card .corner{position:absolute;z-index:2;top:12px;left:13px;color:#c2d9b4;font:10px var(--mono);letter-spacing:.8px}.art-card .small-note{position:absolute;right:10px;bottom:10px;color:#96ad89;font:9px var(--mono)}.art-meta{display:flex;justify-content:space-between;align-items:baseline;margin:13px 0 16px}.art-meta strong{font:18px Georgia,serif}.art-meta span{font:10px var(--mono);color:#9da996}.traits{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:20px}.trait{border:1px solid #364333;padding:10px 6px;text-align:center}.trait span{display:block;color:#9dac94;text-transform:uppercase;font:8px var(--mono);letter-spacing:.7px}.trait strong{display:block;font:13px var(--mono);margin-top:6px;color:#e6efdc}.divide{height:1px;background:#323d2f;margin:18px 0}.public-status{display:flex;align-items:center;gap:8px;border:1px solid #394235;background:#0b0e0b;padding:10px 11px;font:9px var(--mono);letter-spacing:.8px;text-transform:uppercase;color:#85917f}.public-status strong{font-weight:600;color:#bac8b2}.public-status .live{color:var(--lime)}.public-status .arrow{margin-left:auto;color:#66735f}.price-head{display:flex;justify-content:space-between;align-items:center;margin:18px 0 10px}.price-head span{font:10px var(--mono);letter-spacing:1.3px;text-transform:uppercase;color:#a1b19b}.price{font:32px Georgia,serif;letter-spacing:-1px;color:#f5f6ef;white-space:nowrap}.price small{font:12px var(--mono);color:#aec99a;margin-left:4px}.price-note{font:10px/1.5 var(--mono);color:#93a68c;margin-top:6px}.price-ladder{display:flex;gap:5px;align-items:end;margin-top:15px;height:42px}.step{flex:1;text-align:center;min-width:0}.step .bar{background:#536347;opacity:.48;height:4px;margin-bottom:7px;border-radius:1px}.step.current .bar{background:#c2ec98;opacity:1}.step span{font:9px var(--mono);color:#7f917a}.step.current span{color:#e0fac5}.verify{display:flex;align-items:flex-start;gap:11px;background:#192117;border:1px solid #364c32;padding:12px;margin:17px 0}.verify input{accent-color:#bdeb98;width:16px;height:16px;flex:0 0 auto;margin:1px 0 0;cursor:pointer}.verify strong{display:block;font-size:11px;font-weight:600}.verify span{display:block;font-size:10px;line-height:1.55;color:#a8b7a0;margin-top:4px}.mint{width:100%;border:1px solid #c8eeac;border-radius:3px;padding:15px 13px;background:var(--lime);color:#182617;font-size:12px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;display:flex;justify-content:space-between;gap:12px;align-items:center}.mint:hover:not(:disabled){background:#dcf6c1}.mint:disabled{background:#313b2d;border-color:#485845;color:#a0b197}.footnote{font:10px/1.6 var(--mono);color:#879685;margin:13px 0 0}.chooser-top{display:flex;justify-content:space-between;align-items:baseline;margin-top:22px;margin-bottom:12px}.chooser-top h3{font:17px Georgia,serif;margin:0}.chooser-top span{font:10px var(--mono);color:#95a68d}.chooser{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}.thumb{height:53px;padding:0;border:1px solid #354335;background:#172016;border-radius:3px;position:relative}.thumb img{width:100%;height:100%;object-fit:contain}.thumb:hover,.thumb.chosen{border-color:#c6edac;background:#2a3627}.thumb.owned:after{content:"✓";position:absolute;right:1px;bottom:0;color:#172017;background:#bfe5a1;border-radius:50%;font-size:10px;width:12px;height:12px}.side-disclaimer{margin-top:20px;border-top:1px solid #34402f;padding-top:15px;font:10px/1.65 var(--mono);color:#7e907a}.footer{background:#090c09;border-top:1px solid #243021;display:flex;gap:22px;justify-content:space-between;padding:0 30px;align-items:center;color:#8c9985;font:9px var(--mono);letter-spacing:1.0px;text-transform:uppercase}.footer b{color:#bde4a1;font-weight:normal}.toast{position:fixed;left:50%;bottom:66px;transform:translate(-50%,20px);background:#c8e7aa;color:#182319;padding:13px 20px;z-index:70;font:12px var(--mono);border-radius:3px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;max-width:min(90vw,470px);text-align:center}.toast.visible{opacity:1;transform:translate(-50%,0)}.modal-wrap{position:fixed;inset:0;background:#020402b8;z-index:80;display:none;place-items:center;padding:20px}.modal-wrap.visible{display:grid}.modal{max-width:460px;background:#151c13;border:1px solid #607654;padding:31px}.modal h2{font:31px Georgia,serif;margin:0 0 13px}.modal p{font-size:13px;color:#aabb9f;line-height:1.8}.modal button{border:1px solid #a3c78b;padding:10px 20px;color:#c7efaa;background:transparent;margin-top:16px}.modal button:hover{background:#26341f}.hint{position:absolute;bottom:23px;left:360px;color:#8e9d85;font:9px var(--mono);z-index:6;pointer-events:none}
+@media(max-width:1100px){.layout{grid-template-columns:minmax(0,1fr) 340px}.header{padding:0 20px}.brand{min-width:200px}.intro{left:22px;top:22px}.intro h1{font-size:35px}.universe-bottom{left:22px}.stat{min-width:70px}.stats{gap:14px}.side-inner{padding:22px 18px}.hint{display:none}}
+@media(max-width:760px){.app{height:auto;min-height:100vh;display:block;overflow:visible}.header{height:66px;padding:0 15px;gap:10px}.brand{min-width:0}.brandmark{width:33px;height:33px}.brand-name{font-size:22px}.brand-small{font-size:7px}.top-links,.network{display:none}.head-right{margin-left:auto}.wallet{font-size:10px;padding:10px 8px}.layout{display:block}.universe{height:560px}.intro{max-width:230px;top:19px;left:16px}.stage-label{display:none}.intro h1{font-size:33px;margin:12px 0 7px}.intro p{font-size:11px;max-width:215px}.stage-label{top:19px;right:13px;font-size:9px}.universe-bottom{left:15px;bottom:19px}.stats{gap:16px}.stat strong{font-size:21px}.view-tools{bottom:72px;right:12px}.universe-bottom{background:#080e08b8;padding:6px 5px 7px;border-radius:4px}.side{border-left:0;border-top:1px solid #32422e;overflow:visible}.side-inner{padding:24px 20px 35px;max-width:580px;margin:auto}.art-card{height:250px}.footer{padding:15px;line-height:1.6;display:block;text-align:center}.footer span{display:block;margin:3px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Spiral viewport and contextual pricing. */
+.intro,.stage-label,.hint,.universe-bottom{display:none!important}
+.spiral-summary{position:absolute;left:26px;top:24px;z-index:9;display:flex;align-items:center;gap:13px;padding:10px 13px;border:1px solid #384334;background:#0a0e0ad9;border-radius:4px;backdrop-filter:blur(8px);font:9px var(--mono);letter-spacing:1.1px;color:#8f9d89;white-space:nowrap}
+.spiral-summary span{display:flex;align-items:baseline;gap:8px}.spiral-summary strong{font-size:14px;letter-spacing:.2px;color:#edf3e7}.spiral-summary i{width:1px;height:18px;background:#3b4637}
+.slot-tooltip{position:absolute;z-index:50;display:none;min-width:190px;max-width:250px;padding:11px 12px;border:1px solid #66765b;background:#0a0e0af2;border-radius:4px;box-shadow:0 12px 30px #0009;pointer-events:none;backdrop-filter:blur(8px)}
+.slot-tooltip.visible{display:block}.slot-tooltip span{display:block;font:8px var(--mono);letter-spacing:1.3px;color:#b8dc99;text-transform:uppercase;margin-bottom:6px}.slot-tooltip strong{display:block;font:16px Georgia,serif;font-weight:normal;color:#eef1e9;line-height:1.15}.slot-tooltip b{display:block;margin-top:8px;font:700 17px var(--mono);color:#c9f2a7}.slot-tooltip small{display:block;margin-top:6px;font:9px/1.45 var(--mono);letter-spacing:.5px;color:#91a08a;text-transform:uppercase}
+.raised-line{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;padding-top:10px;border-top:1px solid #31402f;font:9px var(--mono);letter-spacing:.8px;text-transform:uppercase;color:#879685}.raised-line strong{font-size:13px;color:#dff5cd}
+.price-ladder{height:52px;margin-top:13px;padding:7px 5px 0;border:1px solid #344231;background:#0c110c;border-radius:3px}.step .bar{opacity:.68;background:#4e5d48}.step.sold .bar{background:#ac9965;opacity:.95}.step.sold span{color:#b9aa7d}.step.current .bar{background:#c7f49f;opacity:1;box-shadow:0 0 14px #bde88c66}.step.current span{color:#ddffc3;font-weight:700}.step.inspect .bar{outline:1px solid #f4e2ad;outline-offset:1px}.step.inspect span{color:#fff0c0}
+.node.empty .plus{font-size:19px;opacity:.38}.node.empty{background:#1116119c;border-color:#66775d42}.node.coming{border-color:#cbe9a5aa;box-shadow:0 0 0 2px #cbe9a522,0 0 22px #9edb685e}
+@media(max-width:760px){.spiral-summary{left:14px;top:14px;right:14px;justify-content:space-between;gap:8px;white-space:normal}.spiral-summary span{display:block}.spiral-summary strong{display:block;margin-top:3px}.slot-tooltip{max-width:210px}}
+
+
+/* Preview-first sidebar with contextual builder and minted information. */
+.spiral-summary{display:none!important}
+.compact-side{padding-top:16px}
+.preview-first{height:248px;margin:0 0 14px;background:#070a07;border-color:#354334}
+.preview-first img,.preview-first canvas{height:100%;width:100%;object-fit:contain;filter:drop-shadow(0 0 18px #bceba012)}
+.context-panel{padding-bottom:18px}
+.context-title{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:3px 0 12px}
+.context-title h2{margin:0!important;font:normal 27px/1 Georgia,serif!important;letter-spacing:-.7px!important}
+.context-title .vol,.context-title .token-pill{border:1px solid #3d493b;padding:7px 9px;border-radius:4px;font:9px var(--mono);letter-spacing:1px;color:#abb8a4;white-space:nowrap}
+.builder-block{border-top:1px solid #313b30}
+.builder-row{padding:13px 0;border-bottom:1px solid #313b30}
+.builder-label{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;color:#d9ded3;font-size:12px}
+.builder-label span:last-child{font:10px var(--mono);color:#8f9c89}
+.swatches{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.swatch{width:28px;height:28px;border-radius:50%;border:1px solid #4a5548;padding:0;background:var(--sw);box-shadow:inset 0 0 0 2px #ffffff0d;position:relative}
+.swatch.active:after{content:"";position:absolute;inset:-5px;border:1px solid #d7e6ce;border-radius:50%}
+.trait-picker{display:grid;grid-template-columns:42px 1fr 42px;gap:9px;align-items:center}
+.trait-arrow{height:38px;border:1px solid #3b4739;border-radius:5px;background:#0d120d;color:#dfe7da;font-size:22px;line-height:1}
+.trait-arrow:hover{border-color:#bce99d;color:#bce99d}
+.trait-name{text-align:center;font-size:14px;color:#edf0e8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.builder-mint{margin-top:15px}
+.builder-mint-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.builder-mint-top span{font:9px var(--mono);letter-spacing:1px;text-transform:uppercase;color:#93a18b}
+.builder-mint-top strong{font:16px var(--mono);color:#dff7ca}
+.builder-status{font:9px/1.5 var(--mono);color:#8e9b88;margin:9px 0}
+.price-ladder.builder-ladder{height:50px;margin:10px 0 14px}
+.minted-card{border-top:1px solid #313b30;padding-top:14px}
+.minted-kicker{display:flex;justify-content:space-between;gap:12px;font:9px var(--mono);letter-spacing:1px;text-transform:uppercase;color:#9cb58b}
+.minted-card h2{margin:13px 0 4px!important;font:normal 27px/1.04 Georgia,serif!important;letter-spacing:-.7px!important}
+.minted-token{font:10px var(--mono);color:#8f9c88;margin-bottom:15px}
+.purchase-box{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}
+.purchase-fact{border:1px solid #354234;padding:10px}
+.purchase-fact span{display:block;font:8px var(--mono);letter-spacing:.8px;text-transform:uppercase;color:#82907c}
+.purchase-fact strong{display:block;margin-top:6px;font:12px var(--mono);color:#eef3e9}
+.minted-traits{border-top:1px solid #313b30;margin-top:14px}
+.minted-trait{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #273126;font-size:11px}
+.minted-trait span{color:#879483;text-transform:uppercase;font:9px var(--mono);letter-spacing:.8px}.minted-trait strong{font-weight:500;color:#e9eee4}
+.back-build{margin-top:15px;width:100%;height:42px;border:1px solid #66785d;background:transparent;color:#dfe8d8;font:10px var(--mono);letter-spacing:.8px;text-transform:uppercase}
+.back-build:hover{border-color:#c7efa5;color:#c7efa5}
+@media(max-width:760px){.preview-first{height:220px}}
+
+
+.mint-summary{position:absolute;left:28px;bottom:28px;z-index:8;display:flex;align-items:flex-end;gap:30px}
+.mint-summary-item{min-width:150px;border-top:1px solid #61715a80;padding-top:9px}
+.mint-summary-item span{display:block;font:9px var(--mono);letter-spacing:1px;text-transform:uppercase;color:#899686;margin-bottom:5px}
+.mint-summary-item strong{display:block;font:18px var(--mono);letter-spacing:.2px;color:#edf3e8;font-weight:650}
+@media(max-width:760px){.mint-summary{left:14px;bottom:16px;gap:14px}.mint-summary-item{min-width:0}.mint-summary-item strong{font-size:14px}.mint-summary-item span{font-size:7px}.view-tools{bottom:16px;right:14px}}
+
+
+/* Compact price histogram. */
+.builder-ladder{
+  display:grid !important;
+  grid-template-columns:repeat(8,minmax(0,1fr));
+  align-items:end;
+  gap:7px !important;
+  height:70px !important;
+  margin-top:14px !important;
+  padding:8px 7px 5px !important;
+  overflow:hidden;
+}
+.builder-ladder .step{
+  width:100%;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:flex-end;
+}
+.builder-ladder .step .bar{
+  width:100%;
+  min-height:5px;
+  margin:0 0 8px !important;
+  border-radius:2px 2px 0 0;
+}
+.builder-ladder .step span{
+  display:block;
+  width:100%;
+  overflow:hidden;
+  white-space:nowrap;
+  text-align:center;
+  font:8px var(--mono) !important;
+  letter-spacing:-.25px;
+  line-height:1;
+}
+.builder-ladder .step.sold .bar{
+  background:#aa9863;
+  opacity:.92;
+}
+.builder-ladder .step.sold span{
+  color:#b9aa7b;
+}
+.builder-ladder .step.current .bar{
+  background:#c4ed9c;
+  opacity:1;
+  box-shadow:0 0 12px #c4ed9c42;
+}
+.builder-ladder .step.current span{
+  color:#e6ffd1;
+  font-weight:700;
+}
+.builder-ladder .step.inspect .bar{
+  outline:1px solid #e7d9a6;
+  outline-offset:1px;
+}
+@media(max-width:760px){
+  .builder-ladder{
+    gap:4px !important;
+    padding-left:4px !important;
+    padding-right:4px !important;
+  }
+  .builder-ladder .step span{
+    font-size:7px !important;
+    letter-spacing:-.45px;
+  }
+}
+
+
+/* Price histogram placement and current-step emphasis. */
+.builder-price-head{
+  margin-top:14px;
+  margin-bottom:0;
+}
+.builder-price-value{
+  font:700 18px var(--mono);
+  color:#dff9c9;
+  white-space:nowrap;
+}
+.builder-ladder{
+  margin-top:9px !important;
+}
+
+
+/* Independent scroll region below the preview. */
+.side{
+  overflow:hidden !important;
+}
+.side-inner.compact-side{
+  height:100%;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+}
+.preview-first{
+  flex:0 0 248px;
+}
+.settings-scroll{
+  flex:1 1 auto;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+.settings-scroll::-webkit-scrollbar{
+  display:none;
+}
+
+
+/* Histogram label height and current-price pulse. */
+.builder-ladder{
+  height:96px !important;
+}
+.builder-ladder .step.current .bar{
+  animation:myceliumPulseBar 1.15s ease-in-out infinite alternate;
+}
+.builder-ladder .step.current span{
+  animation:myceliumPulseLabel 1.15s ease-in-out infinite alternate;
+}
+@keyframes myceliumPulseBar{
+  from{opacity:.72;box-shadow:0 0 8px #c4ed9c2f}
+  to{opacity:1;box-shadow:0 0 16px #c4ed9c72}
+}
+@keyframes myceliumPulseLabel{
+  from{opacity:.72}
+  to{opacity:1}
+}
+@media(prefers-reduced-motion:reduce){
+  .builder-ladder .step.current .bar,
+  .builder-ladder .step.current span{animation:none !important}
+}
+
+
+
+/* =========================================================
+   V16 PRODUCTION VISUAL SKIN
+   CSS-only override. Structure, behavior, sizing and data untouched.
+   ========================================================= */
+:root{
+  --bg:#030412;--sheet:#07091a;--muted:#858cad;--text:#f0f3ff;
+  --lime:#79f7ff;--gold:#ad8cff;--line:#252b55;--panel:#090d22;
+}
+html,body{background:#030412;color:#f0f3ff}
+::selection{background:#7df6ff;color:#05101b}
+button:focus-visible,input:focus-visible{outline-color:#79f7ff}
+.header{background:#050619ed;border-bottom-color:#242a55;box-shadow:0 8px 28px #0007}
+.brandmark path{stroke:#7df6ff;filter:drop-shadow(0 0 5px #50e8ff88)}.brandmark circle{fill:#d699ff;filter:drop-shadow(0 0 5px #d699ff)}
+.brand-name span{color:#79f7ff!important}.brand-small{color:#8992bc}.top-links{color:#818aab}.top-links span:first-child{color:#79f7ff;text-shadow:0 0 12px #55efff66}
+.network{color:#8188a7}.status{background:#79f7ff;box-shadow:0 0 0 4px #79f7ff17,0 0 15px #79f7ffbb}
+.wallet{border-color:#46508d;color:#f1f4ff;background:#080b1a80}.wallet:hover{border-color:#79f7ff;color:#79f7ff;box-shadow:0 0 20px #64efff18}
+.universe{background:radial-gradient(ellipse at 46% 48%,#15194a 0%,#0a0d2b 30%,#05061a 62%,#02030d 100%)}
+.universe:before{content:"";position:absolute;inset:-20%;pointer-events:none;background:radial-gradient(circle at 28% 32%,#784bff1d 0 7%,transparent 22%),radial-gradient(circle at 73% 61%,#00d9ff16 0 5%,transparent 24%),radial-gradient(circle at 58% 19%,#e066ff10 0 4%,transparent 19%);filter:blur(12px)}
+.universe:after{box-shadow:inset 0 0 170px 52px #01020ccf}
+.sky{opacity:.5;background-image:radial-gradient(#9ef8ff 0.7px,transparent 1px),radial-gradient(#c899ff 0.7px,transparent 1px),radial-gradient(#fff 0.45px,transparent .8px);background-size:83px 91px,127px 101px,53px 61px;background-position:11px 17px,77px 41px,31px 8px}
+#spiralColor stop:nth-child(1){stop-color:#70f5ff}#spiralColor stop:nth-child(2){stop-color:#a985ff}#spiralColor stop:nth-child(3){stop-color:#e268ff}
+.orbit .main-spiral{opacity:.84;filter:drop-shadow(0 0 5px #79eaff75)}.orbit .back-spiral{stroke:#9f86ff;opacity:.055}.orbit .orbit-dash{stroke:#a9dfff;opacity:.33}
+.origin-rings{border-color:#6ff6ff47;box-shadow:0 0 0 22px #5a7dff10,0 0 0 42px #bb70ff0a,0 0 55px #5ee7ff19}
+.node{border-color:#6a74ba66;background:radial-gradient(circle at 50% 44%,#1a204e 0%,#0a0d25 63%,#050718 100%);box-shadow:0 8px 28px #000c,0 0 18px #6174ff12}
+.node:hover,.node:focus-visible{border-color:#79f7ff;box-shadow:0 0 0 4px #79f7ff2d,0 0 40px #7eeeff3e;z-index:5}
+.node canvas{filter:drop-shadow(0 5px 8px #0008) drop-shadow(0 0 6px #9579ff22)}.node .index{color:#aebaff;text-shadow:0 0 8px #6d7fff55}
+.node.center{border-color:#86f5ffad;box-shadow:0 0 0 8px #6cf4ff26,0 0 0 19px #9576ff18,0 0 70px #6deaff4a}
+.node.selected{border-color:#79f7ff;box-shadow:0 0 0 4px #70f4ff3d,0 0 46px #8d7cff60}.node.empty{background:#080b21aa;border-color:#5b68a347}.node.empty .index{color:#707aa5}.node.coming{border-color:#d17dffcc;box-shadow:0 0 0 2px #ce7cff22,0 0 25px #bf6fff65}.node.coming .plus,.node.coming .index{color:#e4adff}
+.view-tools button{background:#0b0f2de8;color:#b9faff;border-color:#465595;box-shadow:0 6px 18px #0006}.view-tools button:hover{background:#172052;border-color:#79f7ff}
+.side{background:linear-gradient(180deg,#080a1c 0%,#060817 100%);border-left-color:#28305d;scrollbar-color:#45528d transparent}.side-inner{background:transparent}
+.preview-first,.art-card{background:radial-gradient(circle at 50% 46%,#20265a 0%,#0b0e2a 55%,#050717 100%);border-color:#35417a;box-shadow:inset 0 0 45px #5d6cff10}
+.preview-first img,.art-card img,.preview-first canvas,.art-card canvas{filter:drop-shadow(0 0 18px #83f4ff1c) drop-shadow(0 0 26px #aa73ff14)}.art-card .corner{color:#94f8ff}.art-card .small-note{color:#9a9fd0}
+.context-title .vol,.context-title .token-pill,.tag{border-color:#39467c;color:#aeb8df;background:#0b0f2994}
+.builder-block,.builder-row,.minted-card,.minted-traits,.divide,.side-disclaimer{border-color:#29315c}
+.builder-label{color:#e7ebff}.builder-label span:last-child,.builder-mint-top span,.builder-status,.side-sub,.footnote{color:#8993ba}
+.swatch{border-color:#46528b;box-shadow:inset 0 0 0 2px #ffffff0d,0 0 9px #6a79ff16}.swatch.active:after{border-color:#79f7ff;box-shadow:0 0 12px #79f7ff55}
+.trait-arrow{border-color:#364376;background:#0a0d26;color:#dce6ff}.trait-arrow:hover{border-color:#79f7ff;color:#79f7ff;background:#111947}
+.trait-name{color:#f2f4ff}.builder-mint-top strong,.builder-price-value{color:#9af9ff;text-shadow:0 0 10px #68eeff2e}
+.price-ladder,.price-ladder.builder-ladder{background:#070a20;border-color:#303a70;box-shadow:inset 0 0 25px #5364ff0c}
+.builder-ladder .step.sold .bar,.step.sold .bar{background:#775fb4}.builder-ladder .step.sold span,.step.sold span{color:#998ac6}
+.builder-ladder .step.current .bar,.step.current .bar{background:linear-gradient(180deg,#aafcff,#65e8ff);box-shadow:0 0 14px #79f7ff88}.builder-ladder .step.current span,.step.current span{color:#b9fbff}.builder-ladder .step.inspect .bar,.step.inspect .bar{outline-color:#dcabff}.step.inspect span{color:#eac9ff}
+.mint{background:linear-gradient(90deg,#7df6ff,#a790ff);border-color:#90f8ff;color:#07101d;box-shadow:0 0 24px #76f4ff1f}.mint:hover:not(:disabled){background:linear-gradient(90deg,#a0fbff,#c2aaff);box-shadow:0 0 30px #85f5ff37}.mint:disabled{background:#20274b;border-color:#3c4772;color:#8089ad}
+.minted-kicker{color:#9beeff}.minted-token,.minted-trait span,.purchase-fact span{color:#7f8ab2}.purchase-fact{border-color:#313a6b;background:#090c2380}.purchase-fact strong,.minted-trait strong{color:#edf1ff}.back-build{border-color:#4c5a92;color:#c9d8ff}.back-build:hover{border-color:#79f7ff;color:#79f7ff}
+.mint-summary-item{border-top-color:#6972ad6b}.mint-summary-item span{color:#8a93b6}.mint-summary-item strong{color:#dffaff;text-shadow:0 0 11px #6eecff25}
+.footer{background:#050618;border-top-color:#232a52;color:#7780a3}.footer b{color:#85f7ff}
+.toast{background:#a4f7ff;color:#06111e;box-shadow:0 0 35px #79f7ff55}.modal-wrap{background:#01020dde}.modal{background:#0a0d26;border-color:#5263a5;box-shadow:0 0 50px #6b7fff20}.modal p{color:#9da7ca}.modal button{border-color:#6b7cbb;color:#b9faff}.modal button:hover{background:#131a47}
+@keyframes myceliumPulseBar{from{opacity:.62;box-shadow:0 0 8px #79f7ff35}to{opacity:1;box-shadow:0 0 22px #79f7ffcc}}
+
+
+
+/* =========================================================
+   BALANCED MOTION LAYER
+   Keeps the deep blue production palette. Adds only:
+   - subtle living stars
+   - gentle life to the Mint button
+   - black mushroom preview background
+   ========================================================= */
+.preview-first{
+  background:
+    radial-gradient(circle at 50% 46%,#20265a 0%,#0b0e2a 55%,#050717 100%) !important;
+  border-color:#35417a;
+  box-shadow:inset 0 0 28px #4d72ff0f, inset 0 0 56px #000;
+}
+.preview-first img,.preview-first canvas{
+  filter:drop-shadow(0 0 20px #88f4ff16) drop-shadow(0 0 24px #a17cff12);
+}
+
+.universe{
+  isolation:isolate;
+}
+.living-stars{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  overflow:hidden;
+  pointer-events:none;
+  mix-blend-mode:screen;
+}
+.living-star{
+  position:absolute;
+  left:var(--x);
+  top:var(--y);
+  width:var(--s);
+  height:var(--s);
+  border-radius:50%;
+  background:var(--c);
+  opacity:var(--o);
+  box-shadow:
+    0 0 var(--g1) var(--c),
+    0 0 var(--g2) color-mix(in srgb,var(--c) 38%,transparent);
+  transform:translate3d(0,0,0) scale(.82);
+  animation:
+    starTwinkle var(--twinkle) ease-in-out var(--delay) infinite alternate,
+    starFloat var(--float) ease-in-out var(--delay2) infinite alternate;
+}
+.living-star.cross:before,.living-star.cross:after{
+  content:"";
+  position:absolute;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  background:linear-gradient(90deg,transparent,var(--c),transparent);
+  opacity:.42;
+  border-radius:999px;
+}
+.living-star.cross:before{width:var(--cross);height:1px}
+.living-star.cross:after{height:var(--cross);width:1px}
+
+.mint{
+  background:linear-gradient(90deg,#7df6ff 0%,#94d7ff 22%,#a790ff 52%,#91bbff 78%,#7df6ff 100%);
+  background-size:210% 100%;
+  animation:mintFlow 9s ease-in-out infinite alternate, mintGlow 2.8s ease-in-out infinite alternate;
+  box-shadow:0 0 18px #76f4ff16;
+}
+.mint:hover:not(:disabled){
+  background:linear-gradient(90deg,#93faff 0%,#abddff 22%,#bcabff 52%,#abd0ff 78%,#93faff 100%);
+  background-size:210% 100%;
+  box-shadow:0 0 24px #85f5ff2f;
+}
+.mint:disabled{
+  animation:none;
+}
+
+@keyframes starTwinkle{
+  0%{opacity:var(--o1);transform:translate3d(0,0,0) scale(.72)}
+  40%{opacity:var(--o);transform:translate3d(0,0,0) scale(1.02)}
+  70%{opacity:var(--o2);transform:translate3d(0,0,0) scale(.88)}
+  100%{opacity:var(--o);transform:translate3d(0,0,0) scale(1.12)}
+}
+@keyframes starFloat{
+  from{margin-left:var(--ndx);margin-top:var(--ndy)}
+  to{margin-left:var(--dx);margin-top:var(--dy)}
+}
+@keyframes mintFlow{
+  from{background-position:0% 50%}
+  to{background-position:100% 50%}
+}
+@keyframes mintGlow{
+  from{box-shadow:0 0 16px #76f4ff14}
+  to{box-shadow:0 0 24px #8b9eff22}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .living-star,.mint{animation:none!important}
+}
+
+
+
+/* Give the first active swatch ring room without shifting content. */
+.settings-scroll{
+  margin-left:-6px;
+  padding-left:6px;
+}
+
+
+#previewCanvas{opacity:0;background:transparent}
+#previewCanvas.painted{opacity:1}
+.availability-note{margin:12px 0 0;padding:12px;border:1px solid #735f9e;background:#17142d;border-radius:6px;color:#bfc9e6}
+.availability-note strong,.availability-note span{display:block}.availability-note strong{color:#e7ddff;font:12px var(--mono)}.availability-note span{margin-top:6px;font:10px/1.55 var(--mono)}
+.availability-note button{width:100%;margin-top:10px;border:1px solid #806faa;background:#211b40;color:#d9faff;border-radius:5px;padding:9px;font:10px var(--mono)}
+.usd-price{font:inherit;font-size:.78em;font-weight:400;color:inherit;opacity:.62;white-space:nowrap;letter-spacing:0}.mint .mint-label{min-width:0;white-space:nowrap}.mint .mint-usd{margin-left:3px;font:inherit;letter-spacing:inherit;text-transform:inherit;opacity:1}.builder-ladder{grid-template-columns:repeat(7,minmax(0,1fr))!important}
+/* Useful project footer. Keep it one quiet row on desktop and let it breathe on phones. */
+.app{grid-template-rows:78px minmax(0,1fr) 44px}
+.footer{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;padding:0 30px;align-items:center;background:#050618;border-top:1px solid #232a52;color:#7780a3;font:9px var(--mono);letter-spacing:1px;text-transform:uppercase}
+.footer-brand{color:#d9e4ee;font-weight:700;white-space:nowrap}
+.footer-links{display:flex;align-items:center;justify-content:center;gap:clamp(12px,1.6vw,26px);min-width:0}
+.footer a{color:inherit;text-decoration:none;white-space:nowrap}
+.footer a:hover,.footer a:focus-visible{color:#85f7ff;text-decoration:underline;text-underline-offset:4px}
+.footer-network-link{color:#aab8d6!important}
+.footer-network-link:hover,.footer-network-link:focus-visible{color:#85f7ff!important}
+.footer-placeholder{color:#7886a8!important;cursor:default}
+.footer-rate{color:#aab8d6;white-space:nowrap;font-variant-numeric:tabular-nums}
+.toast{bottom:70px}
+@media(max-width:1100px){.footer{gap:16px;padding-inline:20px}.footer-rate{display:none}}
+@media(max-width:760px){.footer{padding:16px;line-height:1.6;display:flex;flex-direction:column;gap:10px;text-align:center}.footer-links{flex-wrap:wrap;gap:8px 18px}.footer-rate{display:block}}
+</style>
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/chain.css">
+<link rel="stylesheet" href="assets/protected-mint.css">
+<script type="module">
+let web3Ready,web3Loaded=false;
+const loadWeb3=()=>web3Ready??=import('./assets/web3/app.js').then(()=>window.myFriendsWeb3Ready).then(()=>{web3Loaded=true;});
+addEventListener('DOMContentLoaded',()=>{
+  const wallet=document.getElementById('wallet');
+  const showWalletCheck=()=>{wallet.dataset.state='checking';wallet.disabled=true;wallet.textContent='CHECKING WALLET';};
+  wallet.addEventListener('pointerenter',loadWeb3,{once:true});wallet.addEventListener('focusin',loadWeb3,{once:true});
+  wallet.addEventListener('click',async event=>{if(web3Loaded)return;event.preventDefault();event.stopImmediatePropagation();showWalletCheck();await loadWeb3();wallet.click();},{capture:true});
+  const beginOnIntent=()=>loadWeb3();
+  document.addEventListener('pointerdown',beginOnIntent,{once:true,capture:true,passive:true});
+  document.addEventListener('keydown',beginOnIntent,{once:true,capture:true});
+  addEventListener('myfriends:review-mint',()=>loadWeb3().then(()=>dispatchEvent(new Event('myfriends:mint'))).catch(()=>window.myFriendsUI?.notify('Wallet tools could not load. Please try again.')));
+  // Start collection history immediately. A deployment may opt into a
+  // snapshot URL; otherwise the reader falls back to canonical RPC history.
+  if(location.hash.slice(1).startsWith('myfriends')){showWalletCheck();loadWeb3();}
+  else loadWeb3();
+  addEventListener('hashchange',()=>{if(location.hash.slice(1).startsWith('myfriends')&&!web3Loaded)showWalletCheck();});
+});
+</script>
+</head>
+<body data-view="spiral" data-mobile-surface="builder" data-booting>
+<script>
+(()=>{const route=location.hash.slice(1).split('?')[0];document.body.dataset.view=['forest','collection'].includes(route)?'forest':['about','myfriends','wishlist','history'].includes(route)?route:'spiral';document.body.dataset.mobileSurface=route==='spiral'?'spiral':'builder';})();
+</script>
+<svg class="icon-sprite" aria-hidden="true">
+ <symbol id="icon-forest" viewBox="0 0 24 24"><path d="m12 3-4 6h2.5l-4 5h3L5 19h14l-4.5-5h3l-4-5H16l-4-6Z"/><path d="M12 19v2"/></symbol>
+ <symbol id="icon-twitter" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M23.4 4.8c-.8.4-1.7.6-2.6.7a4.5 4.5 0 0 0 2-2.5 9 9 0 0 1-2.9 1.1A4.5 4.5 0 0 0 12.1 8c0 .4 0 .7.1 1A12.8 12.8 0 0 1 3 4.3a4.5 4.5 0 0 0 1.4 6 4.4 4.4 0 0 1-2-.6v.1a4.5 4.5 0 0 0 3.6 4.4 4.7 4.7 0 0 1-2 .1 4.5 4.5 0 0 0 4.2 3.1A9 9 0 0 1 2.6 19c-.4 0-.7 0-1.1-.1a12.7 12.7 0 0 0 6.9 2c8.2 0 12.7-6.8 12.7-12.7v-.6c.9-.6 1.6-1.4 2.3-2.3Z"/></symbol>
+ <symbol id="icon-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle fill="currentColor" stroke="none" cx="17.4" cy="6.7" r="1"/></symbol>
+ <symbol id="icon-youtube" viewBox="0 0 24 24"><path d="M21.2 7.1c-.2-1-1-1.8-2-2C17.4 4.6 12 4.6 12 4.6s-5.4 0-7.2.5c-1 .2-1.8 1-2 2-.5 1.8-.5 4.9-.5 4.9s0 3.1.5 4.9c.2 1 1 1.8 2 2 1.8.5 7.2.5 7.2.5s5.4 0 7.2-.5c1-.2 1.8-1 2-2 .5-1.8.5-4.9.5-4.9s0-3.1-.5-4.9Z"/><path fill="currentColor" stroke="none" d="m9.8 15.2 5.6-3.2-5.6-3.2v6.4Z"/></symbol>
+ <symbol id="icon-etherscan" viewBox="0 0 24 24"><path d="M5 17.5v-6a1.5 1.5 0 0 1 3 0v6M9.5 17.5v-9a1.5 1.5 0 0 1 3 0v9M14 16.8V5.5a1.5 1.5 0 0 1 3 0v8.9"/><path d="M3.5 18.5a10 10 0 0 0 16.8-6"/></symbol>
+ <symbol id="icon-evm" viewBox="0 0 24 24"><path d="m12 2-6 10 6 3.6 6-3.6-6-10Z"/><path d="m6 13.4 6 8.6 6-8.6-6 3.6-6-3.6Z"/></symbol>
+ <symbol id="icon-sourcify" viewBox="0 0 24 24"><path d="m12 2.5 7 3v5.8c0 4.5-2.7 8-7 10.2-4.3-2.2-7-5.7-7-10.2V5.5l7-3Z"/><path d="m8.4 11.9 2.3 2.3 5-5"/></symbol>
+ <symbol id="icon-github" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.7-1.3-2.3-.3-4.6-1.1-4.6-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.5 9.5 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.8-2.3 4.6-4.6 4.9.4.3.7 1 .7 2V21c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></symbol>
+ <symbol id="icon-opensea" viewBox="0 0 24 24"><path d="m8.2 14.8 3.4-9.5 4.2 9.5M5 16.5h14M7 19c2.5 1.8 7.5 1.8 10 0M12 5.3v11.2"/></symbol>
+ <symbol id="icon-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-15-6.7L3 8"/><path d="M3 3v5h5M3 12a9 9 0 0 0 15 6.7l3-2.7"/><path d="M21 21v-5h-5"/></symbol>
+</svg>
+<div class="app">
+<header class="header">
+ <div class="brand"><svg class="brandmark" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M 20.80 20.00 L 20.90 20.12 L 20.99 20.27 L 21.05 20.45 L 21.07 20.65 L 21.06 20.86 L 21.01 21.07 L 20.93 21.29 L 20.80 21.51 L 20.62 21.71 L 20.41 21.89 L 20.16 22.04 L 19.88 22.15 L 19.57 22.23 L 19.23 22.25 L 18.89 22.23 L 18.53 22.15 L 18.18 22.02 L 17.83 21.83 L 17.51 21.58 L 17.22 21.27 L 16.96 20.92 L 16.76 20.52 L 16.60 20.08 L 16.51 19.60 L 16.49 19.11 L 16.54 18.60 L 16.66 18.09 L 16.86 17.58 L 17.13 17.10 L 17.48 16.65 L 17.91 16.24 L 18.39 15.89 L 18.94 15.60 L 19.53 15.38 L 20.16 15.25 L 20.82 15.20 L 21.50 15.25 L 22.17 15.39 L 22.84 15.64 L 23.47 15.97 L 24.07 16.41 L 24.61 16.93 L 25.09 17.53 L 25.48 18.20 L 25.79 18.94 L 25.99 19.73 L 26.08 20.55 L 26.06 21.39 L 25.92 22.24 L 25.67 23.08 L 25.29 23.88 L 24.80 24.64 L 24.20 25.33 L 23.49 25.95 L 22.70 26.47 L 21.83 26.89 L 20.90 27.18 L 19.92 27.35 L 18.91 27.38 L 17.89 27.28 L 16.88 27.03 L 15.90 26.64 L 14.97 26.11 L 14.10 25.45 L 13.33 24.67 L 12.66 23.77 L 12.11 22.78 L 11.69 21.71 L 11.43 20.58 L 11.31 19.41 L 11.36 18.22 L 11.58 17.03 L 11.95 15.87 L 12.49 14.75 L 13.19 13.71 L 14.03 12.76 L 15.01 11.92 L 16.10 11.22 L 17.29 10.66 L 18.56 10.27 L 19.89 10.05 L 21.25 10.02 L 22.61 10.17 L 23.96 10.51 L 25.27 11.03 L 26.50 11.74 L 27.64 12.61 L 28.66 13.65 L 29.54 14.82 L 30.26 16.12 L 30.80 17.52 L 31.15 18.99 L 31.29 20.51 L 31.23 22.05 L 30.96 23.59 L 30.47 25.09 L 29.78 26.52 L 28.90 27.86 L 27.83 29.07 L 26.59 30.14 L 25.21 31.04 L 23.70 31.75 L 22.10 32.26 L 20.43 32.54 L 18.71 32.59 L 17.00 32.41 L 15.31 32.00 L 13.67 31.35 L 12.13 30.48 L 10.70 29.40 L 9.43 28.13 L 8.33 26.68 L 7.43 25.08 L 6.74 23.37 L 6.30 21.55 L 6.10 19.69 L 6.16 17.79 L 6.48 15.91 L 7.05 14.07 L 7.88 12.31 L 8.94 10.67 L 10.23 9.18 L 11.72 7.86 L 13.38 6.76 L 15.20 5.88 L 17.13 5.24 L 19.14 4.88 L 21.21 4.79 L 23.27 4.98 L 25.31 5.46 L 27.28 6.21 L 29.15 7.23 L 30.87 8.50 L 32.41 10.00 L 33.74 11.72 L 34.84 13.61 L 35.68 15.64 L 36.24 17.78 L 36.50 20.00" stroke="#79f7ff" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"/></svg><div><div class="brand-name">mycelium Friends</div><div class="brand-small"><span class="brand-product">myFriends</span> by <a class="brand-credit" href="https://magicforest.land/" target="_blank" rel="noopener noreferrer">Magic Forest</a></div></div></div>
+ <nav class="top-links" aria-label="Sections"><a href="#spiral" id="showSpiral" data-explore="spiral" aria-current="page">SPIRAL</a><a href="#traits" id="showTraits" data-explore="catalog">TRAITS</a><a href="#about" data-view="about">ABOUT</a><a href="#history" data-view="history">HISTORY</a><a href="#wishlist" data-view="wishlist">WISHLIST</a><a href="#myfriends" data-view="myfriends">myFRIENDS</a></nav>
+ <div class="head-right"><select id="deploymentSelect" hidden aria-hidden="true" tabindex="-1"></select><button class="wallet" id="wallet" title="Connect wallet">CONNECT WALLET</button></div>
+</header>
+<div class="layout" id="spiral-view">
+ <div class="explore-toolbar" id="exploreToolbar"><div id="catalogTabs" class="catalog-tabs" role="group" aria-label="Filter traits by type" hidden></div></div>
+ <div class="explore-panel">
+ <div id="spiralModeToggle" class="spiral-mode-toggle" role="group" aria-label="Collection view">
+  <button type="button" id="showSpiralMode" aria-label="Spiral view" title="Spiral view" aria-pressed="true"><svg id="spiralModeIcon" viewBox="0 0 40 40" aria-hidden="true"></svg></button>
+  <button type="button" id="showCollectionMode" aria-label="Collection catalog" title="Collection catalog" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+ </div>
+ <section id="traitCatalog" class="trait-catalog" aria-label="Trait catalog" hidden><div id="catalogGrid" class="catalog-grid"></div><div id="catalogSentinel" class="catalog-sentinel" aria-hidden="true"></div></section>
+ <section id="forest-view" class="wallet-catalog collection-catalog" aria-labelledby="forest-title" hidden>
+  <div class="wallet-catalog-inner">
+   <div class="content-heading collection-heading"><div><div class="eyebrow">ON-CHAIN COLLECTION</div><h1 id="forest-title" tabindex="-1">The Collection</h1></div><div class="content-heading-tools"><div><p id="collection-caption">Minted myFriends. Owner and original mint price are read from the connected network.</p><p class="market-data-note">Live listings are not stored in the NFT contract. A marketplace indexer can add them later.</p></div></div></div>
+   <div id="gallery" class="forest-grid collection-grid"><div class="forest-empty"><h2>The forest starts with a friend.</h2><p>Confirmed myFriends appear here. Choose your traits and grow the first one.</p></div></div><button class="chain-action" id="moreFriends" hidden>Meet more myFriends ↓</button>
+  </div>
+ </section>
+ <section id="myfriends-view" class="wallet-catalog" aria-labelledby="myfriends-title" hidden>
+  <div class="wallet-catalog-inner">
+   <div class="content-heading unified-library-heading">
+     <div>
+      <div class="eyebrow">YOUR WALLET</div>
+      <h1 id="myfriends-title" tabindex="-1">My Friends</h1>
+      <p id="myfriends-caption" class="content-subtitle" hidden>Minted myFriends held by the connected wallet.</p>
+      <p id="myfriends-address" class="collection-identity" hidden></p>
+     </div>
+     <div id="myfriends-wallet-summary" hidden>
+      <div class="content-links"><button id="friendsWalletAction" type="button">DISCONNECT WALLET</button></div>
+     </div>
+    </div>
+   <div id="myfriends-gallery" class="forest-grid"></div>
+  </div>
+ </section>
+ <section id="wishlist-view" class="wallet-catalog library-catalog" aria-labelledby="wishlist-title" hidden>
+  <div class="wallet-catalog-inner">
+   <div class="content-heading unified-library-heading">
+     <div>
+      <div class="eyebrow">FAVOURITE FRIENDS</div>
+      <h1 id="wishlist-title" tabindex="-1">Wishlist</h1>
+      <p id="wishlist-caption" class="content-subtitle" hidden>Favourite combinations, ready to mint.</p>
+     </div>
+    </div>
+   <div id="wishlist-gallery" class="forest-grid wishlist-grid"></div>
+  </div>
+ </section>
+ <section id="history-view" class="wallet-catalog library-catalog" aria-labelledby="history-title" hidden>
+  <div class="wallet-catalog-inner">
+   <div class="content-heading unified-library-heading history-heading">
+     <div>
+      <div class="eyebrow">YOUR EXPLORATIONS</div>
+      <h1 id="history-title" tabindex="-1">History</h1>
+      <p id="history-caption" class="content-subtitle" hidden>Unminted combinations created in this browser.</p>
+     </div>
+     <button id="clearHistory" class="history-clear" type="button" aria-label="Clear history" title="Clear history" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/></svg></button>
+    </div>
+   <div id="history-gallery" class="forest-grid"></div>
+   <button class="chain-action" id="moreHistory" hidden>Show more history ↓</button>
+  </div>
+ </section>
+ <div id="gridScaleControls" class="view-tools grid-scale-tools" role="group" aria-label="Artwork scale" hidden><button type="button" data-grid-scale="-1" aria-label="Show smaller artwork">−</button><output id="gridScaleLevel" aria-live="polite">100%</output><button type="button" data-grid-scale="1" aria-label="Show larger artwork">+</button><button type="button" id="resetGridScale" aria-label="Fit artwork to the view">FIT</button></div>
+ <section id="about-view" class="about-catalog" aria-labelledby="about-title" hidden>
+  <div class="about-catalog-inner">
+   <div class="about-heading"><div class="eyebrow">MEET 🍄 myFriend</div><h1 id="about-title" tabindex="-1">A little friend.<br>Entirely yours.</h1><p id="friend-introduction">A Mycelium Friend is a little on-chain mushroom with a face, a point of view, and something it likes doing. You choose all six parts, so the first thing you meet is a character that feels like yours.</p></div>
+   <div class="about-heading about-parts-heading"><h2>Six parts. One particular friend.</h2></div>
+   <div class="layer-strip" id="layer-strip" aria-label="The six layers of your selected mushroom"><div class="layer-preview" aria-hidden="true"><div></div><span>Stem</span></div><div class="layer-preview" aria-hidden="true"><div></div><span>Temperament</span></div><div class="layer-preview" aria-hidden="true"><div></div><span>Glasses</span></div><div class="layer-preview" aria-hidden="true"><div></div><span>Cap</span></div><div class="layer-preview" aria-hidden="true"><div></div><span>Accessory</span></div><div class="layer-preview" aria-hidden="true"><div></div><span>Hobby</span></div></div>
+   <p id="copy-artwork" class="about-artwork-copy">Choose a stem, cap, temperament, glasses, accessory, and hobby. Tiny vector beads form the artwork, while its original traits, image, and descriptions live entirely on Ethereum. No reveal to wait for. No image server to keep alive.</p>
+   <div class="about-facts">
+    <article class="about-fact"><h2>Make it yours.</h2><p>Choose from <span id="about-counts">32 stems, 128 caps, 32 temperaments, 16 glasses, 4 decorations and 32 hobby options</span>. Glasses, decorations and hobbies are independent: choose any combination, or leave them off. The preview changes as you choose.</p></article>
+    <article class="about-fact"><h2>One combination. One ID.</h2><p><strong id="combination-count">268,435,456</strong> possible combinations. Every friend has its own token ID, and each combination can be minted only once. No random mint. No reveal.</p></article>
+    <article class="about-fact"><h2>Made to live on-chain.</h2><p>The SVG artwork and metadata are generated from the collection's stored vector traits. Every mushroom has a transparent canvas, with no external images needed to render it.</p></article>
+   </div>
+   <div class="about-heading about-protocol-heading">
+    <div class="eyebrow">HOW MYCELIUM WORKS</div>
+    <h2>Simple rules.<br>Written into the collection.</h2>
+   </div>
+   <div class="about-facts about-protocol">
+    <article class="about-fact protocol-card">
+     <span class="eyebrow">THE CONTRACT</span>
+     <h2>One collection. One record.</h2>
+     <p>Every myFriend is minted through the same ERC-721 collection contract. Its six birth traits are recorded on-chain, the original artwork and metadata are generated from on-chain data, and the same combination can never be minted twice.</p>
+     <div class="protocol-card-foot">
+      <div class="contract-resources" aria-label="Verify the collection contract">
+       <a id="aboutContractLink" class="contract-resource" target="_blank" rel="noopener noreferrer" hidden><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-etherscan"/></svg></span><span>Etherscan</span></a>
+       <a id="aboutContractSecondary" class="contract-resource" target="_blank" rel="noopener noreferrer" hidden><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-evm"/></svg></span><span>EVM.Now</span></a>
+       <span class="contract-resource is-placeholder" title="Public source tag mycelium-friends-core-v1.0.0 (commit 5b7d890…) will link here when the repository opens"><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-github"/></svg></span><span>GitHub</span></span>
+      </div>
+      <details class="contract-proof"><summary>Show contract proof</summary><pre><code><span class="code-type">uint256</span> <span class="code-variable">existing</span> <span class="code-operator">=</span> tokenForGenotype[genotype];
+<span class="code-keyword">if</span> (existing <span class="code-operator">!=</span> <span class="code-number">0</span>) <span class="code-keyword">revert</span> <span class="code-call">CombinationAlreadyMinted</span>(existing);
+
+tokenForGenotype[genotype] <span class="code-operator">=</span> tokenId;</code></pre></details>
+     </div>
+    </article>
+    <article class="about-fact protocol-card protocol-spiral-card">
+     <span class="eyebrow">THE PRICE SPIRAL</span>
+     <h2>Every public mint moves one step.</h2>
+     <div class="price-spiral-mini" aria-label="Example of the first five public mint prices">
+      <span><b>#1</b><strong>FREE</strong></span><i>→</i>
+      <span><b>#2</b><strong>0.0001</strong></span><i>→</i>
+      <span><b>#3</b><strong>0.0002</strong></span><i>→</i>
+      <span><b>#4</b><strong>0.0003</strong></span><i>→</i>
+      <span><b>#5</b><strong>0.0004 ETH</strong></span>
+     </div>
+     <p>The first public myFriend is free. Each public mint increases the next price by exactly 0.0001 ETH. Allowlist claims are free and do not advance the public curve.</p>
+     <div class="protocol-card-foot">
+      <div class="contract-resources" aria-label="Verify the price contract">
+       <a id="aboutPriceContract" class="contract-resource" target="_blank" rel="noopener noreferrer" hidden><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-etherscan"/></svg></span><span>Etherscan</span></a>
+       <a id="aboutPriceContractSecondary" class="contract-resource" target="_blank" rel="noopener noreferrer" hidden><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-evm"/></svg></span><span>EVM.Now</span></a>
+       <span class="contract-resource is-placeholder" title="Public source tag mycelium-friends-core-v1.0.0 (commit 5b7d890…) will link here when the repository opens"><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-github"/></svg></span><span>GitHub</span></span>
+      </div>
+      <details class="contract-proof"><summary>Show contract proof</summary><pre><code><span class="code-type">uint256</span> <span class="code-keyword">internal constant</span> <span class="code-constant">STEP</span> <span class="code-operator">=</span> <span class="code-number">100_000_000_000_000</span>;
+
+<span class="code-keyword">function</span> <span class="code-call">price</span>(<span class="code-type">uint256</span> minted, <span class="code-type">uint256</span> quantity)
+    <span class="code-keyword">internal pure returns</span> (<span class="code-type">uint256</span>)
+{
+    <span class="code-keyword">return</span> <span class="code-constant">STEP</span> <span class="code-operator">*</span> (quantity <span class="code-operator">*</span> minted
+        <span class="code-operator">+</span> quantity <span class="code-operator">*</span> (quantity <span class="code-operator">-</span> <span class="code-number">1</span>) <span class="code-operator">/</span> <span class="code-number">2</span>);
+}</code></pre></details>
+     </div>
+    </article>
+    <article class="about-fact protocol-card">
+     <span class="eyebrow">ROYALTIES</span>
+     <h2>5% is the ceiling.</h2>
+     <p>Secondary-sale royalties use ERC-2981. The collection starts at 5%. The contract owner can lower the rate or restore it, but the permanent ceiling is 5%. Royalty payment still depends on marketplace support.</p>
+     <div class="protocol-card-foot">
+      <div class="contract-resources" aria-label="Verify the royalty contract">
+       <a id="aboutRoyaltyContract" class="contract-resource" target="_blank" rel="noopener noreferrer" hidden><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-etherscan"/></svg></span><span>Etherscan</span></a>
+       <a id="aboutRoyaltyContractSecondary" class="contract-resource" target="_blank" rel="noopener noreferrer" hidden><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-evm"/></svg></span><span>EVM.Now</span></a>
+       <span class="contract-resource is-placeholder" title="Public source tag mycelium-friends-core-v1.0.0 (commit 5b7d890…) will link here when the repository opens"><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-github"/></svg></span><span>GitHub</span></span>
+      </div>
+      <details class="contract-proof"><summary>Show contract proof</summary><pre><code><span class="code-type">uint96</span> <span class="code-keyword">public constant</span> <span class="code-constant">MAX_ROYALTY_BPS</span> <span class="code-operator">=</span> <span class="code-number">500</span>;
+
+<span class="code-keyword">function</span> <span class="code-call">_setRoyaltyInfo</span>(<span class="code-type">address</span> receiver, <span class="code-type">uint96</span> bps) <span class="code-keyword">private</span> {
+    <span class="code-keyword">if</span> (bps <span class="code-operator">&gt;</span> <span class="code-constant">MAX_ROYALTY_BPS</span>) <span class="code-keyword">revert</span> <span class="code-call">InvalidRoyaltyBps</span>(bps);
+    royaltyReceiver <span class="code-operator">=</span> receiver;
+    royaltyBps <span class="code-operator">=</span> bps;
+}</code></pre></details>
+     </div>
+    </article>
+    <article class="about-fact protocol-card protocol-market-card">
+     <div class="market-card-intro">
+      <div class="market-card-kicker"><span class="eyebrow">TWO MARKETS</span><button id="marketMotionToggle" class="market-motion-toggle" type="button" aria-label="Pause market animation" title="Pause market animation" aria-pressed="false" hidden><svg viewBox="0 0 20 20" aria-hidden="true"><path class="market-motion-pause" d="M7 5v10M13 5v10"/><path class="market-motion-play" d="m7 5 8 5-8 5Z"/></svg></button></div>
+      <h2>A price is not found once. It keeps being found.</h2>
+      <p>New myFriends enter through the <a class="market-link" href="#traits" data-about-destination="builder">Spiral builder</a>. Existing myFriends meet new owners on <a id="aboutMarketOpenSeaIntro" class="market-link" data-link-label="OpenSea" target="_blank" rel="noopener noreferrer" hidden>OpenSea</a><span id="aboutMarketOpenSeaIntroFallback">secondary markets</span>. One collection. Two markets watching each other.</p>
+     </div>
+     <div class="market-loop">
+      <section class="market-side market-primary">
+       <span>PRIMARY · THE SPIRAL</span>
+       <h3><a href="#traits" data-about-destination="builder">Build on the Spiral</a></h3>
+       <p>Every public mint raises the next price by 0.0001 ETH. The contract can describe <strong>268,435,456</strong> unique friends, <span class="market-power" aria-label="2 to the power of 28">2<sup aria-hidden="true">28</sup></span>. This is a mathematical horizon, not a sellout plan. We do not expect to reach it. The Spiral lets demand decide how far the collection grows, one visible step at a time.</p>
+      </section>
+      <div class="market-bridge" aria-hidden="true">
+       <svg class="market-circuit market-circuit-desktop" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false">
+        <path class="market-track market-track-out" d="M0 50C18 50 15 18 50 18S82 50 100 50"/>
+        <path class="market-track market-track-back" d="M100 50C82 50 85 82 50 82S18 50 0 50"/>
+        <path class="market-direction market-direction-out" d="m45 14 7 4-7 4"/>
+        <path class="market-direction market-direction-back" d="m55 78-7 4 7 4"/>
+        <path class="market-transfer market-transfer-out" pathLength="100" d="M0 50C18 50 15 18 50 18S82 50 100 50"/>
+        <path class="market-transfer market-transfer-back" pathLength="100" d="M100 50C82 50 85 82 50 82S18 50 0 50"/>
+        <circle class="market-response market-response-primary" cx="0" cy="50" r="7"/>
+        <circle class="market-response market-response-secondary" cx="100" cy="50" r="7"/>
+        <circle class="market-node market-node-primary" cx="0" cy="50" r="3.5"/>
+        <circle class="market-node market-node-secondary" cx="100" cy="50" r="3.5"/>
+       </svg>
+       <svg class="market-circuit market-circuit-mobile" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false">
+        <path class="market-track market-track-out" d="M50 0C50 18 18 15 18 50S50 82 50 100"/>
+        <path class="market-track market-track-back" d="M50 100C50 82 82 85 82 50S50 18 50 0"/>
+        <path class="market-direction market-direction-out" d="m14 45 4 7 4-7"/>
+        <path class="market-direction market-direction-back" d="m78 55 4-7 4 7"/>
+        <path class="market-transfer market-transfer-out" pathLength="100" d="M50 0C50 18 18 15 18 50S50 82 50 100"/>
+        <path class="market-transfer market-transfer-back" pathLength="100" d="M50 100C50 82 82 85 82 50S50 18 50 0"/>
+        <circle class="market-response market-response-primary" cx="50" cy="0" r="7"/>
+        <circle class="market-response market-response-secondary" cx="50" cy="100" r="7"/>
+        <circle class="market-node market-node-primary" cx="50" cy="0" r="3.5"/>
+        <circle class="market-node market-node-secondary" cx="50" cy="100" r="3.5"/>
+       </svg>
+      </div>
+      <section class="market-side market-secondary">
+       <span>SECONDARY · RESALE</span>
+       <h3><a id="aboutMarketOpenSea" data-link-label="Trade on OpenSea" target="_blank" rel="noopener noreferrer" hidden>Trade on OpenSea</a><span id="aboutMarketOpenSeaFallback">Trade on secondary markets</span></h3>
+       <p>Owners ask. Collectors answer. Existing friends find a price of their own. When resale wakes up, it can pull attention back to the Spiral. When the Spiral moves, it can make collectors look again at what already exists. Either market can push the other.</p>
+      </section>
+     </div>
+     <div class="market-feedback">
+      <p><strong>FOMO exists in every market.</strong> It can gather around a single 1/1 artwork. It can also gather around a 10k pfp collection that starts cheap and becomes expensive on the secondary market. The Spiral does not pretend to remove it. It makes the rule and the next price visible. Pause. Look at the art. Read the contract. Choose only the friend and price you genuinely want.</p>
+      <p><strong>This is an experiment with a real purpose.</strong> We are trying to turn a collection into a forest and an Art Hub for a community. We want it to work, and we are searching in public for a new way to fund that shared dream. The Spiral can grow when people believe in it and find its natural edge when they do not. Wherever that edge appears, every step is visible and every myFriend brings the forest closer.</p>
+     </div>
+    </article>
+   </div>
+   <div class="about-heading about-forest-heading"><div class="eyebrow">WHY MYCELIUM?</div><h1>First the mushrooms.<br>Then the forest.</h1><p id="about-introduction">Magic Forest is the real place behind these little on-chain friends. We are raising funds to buy land in Spain, plant a forest, and build an Art Hub. The film below is the short version of who we are, why we started, and what we hope to build.</p></div>
+
+   <div class="about-video">
+    <div class="about-video-frame" id="aboutVideoFrame" data-video-src="https://www.youtube-nocookie.com/embed/_owe-Pgs2Ek?rel=0"></div>
+    <div class="about-video-caption"><span class="eyebrow">HUMANS BEHIND THE PROJECT</span><strong>Hannah &amp; Dima — Founders of Magic Forest</strong></div>
+   </div>
+   <div class="about-heading about-how-heading"><div class="eyebrow">HOW IT WORKS</div><h2>A little bureaucracy.<br>For a real forest.</h2></div>
+   <section class="forest-progress" id="forestProgress" aria-labelledby="forestProgressTitle">
+    <div class="forest-progress-top">
+     <div class="forest-progress-total"><span class="eyebrow" id="forestProgressTitle">MAGIC FOREST FUNDRAISING</span></div>
+     <div class="forest-progress-goal"><span>GOAL</span><strong><span id="forestProgressTotal">€7,085</span> / <span id="forestProgressGoal">€100,000</span></strong></div>
+    </div>
+    <div class="forest-progress-track" aria-hidden="true">
+     <span class="forest-progress-line is-donations"></span>
+     <span class="forest-progress-line is-myfriends"></span>
+     <i class="forest-progress-dot is-donations"></i>
+     <i class="forest-progress-dot is-myfriends"></i>
+     <div class="forest-progress-marker is-donations"><strong id="forestDonationAmount">€7,085</strong><span>DIRECT DONATIONS</span></div>
+     <div class="forest-progress-marker is-myfriends"><strong id="forestMyFriendsAmount">€0.00</strong><span>NET COLLECTION PROCEEDS</span></div>
+    </div>
+    <div class="forest-progress-bottom">
+     <div class="forest-progress-rate" aria-label="ETH to EUR exchange rate">
+      <span id="forestEthEurRate">Loading ETH/EUR…</span>
+      <button type="button" id="forestEthEurRefresh" class="refresh-icon-button forest-rate-refresh" aria-label="Refresh ETH to EUR rate" title="Refresh ETH/EUR rate"><svg aria-hidden="true"><use href="#icon-refresh"/></svg></button>
+     </div>
+    </div>
+   </section>
+   <div class="about-facts about-story">
+    <div class="about-story-short">
+     <article class="about-fact"><h2>One mission. Two entities.</h2><p><strong>Magic Forest Friends LLC</strong> is the designated operator for primary sales of <a class="about-inline-link" href="#spiral" data-view="spiral">mycelium Friends</a>. All net collection proceeds are designated for <a class="about-inline-link" href="https://magicforest.land/" target="_blank" rel="noopener noreferrer">Magic Forest Association</a>, the registered Spanish non-profit behind the project.</p><dl class="entity-record" aria-label="Magic Forest Friends LLC company details"><div><dt>Legal name</dt><dd>Magic Forest Friends LLC</dd></div><div><dt>Jurisdiction</dt><dd>Wyoming, United States</dd></div><div><dt>State file number</dt><dd>2026-002117174</dd></div><div><dt>Registered office</dt><dd>30 N Gould St, Suite N, Sheridan, WY 82801, USA</dd></div><div><dt>Net proceeds</dt><dd>Designated for Magic Forest Association · Spain</dd></div></dl></article>
+     <article class="about-fact"><h2>Prefer to donate?</h2><p>Buying a myFriend is a purchase, not a donation. If you want to support the non-profit directly, you can <a class="about-inline-link" href="https://magicforest.land/donate" target="_blank" rel="noopener noreferrer">donate to Magic Forest Association</a> instead. Those funds are received by the non-profit and used for its mission.</p></article>
+     <article class="about-fact"><h2>Built in public.</h2><p>On <a class="about-inline-link" href="https://magicforest.land/" target="_blank" rel="noopener noreferrer">magicforest.land</a> you can follow our roadmap and fundraising progress. The <a class="about-inline-link" href="https://magicforest.land/transparency" target="_blank" rel="noopener noreferrer">Transparency section</a> publishes public financial records, crypto activity, registration documents and financial reports.</p></article>
+    </div>
+   <article class="about-fact money-flow-card">
+     <h2>Where the money goes.</h2>
+     <p>All net proceeds from mycelium Friends are designated for Magic Forest Association, our Spanish non-profit, to help plant the forest. Below is how we calculate that amount after unavoidable costs and Spanish corporate tax.</p>
+     <div class="money-details">
+      <div class="money-ledger">
+       <div class="money-ledger-row money-ledger-gross"><span>Successful on-chain mint payments</span><strong id="moneyGrossRaised">0.00000 ETH</strong></div>
+       <div class="money-ledger-row"><span>Live ETH/EUR rate</span><strong id="moneyEthEurRate">Loading…</strong></div>
+       <div class="money-ledger-row"><span>Gross mint revenue</span><strong id="moneyGrossEuro">—</strong></div>
+       <div class="money-ledger-heading">LLC SETUP &amp; MAINTENANCE</div>
+       <div class="money-ledger-row money-ledger-covered"><span>Northwest formation service · $39</span><strong>SPONSOR-COVERED</strong></div>
+       <div class="money-ledger-row money-ledger-covered"><span>Wyoming state filing · $103</span><strong>SPONSOR-COVERED</strong></div>
+       <div class="money-ledger-row money-ledger-covered"><span>EIN filing service · $200</span><strong>SPONSOR-COVERED</strong></div>
+       <div class="money-ledger-row money-ledger-covered"><span>Registered agent · first year included</span><strong>SPONSOR-COVERED</strong></div>
+       <div class="money-ledger-row"><span>Registered agent renewal · from year 2</span><strong>$125 / YEAR · NOT YET DUE</strong></div>
+       <div class="money-ledger-row"><span>Wyoming annual report / licence · from year 2</span><strong>MIN. $60 / YEAR · NOT YET DUE</strong></div>
+       <div class="money-ledger-row"><span>Current LLC costs charged to collection</span><strong id="moneyCollectionCosts">€0.00</strong></div>
+       <div class="money-ledger-heading">SPANISH CORPORATE-TAX RESERVE</div>
+       <div class="money-ledger-row"><span>Estimated taxable profit</span><strong id="moneyTaxableProfit">—</strong></div>
+       <div class="money-ledger-row money-ledger-tax"><span>Modelo 200 reserve · 25%</span><strong id="moneyTaxReserve">—</strong></div>
+       <div class="money-ledger-row money-ledger-net"><span>Estimated amount for Magic Forest</span><strong id="moneyNetContribution">—</strong></div>
+      </div>
+      <p class="money-rule"><strong>Never more than the real remainder.</strong> If collection-funded costs exceed revenue, myFriends adds €0 to the fundraising bar—not a negative amount.</p>
+      <p class="money-note">LLC setup ($342) and its first service year were paid by a sponsor, not by the collection. Until their Spanish tax treatment is confirmed, we do not use them to reduce the 25% tax reserve. The final tax is determined in Modelo 200. Direct donations are accounted for separately.</p>
+     </div>
+    </article>
+   </div>
+   <div class="about-actions"><a href="https://magicforest.land/donate" target="_blank" rel="noopener noreferrer">Donate directly ↗</a><a href="https://magicforest.land/transparency" target="_blank" rel="noopener noreferrer">Project transparency ↗</a><a href="https://magicforest.land/" target="_blank" rel="noopener noreferrer">Visit Magic Forest ↗</a><a href="#traits" data-about-destination="builder">Build your myFriend ↗</a><a href="#forest" data-about-destination="collection">Meet the collection ↗</a></div>
+   <p class="license-note">Portions © 2025 Reown, Inc. All Rights Reserved · <a href="https://mycelium.magicforest.land/reown-community-license.txt">Reown Community License</a></p>
+   <nav class="about-footer-links" aria-label="Contacts">
+    <span class="about-links-title">CONTACTS</span>
+    <div class="about-icon-links">
+     <a class="about-icon-link" href="https://magicforest.land/" target="_blank" rel="noopener noreferrer" aria-label="Magic Forest website"><span class="about-icon"><svg aria-hidden="true"><use href="#icon-forest"/></svg></span><span>MAGIC FOREST</span></a>
+     <a class="about-icon-link" href="https://twitter.com/MagicForestLand" target="_blank" rel="noopener noreferrer" aria-label="Magic Forest on Twitter"><span class="about-icon"><svg aria-hidden="true"><use href="#icon-twitter"/></svg></span><span>TWITTER</span></a>
+     <a class="about-icon-link" href="https://www.instagram.com/magicforest.land/" target="_blank" rel="noopener noreferrer" aria-label="Magic Forest on Instagram"><span class="about-icon"><svg aria-hidden="true"><use href="#icon-instagram"/></svg></span><span>INSTAGRAM</span></a>
+     <a class="about-icon-link" href="https://www.youtube.com/watch?v=_owe-Pgs2Ek" target="_blank" rel="noopener noreferrer" aria-label="Magic Forest film on YouTube"><span class="about-icon"><svg aria-hidden="true"><use href="#icon-youtube"/></svg></span><span>YOUTUBE</span></a>
+    </div>
+   </nav>
+   <nav class="about-footer-links about-collection-links" aria-label="Collection links">
+    <span class="about-links-title">COLLECTION</span>
+    <div class="about-icon-links">
+     <a id="aboutFooterOpenSea" class="about-icon-link" target="_blank" rel="noopener noreferrer" hidden><span class="about-icon"><svg aria-hidden="true"><use href="#icon-opensea"/></svg></span><span data-resource-label>OPENSEA</span></a>
+     <a id="aboutFooterContract" class="about-icon-link" target="_blank" rel="noopener noreferrer" hidden><span class="about-icon"><svg aria-hidden="true"><use href="#icon-etherscan"/></svg></span><span data-resource-label>ETHERSCAN</span></a>
+     <a id="aboutFooterContractSecondary" class="about-icon-link" target="_blank" rel="noopener noreferrer" hidden><span class="about-icon"><svg aria-hidden="true"><use href="#icon-evm"/></svg></span><span data-resource-label>EVM.NOW</span></a>
+     <a id="aboutFooterSourcify" class="about-icon-link" target="_blank" rel="noopener noreferrer" hidden><span class="about-icon"><svg aria-hidden="true"><use href="#icon-sourcify"/></svg></span><span data-resource-label>SOURCIFY</span></a>
+    </div>
+   </nav>
+   <section id="privacy-details" class="privacy-details" aria-labelledby="privacy-title" tabindex="-1">
+    <div class="eyebrow">PRIVACY</div>
+    <h2 id="privacy-title">Privacy, simply.</h2>
+    <p class="privacy-intro"><strong>Magic Forest Friends LLC</strong> keeps only what is needed to run the mint safely, verify purchases and maintain accurate sales records. This is about our responsibilities as the seller—not your personal taxes.</p>
+    <div class="privacy-detail-list">
+     <details>
+      <summary>What we keep</summary>
+      <p>Before a mint, essential browser storage keeps your local choices and protected-mint recovery data on your device. When you press Mint, our server records the wallet address, chosen genotype, sale phase, a country-level network signal and the network address it observed, stored in encrypted form. If the mint proceeds, its transaction details are added after the blockchain confirms them. Ethereum records are public by design.</p>
+     </details>
+     <details>
+      <summary>How it is used</summary>
+      <p>We use this limited record to protect, recover and verify the purchase, prevent misuse and keep our own sales records accurate. The country signal does not decide who you are, where you live, whether you can mint or what you pay. It is supporting information only and can be wrong when a VPN or mobile network is involved.</p>
+     </details>
+     <details>
+      <summary>Who can see it</summary>
+      <p>The network address is encrypted and hidden from ordinary administration screens. Access is restricted to authorised record exports. Infrastructure providers may process the information only to operate the service. Nothing is automatically sent to tax authorities; information is disclosed only when the law requires it. We never sell it or use it for advertising, profiling or automated decisions.</p>
+     </details>
+     <details>
+      <summary>How long it stays—and your choices</summary>
+      <p>An unconfirmed mint record is removed after 90 days. A confirmed sale record is kept for 10 years. You can ask to access or correct information, or exercise other applicable privacy rights, at <a href="mailto:hello@magicforest.land">hello@magicforest.land</a>. Records that the law requires us to keep may remain for that period, and public Ethereum records cannot be changed by us.</p>
+     </details>
+    </div>
+   </section>
+  </div>
+ </section>
+ <main class="universe" id="universe" tabindex="0" aria-label="Interactive spiral of mushroom mint positions" aria-describedby="spiralHint">
+  <div class="sky"></div>
+<div class="stage spiral-loading-pending" id="stage"><svg class="orbit" viewBox="0 0 2800 2800" aria-hidden="true"><defs><linearGradient id="spiralColor" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0" stop-color="#bedf9d"/><stop offset=".5" stop-color="#dec48a"/><stop offset="1" stop-color="#657d5e"/></linearGradient><radialGradient id="originStarHalo"><stop offset="0" stop-color="#eaffff" stop-opacity=".72"/><stop offset=".28" stop-color="#79f7ff" stop-opacity=".42"/><stop offset="1" stop-color="#a775ff" stop-opacity="0"/></radialGradient><filter id="originStarGlow" x="-180%" y="-180%" width="460%" height="460%"><feGaussianBlur stdDeviation="3.6"/></filter></defs><path class="back-spiral" id="backSpiral" pathLength="1"/><path class="main-spiral" id="mainSpiral" pathLength="1" stroke="url(#spiralColor)"/><path class="orbit-dash" id="futureSpiral"/><g id="ticks"></g><g class="origin-star" id="originStar"><circle class="origin-star-aura" r="25" fill="url(#originStarHalo)"/><circle class="origin-star-glow" r="8"/><path class="origin-star-rays" d="M0-18L2.2-4.2L13-10L4.3-1.8L18 0L4.3 1.8L12 10L2.2 4.2L0 19L-2.2 4.2L-12 10L-4.3 1.8L-18 0L-4.3-1.8L-13-10L-2.2-4.2Z"/><circle class="origin-star-core" r="2.7"/></g></svg><div id="nodes"></div></div>
+  <div class="slot-tooltip" id="slotTooltip" role="status"><span id="tipPhase"></span><strong id="tipTitle"></strong><b id="tipPrice"></b><small id="tipMeta"></small></div>
+  <div class="mint-summary" aria-label="Current mint price" hidden><div class="mint-summary-item"><span>Current mint</span><strong id="summaryCurrent">—</strong></div></div>
+  <div class="spiral-caption" hidden><span>THE GROWING SPIRAL</span><p id="spiralHint">Scroll or drag to follow the thread</p></div>
+  <div class="spiral-controls">
+   <div class="spiral-transport" role="group" aria-label="Browse spiral">
+    <input id="spiralScrub" type="range" min="0" max="0" step="0.01" value="0" aria-label="Position in spiral">
+    <span id="spiralPosition"></span><button type="button" id="spiralLatest">NEXT MINT</button>
+   </div>
+   <div class="view-tools" role="group" aria-label="Spiral scale"><button id="zoomOut" aria-label="Zoom out">−</button><output id="zoomLevel">100%</output><button id="zoomIn" aria-label="Zoom in">+</button><button id="reset" aria-label="Fit spiral to initial view" title="Fit spiral to initial view"><svg data-icon="fit-view" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M20 15v5h-5M9 20H4v-5"/><circle cx="12" cy="12" r="2.25"/></svg><span class="reset-label">FIT</span></button></div>
+  </div>
+ </main></div>
+ <aside class="side"><div class="side-inner compact-side">
+  <div class="art-card preview-first" tabindex="0"><span class="corner" id="previewNumber">PREVIEW</span><button type="button" id="toggleWishlist" class="preview-like" aria-label="Save this combination to wishlist" aria-pressed="false">♡</button><span id="previewLikeBurst" class="preview-like-burst" aria-hidden="true">♥</span><a id="previewOwnership" class="preview-ownership" hidden></a>
+   <button type="button" id="previewRandomize" class="preview-random" aria-label="Roll the dice for a random version" title="Random version · R">
+    <span class="preview-die-scene" aria-hidden="true"><span class="preview-die-cube">
+     <span class="preview-die-face" data-die-face="top" data-die-value="1"></span>
+     <span class="preview-die-face" data-die-face="left" data-die-value="2"></span>
+     <span class="preview-die-face" data-die-face="front" data-die-value="3"></span>
+     <span class="preview-die-face" data-die-face="back" data-die-value="4"></span>
+     <span class="preview-die-face" data-die-face="right" data-die-value="5"></span>
+     <span class="preview-die-face" data-die-face="bottom" data-die-value="6"></span>
+    </span></span>
+   </button><div class="preview-history" role="group" aria-label="Browse versions"><button type="button" id="previousShuffle" class="preview-history-step" aria-label="Previous version" title="Previous version · ←"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12.5 5-5 5 5 5"/></svg></button><output id="previewVersion" class="preview-version" aria-live="polite" aria-label="Version 1 of 1">1 / 1</output><button type="button" id="nextShuffle" class="preview-history-step" aria-label="Next version" title="Next version · →"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 5 5 5-5 5"/></svg></button></div><img id="preview" src="output/branding/preview.svg" width="400" height="400" fetchpriority="high" alt="Vanilla, Jelly Weather, Welcoming, Yellow Wraparounds, As You Are, No Plans"><canvas id="previewCanvas" width="400" height="400" aria-hidden="true"></canvas></div>
+  <div class="mobile-builder-scroll">
+   <section class="mobile-builder-controls" aria-label="Choose traits">
+    <p id="mobileBuilderStatus" class="sr-only" role="status" aria-live="polite">Connecting to the forest…</p>
+    <div id="mobileCategoryTabs" class="mobile-category-tabs" role="tablist" aria-label="Trait categories">
+     <button type="button" role="tab" aria-controls="mobileTraitRail" data-mobile-category="stem">Stem</button>
+     <button type="button" role="tab" aria-controls="mobileTraitRail" data-mobile-category="cap">Cap</button>
+     <button type="button" role="tab" aria-controls="mobileTraitRail" data-mobile-category="temperament">Temperament</button>
+     <button type="button" role="tab" aria-controls="mobileTraitRail" data-mobile-category="glasses">Glasses</button>
+     <button type="button" role="tab" aria-controls="mobileTraitRail" data-mobile-category="accessory">Accessory</button>
+     <button type="button" role="tab" aria-controls="mobileTraitRail" data-mobile-category="hobby">Hobby</button>
+    </div>
+    <div class="mobile-trait-heading"><strong id="mobileTraitLabel">Stem</strong><span id="mobileTraitValue"></span></div>
+    <div id="mobileTraitRail" class="mobile-trait-rail" role="listbox" aria-labelledby="mobileTraitLabel"></div>
+   </section>
+   <div class="builder-actions">
+    <button type="button" id="previewMint" class="mint preview-mint" hidden></button>
+   </div>
+  </div>
+  <div class="settings-scroll"><div id="contextPanel" class="context-panel"></div><div class="chain-status-bar"><span id="chainStatus" role="status" aria-live="polite">Connecting to the forest…</span><button id="retryChain" class="refresh-icon-button" aria-label="Refresh chain" title="Refresh chain"><svg aria-hidden="true"><use href="#icon-refresh"/></svg></button></div></div>
+ </div></aside>
+</div>
+<footer class="footer">
+ <span class="footer-brand">mycelium Friends</span>
+ <nav class="footer-links" aria-label="Project links">
+  <a href="https://magicforest.land/" target="_blank" rel="noopener noreferrer">MAGIC FOREST</a>
+  <a href="https://twitter.com/MagicForestLand" target="_blank" rel="noopener noreferrer">X / TWITTER</a>
+  <a href="https://www.instagram.com/magicforest.land/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+  <a href="https://www.youtube.com/watch?v=_owe-Pgs2Ek" target="_blank" rel="noopener noreferrer">YOUTUBE</a>
+  <a id="footerOpenSea" class="footer-network-link" target="_blank" rel="noopener noreferrer" hidden>OPENSEA</a>
+  <a id="footerContract" class="footer-network-link" target="_blank" rel="noopener noreferrer" hidden>CONTRACT</a>
+  <a id="footerContractSecondary" class="footer-network-link" target="_blank" rel="noopener noreferrer" hidden>EVM.NOW</a>
+  <a href="#about" data-privacy-details>PRIVACY</a>
+  <span class="footer-network-link footer-placeholder" title="Public source tag mycelium-friends-core-v1.0.0 (commit 5b7d890…) will link here when the repository opens">GITHUB · SOON</span>
+ </nav>
+ <span id="footerExchangeRate" class="footer-rate" hidden></span>
+</footer>
+<nav class="mobile-bottom-nav" aria-label="Mobile destinations">
+ <a href="#genotype=4,2,0,9,0,0" data-mobile-destination="builder"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h3M11 12h9M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="14" cy="18" r="2"/></svg></span><strong>Builder</strong></a>
+ <a href="#spiral?genotype=4,2,0,9,0,0" data-mobile-destination="spiral"><span aria-hidden="true"><svg id="mobileSpiralIcon" viewBox="0 0 40 40"></svg></span><strong>Spiral</strong></a>
+ <a href="#wishlist" data-view="wishlist" data-mobile-destination="wishlist"><span aria-hidden="true">♡</span><strong>Wishlist</strong></a>
+ <a href="#history" data-view="history" data-mobile-destination="history"><span aria-hidden="true"><svg data-icon="history" viewBox="0 0 24 24"><path d="M4.5 8.5A8 8 0 1 1 4 14M4.5 4.5v4h4M12 7.5V12l3 2"/></svg></span><strong>History</strong></a>
+ <a href="#about" data-view="about" data-mobile-destination="about"><span aria-hidden="true"><svg data-icon="about" viewBox="0 0 24 24"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6Z"/><circle cx="12" cy="12" r="2.3"/></svg></span><strong>About</strong></a>
+</nav>
+</div>
+<aside id="privacyNotice" class="privacy-notice" aria-labelledby="privacyNoticeTitle" hidden>
+ <div class="privacy-notice-copy"><strong id="privacyNoticeTitle">Privacy, simply.</strong><span>We use essential browser storage to keep wallet and mint recovery safe. If you mint, we keep a small, protected transaction record so our sales records stay accurate. No ads, profiling or sale of personal data.</span></div>
+ <div class="privacy-notice-actions"><a href="#about" id="privacyLearnMore" data-privacy-details>Learn more</a><button type="button" id="privacyDismiss">Got it</button></div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<dialog id="mintDialog" class="mint-dialog" aria-labelledby="mintTitle">
+ <button id="closeMint" class="dialog-close" aria-label="Close mint dialog">×</button>
+ <div id="mintCelebration" class="mint-celebration" aria-hidden="true"></div>
+ <div class="mint-art"><div class="mint-art-label">🍄 myFriend</div><canvas id="mintPreview" class="mint-preview" width="400" height="400" role="img" aria-label="Your selected myFriend"></canvas><p id="mintArtCaption">A little friend. Entirely yours.</p></div>
+ <div class="mint-content"><div class="mint-heading"><div class="eyebrow" id="mintEyebrow">A FRIEND FOR YOUR WALLET</div><h2 id="mintTitle" tabindex="-1">Meet your myFriend</h2><div class="mint-progress-slot"><progress id="mintProgress" max="4" value="0" hidden></progress><div id="mintSteps" class="mint-steps"></div></div></div>
+ <div class="mint-scroll"><div id="mintBody" aria-live="polite"></div><div id="walletEmbed" hidden></div><dl id="mintDetails" class="mint-details"></dl></div></div>
+</dialog>
+<script>
+(()=>{
+ const view=document.body.dataset.view,content={forest:'forest-view',about:'about-view',myfriends:'myfriends-view',wishlist:'wishlist-view',history:'history-view'};
+ for(const [name,id] of Object.entries(content))document.getElementById(id).hidden=name!==view;
+ if(content[view]){document.getElementById('universe').hidden=true;document.getElementById('traitCatalog').hidden=true;document.getElementById('catalogTabs').hidden=true;}
+ document.querySelectorAll('[data-mobile-destination]').forEach(link=>{const destination=link.dataset.mobileDestination,active=destination==='builder'?view==='spiral'&&document.body.dataset.mobileSurface==='builder':destination==='spiral'?view==='spiral'&&document.body.dataset.mobileSurface==='spiral':view===destination;if(active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
+ let started=false;const start=()=>{if(started)return;started=true;const script=document.createElement('script');script.src='mycelium.bundle.js';document.body.append(script);};const preview=document.getElementById('preview');if(preview.complete)start();else{preview.addEventListener('load',start,{once:true});preview.addEventListener('error',start,{once:true});}
+})();
+</script>
+</body></html>

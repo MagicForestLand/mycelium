@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "kind": "MYCELIUM_PUBLIC_SITE_CONFIG",
+  "mode": "read-only",
+  "deployment": {
+    "id": "mycelium-friends-mainnet",
+    "label": "Mycelium Friends",
+    "networkName": "Ethereum",
+    "rpcUrl": "https://ethereum-rpc.publicnode.com",
+    "snapshotUrl": "https://magicforest.land/api/mycelium/snapshot",
+    "mintEvidenceUrl": "https://magicforest.land/api/mycelium/mint-events",
+    "explorers": {
+      "etherscan": "https://etherscan.io",
+      "evmNow": "https://evm.now"
+    }
+  }
+}

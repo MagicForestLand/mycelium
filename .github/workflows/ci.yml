@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      CHROME_PATH: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          package-manager-cache: false
+      - run: npm ci
+      - run: npm test
+      - run: npm run check:references
+      - run: npm run test:artwork-lock
+      - run: npm run test:catalog
+      - run: npm run test:redteam
+      - run: npm run test:m4
+      - run: npm run test:allowlist-browser
+      - run: npm run test:mint-ux
+      - run: npm run test:spiral
+      - run: npm run build
+      - run: npm run test:chain
+      - run: npm run release:export-repo -- --check
+      - run: npm run check:clean

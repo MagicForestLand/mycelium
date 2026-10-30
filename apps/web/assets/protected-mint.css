@@ -1,0 +1,88 @@
+/* Shared by the public mint dialog and the Sepolia lab. */
+.is-protected #mintDetails { display: none; }
+@media (min-width: 641px) { .mint-dialog.is-protected { height: min(760px, calc(100dvh - 32px)); } }
+.is-protected .mint-heading h2 { min-height: 0; margin: 15px 0 24px; }
+.mint-progress-slot:has(.mint-journey-step) #mintProgress { display: none; }
+.mint-dialog .mint-progress-slot:has(.mint-journey-step) { height: 66px; }
+.mint-dialog .mint-steps:has(.mint-journey-step) { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; font: 11px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+.mint-journey-step { position: relative; padding-top: 27px; color: #8093ac; text-align: center; }
+.mint-journey-step::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); box-sizing: border-box; width: 18px; height: 18px; border: 2px solid #50627b; border-radius: 50%; background: #0b1225; }
+.mint-journey-step:not(:last-child)::after { content: ''; position: absolute; top: 8px; left: calc(50% + 9px); width: calc(100% - 18px); height: 2px; background: #50627b; }
+.mint-journey-step[data-state=current] { color: #d5fbf5; font-weight: 600; }
+.mint-journey-step[data-state=current]::before { border-color: #9eece9; background: #9eece9; box-shadow: inset 0 0 0 4px #0b1225, 0 0 0 4px #9eece918; }
+.mint-journey-step[data-state=done] { color: #9eece9; }
+.mint-journey-step[data-state=done]::before { content: '✓'; color: #0b1225; border-color: #9eece9; background: #9eece9; font: bold 11px/14px sans-serif; }
+.mint-journey-step[data-state=done]::after { background: #9eece9; }
+.protected-fee-note { color: #c7dfeb; }
+[data-mint-screen] { --mint-cyan: #9eece9; --mint-muted: #a7b8ce; }
+[data-mint-screen] p { line-height: 1.65; }
+[data-mint-screen] .protected-footnote,
+[data-mint-screen] .protected-saved { font-size: .82rem; color: var(--mint-muted); }
+[data-mint-screen] .protected-saved { margin: 18px 0 8px; }
+.protected-steps { display: grid; gap: 16px; padding: 10px 0 10px 26px; color: #d9e5f2; line-height: 1.5; }
+.protected-steps li::marker { color: var(--mint-cyan); }
+.protected-price-card { padding: 18px 22px; border: 1px solid #37566f; border-radius: 16px; background: #101f33; margin: 12px 0 10px; }
+.protected-price-totals { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.protected-price-row { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
+.protected-price-row > span { color: var(--mint-muted); font: .72rem monospace; letter-spacing: .1em; }
+.protected-price-row strong { color: #edfbff; font-size: clamp(1rem, 2vw, 1.35rem); overflow-wrap: anywhere; }
+.protected-maximum { border-left: 1px solid #37566f; padding-left: 12px; }
+.protected-maximum strong { color: var(--mint-cyan); }
+.protected-buffer-title { margin: 16px 0 8px; color: #d8e7f4; font: .72rem monospace; letter-spacing: .1em; }
+[data-mint-screen] .protected-buffer-intro { margin: 0 0 12px; color: var(--mint-muted); font-size: .8rem; line-height: 1.55; }
+.protected-buffer-label { display: block; margin-bottom: 8px; color: #dce9f5; font-size: .83rem; }
+.protected-buffer-choice { display: flex; justify-content: space-between; gap: 12px; color: #dce9f5; font-size: .83rem; }
+.protected-buffer-choice output { color: var(--mint-cyan); font-weight: 650; text-align: right; }
+input.protected-range { display: block; appearance: none; -webkit-appearance: none; width: 100%; height: 44px; padding: 0; margin: 10px 0 0; cursor: pointer; background: transparent; border: 0; }
+.protected-range::-webkit-slider-runnable-track { height: 8px; border-radius: 8px; background: linear-gradient(to right, #a7baff 0%, #9eece9 var(--range-progress), #35465f var(--range-progress), #35465f 100%); }
+.protected-range::-moz-range-track { height: 8px; border-radius: 8px; background: #35465f; }
+.protected-range::-moz-range-progress { height: 8px; border-radius: 8px; background: #9eece9; }
+.protected-range::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 28px; height: 28px; margin-top: -10px; background: #b9f8ee; border: 4px solid #203c50; border-radius: 50%; box-shadow: 0 0 0 1px #9eece9; }
+.protected-range::-moz-range-thumb { width: 22px; height: 22px; background: #b9f8ee; border: 4px solid #203c50; border-radius: 50%; }
+.protected-range:focus-visible { outline: 2px solid #9eece9; outline-offset: 5px; border-radius: 8px; }
+.protected-range-ticks { display: flex; justify-content: space-between; color: var(--mint-muted); font: .73rem monospace; }
+.protected-buffer-refund { margin-top: 14px; color: #c1d2e3; font-size: .8rem; line-height: 1.55; }
+.protected-buffer-refund span, .protected-buffer-refund strong { display: block; }
+.protected-buffer-refund strong { color: var(--mint-cyan); font-weight: 600; }
+.protected-buffer-refund .protected-network-fee { margin-top: 7px; color: var(--mint-muted); }
+.is-protected .protected-primary { position: sticky; bottom: 0; z-index: 2; box-shadow: 0 8px 0 6px #0b1225, 0 -10px 20px #0b1225; }
+.protected-primary[hidden] { display: none; }
+.protected-options { margin-top: 16px; color: var(--mint-muted); font-size: .82rem; }
+.protected-options summary { cursor: pointer; padding: 10px 0; color: #b8cedf; }
+.protected-options summary:focus-visible { outline: 2px solid #9eece9; outline-offset: 4px; }
+.protected-options p { margin: 10px 0 16px; }
+.protected-options a, .protected-tx-link { color: var(--mint-cyan); text-underline-offset: 4px; }
+[data-mint-screen] .protected-secondary { background: #162b3d; border: 1px solid #43677e; color: #c3e6ef; font-weight: 400; }
+.protected-countdown { width: 136px; height: 136px; border-radius: 50%; border: 2px solid #7cc6d6; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; margin: 24px auto; background: radial-gradient(circle, #1b3548, #101b2c); box-shadow: 0 0 28px #7cc6d610; }
+.protected-countdown strong { font-size: 2.7rem; color: #d8fbff; font-variant-numeric: tabular-nums; line-height: 1; }
+.protected-countdown span { font: .65rem monospace; color: #aac8dc; letter-spacing: .15em; }
+.protected-loader { width: 32px; height: 32px; margin: 26px auto; border: 2px solid #34475d; border-top-color: #9eece9; border-radius: 50%; animation: protected-turn 1.2s linear infinite; }
+.protected-preflight-status { margin: 0; text-align: center; }
+.protected-tx-link { display: inline-block; margin: 10px 0; font-size: .82rem; }
+.protected-explorer-links { display: grid; justify-items: start; gap: 9px; margin: 14px 0; }
+.protected-explorer-links .protected-tx-link { margin: 0; }
+.protected-contract-link { font-size: .82rem; }
+/* A stale open tab may still create this legacy action. Never show it. */
+.protected-forget { display: none !important; }
+.protected-notice { padding: 12px 16px; border: 1px solid #768394; border-radius: 10px; background: #1c2b3c; }
+.protected-hash { box-sizing: border-box; width: 100%; padding: 12px; background: #101a2c; border: 1px solid #43677e; border-radius: 8px; color: #ecf6ff; }
+.protected-unsent { display: block; line-height: 1.6; }
+@keyframes protected-turn { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .protected-loader { animation: none; } }
+@media (max-width: 600px) {
+  .mint-dialog.is-protected[open] { height: calc(100dvh - 20px); grid-template-rows: 120px minmax(0, 1fr); }
+  .mint-dialog.is-protected:has([data-mint-screen=ready]) #mintArtCaption { display: none; }
+  .mint-dialog.is-protected:has([data-mint-screen=ready]) .mint-art { padding-bottom: 10px; }
+  .is-protected .mint-heading h2 { margin: 8px 0 16px; font-size: 26px; }
+  .mint-dialog [data-mint-screen=ready] .protected-notice { margin: 5px 0 10px; padding: 8px 12px; line-height: 1.4; }
+  .mint-dialog [data-mint-screen=ready] .protected-price-card { margin-top: 8px; padding-block: 14px; }
+  .mint-dialog [data-mint-screen=ready] .protected-buffer-title { margin: 12px 0 6px; }
+  .mint-dialog [data-mint-screen=ready] .protected-buffer-intro { margin-bottom: 8px; }
+  .mint-dialog [data-mint-screen=ready] .protected-buffer-refund { margin-top: 10px; }
+  .mint-dialog [data-mint-screen=ready] .protected-network-fee { margin-top: 4px; }
+  .mint-dialog .mint-progress-slot:has(.mint-journey-step) { height: 58px; }
+  .protected-price-card { padding: 16px; }
+  .protected-price-row { gap: 10px; }
+  .protected-steps { gap: 12px; font-size: .9rem; }
+  .protected-countdown { width: 108px; height: 108px; margin: 18px auto; }
+}
