@@ -42,8 +42,9 @@ test('About keeps an explicit inventory for exact and not-yet-public resources',
   assert.match(html,/id="aboutFooterSourcify"[^>]*hidden/);
   assert.match(html,/Portions © 2025 Reown, Inc\. All Rights Reserved/);
   assert.match(html,/href="https:\/\/mycelium\.magicforest\.land\/reown-community-license\.txt"/);
-  assert.match(html,/Public source tag mycelium-friends-core-v1\.0\.0 \(commit 5b7d890…\) will link here when the repository opens/);
-  assert.doesNotMatch(html,/<a[^>]+class="[^"]*footer-placeholder/);
+  assert.match(html,/href="https:\/\/github\.com\/MagicForestLand\/mycelium\/"[^>]*>GITHUB<\/a>/);
+  assert.match(html,/href="https:\/\/api\.mycelium\.magicforest\.land\/"[^>]*>API<\/a>/);
+  assert.doesNotMatch(html,/\bSOON\b/);
 });
 
 test('the first-visit privacy notice stays quiet and links to plain-language detail',async()=>{
@@ -147,6 +148,20 @@ test('production runtime config rejects historical, testnet and placeholder inpu
   assert.throws(()=>runtimeConfigFromRecords({...record,collection:{...record.collection,catalogHash:'0'.repeat(64)}},site),/catalog/);
 });
 
+test('social preview uses the approved universal PNG and collection copy',async()=>{
+  const [html,png]=await Promise.all([
+    readFile(new URL('../../apps/web/index.html',import.meta.url),'utf8'),
+    readFile(new URL('../../apps/web/assets/social/mycelium-friends-og.png',import.meta.url))
+  ]);
+  const description='myFriends are little mushroom characters that live fully on-chain. The collection was created to help bring Magic Forest to life, a real forest in Spain with an Art Hub at its heart.';
+  assert.equal(png.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
+  assert.equal(png.readUInt32BE(16),1200);
+  assert.equal(png.readUInt32BE(20),630);
+  assert.ok(html.includes(`<meta name="description" content="${description}">`));
+  assert.ok(html.includes(`<meta property="og:description" content="${description}">`));
+  assert.ok(html.includes(`<meta name="twitter:description" content="${description}">`));
+});
+
 test('production export maps frontend sources to conventional URLs and only emits public files',async()=>{
   const sourceHTML=await readFile(new URL('../../apps/web/index.html',import.meta.url),'utf8');
   const root=await mkdtemp(path.join(os.tmpdir(),'mycelium-site-export-')),previous=process.cwd();
@@ -154,6 +169,7 @@ test('production export maps frontend sources to conventional URLs and only emit
     'apps/web/index.html':sourceHTML,'apps/web/mycelium.bundle.js':'console.log("collection");',
     'apps/web/assets/web3/app.js':'import "./chunk-test.js"; import("./chunk-wallet.js");','apps/web/assets/web3/chunk-test.js':'export {};','apps/web/assets/web3/chunk-wallet.js':'export {};',
     'apps/web/assets/site.css':'body {}','apps/web/assets/chain.css':'#chain {}','apps/web/assets/protected-mint.css':'#mint {}',
+    'apps/web/assets/social/mycelium-friends-og.png':'PNG fixture',
     'node_modules/@reown/appkit/LICENSE.md':'REOWN COMMUNITY LICENSE AGREEMENT\nfixture',
     'output/branding/avatar.svg':'<svg/>','output/branding/banner.svg':'<svg/>','output/branding/preview.svg':'<svg/>',
     '.dev/web3-build.json':JSON.stringify({format:1,siteMode:'wallet',metafile:{outputs:{
@@ -178,6 +194,12 @@ test('production export maps frontend sources to conventional URLs and only emit
     }
     assert.equal(JSON.parse(await readFile('output/site/chain-config.json','utf8')).deployments[0].address,address);
     assert.ok(Object.hasOwn(manifest.files,'assets/web3/chunk-wallet.js'));
+    assert.ok(Object.hasOwn(manifest.files,'assets/social/mycelium-friends-og.png'));
+    assert.match(html,/<meta property="og:title" content="mycelium Friends">/);
+    assert.match(html,/<meta property="og:image" content="https:\/\/mycelium\.magicforest\.land\/assets\/social\/mycelium-friends-og\.png">/);
+    assert.match(html,/<meta property="og:image:width" content="1200">/);
+    assert.match(html,/<meta property="og:image:height" content="630">/);
+    assert.match(html,/<meta name="twitter:card" content="summary_large_image">/);
     assert.match(await readFile('output/site/reown-community-license.txt','utf8'),/REOWN COMMUNITY LICENSE AGREEMENT/);
     assert.ok(Object.hasOwn(manifest.files,'reown-community-license.txt'));
 

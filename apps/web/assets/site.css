@@ -55,7 +55,9 @@
 .swatch .stem-marker[data-stem-marker="frankenstem"]{color:#173b42}
 .swatch .stem-marker[data-stem-marker="frankenstem"] .marker-fill{fill:#a9f5d0}
 .swatch .stem-marker[data-stem-marker$="stomp"]{color:#352033}
-.swatch .stem-marker[data-stem-marker$="stomp"] .marker-fill,.swatch .stem-marker[data-stem-marker$="stomp"] circle{fill:#fff0cf;stroke:currentColor}
+.swatch .stem-marker[data-stem-marker$="stomp"] .footprint-icon{width:17px;height:21px;filter:drop-shadow(0 1px 1px #fff6)}
+.swatch .stem-marker[data-stem-marker$="stomp"] .marker-fill{fill:#fff0cf;stroke:currentColor;stroke-width:3.5}
+.swatch .stem-marker[data-stem-marker$="stomp"] .footprint-toe{stroke-width:3}
 .swatch .stem-marker .foot-right{transform:scaleX(-1);transform-origin:center}
 a:focus-visible,select:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
 .top-links a{text-decoration:none;white-space:nowrap}

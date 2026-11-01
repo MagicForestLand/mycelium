@@ -118,9 +118,12 @@ try{
  assert.equal(await page.$$eval('.market-transfer,.market-response',nodes=>nodes.every(node=>getComputedStyle(node).animationName==='none')),true);
  await page.waitForFunction(()=>!document.querySelector('#footerExchangeRate').hidden);
  assert.equal(await page.$eval('#footerExchangeRate',node=>node.textContent),'1 ETH ≈ $2,500 · €2,300');
- assert.deepEqual(await page.$$eval('.footer-links > :not([hidden])',nodes=>nodes.map(node=>node.textContent)),['MAGIC FOREST','X / TWITTER','INSTAGRAM','YOUTUBE','CONTRACT · MYFRIENDS LOCAL','EVM.NOW','PRIVACY','GITHUB · SOON']);
+ assert.deepEqual(await page.$$eval('.footer-links > :not([hidden])',nodes=>nodes.map(node=>node.textContent)),['MAGIC FOREST','X / TWITTER','INSTAGRAM','YOUTUBE','CONTRACT · MYFRIENDS LOCAL','EVM.NOW','GITHUB','API']);
  assert.match(await page.$eval('#footerContract',node=>node.href),/^https:\/\/explorer\.test\/address\/0x1111/);
- assert.deepEqual(await page.$eval('.footer-placeholder',node=>({tag:node.tagName,href:node.hasAttribute('href'),text:node.textContent})),{tag:'SPAN',href:false,text:'GITHUB · SOON'});
+ assert.deepEqual(await page.$$eval('.footer-links a[href^="https://github.com/"],.footer-links a[href^="https://api.mycelium."]',nodes=>nodes.map(node=>({text:node.textContent,href:node.href,target:node.target,rel:node.rel}))),[
+  {text:'GITHUB',href:'https://github.com/MagicForestLand/mycelium/',target:'_blank',rel:'noopener noreferrer'},
+  {text:'API',href:'https://api.mycelium.magicforest.land/',target:'_blank',rel:'noopener noreferrer'}
+ ]);
  assert.equal(await page.$$eval('#forestEthEurRefresh,#retryChain',nodes=>nodes.every(node=>node.textContent.trim()===''&&node.querySelector('use')?.getAttribute('href')==='#icon-refresh')),true);
  assert.equal(await page.$eval('#forestEthEurRefresh',node=>getComputedStyle(node).borderRadius==='0px'),true);
  assert.equal(await page.$eval('#retryChain',node=>getComputedStyle(node).borderRadius==='50%'),true);
@@ -169,7 +172,8 @@ try{
   {hidden:false,href:await page.$eval('#footerContractSecondary',node=>node.href),icon:'#icon-evm'},
   {hidden:false,href:await page.$eval('#footerContractSecondary',node=>node.href),icon:'#icon-evm'}
  ]);
- assert.equal(await page.$$eval('.contract-resource.is-placeholder',nodes=>nodes.length===3&&nodes.every(node=>node.tagName==='SPAN'&&!node.hasAttribute('href')&&node.querySelector('use')?.getAttribute('href')==='#icon-github')),true);
+ assert.equal(await page.$$eval('.contract-resources a[href="https://github.com/MagicForestLand/mycelium/"]',nodes=>nodes.length===3&&nodes.every(node=>node.tagName==='A'&&node.target==='_blank'&&node.rel==='noopener noreferrer'&&node.querySelector('use')?.getAttribute('href')==='#icon-github')),true);
+ assert.equal(await page.$$eval('.contract-resource.is-placeholder',nodes=>nodes.length),0);
  assert.equal(await page.$$eval('.contract-proof',nodes=>nodes.length),3);
  assert.deepEqual(await page.$$eval('.protocol-card:not(.protocol-market-card)',cards=>{
   const values=cards.map(card=>({bottom:card.getBoundingClientRect().bottom,resources:card.querySelector('.contract-resources').getBoundingClientRect().top,proof:card.querySelector('.contract-proof').getBoundingClientRect().top}));
@@ -275,9 +279,10 @@ await page.waitForFunction(() => {
  await new Promise(resolve=>setTimeout(resolve,700));
  assert.ok(await page.$eval('#catalogGrid .catalog-trait[data-category="cap"][data-option="80"]',node=>{const root=document.querySelector('#traitCatalog').getBoundingClientRect(),card=node.getBoundingClientRect();return Math.abs((card.top+card.height/2)-(root.top+root.height/2))<8;}),'A changed trait must scroll smoothly to the catalog viewport centre');
  await page.click('.swatch:not(.active)');assert.equal(await page.$eval('#catalogTabs [aria-pressed="true"]',node=>node.dataset.category),'cap','Changing the stem colour must preserve the active trait catalog');
- const specialStemMarkers=await page.$$eval('[data-stem-marker]',nodes=>nodes.map(node=>({id:node.dataset.stemMarker,svg:node.querySelectorAll('svg').length,text:[...node.childNodes].filter(child=>child.nodeType===Node.TEXT_NODE).map(child=>child.textContent.trim()).join('')})));
+ const specialStemMarkers=await page.$$eval('[data-stem-marker]',nodes=>nodes.map(node=>({id:node.dataset.stemMarker,svg:node.querySelectorAll('svg').length,text:[...node.childNodes].filter(child=>child.nodeType===Node.TEXT_NODE).map(child=>child.textContent.trim()).join(''),footprint:node.querySelector('svg')?.classList.contains('footprint-icon')||false})));
  assert.deepEqual(specialStemMarkers.map(marker=>marker.id),['golden-anatomy','nuclear-ember','frankenstem','cocoa-stomp','blush-stomp']);
  assert.ok(specialStemMarkers.every(marker=>marker.svg===1&&!marker.text),'Every special stem must use its own vector marker instead of a platform emoji');
+ assert.deepEqual(specialStemMarkers.filter(marker=>marker.id.endsWith('stomp')).map(marker=>marker.footprint),[true,true],'Both Stomp stems must use the reviewed footprint vector');
  await page.keyboard.press('3');assert.equal(await page.$eval('#catalogTabs [aria-pressed="true"]',node=>node.dataset.category),'temperament');
  const temperamentBefore=(await genotype()).split(',')[2];await page.keyboard.press('ArrowDown');assert.notEqual((await genotype()).split(',')[2],temperamentBefore);
  await page.keyboard.down('Shift');await page.keyboard.press('ArrowRight');await page.keyboard.up('Shift');assert.equal(await page.$eval('#catalogTabs [aria-pressed="true"]',node=>node.dataset.category),'glasses');

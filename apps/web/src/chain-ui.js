@@ -594,7 +594,7 @@ function celebrateMint(tokenId){
   const share=document.createElement('a');share.className='chain-action share-mint';share.id='shareMint';
   share.href=composerURL;
   share.target='_blank';share.rel='noopener noreferrer';share.textContent='Open X Composer ↗';$('mintBody').append(share);
-  const hint=document.createElement('p');hint.className='share-hint';hint.textContent='The X composer contains prepared text without a website link. On supported devices, Share with image attaches your myFriend; on desktop it copies or downloads the image for you to paste.';$('mintBody').append(hint);
+  const hint=document.createElement('p');hint.className='share-hint';hint.textContent='The X composer contains a link with your myFriend preview. On supported devices, Share with image also attaches the artwork; on desktop it copies or downloads the image for you to paste.';$('mintBody').append(hint);
   clearTimeout(celebrationTimer);$('mintCelebration').replaceChildren();
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     for(let i=0;i<48;i++){const piece=document.createElement('i');piece.style.cssText='--x:'+Math.random()*100+'%;--drift:'+(Math.random()-.5)*240+'px;--delay:'+Math.random()*.8+'s;--turn:'+Math.random()*720+'deg;--color:'+['#8cf8ee','#b99aff','#f9d78d','#ff98c8'][i%4];$('mintCelebration').append(piece);}

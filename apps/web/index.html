@@ -6,17 +6,23 @@
 <link rel="canonical" href="https://mycelium.magicforest.land/">
 <link id="favicon" rel="icon" type="image/svg+xml" href="output/branding/preview.svg">
 <link rel="preload" as="image" href="output/branding/preview.svg" fetchpriority="high">
-<meta name="description" content="A fully on-chain ERC-721 collection by Magic Forest. Choose six traits to create a unique myFriend; each genotype can be minted only once.">
+<meta name="description" content="myFriends are little mushroom characters that live fully on-chain. The collection was created to help bring Magic Forest to life, a real forest in Spain with an Art Hub at its heart.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="mycelium Friends">
-<meta property="og:title" content="mycelium Friends — First the mushrooms. Then the forest.">
-<meta property="og:description" content="A fully on-chain ERC-721 collection by Magic Forest. Choose six traits to create a unique myFriend; each genotype can be minted only once.">
+<meta property="og:title" content="mycelium Friends">
+<meta property="og:description" content="myFriends are little mushroom characters that live fully on-chain. The collection was created to help bring Magic Forest to life, a real forest in Spain with an Art Hub at its heart.">
 <meta property="og:url" content="https://mycelium.magicforest.land/">
-<meta property="og:image" content="https://mycelium.magicforest.land/output/branding/banner.svg">
+<meta property="og:image" content="https://mycelium.magicforest.land/assets/social/mycelium-friends-og.png">
+<meta property="og:image:secure_url" content="https://mycelium.magicforest.land/assets/social/mycelium-friends-og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="mycelium Friends by Magic Forest beside a little on-chain mushroom character">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="mycelium Friends — First the mushrooms. Then the forest.">
-<meta name="twitter:description" content="A fully on-chain ERC-721 collection by Magic Forest. Choose six traits to create a unique myFriend; each genotype can be minted only once.">
-<meta name="twitter:image" content="https://mycelium.magicforest.land/output/branding/banner.svg">
+<meta name="twitter:title" content="mycelium Friends">
+<meta name="twitter:description" content="myFriends are little mushroom characters that live fully on-chain. The collection was created to help bring Magic Forest to life, a real forest in Spain with an Art Hub at its heart.">
+<meta name="twitter:image" content="https://mycelium.magicforest.land/assets/social/mycelium-friends-og.png">
+<meta name="twitter:image:alt" content="mycelium Friends by Magic Forest beside a little on-chain mushroom character">
 <style>
 :root{--bg:#080a08;--sheet:#0d100e;--muted:#929c91;--text:#eff1e9;--lime:#c4ed9c;--gold:#d7c58c;--line:#283027;--panel:#121711;--radius:18px;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;-webkit-font-smoothing:antialiased}button{font:inherit;cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid var(--lime);outline-offset:4px}button:disabled{cursor:not-allowed}a{color:inherit}::selection{background:#4a6540;color:#fff}
@@ -393,7 +399,6 @@ button:focus-visible,input:focus-visible{outline-color:#79f7ff}
 .footer a:hover,.footer a:focus-visible{color:#85f7ff;text-decoration:underline;text-underline-offset:4px}
 .footer-network-link{color:#aab8d6!important}
 .footer-network-link:hover,.footer-network-link:focus-visible{color:#85f7ff!important}
-.footer-placeholder{color:#7886a8!important;cursor:default}
 .footer-rate{color:#aab8d6;white-space:nowrap;font-variant-numeric:tabular-nums}
 .toast{bottom:70px}
 @media(max-width:1100px){.footer{gap:16px;padding-inline:20px}.footer-rate{display:none}}
@@ -525,7 +530,7 @@ addEventListener('DOMContentLoaded',()=>{
       <div class="contract-resources" aria-label="Verify the collection contract">
        <a id="aboutContractLink" class="contract-resource" target="_blank" rel="noopener noreferrer" hidden><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-etherscan"/></svg></span><span>Etherscan</span></a>
        <a id="aboutContractSecondary" class="contract-resource" target="_blank" rel="noopener noreferrer" hidden><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-evm"/></svg></span><span>EVM.Now</span></a>
-       <span class="contract-resource is-placeholder" title="Public source tag mycelium-friends-core-v1.0.0 (commit 5b7d890…) will link here when the repository opens"><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-github"/></svg></span><span>GitHub</span></span>
+       <a class="contract-resource" href="https://github.com/MagicForestLand/mycelium/" target="_blank" rel="noopener noreferrer" title="View the canonical source repository"><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-github"/></svg></span><span>GitHub</span></a>
       </div>
       <details class="contract-proof"><summary>Show contract proof</summary><pre><code><span class="code-type">uint256</span> <span class="code-variable">existing</span> <span class="code-operator">=</span> tokenForGenotype[genotype];
 <span class="code-keyword">if</span> (existing <span class="code-operator">!=</span> <span class="code-number">0</span>) <span class="code-keyword">revert</span> <span class="code-call">CombinationAlreadyMinted</span>(existing);
@@ -548,7 +553,7 @@ tokenForGenotype[genotype] <span class="code-operator">=</span> tokenId;</code><
       <div class="contract-resources" aria-label="Verify the price contract">
        <a id="aboutPriceContract" class="contract-resource" target="_blank" rel="noopener noreferrer" hidden><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-etherscan"/></svg></span><span>Etherscan</span></a>
        <a id="aboutPriceContractSecondary" class="contract-resource" target="_blank" rel="noopener noreferrer" hidden><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-evm"/></svg></span><span>EVM.Now</span></a>
-       <span class="contract-resource is-placeholder" title="Public source tag mycelium-friends-core-v1.0.0 (commit 5b7d890…) will link here when the repository opens"><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-github"/></svg></span><span>GitHub</span></span>
+       <a class="contract-resource" href="https://github.com/MagicForestLand/mycelium/" target="_blank" rel="noopener noreferrer" title="View the canonical source repository"><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-github"/></svg></span><span>GitHub</span></a>
       </div>
       <details class="contract-proof"><summary>Show contract proof</summary><pre><code><span class="code-type">uint256</span> <span class="code-keyword">internal constant</span> <span class="code-constant">STEP</span> <span class="code-operator">=</span> <span class="code-number">100_000_000_000_000</span>;
 
@@ -568,7 +573,7 @@ tokenForGenotype[genotype] <span class="code-operator">=</span> tokenId;</code><
       <div class="contract-resources" aria-label="Verify the royalty contract">
        <a id="aboutRoyaltyContract" class="contract-resource" target="_blank" rel="noopener noreferrer" hidden><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-etherscan"/></svg></span><span>Etherscan</span></a>
        <a id="aboutRoyaltyContractSecondary" class="contract-resource" target="_blank" rel="noopener noreferrer" hidden><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-evm"/></svg></span><span>EVM.Now</span></a>
-       <span class="contract-resource is-placeholder" title="Public source tag mycelium-friends-core-v1.0.0 (commit 5b7d890…) will link here when the repository opens"><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-github"/></svg></span><span>GitHub</span></span>
+       <a class="contract-resource" href="https://github.com/MagicForestLand/mycelium/" target="_blank" rel="noopener noreferrer" title="View the canonical source repository"><span class="contract-resource-icon"><svg aria-hidden="true"><use href="#icon-github"/></svg></span><span>GitHub</span></a>
       </div>
       <details class="contract-proof"><summary>Show contract proof</summary><pre><code><span class="code-type">uint96</span> <span class="code-keyword">public constant</span> <span class="code-constant">MAX_ROYALTY_BPS</span> <span class="code-operator">=</span> <span class="code-number">500</span>;
 
@@ -790,8 +795,8 @@ tokenForGenotype[genotype] <span class="code-operator">=</span> tokenId;</code><
   <a id="footerOpenSea" class="footer-network-link" target="_blank" rel="noopener noreferrer" hidden>OPENSEA</a>
   <a id="footerContract" class="footer-network-link" target="_blank" rel="noopener noreferrer" hidden>CONTRACT</a>
   <a id="footerContractSecondary" class="footer-network-link" target="_blank" rel="noopener noreferrer" hidden>EVM.NOW</a>
-  <a href="#about" data-privacy-details>PRIVACY</a>
-  <span class="footer-network-link footer-placeholder" title="Public source tag mycelium-friends-core-v1.0.0 (commit 5b7d890…) will link here when the repository opens">GITHUB · SOON</span>
+  <a class="footer-network-link" href="https://github.com/MagicForestLand/mycelium/" target="_blank" rel="noopener noreferrer">GITHUB</a>
+  <a class="footer-network-link" href="https://api.mycelium.magicforest.land/" target="_blank" rel="noopener noreferrer">API</a>
  </nav>
  <span id="footerExchangeRate" class="footer-rate" hidden></span>
 </footer>

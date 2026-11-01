@@ -110,9 +110,10 @@ contract links that are otherwise available through the desktop footer. Mobile
 contacts and collection resources use labelled circular icons, including the
 Twitter bird rather than the X mark. Each protocol claim exposes the exact active
 deployment through Etherscan source and EVM.Now links plus a native expandable
-Solidity excerpt; GitHub remains a visibly disabled placeholder until the public
-source repository exists, including a non-link placeholder in the desktop footer.
-The excerpts use lightweight native token colouring and contain their own horizontal
+Solidity excerpt. Its GitHub link targets the canonical
+[`MagicForestLand/mycelium`](https://github.com/MagicForestLand/mycelium/)
+repository; availability follows that repository's launch visibility. The excerpts
+use lightweight native token colouring and contain their own horizontal
 overflow, so proof remains readable without changing the protocol-card width.
 
 An additional two-market card distinguishes deterministic primary Spiral pricing

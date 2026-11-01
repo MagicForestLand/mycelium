@@ -781,7 +781,7 @@ function ownerCollectionActions(entry){
     '<div class="token-download-grid"><button data-token-download="png">PNG ↓</button><button data-token-download="jpeg">JPEG ↓</button><button data-token-download="svg">SVG ↓</button><button data-token-metadata>METADATA ↓</button></div>'+
     '<div class="token-share-grid"><button data-token-share>IMAGE FOR X</button><button data-token-copy>COPY X POST LINK</button></div>'+
     '<a class="post-token" data-token-post href="'+composerURL+'" target="_blank" rel="noopener noreferrer">OPEN X COMPOSER ↗</a>'+
-    '<p class="export-note">The X link carries only the prepared text. Copy or share the image separately; no website link is added to the post.</p></div>';
+    '<p class="export-note">The X link includes a preview page for this myFriend. You can also copy or share the artwork separately.</p></div>';
 }
 function collectionActions(entry){
   if(ownsEntry(entry))return ownerCollectionActions(entry);
@@ -800,12 +800,13 @@ function builderMintState(){
   return {taken,takenByOwner,disabled,mintLabel,phaseLabel};
 }
 function builderHTML(){
+  const footprint='<path class="marker-fill footprint-sole" d="M45 174C28 174 17 163 18 146c1-16 13-27 14-42 1-16-12-29-12-46 0-20 13-32 30-31 18 1 32 15 32 32 0 15-12 25-19 37-8 13-8 25-1 41 7 16 2 33-17 37Z"/><ellipse class="marker-fill footprint-toe" cx="25" cy="15" rx="12" ry="15" transform="rotate(-18 25 15)"/><ellipse class="marker-fill footprint-toe" cx="46" cy="14" rx="9" ry="12" transform="rotate(-8 46 14)"/><ellipse class="marker-fill footprint-toe" cx="63" cy="18" rx="8" ry="11" transform="rotate(4 63 18)"/><ellipse class="marker-fill footprint-toe" cx="78" cy="24" rx="7" ry="10" transform="rotate(13 78 24)"/><ellipse class="marker-fill footprint-toe" cx="90" cy="33" rx="6" ry="9" transform="rotate(20 90 33)"/>';
   const stemMarkers={
     'golden-anatomy':'<svg viewBox="0 0 24 24"><path class="marker-fill" d="M5.2 10.3a6.8 6.8 0 1 1 13.6 0c0 2.4-1.2 4.2-3 5.3v3.2h-2.1v-2h-1v2h-1.5v-2h-1v2H8.1v-3.2a6.3 6.3 0 0 1-2.9-5.3Z"/><circle cx="9.1" cy="10.1" r="1.7"/><circle cx="14.9" cy="10.1" r="1.7"/><path d="m12 12.2-1.1 2h2.2L12 12.2Z"/></svg>',
     'nuclear-ember':'<svg viewBox="0 0 24 24"><path class="marker-fill" d="m12 1.8 1.7 5 4.6-2.6-.9 5.2 5.2-.5-3.7 3.7 4.2 3.1-5.2 1.3 2.2 4.8-4.8-2.1-1.4 5.1-2.3-4.7-3.5 3.9.4-5.3-5.1 1.1 3-4.3-5.1-1.5 5-1.6-3.8-3.7 5.3.3-.8-5.2 4.5 2.7L12 1.8Z"/><circle cx="12" cy="12" r="2.6"/></svg>',
     'frankenstem':'<svg viewBox="0 0 24 24"><path class="marker-fill" d="M7 3.2h10v3l2 2v9.5c0 1.7-1.3 3-3 3H8c-1.7 0-3-1.3-3-3V8.2l2-2v-3Z"/><path d="M7 3.2v3h2v-3h2v3h2v-3h2v3h2M4.8 11H2.5v3h2.3m14.4-3h2.3v3h-2.3M8.2 11.3h2m3.6 0h2m-6.1 5h4.6m-2.3-5v2.1"/></svg>',
-    'cocoa-stomp':'<svg class="foot-left" viewBox="0 0 24 24"><path class="marker-fill" d="M13.6 9.8c1.4 2.8 1.8 6.6-.2 9.6-1.4 2.1-4.8 2-6.1-.2-1.2-2.1.4-4 1.4-5.6 1-1.7 1.1-4.2.8-6.3-.2-1.6 2.5-2.1 3.1-.6.3.8.5 1.5 1 2.1.7.8 1.4 1.9 2.1 3.1Z"/><circle cx="9.2" cy="5.2" r="1.35"/><circle cx="11.8" cy="3.7" r="1.25"/><circle cx="14.5" cy="3.9" r="1.1"/><circle cx="16.5" cy="5.3" r=".95"/></svg>',
-    'blush-stomp':'<svg class="foot-right" viewBox="0 0 24 24"><path class="marker-fill" d="M13.6 9.8c1.4 2.8 1.8 6.6-.2 9.6-1.4 2.1-4.8 2-6.1-.2-1.2-2.1.4-4 1.4-5.6 1-1.7 1.1-4.2.8-6.3-.2-1.6 2.5-2.1 3.1-.6.3.8.5 1.5 1 2.1.7.8 1.4 1.9 2.1 3.1Z"/><circle cx="9.2" cy="5.2" r="1.35"/><circle cx="11.8" cy="3.7" r="1.25"/><circle cx="14.5" cy="3.9" r="1.1"/><circle cx="16.5" cy="5.3" r=".95"/></svg>'
+    'cocoa-stomp':'<svg class="footprint-icon foot-left" viewBox="6 -2 96 182">'+footprint+'</svg>',
+    'blush-stomp':'<svg class="footprint-icon foot-right" viewBox="6 -2 96 182">'+footprint+'</svg>'
   };
   const swatches=traits.stem.map((item,i)=>'<button id="stem-'+i+'" class="swatch '+(i===builderGenotype[0]?'active':'')+'" style="--sw:'+item.color+'" data-stem="'+i+'" aria-label="'+item.name+'" aria-pressed="'+(i===builderGenotype[0])+'" title="'+item.name+'">'+(stemMarkers[item.id]?'<span class="stem-marker" data-stem-marker="'+item.id+'" aria-hidden="true">'+stemMarkers[item.id]+'</span>':'')+'</button>').join('');
   const {taken,takenByOwner,disabled,mintLabel,phaseLabel}=builderMintState();

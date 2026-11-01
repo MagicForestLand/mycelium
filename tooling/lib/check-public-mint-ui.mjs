@@ -264,7 +264,7 @@ export async function checkPublicMintUI({browser,local,deployment,buyer,nft,manu
     assert.deepEqual(await journey(),['done','done','done'],'Success must finish the same metro journey');
     assert.equal(await page.$$eval('.mint-downloads button',n=>n.length),3);
     assert.equal(await page.$$eval('#shareMint,#shareMintImage,#copyMintLink',n=>n.length),3);
-    assert.equal(await page.$eval('#shareMint',node=>{const url=new URL(node.href);return !url.searchParams.has('url')&&/myFriend #\d+/.test(url.searchParams.get('text')||'');}),true,'X composer must contain prepared text without a website link');
+    assert.equal(await page.$eval('#shareMint',node=>{const url=new URL(node.href),text=url.searchParams.get('text')||'';return !url.searchParams.has('url')&&/^Meet myFriend #\d+ 🍄\nhttps:\/\/api\.mycelium\.magicforest\.land\/share\/myfriend\/\d+$/.test(text);}),true,'X composer must contain the token-specific share page in its prepared text');
     assert.equal(await page.$$eval('#mintCelebration i',n=>n.length),48);
     assert.equal(await page.evaluate(()=>myFriendsUI.owned().some(r=>r.genotype.join(',')==='5,0,6,0,0,0')),true);
     for(let i=0;i<100&&!mintEvidence.some(event=>event.stage==='confirmed');i++)await new Promise(resolve=>setTimeout(resolve,20));

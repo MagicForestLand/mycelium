@@ -11,6 +11,7 @@ const STYLE_ASSETS=Object.freeze(['assets/site.css','assets/chain.css','assets/p
 const PUBLIC_ASSETS=Object.freeze([
   'output/branding/avatar.svg','output/branding/banner.svg','output/branding/preview.svg'
 ]);
+const WEB_PUBLIC_ASSETS=Object.freeze(['assets/social/mycelium-friends-og.png']);
 const REOWN_LICENSE_SOURCE='node_modules/@reown/appkit/LICENSE.md';
 const sha256=content=>createHash('sha256').update(content).digest('hex');
 const shortHash=content=>sha256(content).slice(0,12);
@@ -84,6 +85,7 @@ export async function exportSite(deploymentPath,siteConfigPath){
   const copy=async(source,target=source)=>emit(target,await readFile(source));
 
   for(const file of PUBLIC_ASSETS)await copy(file);
+  for(const file of WEB_PUBLIC_ASSETS)await copy(path.join('apps/web',file),file);
   await copy(REOWN_LICENSE_SOURCE,'reown-community-license.txt');
   const web3Outputs=selectedWeb3Outputs(web3Build.metafile,config.mode);
   if(!web3Outputs.includes('apps/web/assets/web3/app.js')||(config.mode==='wallet'&&web3Outputs.length<2))throw Error('Missing current web3 build graph.');
