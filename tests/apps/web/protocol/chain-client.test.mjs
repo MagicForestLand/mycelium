@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {ZeroAddress} from 'ethers';
-import {CHAIN_SNAPSHOT_FORMAT,allowlistMessage,appendMintLogs,chainInterface,deploymentKey,friendlyError,mintReceiptToken,mintReceiptTokenId,mintReceiptForGenotype,mintReceiptPayment,tokenExplorerURL,validateDeployment} from '../../../../apps/web/src/chain-core.js';
+import {CHAIN_SNAPSHOT_VERSION,allowlistMessage,appendMintLogs,chainInterface,deploymentKey,friendlyError,mintReceiptToken,mintReceiptTokenId,mintReceiptForGenotype,mintReceiptPayment,tokenExplorerURL,validateDeployment} from '../../../../apps/web/src/chain-core.js';
 import {ChainReader,fetchAndSeedSnapshot,snapshotFromEnvelope,validateChainSnapshot} from '../../../../apps/web/src/chain-reader.js';
 const buyer='0x1111111111111111111111111111111111111111',address='0x2222222222222222222222222222222222222222';
 test('allowlist allowance copy covers waiting, remaining, complete and ineligible wallets',()=>{
@@ -84,25 +84,25 @@ test('cache tolerates inaccessible storage, malformed JSON and invalid token IDs
 });
 test('remote snapshot is accepted only for the exact deployment and a coherent mint history',()=>{
   const d={id:'remote-cache',label:'Remote',networkName:'Sepolia',mintProtocol:'commit-reveal-v1',saleLifecycle:'phased-v1',chainId:11155111,address,rpcUrl:'https://rpc.example',snapshotUrl:'https://cache.example/api/mycelium/snapshot',deploymentBlock:10,deploymentHash:'0x'+'a'.repeat(64),codeHash:'0x'+'b'.repeat(64),catalogHash:'c'.repeat(64)};
-  const snapshot={format:CHAIN_SNAPSHOT_FORMAT,records:[{tokenId:'1',genotype:[1,2,3,4,0,1],price:'0',phase:'allowlist',step:0,buyer,owner:buyer,transactionHash:'0x'+'d'.repeat(64),blockNumber:11},{tokenId:'2',genotype:[2,3,4,5,1,0],price:'0',phase:'public',step:1,buyer,owner:buyer,transactionHash:'0x'+'e'.repeat(64),blockNumber:12}],publicOpen:true,salePhase:2,total:2,cap:1000,publicMinted:1,allowlistMinted:1,price:'100000000000000',blockNumber:12,blockHash:'0x'+'f'.repeat(64),updatedAt:1};
-  const envelope={format:CHAIN_SNAPSHOT_FORMAT,deployment:{id:d.id,chainId:d.chainId,address:d.address,deploymentBlock:d.deploymentBlock,deploymentHash:d.deploymentHash,codeHash:d.codeHash,catalogHash:d.catalogHash},snapshot};
+  const snapshot={version:CHAIN_SNAPSHOT_VERSION,records:[{tokenId:'1',genotype:[1,2,3,4,0,1],price:'0',phase:'allowlist',step:0,buyer,owner:buyer,transactionHash:'0x'+'d'.repeat(64),blockNumber:11},{tokenId:'2',genotype:[2,3,4,5,1,0],price:'0',phase:'public',step:1,buyer,owner:buyer,transactionHash:'0x'+'e'.repeat(64),blockNumber:12}],publicOpen:true,salePhase:2,total:2,cap:1000,publicMinted:1,allowlistMinted:1,price:'100000000000000',blockNumber:12,blockHash:'0x'+'f'.repeat(64),updatedAt:1};
+  const envelope={version:CHAIN_SNAPSHOT_VERSION,deployment:{id:d.id,chainId:d.chainId,address:d.address,deploymentBlock:d.deploymentBlock,deploymentHash:d.deploymentHash,codeHash:d.codeHash,catalogHash:d.catalogHash},snapshot};
   assert.equal(snapshotFromEnvelope(envelope,d,1000,[32,128,32,16,4,32]),snapshot);
   for(const changed of [{chainId:1},{address:buyer},{deploymentHash:'0x'+'0'.repeat(64)},{codeHash:'0x'+'0'.repeat(64)},{catalogHash:'0'.repeat(64)}])assert.throws(()=>snapshotFromEnvelope({...envelope,deployment:{...envelope.deployment,...changed}},d,1000,[32,128,32,16,4,32]),/does not match/);
-  for(const changed of [{total:1},{publicMinted:2},{price:'0'},{blockHash:'broken'},{records:[snapshot.records[1],snapshot.records[0]]}])assert.throws(()=>validateChainSnapshot({...snapshot,...changed},d,1000,[32,128,32,16,4,32]),/Invalid|match/);
+  for(const changed of [{total:1},{publicMinted:2},{allowlistMinted:undefined,privateMinted:1},{price:'0'},{blockHash:'broken'},{records:[snapshot.records[1],snapshot.records[0]]}])assert.throws(()=>validateChainSnapshot({...snapshot,...changed},d,1000,[32,128,32,16,4,32]),/Invalid|match/);
   assert.throws(()=>validateChainSnapshot({...snapshot,records:snapshot.records.map((record,index)=>({...record,genotype:index?[1,2,3,4,0,1]:record.genotype}))},d,1000,[32,128,32,16,4,32]),/Duplicate/);
 });
 test('remote snapshot seeds empty storage but never replaces a newer local snapshot',()=>{
   const d={id:'remote-seed',label:'Remote',networkName:'Sepolia',mintProtocol:'commit-reveal-v1',saleLifecycle:'phased-v1',chainId:11155111,address,rpcUrl:'https://rpc.example',deploymentBlock:10,deploymentHash:'0x'+'a'.repeat(64),codeHash:'0x'+'b'.repeat(64),catalogHash:'c'.repeat(64)};
   const values=new Map(),storage={getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value),removeItem:key=>values.delete(key),key:index=>[...values.keys()][index]??null,get length(){return values.size;}};
   const reader=new ChainReader(d,d.catalogHash,storage,1000,[32,128,32,16,4,32]);
-  const make=blockNumber=>({format:CHAIN_SNAPSHOT_FORMAT,deployment:{id:d.id,chainId:d.chainId,address:d.address,deploymentBlock:d.deploymentBlock,deploymentHash:d.deploymentHash,codeHash:d.codeHash,catalogHash:d.catalogHash},snapshot:{format:CHAIN_SNAPSHOT_FORMAT,records:[],publicOpen:false,salePhase:0,total:0,cap:1000,publicMinted:0,allowlistMinted:0,price:'0',blockNumber,blockHash:'0x'+'f'.repeat(64),updatedAt:blockNumber}});
+  const make=blockNumber=>({version:CHAIN_SNAPSHOT_VERSION,deployment:{id:d.id,chainId:d.chainId,address:d.address,deploymentBlock:d.deploymentBlock,deploymentHash:d.deploymentHash,codeHash:d.codeHash,catalogHash:d.catalogHash},snapshot:{version:CHAIN_SNAPSHOT_VERSION,records:[],publicOpen:false,salePhase:0,total:0,cap:1000,publicMinted:0,allowlistMinted:0,price:'0',blockNumber,blockHash:'0x'+'f'.repeat(64),updatedAt:blockNumber}});
   assert.equal(reader.seedSnapshot(make(12)),true);assert.equal(reader.snapshot.blockNumber,12);assert.ok(values.get(reader.key));
   assert.equal(reader.seedSnapshot(make(11)),false);assert.equal(reader.snapshot.blockNumber,12);reader.destroy();
 });
-test('snapshot API seed requires a matching canonical and recent block, then safely falls back',async()=>{
+test('snapshot API seed requires a matching canonical and recent block',async()=>{
   const d={id:'remote-api',label:'Remote',networkName:'Ethereum',mintProtocol:'commit-reveal-v1',saleLifecycle:'phased-v1',chainId:1,address,rpcUrl:'https://rpc.example',snapshotUrl:'https://cache.example/snapshot',deploymentBlock:10,deploymentHash:'0x'+'a'.repeat(64),codeHash:'0x'+'b'.repeat(64),catalogHash:'c'.repeat(64)};
-  const blockHash='0x'+'f'.repeat(64),snapshot={format:CHAIN_SNAPSHOT_FORMAT,records:[],publicOpen:false,salePhase:0,total:0,cap:1000,publicMinted:0,allowlistMinted:0,price:'0',blockNumber:100,blockHash,updatedAt:1};
-  const envelope={format:CHAIN_SNAPSHOT_FORMAT,deployment:{id:d.id,chainId:d.chainId,address:d.address,deploymentBlock:d.deploymentBlock,deploymentHash:d.deploymentHash,codeHash:d.codeHash,catalogHash:d.catalogHash},snapshot};
+  const blockHash='0x'+'f'.repeat(64),snapshot={version:CHAIN_SNAPSHOT_VERSION,records:[],publicOpen:false,salePhase:0,total:0,cap:1000,publicMinted:0,allowlistMinted:0,price:'0',blockNumber:100,blockHash,updatedAt:1};
+  const envelope={version:CHAIN_SNAPSHOT_VERSION,deployment:{id:d.id,chainId:d.chainId,address:d.address,deploymentBlock:d.deploymentBlock,deploymentHash:d.deploymentHash,codeHash:d.codeHash,catalogHash:d.catalogHash},snapshot};
   const reader=new ChainReader(d,d.catalogHash,null,1000,[32,128,32,16,4,32]);
   reader.provider.getBlockNumber=async()=>120;reader.provider.getBlock=async()=>({hash:blockHash});
   const fetchImpl=async()=>({ok:true,json:async()=>envelope});
@@ -116,7 +116,7 @@ test('snapshot API seed requires a matching canonical and recent block, then saf
 test('10001 records are valid collection state but oversized snapshots stay out of localStorage',()=>{
   const d={id:'large-cache',label:'Large',networkName:'Local',mintProtocol:'commit-reveal-v1',saleLifecycle:'phased-v1',chainId:31337,address,rpcUrl:'http://127.0.0.1:8545',deploymentBlock:1,deploymentHash:'0x'+'a'.repeat(64),codeHash:'0x'+'b'.repeat(64),catalogHash:'c'.repeat(64)};
   const records=Array.from({length:10001},(_,index)=>({tokenId:String(index+1),genotype:[index&255,index>>8&255,index>>16&255,0,0,0],price:'0',phase:'allowlist',step:0,buyer,owner:buyer,transactionHash:'0x'+index.toString(16).padStart(64,'0'),blockNumber:2}));
-  const snapshot={format:CHAIN_SNAPSHOT_FORMAT,records,publicOpen:false,salePhase:1,total:records.length,cap:20000,publicMinted:0,allowlistMinted:records.length,price:'0',blockNumber:2,blockHash:'0x'+'f'.repeat(64),updatedAt:1};
+  const snapshot={version:CHAIN_SNAPSHOT_VERSION,records,publicOpen:false,salePhase:1,total:records.length,cap:20000,publicMinted:0,allowlistMinted:records.length,price:'0',blockNumber:2,blockHash:'0x'+'f'.repeat(64),updatedAt:1};
   assert.equal(validateChainSnapshot(snapshot,d,268435456,[256,256,256,256,256,256]),snapshot);
   let writes=0;const storage={getItem:()=>null,setItem(){writes++;},removeItem(){},key(){return null;},length:0};
   const reader=new ChainReader(d,d.catalogHash,storage,268435456,[256,256,256,256,256,256]);reader.persist(snapshot);reader.destroy();

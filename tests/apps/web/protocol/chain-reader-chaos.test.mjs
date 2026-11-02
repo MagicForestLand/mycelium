@@ -21,8 +21,9 @@ function storage() {
   }
 }
 
-function fixture() {
-  const reader = new ChainReader(deployment, deployment.catalogHash, storage())
+function fixture(overrides = {}) {
+  const activeDeployment = {...deployment, ...overrides}
+  const reader = new ChainReader(activeDeployment, activeDeployment.catalogHash, storage())
   reader.verify = async () => {}
   const controls = {head: 2, fail: null, delay: null, total: 0, calls: {head: 0, logs: 0}}
   reader.provider.destroy()
@@ -87,6 +88,13 @@ test('zero supply skips an arbitrarily long empty deployment history', async () 
   const snapshot = await reader.refresh()
   assert.equal(snapshot.total, 0)
   assert.equal(snapshot.blockNumber, 5_000_000)
+  assert.equal(controls.calls.logs, 0)
+})
+
+test('cold public readers require the verified API snapshot instead of archive RPC logs', async () => {
+  const {reader, controls} = fixture({chainId: 1, rpcUrl: 'https://rpc.example'})
+  controls.total = 1
+  await assert.rejects(() => reader.refresh(), /verified collection snapshot/)
   assert.equal(controls.calls.logs, 0)
 })
 

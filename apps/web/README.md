@@ -39,4 +39,4 @@ resulting ignored `output/site/`: `/index.html`, `/assets/…`,
 `/chain-config.json` and `/output/branding/…`, never `/apps/web/…`. No private
 source tree or local config is published.
 
-See [frontend architecture](../../docs/apps/web/ARCHITECTURE.md) for the RPC authority model, snapshot fallback and wallet boundaries; [minting](../../docs/contracts/core/architecture/MINTING.md) for the protocol and recovery behavior; and the [test guide](../../tests/README.md) for browser checks.
+See [frontend architecture](../../docs/apps/web/ARCHITECTURE.md) for the snapshot/RPC authority model and wallet boundaries; [minting](../../docs/contracts/core/architecture/MINTING.md) for the protocol and recovery behavior; and the [test guide](../../tests/README.md) for browser checks.

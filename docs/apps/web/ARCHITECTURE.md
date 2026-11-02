@@ -189,7 +189,7 @@ mint history is unchanged.
 On a repeat visit that snapshot starts the interface and intro immediately while
 RPC verification and incremental block syncing continue in the background. The
 empty loading thread is therefore reserved for first visits and missing caches.
-Production and development configurations may provide an HTTPS `snapshotUrl`; a first
+Production configurations require an HTTPS `snapshotUrl`; a first
 visit then requests it with a 2.5-second timeout. The web3 reader and this request start
 immediately on `DOMContentLoaded`; they are not held behind wallet interaction or
 a delayed fallback. The response is used only after its chain, contract,
@@ -198,12 +198,14 @@ catalog, sequential token history, genotypes, phase counters, and pricing pass t
 same validation as the local cache. Before seeding the UI, the client checks that the
 snapshot block is recent and its hash is canonical through the configured RPC. It is
 then persisted locally and rendered while the normal RPC refresh incrementally catches up. An
-unavailable, stale, or invalid API response falls back to the RPC reader; a remote
-snapshot never replaces a newer local one. The API is only a performance/indexing
-layer: before any wallet-sensitive action the client reads phase, price, availability,
+remote snapshot never replaces a newer local one. A cold public client deliberately
+does not replay archive logs through a browser RPC: the backend owns that expensive
+history scan, while the browser RPC verifies the snapshot block and incrementally
+catches up from it. Local development chains may still build their complete history
+directly. Before any wallet-sensitive action the client reads phase, price, availability,
 quota/claimed counts and supply from the configured contract/RPC. A structurally valid
 snapshot and canonical block hash still do not make the API a transaction authority.
-The production reader continues from the snapshot using contract logs; when the on-chain total is zero it
+The production reader continues from the snapshot using recent contract logs; when the on-chain total is zero it
 skips the empty log history entirely; once records exist it reads logs in bounded,
 ordered ranges. Snapshots larger than 2 MB remain usable in memory but are not
 written to `localStorage`; this cache threshold is not a collection or sale cap.

@@ -1,5 +1,5 @@
 import {Contract, JsonRpcProvider, FetchRequest, keccak256} from 'ethers';
-import {ABI, CHAIN_CACHE_PREFIX, CHAIN_SNAPSHOT_FORMAT, PRICE_STEP, chainInterface, appendMintLogs, deploymentKey, validateDeployment} from './chain-core.js';
+import {ABI, CHAIN_CACHE_PREFIX, CHAIN_SNAPSHOT_VERSION, PRICE_STEP, chainInterface, appendMintLogs, deploymentKey, validateDeployment} from './chain-core.js';
 
 const hash=value=>typeof value==='string'&&/^0x[\da-f]{64}$/i.test(value);
 const decimal=value=>typeof value==='string'&&/^\d{1,78}$/.test(value);
@@ -7,7 +7,7 @@ const address=value=>typeof value==='string'&&/^0x[\da-f]{40}$/i.test(value);
 const same=(a,b)=>typeof a==='string'&&typeof b==='string'&&a.toLowerCase()===b.toLowerCase();
 
 export function validateChainSnapshot(snapshot,deployment,genotypeSpace=Number.MAX_SAFE_INTEGER,traitCounts=[]) {
-  if(snapshot?.format!==CHAIN_SNAPSHOT_FORMAT||!Array.isArray(snapshot.records)||snapshot.records.length>genotypeSpace)throw Error('Invalid snapshot records.');
+  if(snapshot?.version!==CHAIN_SNAPSHOT_VERSION||!Array.isArray(snapshot.records)||snapshot.records.length>genotypeSpace)throw Error('Invalid snapshot records.');
   if(!Number.isSafeInteger(snapshot.blockNumber)||snapshot.blockNumber<deployment.deploymentBlock||!hash(snapshot.blockHash))throw Error('Invalid snapshot block.');
   if(snapshot.total!==snapshot.records.length||!Number.isSafeInteger(snapshot.cap)||snapshot.cap<snapshot.total||snapshot.cap>genotypeSpace)throw Error('Invalid snapshot supply.');
   if(!Number.isSafeInteger(snapshot.publicMinted)||snapshot.publicMinted<0||!Number.isSafeInteger(snapshot.allowlistMinted)||snapshot.allowlistMinted<0||snapshot.publicMinted+snapshot.allowlistMinted!==snapshot.total)throw Error('Invalid snapshot mint counts.');
@@ -35,7 +35,7 @@ export function validateChainSnapshot(snapshot,deployment,genotypeSpace=Number.M
 
 export function snapshotFromEnvelope(envelope,deployment,genotypeSpace=Number.MAX_SAFE_INTEGER,traitCounts=[]) {
   const remote=envelope?.deployment;
-  if(envelope?.format!==CHAIN_SNAPSHOT_FORMAT||!remote||remote.id!==deployment.id||remote.chainId!==deployment.chainId||!same(remote.address,deployment.address)||remote.deploymentBlock!==deployment.deploymentBlock||!same(remote.deploymentHash,deployment.deploymentHash)||!same(remote.codeHash,deployment.codeHash)||!same(remote.catalogHash,deployment.catalogHash))throw Error('Snapshot deployment does not match this collection.');
+  if(envelope?.version!==CHAIN_SNAPSHOT_VERSION||!remote||remote.id!==deployment.id||remote.chainId!==deployment.chainId||!same(remote.address,deployment.address)||remote.deploymentBlock!==deployment.deploymentBlock||!same(remote.deploymentHash,deployment.deploymentHash)||!same(remote.codeHash,deployment.codeHash)||!same(remote.catalogHash,deployment.catalogHash))throw Error('Snapshot deployment does not match this collection.');
   return validateChainSnapshot(envelope.snapshot,deployment,genotypeSpace,traitCounts);
 }
 
@@ -116,11 +116,12 @@ export class ChainReader {
     // so a first visit need not scan every empty post-deployment block.
     if(!state&&total===0n){
       if(publicMinted!==0n||allowlistMinted!==0n)throw Error('The collection counters are inconsistent. Please retry.');
-      const snapshot={format:CHAIN_SNAPSHOT_FORMAT,records:[],publicOpen,salePhase:phase,total:0,cap:Number(cap),publicMinted:0,allowlistMinted:0,
+      const snapshot={version:CHAIN_SNAPSHOT_VERSION,records:[],publicOpen,salePhase:phase,total:0,cap:Number(cap),publicMinted:0,allowlistMinted:0,
         price:price.toString(),blockNumber:end,blockHash:block.hash,updatedAt:Date.now()};
       validateChainSnapshot(snapshot,this.deployment,this.genotypeSpace,this.traitCounts);
       this.snapshot=snapshot;this.persist(snapshot);return snapshot;
     }
+    if(!state&&total>0n&&this.deployment.chainId!==31337)throw Error('A verified collection snapshot is required before public history can be synchronized.');
     state=state ? {...state,records:[...state.records]} : {records:[],publicOpen:false,blockNumber:this.deployment.deploymentBlock-1};
     const topics=[[...['Minted','GenotypeAssigned','PublicSaleOpened','Transfer'].map(name=>chainInterface.getEvent(name).topicHash)]];
     const ranges=[];
@@ -136,7 +137,7 @@ export class ChainReader {
       await new Promise(resolve=>setTimeout(resolve,0));
     }
     if (Number(total)!==state.records.length || publicOpen!==state.publicOpen) {this.snapshot=null;throw Error('The history changed during sync. Please retry.');}
-    const snapshot={format:CHAIN_SNAPSHOT_FORMAT,records:state.records,publicOpen,salePhase:phase,total:Number(total),cap:Number(cap),publicMinted:Number(publicMinted),allowlistMinted:Number(allowlistMinted),
+    const snapshot={version:CHAIN_SNAPSHOT_VERSION,records:state.records,publicOpen,salePhase:phase,total:Number(total),cap:Number(cap),publicMinted:Number(publicMinted),allowlistMinted:Number(allowlistMinted),
       price:price.toString(),blockNumber:end,blockHash:block.hash,updatedAt:Date.now()};
     validateChainSnapshot(snapshot,this.deployment,this.genotypeSpace,this.traitCounts);
     this.snapshot=snapshot;

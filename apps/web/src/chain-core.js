@@ -35,8 +35,8 @@ export const ABI = [
 export const chainInterface = new Interface(ABI);
 export const PRICE_STEP = MINT_PRICE_STEP;
 export const SALE_LIFECYCLE = 'phased-v1';
-export const CHAIN_SNAPSHOT_FORMAT = 'mycelium-snapshot-20261023';
-export const CHAIN_CACHE_PREFIX = `myfriends:snapshot:${CHAIN_SNAPSHOT_FORMAT}:`;
+export const CHAIN_SNAPSHOT_VERSION = 2;
+export const CHAIN_CACHE_PREFIX = `myfriends:snapshot:v${CHAIN_SNAPSHOT_VERSION}:`;
 export function deploymentKey(d) { return `${CHAIN_CACHE_PREFIX}${d.chainId}:${d.address.toLowerCase()}:${d.deploymentHash}`; }
 export function tokenExplorerURL(deployment,tokenId){
   if(!deployment?.explorerUrl||!isAddress(deployment.address)||!/^\d+$/.test(String(tokenId)))throw Error('Invalid token explorer link.');
