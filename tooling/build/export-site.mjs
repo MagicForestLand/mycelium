@@ -46,6 +46,7 @@ export function runtimeConfigFromRecords(record,site){
   const publicDeployment=site.deployment;
   if(!publicDeployment||typeof publicDeployment!=='object')throw Error('Missing public deployment configuration.');
   if(typeof publicDeployment.snapshotUrl!=='string'||new URL(publicDeployment.snapshotUrl).protocol!=='https:')throw Error('Set the reviewed HTTPS production snapshot API.');
+  if(typeof publicDeployment.profilesUrl!=='string'||new URL(publicDeployment.profilesUrl).protocol!=='https:')throw Error('Set the reviewed HTTPS minter profile API.');
   if(typeof publicDeployment.mintEvidenceUrl!=='string'||new URL(publicDeployment.mintEvidenceUrl).protocol!=='https:')throw Error('Set the reviewed HTTPS mint evidence API.');
   if(!publicDeployment.explorers||publicDeployment.explorers.etherscan!=='https://etherscan.io'||publicDeployment.explorers.evmNow!=='https://evm.now')throw Error('Production explorers must be Etherscan and EVM.NOW.');
   const deployment=validateDeployment({
@@ -59,6 +60,7 @@ export function runtimeConfigFromRecords(record,site){
     explorerUrl:publicDeployment.explorers.etherscan,
     explorers:publicDeployment.explorers,
     snapshotUrl:publicDeployment.snapshotUrl,
+    profilesUrl:publicDeployment.profilesUrl,
     mintEvidenceUrl:publicDeployment.mintEvidenceUrl,
     address:record.collection?.address,
     deploymentBlock:record.deploymentBlock,

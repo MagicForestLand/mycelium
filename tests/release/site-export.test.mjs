@@ -13,7 +13,7 @@ const record={version:1,kind:'MYCELIUM_VERIFIED_DEPLOYMENT',releaseStatus:'CURRE
   collection:{address,runtimeHash:hash('d'),catalogHash:catalogFingerprint().sha256},
   protocol:{mint:'commit-reveal-v1',saleLifecycle:'phased-v1'}};
 const site={version:1,kind:'MYCELIUM_PUBLIC_SITE_CONFIG',mode:'wallet',projectId:'e'.repeat(32),walletMetadata:{name:'mycelium Friends',description:'myFriends by Magic Forest',url:'https://mycelium.magicforest.land/',icons:['https://mycelium.magicforest.land/output/branding/avatar.svg']},
-  deployment:{id:'mycelium-friends-mainnet',label:'Mycelium Friends',networkName:'Ethereum',rpcUrl:'https://rpc.example',snapshotUrl:'https://cache.example/snapshot',mintEvidenceUrl:'https://cache.example/mint-events',explorers:{etherscan:'https://etherscan.io',evmNow:'https://evm.now'}}};
+  deployment:{id:'mycelium-friends-mainnet',label:'Mycelium Friends',networkName:'Ethereum',rpcUrl:'https://rpc.example',snapshotUrl:'https://cache.example/snapshot',profilesUrl:'https://cache.example/minter-profiles',mintEvidenceUrl:'https://cache.example/mint-events',explorers:{etherscan:'https://etherscan.io',evmNow:'https://evm.now'}}};
 const readOnlySite={version:1,kind:'MYCELIUM_PUBLIC_SITE_CONFIG',mode:'read-only',deployment:site.deployment};
 
 test('About names the operating entities without asserting unrecorded ownership',async()=>{
@@ -92,6 +92,7 @@ test('Render applies the HTML cache policy to the exported public root path',asy
   assert.doesNotMatch(staging,/\n\s+domains:/);
   assert.match(staging,/name: X-Robots-Tag\n\s+value: noindex, nofollow, noarchive/);
   assert.match(staging,/name: Content-Security-Policy\n\s+value: .*frame-ancestors 'none'.*ethereum-rpc\.publicnode\.com/);
+  assert.match(staging,/img-src 'self' data: blob: https:\/\/magicforest\.land;/);
   assert.match(staging,/- path: \/\n\s+name: Cache-Control\n\s+value: no-cache/);
   assert.match(walletRC,/branch: feat\/read-only-mainnet-staging/);
   assert.match(walletRC,/buildCommand: .*mainnet-site\.json/);
@@ -99,6 +100,7 @@ test('Render applies the HTML cache policy to the exported public root path',asy
   assert.doesNotMatch(walletRC,/\n\s+domains:/);
   assert.match(walletRC,/name: X-Robots-Tag\n\s+value: noindex, nofollow, noarchive/);
   assert.match(walletRC,/name: Content-Security-Policy\n\s+value: .*frame-ancestors 'none'.*ethereum-rpc\.publicnode\.com/);
+  assert.match(walletRC,/img-src 'self' data: blob: https:\/\/magicforest\.land;/);
   assert.match(walletRC,/- path: \/\n\s+name: Cache-Control\n\s+value: no-cache/);
   assert.match(production,/branch: main/);
   assert.match(production,/buildCommand: .*mainnet-site\.json/);
@@ -128,6 +130,7 @@ test('production runtime config is derived from one current mainnet evidence rec
   assert.equal(config.deployments[0].address,address);
   assert.equal(config.deployments[0].catalogHash,catalogFingerprint().sha256);
   assert.equal(config.deployments[0].snapshotUrl,site.deployment.snapshotUrl);
+  assert.equal(config.deployments[0].profilesUrl,site.deployment.profilesUrl);
   assert.equal(config.deployments[0].mintEvidenceUrl,site.deployment.mintEvidenceUrl);
   assert.deepEqual(config.deployments[0].explorers,site.deployment.explorers);
 });
@@ -144,7 +147,7 @@ test('read-only runtime config is explicit and contains no wallet settings',()=>
 
 test('production runtime config rejects historical, testnet and placeholder inputs',()=>{
   for(const changed of [{releaseStatus:'HISTORICAL_PRE_RELEASE'},{network:'sepolia'},{chainId:11155111},{releaseDigest:''}])assert.throws(()=>runtimeConfigFromRecords({...record,...changed},site));
-  for(const changed of [{mode:undefined},{mode:'preview'},{projectId:''},{kind:'DEV'},{walletMetadata:{...site.walletMetadata,url:'https://magicforest.land/'}},{deployment:{...site.deployment,rpcUrl:'http://localhost:8545'}},{deployment:{...site.deployment,snapshotUrl:'http://cache.example/snapshot'}},{deployment:{...site.deployment,mintEvidenceUrl:'http://cache.example/mint-events'}},{deployment:{...site.deployment,explorers:{etherscan:'https://etherscan.io',evmNow:'https://wrong.example'}}}])assert.throws(()=>runtimeConfigFromRecords(record,{...site,...changed}));
+  for(const changed of [{mode:undefined},{mode:'preview'},{projectId:''},{kind:'DEV'},{walletMetadata:{...site.walletMetadata,url:'https://magicforest.land/'}},{deployment:{...site.deployment,rpcUrl:'http://localhost:8545'}},{deployment:{...site.deployment,snapshotUrl:'http://cache.example/snapshot'}},{deployment:{...site.deployment,profilesUrl:'http://cache.example/minter-profiles'}},{deployment:{...site.deployment,mintEvidenceUrl:'http://cache.example/mint-events'}},{deployment:{...site.deployment,explorers:{etherscan:'https://etherscan.io',evmNow:'https://wrong.example'}}}])assert.throws(()=>runtimeConfigFromRecords(record,{...site,...changed}));
   assert.throws(()=>runtimeConfigFromRecords({...record,collection:{...record.collection,catalogHash:'0'.repeat(64)}},site),/catalog/);
 });
 

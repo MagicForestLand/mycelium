@@ -8,6 +8,7 @@
     "networkName": "Ethereum",
     "rpcUrl": "https://ethereum-rpc.publicnode.com",
     "snapshotUrl": "https://magicforest.land/api/mycelium/snapshot",
+    "profilesUrl": "https://magicforest.land/api/mycelium/minter-profiles",
     "mintEvidenceUrl": "https://magicforest.land/api/mycelium/mint-events",
     "explorers": {
       "etherscan": "https://etherscan.io",

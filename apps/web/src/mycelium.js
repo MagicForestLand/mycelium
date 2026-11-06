@@ -1,23 +1,99 @@
 // Production interface connected to the catalog, renderer, and token ID helpers.
 const $=id=>document.getElementById(id);
 const privacyNoticeKey='mycelium:privacy-notice:v1';
-let spiralEntries=[], receiptEntries=new Map(), chainState={ready:false,busy:false,snapshot:null,walletChecking:true,walletEnabled:true}, galleryLimit=24;
+let spiralEntries=[], receiptEntries=new Map(), chainState={ready:false,busy:false,snapshot:null,profiles:Object.create(null),walletChecking:true,walletEnabled:true}, galleryLimit=24, collectionNewestFirst=true;
 const SALE_PHASE={PAUSED:0,ALLOWLIST:1,PUBLIC_ACTIVE:2,PUBLIC_PAUSED:3};
 const defaultPreviewGenotype=[4,2,0,9,0,0];
 let builderGenotype=[...defaultPreviewGenotype],currentView='spiral',selectedSlot=null,pendingTokenId=null;
-let zoom=1,pinnedSlot=null,toastTimer,lastModalFocus=null;
+let zoom=1,pinnedSlot=null,tooltipHideTimer=0,toastTimer,lastModalFocus=null;
 const mobileLayout=matchMedia('(max-width: 820px), (max-height: 520px) and (max-width: 950px)');
 let mobileSurface='builder',mobileTraitKey='stem',mobileTraitPaintObserver=null,mobileTraitCenterTimer=0,mobileTraitCentering=false;
 let walletLandingAccount=null;
 let renderQueue=[],renderQueueFrame=0;
+let collectionRevision=0,collectionProfilesRevision=0,collectionRenderedKey='',collectionRenderFrame=0;
 const faviconLink=$('favicon'),faviconCanvas=document.createElement('canvas');
 faviconCanvas.dataset.resolution='128';
 let faviconTimer=0,faviconRevision=0,faviconObjectURL='';
-let spiralFit=null,spiralCount=20,spiralOffset=0,spiralTarget=0,spiralFrame=0,spiralTime=0;
-let spiralIntroPhase='waiting',spiralIntroLimit=0,spiralIntroFrame=0,spiralIntroStarted=0,spiralIntroMinted=0;
-let spiralThreadReady=false,spiralThreadFrame=0;
+let spiralFit=null,spiralCount=20,spiralOffset=0,spiralTarget=0,spiralFrame=0,spiralTime=0,spiralPaintedAt=0;
+let deferredSpiralPaint=0;
+let spiralIntroPhase='waiting',spiralIntroLimit=0,spiralIntroFrame=0,spiralIntroStarted=0,spiralIntroMinted=0,spiralIntroPaintedAt=0;
+let spiralThreadReady=false,spiralThreadArmed=false,spiralThreadFrame=0;
 const spiralNodes=new Map(),spiralMotion=matchMedia('(prefers-reduced-motion: reduce)');
+const mobileSpiralFrameInterval=1000/30;
+const mobileSpiralArtQueue=new Map();
+let mobileSpiralArtFrame=0,mobileSpiralArtTimer=0,mobileSpiralArtPaintedAt=0;
+const mobileSpiralReveals=new Map(),mobileSpiralRevealInterval=110,mobileSpiralRevealDuration=400;
+let mobileSpiralRevealFrame=0,mobileSpiralNextRevealAt=0;
 const num=n=>String(n).padStart(2,'0');
+const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,character=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+const shortWallet=address=>address?address.slice(0,6)+'…'+address.slice(-4):'Unknown';
+const profileFor=address=>chainState.profiles?.[address?.toLowerCase()]||null;
+const profileName=address=>profileFor(address)?.displayName||shortWallet(address);
+const ownerName=entry=>profileName(entry?.owner);
+const profileAvatarObjects=new Map(),profileAvatarRequests=new Map();
+async function profileAvatarObjectURL(source){
+  if(profileAvatarObjects.has(source))return profileAvatarObjects.get(source);
+  if(profileAvatarRequests.has(source))return profileAvatarRequests.get(source);
+  const request=fetch(source,{mode:'cors',credentials:'omit',cache:'default',referrerPolicy:'no-referrer'}).then(async response=>{
+    if(!response.ok)throw Error('Avatar unavailable.');
+    const blob=await response.blob();
+    if(!blob.type.toLowerCase().startsWith('image/'))throw Error('Invalid avatar.');
+    const objectURL=URL.createObjectURL(blob);profileAvatarObjects.set(source,objectURL);return objectURL;
+  }).finally(()=>profileAvatarRequests.delete(source));
+  profileAvatarRequests.set(source,request);return request;
+}
+function hydrateProfileAvatar(image,source=image?.dataset.profileAvatar,onFailure=null){
+  if(!image)return;
+  const revision=String(Number(image.dataset.avatarRevision||0)+1);image.dataset.avatarRevision=revision;
+  image.hidden=true;image.removeAttribute('src');delete image.dataset.avatarFailed;
+  const failed=()=>{if(image.dataset.avatarRevision===revision){image.hidden=true;image.removeAttribute('src');image.dataset.avatarFailed='true';onFailure?.();}};
+  if(!source)return;
+  image.dataset.profileAvatar=source;
+  profileAvatarObjectURL(source).then(objectURL=>{
+    if(image.dataset.avatarRevision!==revision||image.dataset.profileAvatar!==source)return;
+    image.onload=()=>{if(image.dataset.avatarRevision===revision)image.hidden=false;};
+    image.onerror=failed;
+    image.hidden=false;image.src=objectURL;
+  }).catch(failed);
+}
+function ownerIdentityHTML(entry){
+  const profile=profileFor(entry?.owner),name=ownerName(entry),tag=profile?.profileUrl?'a':'div';
+  const attributes=profile?.profileUrl?' href="'+escapeHTML(profile.profileUrl)+'" target="_blank" rel="noopener noreferrer" aria-label="Owner '+escapeHTML(name)+' · open profile"':'';
+  const avatar=profile?.avatarUrl?'<img data-profile-avatar="'+escapeHTML(profile.avatarUrl)+'" alt="" decoding="async">':'';
+  return '<'+tag+' class="minted-owner"'+attributes+' title="'+escapeHTML(entry?.owner)+'"><span class="minted-owner-avatar" aria-hidden="true"><canvas width="64" height="64" data-resolution="64" data-owner-art="'+entry.genotype.join(',')+'"></canvas>'+avatar+'</span><strong class="minted-owner-name">'+escapeHTML(name)+'</strong></'+tag+'>';
+}
+function collectionOwnerHTML(entry){
+  const profile=profileFor(entry?.owner),name=ownerName(entry);
+  const avatar=profile?.avatarUrl?'<img data-profile-avatar="'+escapeHTML(profile.avatarUrl)+'" alt="" decoding="async">':'';
+  return '<div class="collection-owner"><dt>OWNER</dt><dd title="'+escapeHTML(entry?.owner)+'"><span class="collection-owner-avatar" aria-hidden="true"><canvas width="64" height="64" data-resolution="64" data-owner-art="'+entry.genotype.join(',')+'"></canvas>'+avatar+'</span><span class="collection-owner-name">'+escapeHTML(name)+'</span></dd></div>';
+}
+function wireProfileAvatars(scope){
+  scope?.querySelectorAll?.('[data-owner-art]').forEach(canvas=>{
+    if(mobileLayout.matches){
+      const image=canvas.parentElement.querySelector('[data-profile-avatar]');
+      if(!image||image.dataset.avatarFailed)queueOwnerFallback(canvas);
+      return;
+    }
+    const genotype=canvas.dataset.ownerArt?.split(',').map(Number);
+    if(genotype?.length===layerKeys.length&&!canvas.classList.contains('painted'))paintGenotypeCanvas(canvas,genotype);
+  });
+  scope?.querySelectorAll?.('[data-profile-avatar]').forEach(image=>hydrateProfileAvatar(image,undefined,mobileLayout.matches?()=>queueOwnerFallback(image.parentElement.querySelector('[data-owner-art]')):null));
+}
+function paintOwnerFallback(canvas){
+  const image=canvas.parentElement.querySelector('[data-profile-avatar]');
+  if(image&&!image.dataset.avatarFailed)return;
+  const genotype=canvas.dataset.ownerArt?.split(',').map(Number);
+  if(genotype?.length===layerKeys.length){paintGenotypeCanvas(canvas,genotype);canvas.dataset.painted='true';}
+}
+function queueOwnerFallback(canvas){
+  if(!canvas||canvas.dataset.painted||document.hidden)return;
+  if(canvas.closest('#gallery')){
+    if(currentView==='forest'){
+      if(collectionPaintObserver)collectionPaintObserver.observe(canvas);
+      else if(!('IntersectionObserver' in window))queueRender(canvas,paintOwnerFallback);
+    }
+  }else queueRender(canvas,paintOwnerFallback);
+}
 const dnaForGenotype=genotype=>genotypeIndexForTraits(...genotype);
 const sameGenotype=(a,b)=>a.length===b.length&&a.every((v,i)=>v===b[i]);
 const genotypeKey=genotype=>genotype.join(',');
@@ -663,7 +739,18 @@ function parseHash(){
     }catch{announce('That shared combination is invalid. Showing the current mushroom.');}
   }
 }
-function showView(view,focus=false){
+function scheduleSpiralPaint(){
+  const revision=++deferredSpiralPaint;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    if(revision!==deferredSpiralPaint||!spiralIsVisible())return;
+    updateNextNode();paintView();ensureMobileSpiralIntro();
+  }));
+}
+function showView(view,focus=false,deferSpiral=false){
+  if(view!=='forest'){
+    if(collectionRenderFrame)cancelAnimationFrame(collectionRenderFrame);collectionRenderFrame=0;
+    collectionPaintObserver?.disconnect();
+  }
   if(view!=='history')releaseHistoryCanvases();
   syncAboutVideo(view==='about');
   currentView=view;syncMobileShell();
@@ -689,11 +776,22 @@ function showView(view,focus=false){
   if(view==='wishlist')renderWishlist();
   if(view==='history')renderHistoryCatalog(true);
   if(mobileLayout.matches&&view==='spiral'&&mobileSurface==='builder')renderMobileTraitRail(true,true,false);
-  if(view==='spiral'&&(!mobileLayout.matches||mobileSurface==='spiral')){updateNextNode();paintView();}
-  else stopSpiral();
+  if(view==='spiral'&&(!mobileLayout.matches||mobileSurface==='spiral')){
+    if(deferSpiral)scheduleSpiralPaint();
+    else{deferredSpiralPaint++;updateNextNode();paintView();ensureMobileSpiralIntro();}
+  }else{deferredSpiralPaint++;settleMobileSpiralIntro();stopSpiral();}
   syncLinks();syncPreviewWishlist();syncMobileStatus();
   if(focus&&view!=='spiral')$({forest:'forest-title',about:'about-title',myfriends:'myfriends-title',wishlist:'wishlist-title',history:'history-title'}[view]).focus({preventScroll:true});
 }
+document.querySelector('[data-mobile-destination="spiral"]').addEventListener('click',event=>{
+  if(!mobileLayout.matches)return;
+  event.preventDefault();
+  const hash=mobileSpiralHash();
+  mobileSurface='spiral';pendingTokenId=null;
+  showView('spiral',false,true);
+  updateNextNode();
+  if(location.hash!==hash)location.hash=hash;
+});
 function rememberPrivacyNotice(){
   try{localStorage.setItem(privacyNoticeKey,'dismissed');}catch{/* Closing the notice still works when browser storage is unavailable. */}
 }
@@ -734,7 +832,7 @@ function selectGenotype(genotype,remember=true){
   if(currentView==='history')$('history-gallery').querySelectorAll('.history-card').forEach((card,index)=>card.classList.toggle('selected',sameGenotype(historyCatalog[index]?.genotype||[],builderGenotype)));
   if(!$('traitCatalog').hidden)renderCatalog(true);
   syncURL();
-  document.querySelectorAll('#gallery .forest-card').forEach((card,i)=>card.classList.toggle('selected',spiralEntries[i]&&sameGenotype(spiralEntries[i].genotype,builderGenotype)));
+  document.querySelectorAll('#gallery .forest-card').forEach(card=>{const entry=spiralEntries[Number(card.dataset.minted)];card.classList.toggle('selected',entry&&sameGenotype(entry.genotype,builderGenotype));});
 }
 function stepTrait(key,delta){
   const i=layerKeys.indexOf(key),genotype=[...builderGenotype];
@@ -837,8 +935,7 @@ function sampleHTML(slot){
   const entry=spiralEntries[slot-1],edition=entry;
   return '<div class="minted-card"><div class="minted-kicker"><span>SPIRAL POSITION '+num(slot)+'</span><span>'+(entry.phase==='allowlist'?'ALLOWLIST CLAIM':'PUBLIC MINT')+'</span></div>'+
     '<h2>'+edition.name+'</h2><div class="minted-token">TOKEN ID #'+entry.tokenId+'</div>'+
-    '<div class="purchase-box"><div class="purchase-fact"><span>Mint price</span><strong>'+(entry.price===0n?'FREE':priceMarkup(entry.price))+'</strong></div>'+
-    '<div class="purchase-fact"><span>Phase</span><strong>'+(entry.phase==='allowlist'?'ALLOWLIST CLAIM':'STEP '+num(entry.step))+'</strong></div></div>'+
+    ownerIdentityHTML(entry)+
     '<div class="minted-traits">'+layerKeys.map((key,i)=>'<div class="minted-trait"><span>'+layerNames[key]+'</span><strong>'+traits[key][edition.genotype[i]].name+'</strong></div>').join('')+'</div>'+
     tokenDestinations(entry)+'<button class="back-build" id="backBuild">← BUILD FROM THESE TRAITS</button>'+collectionActions(entry)+'</div>';
 }
@@ -869,6 +966,7 @@ function renderSidebar(centerMobileTrait=false){
   syncPreviewWishlist();
   if(!mobileLayout.matches){
     $('contextPanel').innerHTML=selectedSlot?sampleHTML(selectedSlot):builderHTML();
+    wireProfileAvatars($('contextPanel'));
     if(selectedSlot)$('backBuild').onclick=()=>{selectedSlot=null;clearPinned();renderSidebar();};
     else{
       document.querySelectorAll('[data-stem]').forEach(button=>button.onclick=()=>{const genotype=[...builderGenotype];genotype[0]=Number(button.dataset.stem);selectGenotype(genotype);});
@@ -1029,25 +1127,51 @@ function paintCollectionCanvas(canvas){
 }
 function observeCollectionCanvases(){
   collectionPaintObserver?.disconnect();
-  const canvases=[...$('gallery').querySelectorAll('[data-minted-art]')];
-  if(!('IntersectionObserver' in window)){canvases.forEach(canvas=>queueRender(canvas,paintCollectionCanvas));return;}
+  const canvases=[...$('gallery').querySelectorAll('[data-minted-art], [data-owner-art]')].filter(canvas=>!canvas.dataset.painted&&(!canvas.dataset.ownerArt||mobileLayout.matches&&(!canvas.parentElement.querySelector('[data-profile-avatar]')||canvas.parentElement.querySelector('[data-profile-avatar]').dataset.avatarFailed)));
+  const paint=canvas=>canvas.dataset.ownerArt?paintOwnerFallback(canvas):paintCollectionCanvas(canvas);
+  if(!('IntersectionObserver' in window)){canvases.forEach(canvas=>queueRender(canvas,paint));return;}
   collectionPaintObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
     if(!entry.isIntersecting)return;
-    queueRender(entry.target,paintCollectionCanvas);collectionPaintObserver.unobserve(entry.target);
+    if(currentView!=='forest'||(mobileLayout.matches&&document.hidden))return;
+    queueRender(entry.target,paint);collectionPaintObserver.unobserve(entry.target);
   }),{root:$('forest-view'),rootMargin:'240px 0px'});
   canvases.forEach(canvas=>collectionPaintObserver.observe(canvas));
 }
-function renderGallery(){
+function orderedCollectionEntries(){
+  const entries=spiralEntries.map((entry,index)=>({entry,index}));
+  return collectionNewestFirst?entries.reverse():entries;
+}
+function syncCollectionSort(){
+  const button=$('collectionSort');
+  button.disabled=spiralEntries.length<2;
+  button.dataset.order=collectionNewestFirst?'newest':'oldest';
+  button.setAttribute('aria-label',collectionNewestFirst?'Newest first. Show oldest first':'Oldest first. Show newest first');
+  button.querySelector('span').textContent=collectionNewestFirst?'NEWEST FIRST':'OLDEST FIRST';
+}
+function renderGallery(immediate=false){
+  const key=[collectionRevision,collectionProfilesRevision,chainState.ready,galleryLimit,collectionNewestFirst,mobileLayout.matches].join(':');
+  if(mobileLayout.matches&&collectionRenderedKey===key){$('gallery').inert=false;$('gallery').removeAttribute('aria-busy');observeCollectionCanvases();return;}
+  if(mobileLayout.matches&&!immediate){
+    $('gallery').setAttribute('aria-busy','true');$('gallery').inert=true;
+    if(!collectionRenderFrame)collectionRenderFrame=requestAnimationFrame(()=>{
+      collectionRenderFrame=requestAnimationFrame(()=>{collectionRenderFrame=0;if(currentView==='forest'&&!document.hidden)renderGallery(true);});
+    });
+    return;
+  }
+  if(collectionRenderFrame)cancelAnimationFrame(collectionRenderFrame);collectionRenderFrame=0;
   collectionPaintObserver?.disconnect();
-  const shortAddress=address=>address?address.slice(0,6)+'…'+address.slice(-4):'Unknown';
   const gallery=$('gallery');
-  if(spiralEntries.length)gallery.innerHTML=spiralEntries.slice(0,galleryLimit).map((entry,i)=>'<button class="forest-card collection-card" data-minted="'+i+'" aria-label="Meet '+entry.name+'"><div class="forest-art"><canvas width="240" height="240" data-resolution="240" data-minted-art="'+i+'" aria-hidden="true"></canvas></div><div class="forest-label"><span>#'+entry.tokenId+'</span><strong>'+entry.name+'</strong></div><dl class="collection-card-meta"><div><dt>OWNER</dt><dd title="'+entry.owner+'">'+shortAddress(entry.owner)+'</dd></div><div><dt>MINT</dt><dd>'+(entry.price===0n?'FREE':ethFormat(entry.price)+' ETH')+'</dd></div><div><dt>LISTING</dt><dd title="Marketplace listing data requires an external indexer">—</dd></div></dl></button>').join('');
+  if(spiralEntries.length)gallery.innerHTML=orderedCollectionEntries().slice(0,galleryLimit).map(({entry,index})=>'<button class="forest-card collection-card" data-minted="'+index+'" aria-label="Meet '+entry.name+'"><div class="forest-art"><canvas width="240" height="240" data-resolution="240" data-minted-art="'+index+'" aria-hidden="true"></canvas></div><div class="forest-label"><span>#'+entry.tokenId+'</span><strong>'+entry.name+'</strong></div><dl class="collection-card-meta">'+collectionOwnerHTML(entry)+'<div class="collection-mint"><dt>MINT PRICE</dt><dd>'+(entry.price===0n?'FREE':ethFormat(entry.price)+' ETH')+'</dd></div></dl></button>').join('');
   else if(!gallery.querySelector('.forest-empty'))gallery.innerHTML='<div class="forest-empty"><h2>The forest starts with a friend.</h2><p>Confirmed myFriends appear here. Choose your traits and grow the first one.</p></div>';
+  syncCollectionSort();
+  wireProfileAvatars(gallery);
   observeCollectionCanvases();
   gallery.querySelectorAll('button').forEach(button=>button.onclick=()=>selectMinted(Number(button.dataset.minted),'forest'));
   $('moreFriends').hidden=galleryLimit>=spiralEntries.length;
+  gallery.inert=false;gallery.removeAttribute('aria-busy');collectionRenderedKey=key;
 }
-$('moreFriends').onclick=()=>{galleryLimit+=24;renderGallery();};
+$('moreFriends').onclick=()=>{galleryLimit+=24;renderGallery(true);};
+$('collectionSort').onclick=()=>{collectionNewestFirst=!collectionNewestFirst;renderGallery(true);};
 let ownedArtURLs=[];
 function clearOwnedArtURLs(){ownedArtObserver?.disconnect();ownedArtURLs.forEach(url=>URL.revokeObjectURL(url));ownedArtURLs=[];}
 function paintOwnedArt(image){
@@ -1239,7 +1363,7 @@ function renderAboutChainStats(){
   for(const link of evmNowLinks){link.hidden=!evmNowURL;if(evmNowURL){link.href=evmNowURL;link.setAttribute('aria-label','Open this deployed contract on EVM.Now');}else link.removeAttribute('href');}
 }
 function renderFooterNetworkLinks(){
-  const contracts=[$('footerContract'),$('aboutFooterContract')],secondaries=[$('footerContractSecondary'),$('aboutFooterContractSecondary')],sourcify=$('aboutFooterSourcify'),markets=[$('footerOpenSea'),$('aboutFooterOpenSea'),$('aboutMarketOpenSea'),$('aboutMarketOpenSeaIntro')],marketFallbacks=[$('aboutMarketOpenSeaFallback'),$('aboutMarketOpenSeaIntroFallback')],deployment=chainState.deployment;
+  const contracts=[$('footerContract'),$('aboutFooterContract')],secondaries=[$('footerContractSecondary'),$('aboutFooterContractSecondary')],sourcify=$('aboutFooterSourcify'),markets=[$('footerOpenSea'),$('aboutFooterOpenSea'),$('aboutMobileOpenSea'),$('aboutMarketOpenSea'),$('aboutMarketOpenSeaIntro')],marketFallbacks=[$('aboutMarketOpenSeaFallback'),$('aboutMarketOpenSeaIntroFallback')],deployment=chainState.deployment;
   if([...contracts,...secondaries,sourcify,...markets].some(node=>!node))return;
   if(!deployment?.address||!deployment?.explorerUrl){
     for(const node of [...contracts,...secondaries,sourcify,...markets]){node.hidden=true;node.removeAttribute('href');}
@@ -1255,7 +1379,7 @@ function renderFooterNetworkLinks(){
   const sourcifyURL=sourcifyContractURL(deployment);
   if(sourcifyURL)setLink(sourcify,sourcifyURL,'SOURCIFY');
   else{sourcify.hidden=true;sourcify.removeAttribute('href');}
-  const openSea=openSeaTokenURL(deployment,spiralEntries[0]?.tokenId||1);
+  const openSea=openSeaCollectionURL(deployment);
   if(openSea){
     for(const market of markets)setLink(market,openSea,'OPENSEA');
     for(const fallback of marketFallbacks)fallback.hidden=true;
@@ -1281,8 +1405,8 @@ function renderLayers(){
   loadForestProgress();
 }
 
-function spiralIsVisible(){return currentView==='spiral'&&(!mobileLayout.matches||mobileSurface==='spiral')&&!$('universe').hidden;}
-function spiralTotal(){return Math.max(1,spiralEntries.length+1+Math.max(6,spiralCount));}
+function spiralIsVisible(){return (!mobileLayout.matches||!document.hidden)&&currentView==='spiral'&&(!mobileLayout.matches||mobileSurface==='spiral')&&!$('universe').hidden;}
+function spiralTotal(){return Math.max(1,spiralEntries.length+1+(mobileLayout.matches?6:Math.max(6,spiralCount)));}
 // Transport controls follow confirmed mushrooms only. Future landing places
 // remain part of the scene, but never extend playback into an empty tail.
 function spiralTravelMax(){return spiralEntries.length;}
@@ -1291,8 +1415,26 @@ function spiralScreenPoint(point){
 }
 function drawSpiral(){
   if(!spiralFit)return;
-  const path=spiralFit.points.map((point,i)=>{const p=spiralScreenPoint(point);return (i?'L':'M')+p.x.toFixed(2)+' '+p.y.toFixed(2);}).join(' ');
-  $('mainSpiral').setAttribute('d',path);$('backSpiral').setAttribute('d',path);
+  let previous=null,length=0;
+  const path=spiralFit.points.map((point,i)=>{
+    const p=spiralScreenPoint(point);
+    if(previous)length+=Math.hypot(p.x-previous.x,p.y-previous.y);
+    previous=p;return (i?'L':'M')+p.x.toFixed(2)+' '+p.y.toFixed(2);
+  }).join(' ');
+  const main=$('mainSpiral'),back=$('backSpiral'),stage=$('stage');
+  main.setAttribute('d',path);back.setAttribute('d',path);
+  if(mobileLayout.matches){
+    // WebKit repaints long normalized SVG dashes in visible chunks. Give it the
+    // real path length in user pixels so every frame advances one continuous
+    // brush instead of repeatedly rescaling pathLength="1".
+    main.removeAttribute('pathLength');
+    stage.style.setProperty('--spiral-loading-start',length+'px');
+    stage.style.setProperty('--spiral-loading-end',Math.max(0,length*(1-spiralFit.visiblePathFraction))+'px');
+  }else{
+    main.setAttribute('pathLength','1');
+    stage.style.setProperty('--spiral-loading-start','1');
+    stage.style.setProperty('--spiral-loading-end','0');
+  }
   $('originStar').setAttribute('transform',`translate(${spiralFit.x.toFixed(2)} ${spiralFit.y.toFixed(2)})`);
   $('futureSpiral').setAttribute('d','');$('ticks').innerHTML='';
 }
@@ -1310,17 +1452,157 @@ function placeTooltip(button){
   tip.style.top=Math.max(12,Math.min(y,universe.height-height-12))+'px';
 }
 function showSlot(slot,button,pin=false){
+  clearTimeout(tooltipHideTimer);
   if(pin)pinnedSlot=slot;
   const state=slotState(slot);
   $('tipPhase').textContent=state.status==='minted'?(state.phase==='allowlist'?'ALLOWLIST CLAIM':'PUBLIC MINT'):state.status==='next'?'NEXT MINT':'FUTURE MINT';
   $('tipTitle').textContent=state.status==='minted'?state.name:'Spiral position '+num(slot);
-  $('tipPrice').innerHTML=state.phase==='allowlist'?'FREE CLAIM':priceMarkup(state.price);
+  const minted=state.status==='minted',profile=minted?profileFor(state.owner):null,name=minted?ownerName(state):'';
+  const freeMint=minted&&state.price===0n,price=$('tipPrice'),owner=$('tipOwner'),avatar=$('tipOwnerAvatar');
+  price.hidden=freeMint;price.innerHTML=state.phase==='allowlist'?'FREE CLAIM':priceMarkup(state.price);
+  owner.hidden=!minted;
+  if(minted){
+    $('tipOwnerName').textContent=name;paintGenotypeCanvas($('tipOwnerFallback'),state.genotype);
+    if(profile?.profileUrl){owner.href=profile.profileUrl;owner.target='_blank';owner.rel='noopener noreferrer';owner.setAttribute('aria-label','Owner '+name+' · open profile');}
+    else{owner.removeAttribute('href');owner.removeAttribute('target');owner.removeAttribute('rel');owner.removeAttribute('aria-label');}
+    hydrateProfileAvatar(avatar,profile?.avatarUrl||'');
+  }
   $('tipMeta').textContent='';
-  $('slotTooltip').classList.add('visible');placeTooltip(button);renderLadder(state.step||0);
+  $('slotTooltip').classList.add('visible');$('slotTooltip').classList.toggle('is-pinned',pinnedSlot===slot);$('slotTooltip').classList.toggle('is-interactive',Boolean(profile?.profileUrl));placeTooltip(button);renderLadder(state.step||0);
 }
-function clearPinned(){pinnedSlot=null;$('slotTooltip').classList.remove('visible');renderLadder();}
+function hideTransientTooltip(){
+  clearTimeout(tooltipHideTimer);
+  if(pinnedSlot===null){$('slotTooltip').classList.remove('visible','is-pinned','is-interactive');renderLadder();}
+}
+function scheduleTooltipHide(){clearTimeout(tooltipHideTimer);tooltipHideTimer=setTimeout(hideTransientTooltip,140);}
+function clearPinned(){clearTimeout(tooltipHideTimer);pinnedSlot=null;$('slotTooltip').classList.remove('visible','is-pinned','is-interactive');renderLadder();}
+$('slotTooltip').addEventListener('mouseenter',()=>clearTimeout(tooltipHideTimer));
+$('slotTooltip').addEventListener('mouseleave',scheduleTooltipHide);
+$('slotTooltip').addEventListener('focusin',()=>clearTimeout(tooltipHideTimer));
+$('slotTooltip').addEventListener('focusout',scheduleTooltipHide);
 function buildNodes(){
+  if(mobileLayout.matches&&spiralIntroPhase==='waiting'&&chainState.snapshot&&spiralIsVisible()){
+    spiralIntroMinted=spiralEntries.length;spiralIntroLimit=spiralIntroMinted;spiralOffset=spiralTarget=0;
+  }
+  clearMobileSpiralArtQueue();
   spiralNodes.clear();$('nodes').replaceChildren();clearPinned();paintView();
+}
+function clearMobileSpiralArtQueue(){
+  if(mobileSpiralArtFrame)cancelAnimationFrame(mobileSpiralArtFrame);
+  if(mobileSpiralRevealFrame)cancelAnimationFrame(mobileSpiralRevealFrame);
+  clearTimeout(mobileSpiralArtTimer);
+  mobileSpiralArtFrame=mobileSpiralArtTimer=mobileSpiralArtPaintedAt=mobileSpiralRevealFrame=mobileSpiralNextRevealAt=0;
+  mobileSpiralArtQueue.clear();
+  for(const animation of mobileSpiralReveals.values())animation.cancel();
+  mobileSpiralReveals.clear();
+}
+function revealMobileSpiralNode(node){
+  node.classList.remove('spiral-art-pending');node.classList.add('spiral-art-ready');node.tabIndex=0;
+  if(spiralMotion.matches)return;
+  // Keep the node's translate(-50%, -50%) positioning in every keyframe. The
+  // tiny overshoot reads as growth, while opacity + transform stay entirely on
+  // the compositor and do not repaint the mushroom canvas.
+  const animation=node.animate([
+    {opacity:0,visibility:'visible',transform:'translate(-50%, -50%) scale(.84)',offset:0,easing:'cubic-bezier(.18,.66,.24,1)'},
+    {opacity:.76,visibility:'visible',transform:'translate(-50%, -50%) scale(1.018)',offset:.72,easing:'cubic-bezier(.2,.8,.25,1)'},
+    {opacity:1,visibility:'visible',transform:'translate(-50%, -50%) scale(1)',offset:1}
+  ],{duration:mobileSpiralRevealDuration,fill:'both'});
+  mobileSpiralReveals.set(node,animation);
+  animation.finished.then(()=>{
+    if(mobileSpiralReveals.get(node)!==animation)return;
+    mobileSpiralReveals.delete(node);animation.cancel();
+    scheduleMobileSpiralReveal();
+  },()=>{});
+}
+function finishMobileMintedReveal(){
+  if(spiralIntroPhase!=='minted')return;
+  spiralIntroLimit=spiralIntroMinted+1;setSpiralIntroPhase('current');spiralIntroStarted=performance.now();paintSpiralNodes();
+  spiralIntroFrame=requestAnimationFrame(animateSpiralIntro);
+}
+function paintMobileSpiralReveal(time){
+  mobileSpiralRevealFrame=0;
+  if(!mobileLayout.matches||!spiralIsVisible()||!spiralThreadReady||spiralIntroPhase==='waiting')return;
+  const pending=[...spiralNodes.values()].filter(node=>node.classList.contains('spiral-art-pending')).sort((a,b)=>Number(a.dataset.slot)-Number(b.dataset.slot));
+  if(spiralMotion.matches){
+    for(const node of pending){if(!node.dataset.spiralPrepared)break;revealMobileSpiralNode(node);}
+    const stillPending=[...spiralNodes.values()].some(node=>node.classList.contains('spiral-art-pending'));
+    if(spiralIntroPhase==='minted'&&!stillPending)finishMobileMintedReveal();
+    return;
+  }
+  const node=pending[0];
+  if(!node){
+    const mintedAnimating=[...mobileSpiralReveals.keys()].some(item=>Number(item.dataset.slot)<=spiralIntroMinted);
+    if(spiralIntroPhase==='minted'&&!mintedAnimating)finishMobileMintedReveal();
+    return;
+  }
+  if(!node.dataset.spiralPrepared)return;
+  if(mobileSpiralNextRevealAt&&time<mobileSpiralNextRevealAt){mobileSpiralRevealFrame=requestAnimationFrame(paintMobileSpiralReveal);return;}
+  // Launch exactly one mushroom from an actual presentation frame. Real iOS
+  // Safari may group future WAAPI start times or timers; a single rAF conductor
+  // cannot release two nodes in the same rendered frame and never catches up by
+  // compressing missed beats after a slow frame.
+  revealMobileSpiralNode(node);
+  mobileSpiralNextRevealAt=time+mobileSpiralRevealInterval;
+  mobileSpiralRevealFrame=requestAnimationFrame(paintMobileSpiralReveal);
+}
+function scheduleMobileSpiralReveal(){
+  if(mobileSpiralRevealFrame||!mobileLayout.matches||!spiralIsVisible()||!spiralThreadReady||spiralIntroPhase==='waiting')return;
+  mobileSpiralRevealFrame=requestAnimationFrame(paintMobileSpiralReveal);
+}
+function scheduleMobileSpiralArt(delay=0){
+  if(mobileSpiralArtFrame||mobileSpiralArtTimer||!mobileSpiralArtQueue.size||!spiralIsVisible())return;
+  if(delay){mobileSpiralArtTimer=setTimeout(()=>{mobileSpiralArtTimer=0;scheduleMobileSpiralArt();},delay);return;}
+  mobileSpiralArtFrame=requestAnimationFrame(paintMobileSpiralArt);
+}
+function queueMobileSpiralArt(node,genotype,priority=0){
+  const canvas=node.querySelector('canvas');
+  const key=genotype?genotype.join(','):'future';
+  if(canvas?canvas.dataset.genotype===key:node.dataset.spiralReady===key){
+    mobileSpiralArtQueue.delete(node);
+    node.dataset.spiralPrepared=key;
+    if(node.classList.contains('spiral-art-pending'))scheduleMobileSpiralReveal();
+    return;
+  }
+  const pending=mobileSpiralArtQueue.get(node);
+  if(pending&&pending.key===key)pending.priority=priority;
+  else mobileSpiralArtQueue.set(node,{canvas,key,genotype:genotype?[...genotype]:null,priority,retryAt:0,failures:0});
+  // The border, label and artwork arrive together. Never expose an empty minted
+  // circle while its canvas is queued or temporarily has no layout box.
+  node.classList.add('spiral-art-pending');node.classList.remove('spiral-art-ready');node.tabIndex=-1;
+  delete node.dataset.spiralPrepared;
+  mobileSpiralReveals.get(node)?.cancel();mobileSpiralReveals.delete(node);
+  scheduleMobileSpiralArt();
+}
+function paintMobileSpiralArt(time){
+  mobileSpiralArtFrame=0;
+  if(!mobileLayout.matches||!spiralIsVisible()){clearMobileSpiralArtQueue();return;}
+  const since=time-mobileSpiralArtPaintedAt;
+  if(mobileSpiralArtPaintedAt&&since<mobileSpiralFrameInterval){scheduleMobileSpiralArt(mobileSpiralFrameInterval-since);return;}
+  mobileSpiralArtPaintedAt=time;
+  const start=performance.now();let painted=0,retryAt=Infinity;
+  // Geometry assigns viewport work first; no repeated layout reads are needed
+  // to sort hundreds of offscreen positions at the wide camera setting.
+  const pending=[...mobileSpiralArtQueue].sort((a,b)=>a[1].priority-b[1].priority);
+  for(const [node,job] of pending){
+    if(!node.isConnected||spiralNodes.get(Number(node.dataset.slot))!==node){mobileSpiralArtQueue.delete(node);continue;}
+    if(job.retryAt>time){retryAt=Math.min(retryAt,job.retryAt);continue;}
+    if(!(job.canvas||node).getClientRects().length){job.retryAt=time+120;retryAt=Math.min(retryAt,job.retryAt);continue;}
+    try{
+      if(job.canvas){paintGenotypeCanvas(job.canvas,job.genotype);job.canvas.dataset.painted='true';}
+      else node.dataset.spiralReady=job.key;
+      node.dataset.spiralPrepared=job.key;scheduleMobileSpiralReveal();
+      mobileSpiralArtQueue.delete(node);painted++;
+    }catch{
+      // A temporarily unavailable canvas context must not strand this node or
+      // the rest of the queue. Back off instead of spinning on every frame.
+      job.retryAt=time+Math.min(2000,120*2**Math.min(job.failures++,4));retryAt=Math.min(retryAt,job.retryAt);
+    }
+    if(painted>=2||performance.now()-start>=3)break;
+  }
+  if(mobileSpiralArtQueue.size){
+    const ready=[...mobileSpiralArtQueue.values()].some(job=>job.retryAt<=time);
+    scheduleMobileSpiralArt(ready?mobileSpiralFrameInterval:Math.max(1,retryAt-time));
+  }
 }
 function makeSpiralNode(slot){
     const state=slotState(slot),example=state.status==='minted',next=state.status==='next';
@@ -1331,9 +1613,13 @@ function makeSpiralNode(slot){
     const visibleIndex=(next?'NEXT / ':'')+num(slot);
     button.setAttribute('aria-label',visibleIndex+' · '+(example?state.name:next?'Your next mushroom':'Future mint position')+', spiral position '+slot);
     button.innerHTML=(example||next?'<canvas width="144" height="144" data-resolution="144" aria-hidden="true"></canvas>':'<span class="plus">+</span>')+'<span class="index">'+visibleIndex+'</span>';
-    if(example||next)paintGenotypeCanvas(button.querySelector('canvas'),state.genotype);
+    if(mobileLayout.matches){button.classList.add('spiral-art-pending');button.tabIndex=-1;}
+    if(example||next){
+      const canvas=button.querySelector('canvas');
+      if(!mobileLayout.matches)paintGenotypeCanvas(canvas,state.genotype);
+    }
     button.onmouseenter=button.onfocus=()=>{stopSpiral();if(pinnedSlot===null)showSlot(slot,button);};
-    button.onmouseleave=button.onblur=()=>{if(pinnedSlot===null){$('slotTooltip').classList.remove('visible');renderLadder();}};
+    button.onmouseleave=button.onblur=()=>{if(pinnedSlot===null)scheduleTooltipHide();};
     button.onclick=event=>{
       event.stopPropagation();
       if(slot<=spiralEntries.length){
@@ -1347,7 +1633,10 @@ function makeSpiralNode(slot){
 function updateNextNode(){
   if(currentView!=='spiral'||$('universe').hidden||(mobileLayout.matches&&mobileSurface!=='spiral'))return;
   const canvas=$('nodes').querySelector('.coming canvas'),genotype=builderGenotype.join(',');
-  if(canvas&&canvas.dataset.genotype!==genotype)paintGenotypeCanvas(canvas,builderGenotype);
+  if(canvas&&canvas.dataset.genotype!==genotype){
+    if(mobileLayout.matches)queueMobileSpiralArt(canvas.parentElement,builderGenotype);
+    else paintGenotypeCanvas(canvas,builderGenotype);
+  }
 }
 function renderLadder(inspectStep=0){
   const container=$('priceLadder');if(!container)return;
@@ -1359,11 +1648,14 @@ function renderLadder(inspectStep=0){
   }).join('');
 }
 function paintView(){
-  const bounds=$('universe').getBoundingClientRect(),width=bounds.width,height=bounds.height;
+  if(mobileLayout.matches&&!spiralIsVisible()&&spiralFit)return;
+  const bounds=$('universe').getBoundingClientRect(),shell=$('spiral-view').getBoundingClientRect();
+  const width=bounds.width||shell.width,height=bounds.height||shell.height;
   if(!width||!height)return;
+  zoom=Math.max(spiralMinZoom(),Math.min(3.2,zoom));
   const count=width<600?12:20;
   const top=64,controls=universe.querySelector('.spiral-controls').getBoundingClientRect();
-  const bottom=Math.max(110,bounds.bottom-controls.top+58);
+  const bottom=controls.width&&controls.height?Math.max(110,bounds.bottom-controls.top+58):mobileLayout.matches?114:110;
   if(!spiralFit||spiralFit.width!==width||spiralFit.height!==height||spiralFit.zoom!==zoom||spiralFit.top!==top||spiralFit.bottom!==bottom){
     spiralFit={...fitSpiral(width,height,count,{top,bottom},zoom),width,height,top,bottom,zoom};
     spiralCount=spiralFit.count;
@@ -1378,55 +1670,101 @@ function paintView(){
   spiralOffset=Math.max(0,Math.min(max,spiralOffset));spiralTarget=Math.max(0,Math.min(max,spiralTarget));
   drawSpiral();paintSpiralNodes();
   $('zoomLevel').textContent=Math.round(zoom*100)+'%';
-  $('zoomOut').disabled=zoom<=.2;$('zoomIn').disabled=zoom>=3.2;
+  $('zoomOut').disabled=zoom<=spiralMinZoom();$('zoomIn').disabled=zoom>=3.2;
 }
 function paintSpiralNodes(){
   if(!spiralFit)return;
   const total=spiralTotal(),window=spiralWindow(total,spiralCount,spiralOffset),max=spiralTravelMax();
-  $('stage').dataset.totalPositions=total;
+  if($('stage').dataset.totalPositions!==String(total))$('stage').dataset.totalPositions=total;
   const size=spiralFit.nodeSize;
   $('stage').classList.toggle('spiral-overview',size<28);
   const active=new Set();
+  // A hidden mobile Spiral must not spend Builder's budget maintaining canvas.
+  // Once visible, verified mushrooms may be prepared behind the drawing thread,
+  // but remain pending until the ordered reveal begins.
+  const holdMobileNodes=mobileLayout.matches&&(!chainState.snapshot||!spiralIsVisible());
+  if(holdMobileNodes){
+    clearMobileSpiralArtQueue();
+    if(!chainState.snapshot||spiralIntroPhase==='waiting')for(const [slot,node] of spiralNodes){node.remove();spiralNodes.delete(slot);}
+    $('spiralPosition').textContent=`0 / ${chainState.snapshot?total:0}`;
+    if($('spiralScrub').max!==String(max))$('spiralScrub').max=max;
+    $('spiralScrub').value=spiralOffset;
+    $('spiralScrub').disabled=max===0;
+    return;
+  }
   for(let slot=window.first;slot<=window.last;slot++){
     if(spiralIntroPhase!=='done'&&slot>spiralIntroLimit)continue;
     const position=slot-spiralOffset,p=spiralScreenPoint(spiralPoint(position,spiralFit.angle,spiralFit.nodeArcScale));
+    const art=slot<=spiralEntries.length+1,visualSize=art?spiralFit.artNodeSize:size;
+    const radius=visualSize/2,margin=radius+32;
+    // Mobile keeps a small prepaint margin, not the circumscribed circle's
+    // entire tail. The camera can still reach 20% without hundreds of hidden
+    // canvases, filters and shadows competing with the visible mushrooms.
+    if(mobileLayout.matches&&(p.x < -margin||p.x>spiralFit.width+margin||p.y < -margin||p.y>spiralFit.height+margin))continue;
     active.add(slot);
     let node=spiralNodes.get(slot);
     if(!node){node=makeSpiralNode(slot);spiralNodes.set(slot,node);$('nodes').append(node);}
-    const visualSize=node.classList.contains('empty')&&!node.classList.contains('coming')?size:spiralFit.artNodeSize;
-    node.style.left=p.x+'px';node.style.top=p.y+'px';node.style.width=visualSize+'px';node.style.height=visualSize+'px';
-    node.style.opacity='';node.style.pointerEvents='';node.tabIndex=0;
+    const width=visualSize+'px';
+    node.style.left=p.x+'px';node.style.top=p.y+'px';
+    if(node.style.width!==width){node.style.width=width;node.style.height=width;}
+    if(node.style.opacity)node.style.opacity='';if(node.style.pointerEvents)node.style.pointerEvents='';
+    if(mobileLayout.matches){
+      const inViewport=p.x+radius>=0&&p.x-radius<=spiralFit.width&&p.y+radius>=0&&p.y-radius<=spiralFit.height;
+      queueMobileSpiralArt(node,art?(slot<=spiralEntries.length?spiralEntries[slot-1].genotype:builderGenotype):null,(art?(inViewport?0:1e9):2e9)+Math.hypot(p.x-spiralFit.x,p.y-spiralFit.y));
+    }else if(node.classList.contains('spiral-art-pending')){
+      // Crossing the responsive breakpoint must not leave a mobile job behind
+      // in the desktop's synchronous rendering path.
+      if(art)paintGenotypeCanvas(node.querySelector('canvas'),slotState(slot).genotype);
+      node.classList.remove('spiral-art-pending');mobileSpiralArtQueue.delete(node);
+    }
+    if(!node.classList.contains('spiral-art-pending')&&node.tabIndex!==0)node.tabIndex=0;
     node.classList.toggle('selected',selectedSlot===slot);
   }
-  for(const [slot,node] of spiralNodes)if(!active.has(slot)){node.remove();spiralNodes.delete(slot);}
-  $('spiralPosition').textContent=window.first>window.last?`0 / ${total}`:`${window.first}–${window.last} / ${total}`;
-  $('spiralScrub').max=max;$('spiralScrub').value=spiralOffset;
-  $('spiralScrub').disabled=max===0;
+  for(const [slot,node] of spiralNodes)if(!active.has(slot)){mobileSpiralArtQueue.delete(node);mobileSpiralReveals.get(node)?.cancel();mobileSpiralReveals.delete(node);node.remove();spiralNodes.delete(slot);}
+  const positionLabel=window.first>window.last?`0 / ${total}`:`${window.first}–${window.last} / ${total}`;
+  if($('spiralPosition').textContent!==positionLabel)$('spiralPosition').textContent=positionLabel;
+  if($('spiralScrub').max!==String(max))$('spiralScrub').max=max;$('spiralScrub').value=spiralOffset;
+  if($('spiralScrub').disabled!==(max===0))$('spiralScrub').disabled=max===0;
   if(pinnedSlot!==null){const node=spiralNodes.get(pinnedSlot);if(node)placeTooltip(node);else clearPinned();}
 }
 function stopSpiral(){
   spiralTarget=spiralOffset;
+  if(mobileLayout.matches&&spiralIsVisible())settleMobileSpiralIntro();
 }
+function spiralMinZoom(){return .2;}
 function setSpiralIntroPhase(phase){
   spiralIntroPhase=phase;document.body.dataset.spiralIntro=phase;
 }
-function finishSpiralIntro(){
+function finishSpiralIntro(preserveOffset=false){
   if(spiralIntroFrame)cancelAnimationFrame(spiralIntroFrame);
-  spiralIntroFrame=0;spiralOffset=0;spiralTarget=0;spiralIntroLimit=Infinity;setSpiralIntroPhase('done');paintSpiralNodes();
+  spiralIntroFrame=0;spiralIntroPaintedAt=0;
+  if(preserveOffset)spiralTarget=spiralOffset;else spiralOffset=spiralTarget=0;
+  spiralIntroLimit=Infinity;setSpiralIntroPhase('done');paintSpiralNodes();
+  if(mobileLayout.matches){
+    if(preserveOffset){
+      if(mobileSpiralRevealFrame)cancelAnimationFrame(mobileSpiralRevealFrame);
+      mobileSpiralRevealFrame=mobileSpiralNextRevealAt=0;
+      for(const animation of mobileSpiralReveals.values())animation.cancel();mobileSpiralReveals.clear();
+      for(const node of spiralNodes.values())if(node.classList.contains('spiral-art-pending')&&node.dataset.spiralPrepared){node.classList.remove('spiral-art-pending');node.classList.add('spiral-art-ready');node.tabIndex=0;}
+    }
+    scheduleMobileSpiralReveal();
+  }
 }
 function animateSpiralIntro(time){
   spiralIntroFrame=0;
   if(!spiralIsVisible()){finishSpiralIntro();return;}
+  if(mobileLayout.matches&&spiralIntroPaintedAt&&time-spiralIntroPaintedAt<mobileSpiralFrameInterval){spiralIntroFrame=requestAnimationFrame(animateSpiralIntro);return;}
+  spiralIntroPaintedAt=time;
   const elapsed=time-spiralIntroStarted;
   if(spiralIntroPhase==='minted'){
-    const duration=Math.min(12000,Math.max(5500,spiralIntroMinted*350)),progress=Math.min(1,elapsed/duration);
+    const duration=mobileLayout.matches?Math.min(4200,Math.max(1600,spiralIntroMinted*55)):Math.min(12000,Math.max(5500,spiralIntroMinted*350)),progress=Math.min(1,elapsed/duration);
     const eased=progress<.5?2*progress*progress:1-Math.pow(-2*progress+2,2)/2;
     spiralOffset=spiralTarget=spiralIntroMinted*(1-eased);paintSpiralNodes();
     if(progress>=1){spiralOffset=spiralTarget=0;spiralIntroLimit=spiralIntroMinted+1;setSpiralIntroPhase('current');spiralIntroStarted=time;paintSpiralNodes();}
-  }else if(spiralIntroPhase==='current'&&elapsed>=850){
+  }else if(spiralIntroPhase==='current'&&elapsed>=(mobileLayout.matches?600:850)){
     setSpiralIntroPhase('future');spiralIntroStarted=time;
   }else if(spiralIntroPhase==='future'){
-    const futureCount=Math.max(0,spiralTotal()-spiralIntroMinted-1),duration=Math.min(3000,Math.max(1200,futureCount*60));
+    const futureCount=Math.max(0,spiralTotal()-spiralIntroMinted-1),duration=mobileLayout.matches?Math.min(1200,Math.max(500,futureCount*20)):Math.min(3000,Math.max(1200,futureCount*60));
     const progress=Math.min(1,elapsed/duration);
     spiralIntroLimit=spiralIntroMinted+1+Math.floor(futureCount*progress);paintSpiralNodes();
     if(progress>=1){finishSpiralIntro();return;}
@@ -1435,7 +1773,14 @@ function animateSpiralIntro(time){
 }
 function startSpiralIntro(){
   if(spiralIntroFrame)cancelAnimationFrame(spiralIntroFrame);
+  spiralIntroPaintedAt=0;
   spiralIntroMinted=spiralEntries.length;
+  if(mobileLayout.matches){
+    spiralOffset=spiralTarget=0;spiralIntroLimit=spiralIntroMinted||1;setSpiralIntroPhase(spiralIntroMinted?'minted':'current');paintSpiralNodes();
+    if(spiralMotion.matches){finishSpiralIntro();return;}
+    if(spiralIntroMinted){scheduleMobileSpiralReveal();return;}
+    spiralIntroStarted=performance.now();spiralIntroFrame=requestAnimationFrame(animateSpiralIntro);return;
+  }
   if(spiralIntroMinted){
     spiralIntroLimit=spiralIntroMinted;spiralOffset=spiralTarget=spiralIntroMinted;setSpiralIntroPhase('minted');
   }else{
@@ -1450,18 +1795,23 @@ function startSpiralIntro(){
 }
 function finishSpiralThreadIntro(){
   if(spiralThreadReady)return;
+  if(mobileLayout.matches&&!spiralIsVisible())return;
   if(spiralThreadFrame)cancelAnimationFrame(spiralThreadFrame);spiralThreadFrame=0;
-  spiralThreadReady=true;$('stage').classList.remove('spiral-loading','spiral-loading-pending');
+  spiralThreadArmed=false;spiralThreadReady=true;$('stage').classList.remove('spiral-loading','spiral-loading-pending');
   if(spiralIntroPhase==='waiting'&&chainState.snapshot)startSpiralIntro();
 }
 function armSpiralThreadIntro(){
+  if(spiralThreadReady||spiralThreadArmed)return;
+  if(mobileLayout.matches&&!spiralIsVisible())return;
   if(spiralMotion.matches||!spiralIsVisible()){finishSpiralThreadIntro();return;}
   const stage=$('stage'),path=$('mainSpiral');
+  spiralThreadArmed=true;
   // The path receives its geometry at runtime. Keep it fully masked until that
   // geometry exists, then start a fresh one-stroke draw on the next frame.
   stage.classList.remove('spiral-loading');stage.classList.add('spiral-loading-pending');
-  requestAnimationFrame(()=>{
-    if(spiralThreadReady)return;
+  spiralThreadFrame=requestAnimationFrame(()=>{
+    spiralThreadFrame=0;
+    if(spiralThreadReady||(mobileLayout.matches&&!spiralIsVisible())){spiralThreadArmed=false;return;}
     stage.classList.add('spiral-loading');stage.classList.remove('spiral-loading-pending');
     const animation=path.getAnimations().find(item=>item.animationName==='spiral-loading-draw');
     if(!animation){finishSpiralThreadIntro();return;}
@@ -1469,24 +1819,58 @@ function armSpiralThreadIntro(){
     // never expose its artificial end. Begin the mushrooms once the brush has
     // covered every pixel the browser can actually show; do not wait for that
     // invisible safety tail.
-    const visibleOffset=1-spiralFit.visiblePathFraction;
+    const mobileEnd=Number.parseFloat(getComputedStyle(stage).getPropertyValue('--spiral-loading-end'));
+    const visibleOffset=mobileLayout.matches&&Number.isFinite(mobileEnd)?mobileEnd:1-spiralFit.visiblePathFraction;
+    const offsetTolerance=mobileLayout.matches?.5:.002;
     const watch=()=>{
       if(spiralThreadReady)return;
       const offset=Number.parseFloat(getComputedStyle(path).strokeDashoffset);
-      if(!Number.isFinite(offset)||offset<=visibleOffset+.002){finishSpiralThreadIntro();return;}
+      if(!Number.isFinite(offset)||offset<=visibleOffset+offsetTolerance){finishSpiralThreadIntro();return;}
       spiralThreadFrame=requestAnimationFrame(watch);
     };
     spiralThreadFrame=requestAnimationFrame(watch);
   });
 }
+function ensureMobileSpiralIntro(){
+  if(!mobileLayout.matches||spiralIntroPhase!=='waiting'||!spiralIsVisible())return;
+  if(chainState.snapshot){spiralIntroMinted=spiralEntries.length;spiralIntroLimit=spiralIntroMinted;spiralOffset=spiralTarget=0;paintSpiralNodes();}
+  if(!spiralThreadReady){armSpiralThreadIntro();return;}
+  if(chainState.snapshot)startSpiralIntro();
+}
+function settleMobileSpiralIntro(){
+  if(!mobileLayout.matches)return;
+  if(!spiralIsVisible()){
+    clearMobileSpiralArtQueue();
+    if(spiralFrame)cancelAnimationFrame(spiralFrame);spiralFrame=spiralTime=spiralPaintedAt=0;spiralTarget=spiralOffset;
+  }
+  if(spiralThreadFrame)cancelAnimationFrame(spiralThreadFrame);
+  spiralThreadFrame=0;spiralThreadArmed=false;
+  $('stage').classList.remove('spiral-loading','spiral-loading-pending');
+  if(spiralIntroPhase==='waiting'){
+    if(!spiralIsVisible()){
+      spiralThreadReady=false;
+      for(const [slot,node] of spiralNodes){node.remove();spiralNodes.delete(slot);}
+      return;
+    }
+    if(!chainState.snapshot){
+      spiralThreadReady=false;
+      if(spiralIsVisible())requestAnimationFrame(ensureMobileSpiralIntro);
+      return;
+    }
+    spiralThreadReady=true;finishSpiralIntro();return;
+  }
+  if(spiralIntroPhase!=='done')finishSpiralIntro(true);
+}
 function animateSpiral(time){
   spiralFrame=0;
+  if(mobileLayout.matches&&spiralPaintedAt&&time-spiralPaintedAt<mobileSpiralFrameInterval){spiralFrame=requestAnimationFrame(animateSpiral);return;}
+  spiralPaintedAt=time;
   const elapsed=Math.min(.05,(time-(spiralTime||time))/1000);spiralTime=time;
   const distance=spiralTarget-spiralOffset;
   spiralOffset=spiralMotion.matches?spiralTarget:Math.abs(distance)<.001?spiralTarget:spiralOffset+distance*(1-Math.exp(-elapsed*12));
   paintSpiralNodes();
   if(Math.abs(spiralTarget-spiralOffset)>.001)spiralFrame=requestAnimationFrame(animateSpiral);
-  else spiralTime=0;
+  else{spiralTime=0;spiralPaintedAt=0;}
 }
 function seekSpiral(offset,instant=false){
   clearPinned();
@@ -1494,18 +1878,26 @@ function seekSpiral(offset,instant=false){
   if(instant||spiralMotion.matches){spiralOffset=spiralTarget;paintSpiralNodes();}
   else if(!spiralFrame)spiralFrame=requestAnimationFrame(animateSpiral);
 }
-function changeSpiralZoom(factor){stopSpiral();zoom=Math.max(.2,Math.min(3.2,zoom*factor));clearPinned();paintView();}
+function changeSpiralZoom(factor){stopSpiral();zoom=Math.max(spiralMinZoom(),Math.min(3.2,zoom*factor));clearPinned();paintView();}
 document.addEventListener('keydown',event=>{if(event.key==='Escape')clearPinned();});
 $('zoomIn').onclick=()=>changeSpiralZoom(1.2);
 $('zoomOut').onclick=()=>changeSpiralZoom(1/1.2);
 $('reset').onclick=()=>{stopSpiral();zoom=1;seekSpiral(0,true);paintView();};
 $('spiralLatest').onclick=()=>{stopSpiral();seekSpiral(spiralEntries.length-Math.floor(spiralCount/2));};
 $('spiralScrub').oninput=event=>{stopSpiral();seekSpiral(Number(event.target.value),true);};
-let drag=null,dragFrame=0,dragPending=0,pinch=null,pinchFrame=0,pinchPendingZoom=1;
+let drag=null,dragFrame=0,dragPending=0,dragPaintedAt=0,pinch=null,pinchFrame=0,pinchPendingZoom=1,pinchPaintedAt=0;
 const gesturePointers=new Map(),universe=$('universe');
 const pointerDistance=points=>Math.hypot(points[0].x-points[1].x,points[0].y-points[1].y);
+function paintPinchFrame(time){
+  if(mobileLayout.matches&&pinchPaintedAt&&time-pinchPaintedAt<mobileSpiralFrameInterval){pinchFrame=requestAnimationFrame(paintPinchFrame);return;}
+  pinchFrame=0;pinchPaintedAt=time;if(pinch){zoom=pinchPendingZoom;paintView();}
+}
+function paintDragFrame(time){
+  if(mobileLayout.matches&&dragPaintedAt&&time-dragPaintedAt<mobileSpiralFrameInterval){dragFrame=requestAnimationFrame(paintDragFrame);return;}
+  dragFrame=0;dragPaintedAt=time;if(drag)seekSpiral(dragPending,true);
+}
 universe.addEventListener('pointerdown',event=>{
-  if(event.button!==0||event.target.closest('button,input'))return;
+  if(event.button!==0||event.target.closest('button,input,a'))return;
   stopSpiral();
   try{universe.setPointerCapture(event.pointerId);}catch{/* Synthetic and older pointer implementations can still use the gesture. */}
   universe.classList.add('dragging');clearPinned();
@@ -1513,8 +1905,8 @@ universe.addEventListener('pointerdown',event=>{
     gesturePointers.set(event.pointerId,{x:event.clientX,y:event.clientY});
     if(gesturePointers.size>1){
       const points=[...gesturePointers.values()].slice(0,2);
-      pinch={distance:Math.max(1,pointerDistance(points)),zoom};pinchPendingZoom=zoom;drag=null;
-    }else drag={id:event.pointerId,x:event.clientX,y:event.clientY,offset:spiralOffset};
+      pinch={distance:Math.max(1,pointerDistance(points)),zoom};pinchPendingZoom=zoom;pinchPaintedAt=0;drag=null;
+    }else{drag={id:event.pointerId,x:event.clientX,y:event.clientY,offset:spiralOffset};dragPaintedAt=0;}
     return;
   }
   drag={id:event.pointerId,x:event.clientX,y:event.clientY,offset:spiralOffset};
@@ -1524,20 +1916,21 @@ universe.addEventListener('pointermove',event=>{
     gesturePointers.set(event.pointerId,{x:event.clientX,y:event.clientY});
     if(pinch&&gesturePointers.size>1){
       event.preventDefault();
-      pinchPendingZoom=Math.max(.2,Math.min(3.2,pinch.zoom*pointerDistance([...gesturePointers.values()].slice(0,2))/pinch.distance));
-      if(!pinchFrame)pinchFrame=requestAnimationFrame(()=>{pinchFrame=0;zoom=pinchPendingZoom;paintView();});
+      pinchPendingZoom=Math.max(spiralMinZoom(),Math.min(3.2,pinch.zoom*pointerDistance([...gesturePointers.values()].slice(0,2))/pinch.distance));
+      if(!pinchFrame)pinchFrame=requestAnimationFrame(paintPinchFrame);
       return;
     }
   }
   if(!drag)return;dragPending=drag.offset+(drag.x-event.clientX)/65;
-  if(!dragFrame)dragFrame=requestAnimationFrame(()=>{dragFrame=0;if(drag)seekSpiral(dragPending,true);});
+  if(!dragFrame)dragFrame=requestAnimationFrame(paintDragFrame);
 });
 for(const name of ['pointerup','pointercancel','lostpointercapture'])universe.addEventListener(name,event=>{
   if(drag&&dragFrame){cancelAnimationFrame(dragFrame);dragFrame=0;seekSpiral(dragPending,true);}
+  if(pinchFrame){cancelAnimationFrame(pinchFrame);pinchFrame=0;if(pinch){zoom=pinchPendingZoom;paintView();}}
   gesturePointers.delete(event.pointerId);
   if(pinch&&gesturePointers.size===1){
-    const [id,point]=gesturePointers.entries().next().value;drag={id,x:point.x,y:point.y,offset:spiralOffset};pinch=null;
-  }else if(!gesturePointers.size){drag=null;pinch=null;universe.classList.remove('dragging');}
+    const [id,point]=gesturePointers.entries().next().value;drag={id,x:point.x,y:point.y,offset:spiralOffset};dragPaintedAt=0;pinch=null;
+  }else if(!gesturePointers.size){drag=null;pinch=null;dragPaintedAt=pinchPaintedAt=0;universe.classList.remove('dragging');}
 });
 universe.addEventListener('wheel',event=>{
   if(event.target.closest('input'))return;
@@ -1554,21 +1947,36 @@ universe.addEventListener('keydown',event=>{
   if(event.key==='Home'||event.key==='End'){stopSpiral();seekSpiral(event.key==='Home'?0:spiralTravelMax());}
   if(event.key==='+')changeSpiralZoom(1.2);if(event.key==='-')changeSpiralZoom(1/1.2);
 });
-const spiralResize=new ResizeObserver(()=>{clearPinned();paintView();});
-for(const element of [universe,universe.querySelector('.spiral-controls')])spiralResize.observe(element);
-new MutationObserver(()=>{if(universe.hidden)stopSpiral();}).observe(universe,{attributes:true,attributeFilter:['hidden']});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)stopSpiral();});
-spiralMotion.addEventListener('change',()=>stopSpiral());
+const spiralResize=new ResizeObserver(()=>{
+  clearPinned();
+  if(mobileLayout.matches&&spiralIsVisible())scheduleSpiralPaint();
+  else paintView();
+});
+for(const element of [universe,universe.querySelector('.spiral-controls'),$('spiral-view')])spiralResize.observe(element);
+new MutationObserver(()=>{if(universe.hidden){settleMobileSpiralIntro();stopSpiral();}}).observe(universe,{attributes:true,attributeFilter:['hidden']});
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){settleMobileSpiralIntro();stopSpiral();if(mobileLayout.matches)collectionPaintObserver?.disconnect();}
+  else if(mobileLayout.matches){if(spiralIsVisible())scheduleSpiralPaint();if(currentView==='forest')renderGallery();}
+});
+spiralMotion.addEventListener('change',()=>{
+  stopSpiral();
+  if(mobileLayout.matches&&spiralMotion.matches){
+    if(mobileSpiralRevealFrame)cancelAnimationFrame(mobileSpiralRevealFrame);
+    mobileSpiralRevealFrame=mobileSpiralNextRevealAt=0;
+    $('nodes').getAnimations({subtree:true}).forEach(animation=>animation.cancel());mobileSpiralReveals.clear();
+    for(const node of spiralNodes.values())if(node.classList.contains('spiral-art-pending')&&node.dataset.spiralPrepared){node.classList.remove('spiral-art-pending');node.classList.add('spiral-art-ready');node.tabIndex=0;}
+  }
+});
 window.addEventListener('hashchange',()=>{
   const previousGenotype=[...builderGenotype],wasSelected=selectedSlot!==null;
   parseHash();rememberLook();selectedSlot=null;clearPinned();
   if(pendingTokenId&&showToken(pendingTokenId))return;
   if(wasSelected||!sameGenotype(previousGenotype,builderGenotype)){renderSidebar();updateNextNode();}
   if(!$('traitCatalog').hidden)renderCatalog();
-  showView(currentView,true);
+  showView(currentView,true,mobileLayout.matches&&currentView==='spiral'&&mobileSurface==='spiral');
 });
 new MutationObserver(syncMobileStatus).observe($('chainStatus'),{childList:true,characterData:true,subtree:true});
-mobileLayout.addEventListener('change',()=>{syncMobileShell();renderSidebar();paintView();});
+mobileLayout.addEventListener('change',()=>{clearMobileSpiralArtQueue();syncMobileShell();renderSidebar();paintView();if(currentView==='forest')renderGallery();});
 restoreWishlist();restoreGridSize();syncGridSize();restoreLooks();parseHash();rememberLook();drawSpiral();paintView();armSpiralThreadIntro();renderSidebar();buildNodes();showView(currentView);syncURL();
 setupPrivacyNotice();
 $('summaryCurrent').textContent='—';
@@ -1584,6 +1992,7 @@ window.myFriendsUI={genotype:()=>[...builderGenotype],paint:(canvas,genotype)=>p
       phase:record.phase||'allowlist',name:'Mycelium Friend #'+tokenId,confirmedByReceipt:true};
     receiptEntries.set(tokenId,entry);
     if(!spiralEntries.some(item=>item.tokenId===tokenId))spiralEntries=[...spiralEntries,entry].sort((a,b)=>Number(a.tokenId)-Number(b.tokenId));
+    collectionRevision++;
     mintedGenotypes.add(genotypeKey(entry.genotype));buildNodes();
     if(currentView==='forest')renderGallery();if(currentView==='myfriends')renderMyFriends();if(currentView==='wishlist')renderWishlist();if(currentView==='history')renderHistoryCatalog();renderSidebar();
   },
@@ -1597,16 +2006,21 @@ window.dispatchEvent(new Event('myfriends:ui-ready'));
 window.addEventListener('myfriends:state',event=>{
   const state=event.detail,previous=chainState;
   const historyKey=s=>(s.snapshot?.records||[]).map(r=>r.tokenId+':'+r.transactionHash+':'+r.owner).join(',');
-  const changed=previous.deployment?.id!==state.deployment?.id||historyKey(state)!==historyKey(previous);
+  const snapshotAvailabilityChanged=Boolean(previous.snapshot)!==Boolean(state.snapshot);
+  const changed=previous.deployment?.id!==state.deployment?.id||snapshotAvailabilityChanged||historyKey(state)!==historyKey(previous);
   const snapshotChanged=previous.snapshot?.blockNumber!==state.snapshot?.blockNumber||previous.snapshot?.blockHash!==state.snapshot?.blockHash;
   const snapshotIds=new Set((state.snapshot?.records||[]).map(entry=>String(entry.tokenId)));
   const receiptsChanged=snapshotChanged&&[...receiptEntries].some(([tokenId,entry])=>snapshotIds.has(tokenId)||(state.snapshot&&state.snapshot.blockNumber>=entry.blockNumber));
   const preparedKey=s=>(s.preparedMints||[]).map(item=>item.genotype.join(',')+':'+item.status).join('|');
   const preparedChanged=preparedKey(previous)!==preparedKey(state);
+  const profilesKey=profiles=>Object.entries(profiles||{}).map(([address,profile])=>[address,profile.displayName,profile.source,profile.profileUrl||'',profile.avatarUrl||''].join(':')).join('|');
+  const profilesChanged=profilesKey(previous.profiles)!==profilesKey(state.profiles);
+  if(profilesChanged)collectionProfilesRevision++;
   chainState=state;
   syncDocumentTitle();
   renderFooterNetworkLinks();
   if(changed||receiptsChanged){
+    collectionRevision++;
     const deploymentChanged=previous.deployment?.id!==state.deployment?.id;
     if(deploymentChanged){if(spiralIntroFrame)cancelAnimationFrame(spiralIntroFrame);spiralIntroFrame=0;setSpiralIntroPhase('waiting');}
     if(previous.deployment?.id!==state.deployment?.id)receiptEntries.clear();
@@ -1620,14 +2034,19 @@ window.addEventListener('myfriends:state',event=>{
     // and appends newer blocks in the background, so visitors see the known
     // collection without waiting for the RPC scan.
     mintedGenotypes=new Set(spiralEntries.map(entry=>genotypeKey(entry.genotype)));
-    if(previous.deployment?.id!==state.deployment?.id){selectedSlot=null;galleryLimit=24;clearPinned();}
+    if(previous.deployment?.id!==state.deployment?.id){selectedSlot=null;galleryLimit=24;collectionNewestFirst=true;clearPinned();}
     if(selectedSlot>spiralEntries.length)selectedSlot=null;
-    const beginIntro=spiralThreadReady&&spiralIntroPhase==='waiting'&&Boolean(state.snapshot);
+    if(mobileLayout.matches&&spiralIntroPhase==='waiting'&&!spiralIsVisible())settleMobileSpiralIntro();
+    const beginIntro=spiralThreadReady&&spiralIntroPhase==='waiting'&&Boolean(state.snapshot)&&(!mobileLayout.matches||spiralIsVisible());
     if(beginIntro)startSpiralIntro();else buildNodes();
     if(currentView==='forest')renderGallery();if(currentView==='myfriends')renderMyFriends();if(currentView==='wishlist')renderWishlist();if(currentView==='history')renderHistoryCatalog();
     if(pendingTokenId)showToken(pendingTokenId);
   }
   if(!changed&&previous.ready!==state.ready&&currentView==='forest')renderGallery();
+  if(profilesChanged){
+    if(currentView==='forest')renderGallery();if(selectedSlot)renderSidebar();
+    if(pinnedSlot!==null){const node=spiralNodes.get(pinnedSlot);if(node)showSlot(pinnedSlot,node,true);}
+  }
   if((changed||previous.account!==state.account||previous.walletChecking!==state.walletChecking||previous.walletEnabled!==state.walletEnabled)&&currentView==='myfriends')renderMyFriends();
   if(changed||preparedChanged||previous.ready!==state.ready||previous.busy!==state.busy||previous.snapshot?.price!==state.snapshot?.price||
     previous.snapshot?.publicOpen!==state.snapshot?.publicOpen||previous.snapshot?.salePhase!==state.snapshot?.salePhase||previous.account!==state.account||previous.walletEnabled!==state.walletEnabled)renderSidebar();

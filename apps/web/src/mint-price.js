@@ -6,7 +6,8 @@ export function mintBatchPrice(minted, quantity=1n) {
 }
 export function formatMintETH(wei) {
   if(typeof wei!=='bigint'||wei<0n)throw new RangeError('Invalid ETH amount.');
-  return (wei/10n**18n)+'.'+(wei%10n**18n).toString().padStart(18,'0').replace(/0+$/,'').padEnd(5,'0');
+  const whole=wei/10n**18n,fraction=(wei%10n**18n).toString().padStart(18,'0').replace(/0+$/,'');
+  return fraction?whole+'.'+fraction:String(whole);
 }
 export function saleMintPrice({salePhase,publicMinted=0n},quantity=1n){
   if(!Number.isInteger(salePhase)||salePhase<0||salePhase>3||typeof quantity!=='bigint'||quantity<1n||quantity>32n)throw new RangeError('Invalid sale quote.');

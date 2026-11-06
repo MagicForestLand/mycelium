@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {ZeroAddress} from 'ethers';
 import {CHAIN_SNAPSHOT_VERSION,allowlistMessage,appendMintLogs,chainInterface,deploymentKey,friendlyError,mintReceiptToken,mintReceiptTokenId,mintReceiptForGenotype,mintReceiptPayment,tokenExplorerURL,validateDeployment} from '../../../../apps/web/src/chain-core.js';
-import {ChainReader,fetchAndSeedSnapshot,snapshotFromEnvelope,validateChainSnapshot} from '../../../../apps/web/src/chain-reader.js';
+import {ChainReader,fetchAndSeedSnapshot,fetchMinterProfiles,snapshotFromEnvelope,validateChainSnapshot} from '../../../../apps/web/src/chain-reader.js';
 const buyer='0x1111111111111111111111111111111111111111',address='0x2222222222222222222222222222222222222222';
 test('allowlist allowance copy covers waiting, remaining, complete and ineligible wallets',()=>{
   assert.equal(allowlistMessage(0,0),'This wallet has no allowlist mints.');
@@ -67,6 +67,7 @@ test('deployment identity isolates chain, collection and local resets; public RP
   assert.notEqual(deploymentKey(d),deploymentKey({...d,deploymentHash:'0x'+'d'.repeat(64)}));
   assert.notEqual(deploymentKey(d),deploymentKey({...d,address:buyer}));
   assert.throws(()=>validateDeployment({...d,chainId:1}),/HTTPS/);
+  assert.throws(()=>validateDeployment({...d,profilesUrl:'http://profiles.example'}),/HTTPS/);
   assert.throws(()=>validateDeployment({...d,address:ZeroAddress}),/Invalid/);
   assert.throws(()=>validateDeployment({...d,mintProtocol:'legacy-direct'}),/current protected mint protocol/);
   assert.throws(()=>validateDeployment({...d,saleLifecycle:undefined}),/current phased sale lifecycle/);
@@ -97,7 +98,9 @@ test('remote snapshot seeds empty storage but never replaces a newer local snaps
   const reader=new ChainReader(d,d.catalogHash,storage,1000,[32,128,32,16,4,32]);
   const make=blockNumber=>({version:CHAIN_SNAPSHOT_VERSION,deployment:{id:d.id,chainId:d.chainId,address:d.address,deploymentBlock:d.deploymentBlock,deploymentHash:d.deploymentHash,codeHash:d.codeHash,catalogHash:d.catalogHash},snapshot:{version:CHAIN_SNAPSHOT_VERSION,records:[],publicOpen:false,salePhase:0,total:0,cap:1000,publicMinted:0,allowlistMinted:0,price:'0',blockNumber,blockHash:'0x'+'f'.repeat(64),updatedAt:blockNumber}});
   assert.equal(reader.seedSnapshot(make(12)),true);assert.equal(reader.snapshot.blockNumber,12);assert.ok(values.get(reader.key));
-  assert.equal(reader.seedSnapshot(make(11)),false);assert.equal(reader.snapshot.blockNumber,12);reader.destroy();
+  assert.equal(reader.seedSnapshot(make(11)),false);assert.equal(reader.snapshot.blockNumber,12);
+  assert.equal(reader.seedSnapshot(make(11),{replace:true}),false);
+  assert.equal(reader.seedSnapshot(make(12),{replace:true}),true);reader.destroy();
 });
 test('snapshot API seed requires a matching canonical and recent block',async()=>{
   const d={id:'remote-api',label:'Remote',networkName:'Ethereum',mintProtocol:'commit-reveal-v1',saleLifecycle:'phased-v1',chainId:1,address,rpcUrl:'https://rpc.example',snapshotUrl:'https://cache.example/snapshot',deploymentBlock:10,deploymentHash:'0x'+'a'.repeat(64),codeHash:'0x'+'b'.repeat(64),catalogHash:'c'.repeat(64)};
@@ -112,6 +115,60 @@ test('snapshot API seed requires a matching canonical and recent block',async()=
   reader.provider.getBlockNumber=async()=>300;await assert.rejects(()=>fetchAndSeedSnapshot(reader,d.snapshotUrl,{fetchImpl}),/stale/);
   reader.provider.getBlockNumber=async()=>120;reader.provider.getBlock=async()=>({hash:'0x'+'0'.repeat(64)});await assert.rejects(()=>fetchAndSeedSnapshot(reader,d.snapshotUrl,{fetchImpl}),/not canonical/);
   reader.destroy();
+});
+test('snapshot API failures preserve bounded Retry-After guidance for background recovery',async()=>{
+  const d={id:'remote-retry',label:'Remote',networkName:'Ethereum',mintProtocol:'commit-reveal-v1',saleLifecycle:'phased-v1',chainId:1,address,rpcUrl:'https://rpc.example',snapshotUrl:'https://cache.example/snapshot',deploymentBlock:10,deploymentHash:'0x'+'a'.repeat(64),codeHash:'0x'+'b'.repeat(64),catalogHash:'c'.repeat(64)};
+  const reader=new ChainReader(d,d.catalogHash,null,1000,[32,128,32,16,4,32]);
+  await assert.rejects(
+    ()=>fetchAndSeedSnapshot(reader,d.snapshotUrl,{fetchImpl:async()=>({ok:false,status:429,headers:{get:name=>name==='retry-after'?'3':null}})}),
+    error=>error.message==='Snapshot API unavailable.'&&error.status===429&&error.retryAfterMs===3000
+  );
+  await assert.rejects(
+    ()=>fetchAndSeedSnapshot(reader,d.snapshotUrl,{fetchImpl:async()=>({ok:false,status:503,headers:{get:()=> '3600'}})}),
+    error=>error.status===503&&error.retryAfterMs===60_000
+  );
+  await assert.rejects(
+    ()=>fetchAndSeedSnapshot(reader,d.snapshotUrl,{fetchImpl:async()=>({ok:false,status:503,headers:{get:()=>null}})}),
+    error=>error.status===503&&!Object.hasOwn(error,'retryAfterMs')
+  );
+  const retryDate=new Date(Date.now()+3_000).toUTCString();
+  await assert.rejects(
+    ()=>fetchAndSeedSnapshot(reader,d.snapshotUrl,{fetchImpl:async()=>({ok:false,status:429,headers:{get:()=>retryDate}})}),
+    error=>error.status===429&&error.retryAfterMs>=1_000&&error.retryAfterMs<=4_000
+  );
+  reader.destroy();
+});
+test('a non-canonical browser cache is invalidated so the API can reseed recovery',async()=>{
+  const d={id:'reorg-recovery',label:'Remote',networkName:'Ethereum',mintProtocol:'commit-reveal-v1',saleLifecycle:'phased-v1',chainId:1,address,rpcUrl:'https://rpc.example',snapshotUrl:'https://cache.example/snapshot',deploymentBlock:10,deploymentHash:'0x'+'a'.repeat(64),codeHash:'0x'+'b'.repeat(64),catalogHash:'c'.repeat(64)};
+  const blockHash='0x'+'f'.repeat(64),record={tokenId:'1',genotype:[1,2,3,4,0,1],price:'0',phase:'allowlist',step:0,buyer,owner:buyer,transactionHash:'0x'+'d'.repeat(64),blockNumber:100};
+  const snapshot={version:CHAIN_SNAPSHOT_VERSION,records:[record],publicOpen:false,salePhase:1,total:1,cap:1000,publicMinted:0,allowlistMinted:1,price:'0',blockNumber:100,blockHash,updatedAt:1};
+  const envelope={version:CHAIN_SNAPSHOT_VERSION,deployment:{id:d.id,chainId:d.chainId,address:d.address,deploymentBlock:d.deploymentBlock,deploymentHash:d.deploymentHash,codeHash:d.codeHash,catalogHash:d.catalogHash},snapshot};
+  const removed=[];const storage={getItem:()=>null,setItem(){},removeItem:key=>removed.push(key),key:()=>null,length:0};
+  const reader=new ChainReader(d,d.catalogHash,storage,1000,[32,128,32,16,4,32]);reader.snapshot=snapshot;reader.verify=async()=>{};
+  reader.provider.getBlockNumber=async()=>102;reader.provider.getBlock=async()=>({hash:'0x'+'0'.repeat(64)});
+  reader.contract={totalMinted:async()=>1n,saleCap:async()=>1000n,publicMinted:async()=>0n,allowlistMinted:async()=>1n,salePhase:async()=>1n};
+  await assert.rejects(()=>reader.read(),/verified collection snapshot/);
+  assert.equal(reader.snapshot,null);assert.deepEqual(removed,[reader.key]);
+  reader.provider.getBlock=async()=>({hash:blockHash});
+  assert.equal(await fetchAndSeedSnapshot(reader,d.snapshotUrl,{fetchImpl:async()=>({ok:true,json:async()=>envelope})}),true);
+  assert.equal(reader.snapshot.blockHash,blockHash);reader.destroy();
+});
+test('minter profiles accept only bounded public-safe names and HTTPS links',async()=>{
+  const profile={displayName:'Forest Friend',source:'magic_forest',profileUrl:'https://magicforest.land/friend',avatarUrl:'https://magicforest.land/api/mycelium/minter-avatar/0x1111111111111111111111111111111111111111?v='+'a'.repeat(64)};
+  const fetchImpl=async()=>({ok:true,json:async()=>({version:1,profiles:{[buyer]:profile}})});
+  const profiles=await fetchMinterProfiles('https://cache.example/minter-profiles',{fetchImpl});
+  assert.deepEqual({...profiles.profiles[buyer]},profile);
+  const emoji='🌳'.repeat(41),other='0x3333333333333333333333333333333333333333';
+  const isolated=await fetchMinterProfiles('https://cache.example/minter-profiles',{fetchImpl:async()=>({ok:true,json:async()=>({version:1,profiles:{
+    [buyer]:{...profile,displayName:emoji},
+    [other]:{...profile,profileUrl:'javascript:alert(1)'},
+    [address.toUpperCase()]:profile
+  }})})});
+  assert.equal(isolated.profiles[buyer].displayName,emoji);
+  assert.equal(isolated.profiles[other],undefined);
+  assert.equal(isolated.profiles[address],undefined);
+  const expired=await fetchMinterProfiles('https://cache.example/minter-profiles',{fetchImpl:async()=>({ok:true,json:async()=>({version:1,expiresAt:Date.now()-1,profiles:{[buyer]:profile}})})});
+  assert.equal(expired.profiles[buyer],undefined);
 });
 test('10001 records are valid collection state but oversized snapshots stay out of localStorage',()=>{
   const d={id:'large-cache',label:'Large',networkName:'Local',mintProtocol:'commit-reveal-v1',saleLifecycle:'phased-v1',chainId:31337,address,rpcUrl:'http://127.0.0.1:8545',deploymentBlock:1,deploymentHash:'0x'+'a'.repeat(64),codeHash:'0x'+'b'.repeat(64),catalogHash:'c'.repeat(64)};

@@ -28,7 +28,7 @@ generate it with `npm run local:deploy`.
 | `apps/web/config/mainnet-site.json` | `wallet` | Connect a wallet and mint when the contract phase allows it |
 
 Both profiles derive one chain-1 configuration from the verified deployment
-record plus explicit public RPC, snapshot and explorer settings. Wallet mode
+record plus explicit public RPC, snapshot, minter-profile and explorer settings. Wallet mode
 also requires the reviewed Reown project and metadata. The exporter writes an
 ignored static site under `output/site/`, publishes an explicit file allowlist,
 hashes executable/style entry points, and records SHA-256 values and the mode in
@@ -42,6 +42,12 @@ header identifies the site as a read-only preview, mint actions stay disabled,
 and myFriends explains that wallet access is unavailable. Chain and snapshot
 reads continue normally, so reviewers see the configured mainnet collection and
 can inspect its canonical history without any transaction path.
+
+The Render staging profile is a read-only frontend gate, not a separate chain
+or backend environment: it reads Ethereum mainnet and the production Magic
+Forest snapshot/profile endpoints. Backend production must therefore pass its
+own smoke and privacy checks before this staging site can validate a frontend
+candidate against live data.
 
 ## Mint and wallet boundaries
 
@@ -209,6 +215,12 @@ The production reader continues from the snapshot using recent contract logs; wh
 skips the empty log history entirely; once records exist it reads logs in bounded,
 ordered ranges. Snapshots larger than 2 MB remain usable in memory but are not
 written to `localStorage`; this cache threshold is not a collection or sale cap.
+
+The separate HTTPS `profilesUrl` is presentation-only. Its bounded, expiring
+response may add a public display name, profile link and avatar for an address.
+The interface resolves that profile against each token's current snapshot
+`owner`, falls back to the shortened on-chain address when no profile is
+available, and never uses profile data as ownership or transaction authority.
 
 After the opening sequence, continuous playback is opt-in and stops on inspection,
 navigation away, or a hidden browser tab.

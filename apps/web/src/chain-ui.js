@@ -4,7 +4,7 @@ import {xComposerURL,xPostText} from './x-share.js';
 const TRAIT_COUNTS=__TRAIT_COUNTS__;
 import {BrowserProvider,Contract,formatEther,toQuantity,keccak256} from 'ethers';
 import {ABI,allowlistMessage,deploymentKey,friendlyError,mintReceiptForGenotype,mintReceiptPayment,tokenExplorerURL,validateDeployment} from './chain-core.js';
-import {ChainReader,fetchAndSeedSnapshot} from './chain-reader.js';
+import {ChainReader,fetchAndSeedSnapshot,fetchMinterProfiles} from './chain-reader.js';
 import {emitMintEvidence,newMintEvidenceId} from './mint-telemetry.js';
 
 const $=id=>document.getElementById(id);
@@ -12,6 +12,8 @@ if(!window.myFriendsUI)await new Promise(resolve=>window.addEventListener('myfri
 const ui=window.myFriendsUI;
 let config,reader,deployment,walletProvider,account=null,walletChain=null,kit,kitLoading;
 let refreshing=false,ready=false,busy=false,pending=null,quote=null,pollTimer,receiptChecking=false;
+let snapshotSeeding=null,snapshotSeedFailures=0,snapshotRetryAt=0;
+let minterProfiles=Object.create(null),profilesLoading=null,profilesLoadedAt=0,profilesExpireAt=0,profilesExpiryTimer=null;
 let walletChecking=true;
 let closeProtectedMint,protectedResume;
 let mintContext=null,mintIntent=false,celebrationTimer;
@@ -46,10 +48,11 @@ function restoreProtection(){
   }catch{}
 }
 function emit(){
+  expireMinterProfiles(false);
   restoreProtection();
   const preparedMints=(protectedMintRecords()?.records??[]).flatMap(record=>record.selections.map(genotype=>({genotype:[...genotype],status:mintProgressLabel(record)})));
   const canUseWallet=walletEnabled();
-  window.dispatchEvent(new CustomEvent('myfriends:state',{detail:{snapshot:reader?.snapshot,ready,busy,account,deployment,walletChecking:canUseWallet&&walletChecking,walletEnabled:canUseWallet,preparedMints}}));
+  window.dispatchEvent(new CustomEvent('myfriends:state',{detail:{snapshot:reader?.snapshot,profiles:minterProfiles,ready,busy,account,deployment,walletChecking:canUseWallet&&walletChecking,walletEnabled:canUseWallet,preparedMints}}));
   $('wallet').dataset.state=!canUseWallet?'read-only':walletChecking?'checking':account?'connected':'disconnected';
   $('wallet').disabled=!canUseWallet||walletChecking;
   $('wallet').textContent=!canUseWallet
@@ -68,6 +71,18 @@ function emit(){
       ?'Open wallet menu'
       :'Connect wallet';
   $('deploymentSelect').disabled=busy;
+}
+function expireMinterProfiles(notify=true){
+  if(!profilesExpireAt||Date.now()<profilesExpireAt)return false;
+  clearTimeout(profilesExpiryTimer);profilesExpiryTimer=null;
+  minterProfiles=Object.create(null);profilesLoadedAt=0;profilesExpireAt=0;
+  if(notify)emit();return true;
+}
+function scheduleMinterProfileExpiry(){
+  clearTimeout(profilesExpiryTimer);profilesExpiryTimer=null;
+  if(!profilesExpireAt)return;
+  const delay=Math.max(0,profilesExpireAt-Date.now());
+  profilesExpiryTimer=setTimeout(()=>expireMinterProfiles(),delay);
 }
 function renderMintDetails(){
   const details=$('mintDetails');details.replaceChildren();
@@ -643,14 +658,58 @@ async function refresh(){
   }catch(error){if(reader!==active)return;ready=false;$('chainStatus').dataset.ready='false';notice((reader.snapshot?'Saved myFriends · Connection interrupted. ':'')+friendlyError(error),'error');}
   finally{if(reader===active){refreshing=false;emit();}}
 }
-async function seedFromSnapshotApi(active,deployment){
+async function seedFromSnapshotApi(active,deployment,replace=false){
   const snapshotUrl=deployment.snapshotUrl;
   if(!snapshotUrl)return false;
-  return fetchAndSeedSnapshot(active,snapshotUrl);
+  return fetchAndSeedSnapshot(active,snapshotUrl,{replace});
+}
+function snapshotRetryDelay(error){
+  if(Number.isFinite(error?.retryAfterMs))return error.retryAfterMs;
+  return Math.min(60_000,2_000*2**Math.min(snapshotSeedFailures,5));
+}
+async function seedMissingSnapshot(active=reader,{force=false}={}){
+  if(!active||active!==reader||(!force&&active.snapshot)||!active.deployment.snapshotUrl)return false;
+  if(!force&&Date.now()<snapshotRetryAt)return false;
+  if(snapshotSeeding?.reader===active)return snapshotSeeding.promise;
+  const promise=seedFromSnapshotApi(active,active.deployment,force).then(seeded=>{
+    snapshotSeedFailures=0;snapshotRetryAt=0;
+    if(seeded&&reader===active){emit();notice('Showing recent myFriends · Verifying with '+active.deployment.networkName+'…');}
+    return seeded;
+  }).catch(error=>{
+    snapshotSeedFailures++;snapshotRetryAt=Date.now()+snapshotRetryDelay(error);throw error;
+  }).finally(()=>{if(snapshotSeeding?.promise===promise)snapshotSeeding=null;});
+  snapshotSeeding={reader:active,promise};return promise;
+}
+async function recoverAndRefresh({forceSnapshot=false}={}){
+  const active=reader;if(!active)return;
+  if(!active.snapshot||forceSnapshot){try{await seedMissingSnapshot(active,{force:forceSnapshot});}catch{/* Refresh reports the safe user-facing state below. */}}
+  if(reader!==active)return;
+  await refresh();
+  if(reader===active&&!active.snapshot){
+    try{await seedMissingSnapshot(active,{force:forceSnapshot});}catch{return;}
+    if(reader===active&&active.snapshot)await refresh();
+  }
+}
+async function refreshMinterProfiles(active=reader,{force=false}={}){
+  if(!active||active!==reader||!active.deployment.profilesUrl)return false;
+  expireMinterProfiles();
+  if(!force&&Date.now()-profilesLoadedAt<300_000)return false;
+  if(profilesLoading?.reader===active)return profilesLoading.promise;
+  const promise=fetchMinterProfiles(active.deployment.profilesUrl).then(result=>{
+    if(reader!==active)return false;
+    minterProfiles=result.profiles;profilesLoadedAt=Date.now();profilesExpireAt=result.expiresAt;scheduleMinterProfileExpiry();emit();return true;
+  }).catch(()=>{
+    if(reader===active&&profilesLoadedAt&&Date.now()>=profilesExpireAt){minterProfiles=Object.create(null);profilesLoadedAt=0;profilesExpireAt=0;emit();}
+    return false;
+  }).finally(()=>{if(profilesLoading?.promise===promise)profilesLoading=null;});
+  profilesLoading={reader:active,promise};return promise;
 }
 async function selectDeployment(id){
   if(busy)return;
   clearTimeout(pollTimer);reader?.destroy();ready=false;quote=null;busy=false;
+  snapshotSeeding=null;snapshotSeedFailures=0;snapshotRetryAt=0;
+  clearTimeout(profilesExpiryTimer);profilesExpiryTimer=null;
+  minterProfiles=Object.create(null);profilesLoading=null;profilesLoadedAt=0;profilesExpireAt=0;
   deployment=config.deployments.find(d=>d.id===id);if(!deployment)throw Error('Unknown deployment.');
   reader=new ChainReader(deployment,__CATALOG_HASH__,undefined,__GENOTYPE_SPACE__,TRAIT_COUNTS);
   const active=reader;
@@ -667,24 +726,23 @@ async function selectDeployment(id){
     }
   }catch{}
   emit();notice(reader.snapshot?'Showing saved myFriends · Checking the network…':'Connecting to '+deployment.networkName+'…');
-  try{
-    if(await seedFromSnapshotApi(active,deployment)&&reader===active){emit();notice('Showing recent myFriends · Verifying with '+deployment.networkName+'…');}
-  }catch{/* The pinned RPC remains the source of truth and continues below. */}
+  refreshMinterProfiles(active,{force:true});
+  try{await seedMissingSnapshot(active,{force:true});}catch{/* The pinned RPC remains the source of truth and recovery continues below. */}
   if(reader!==active)return;
   refresh().then(async()=>{if(reader===active)await checkPending();}).finally(()=>{if(reader===active)schedule();});
 }
 function schedule(){clearTimeout(pollTimer);pollTimer=setTimeout(async()=>{
-  if(!document.hidden){await refresh();await checkPending();}schedule();
-},pending?4000:45000);}
+  if(!document.hidden){await Promise.all([recoverAndRefresh(),refreshMinterProfiles()]);await checkPending();}schedule();
+},pending?4000:reader&&!reader.snapshot?Math.max(1_000,snapshotRetryAt-Date.now()):45000);}
 $('wallet').onclick=()=>connect().catch(showError);
 $('closeMint').onclick=()=>$('mintDialog').close();
 $('mintDialog').addEventListener('close',()=>{if(!pending){cancelPreflight('closed');if($('mintDialog').classList.contains('is-protected')){busy=false;emit();}}closeProtectedMint?.();mintIntent=false;mintContext=null;kit?.close();if(!account&&walletChecking){walletChecking=false;emit();}clearTimeout(celebrationTimer);$('mintCelebration').replaceChildren();});
-$('retryChain').onclick=()=>refresh();
+$('retryChain').onclick=()=>recoverAndRefresh({forceSnapshot:true});
 $('deploymentSelect').onchange=event=>selectDeployment(event.target.value).catch(showError);
 window.addEventListener('myfriends:mint',()=>reviewMint().catch(showError));
 window.addEventListener('myfriends:disconnect',()=>disconnectWallet().catch(showError));
-document.addEventListener('visibilitychange',()=>{if(!document.hidden){refresh();checkPending();}});
-window.addEventListener('online',()=>refresh());
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){expireMinterProfiles();recoverAndRefresh();refreshMinterProfiles(reader,{force:true});checkPending();}});
+window.addEventListener('online',()=>recoverAndRefresh({forceSnapshot:true}));
 async function start(){
   const response=await fetch(__CHAIN_CONFIG_PATH__,{cache:'no-store'});if(!response.ok)throw Error('Unable to load collection configuration.');
   config=await response.json();if(config.version!==1 || !Array.isArray(config.deployments))throw Error('Invalid collection configuration.');
