@@ -60,7 +60,7 @@ test('FINAL CHECK: orphaned receipt overlay expires when canonical history catch
   const previous = {deployment:{id:'audit'},snapshot:{blockNumber:98,records}}
   const state = {deployment:{id:'audit'},snapshot:{blockNumber:102,records}}
   const receipts = new Map([['4',{tokenId:'4',blockNumber:100,genotype}]])
-  const context = {previous,state,chainState:previous,receiptEntries:receipts,syncDocumentTitle(){},renderFooterNetworkLinks(){}}
+  const context = {previous,state,chainState:previous,receiptEntries:receipts,collectionRevision:0,syncDocumentTitle(){},renderFooterNetworkLinks(){}}
   vm.runInNewContext(reconcile + '\n}', context)
   assert.equal(receipts.size, 0, 'A reorged-out NFT remains in My Friends despite the canonical head passing its receipt')
 })
@@ -73,7 +73,7 @@ test('TRANSITION CHECK: receipt preview preserves public mint phase', async () =
   const receipts = new Map()
   const context = {
     record:{tokenId:'5',genotype,phase:'public',price:'100000000000000',buyer,owner:buyer},
-    receiptEntries:receipts,spiralEntries:[],mintedGenotypes:new Set(),genotypeKey:g=>g.join(','),currentView:'spiral',
+    receiptEntries:receipts,spiralEntries:[],collectionRevision:0,mintedGenotypes:new Set(),genotypeKey:g=>g.join(','),currentView:'spiral',
     buildNodes(){},renderGallery(){},renderMyFriends(){},renderWishlist(){},renderHistoryCatalog(){},renderSidebar(){}
   }
   vm.runInNewContext(source.slice(start,end),context)

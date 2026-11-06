@@ -1,6 +1,42 @@
 import {Contract, JsonRpcProvider, FetchRequest, keccak256} from 'ethers';
 import {ABI, CHAIN_CACHE_PREFIX, CHAIN_SNAPSHOT_VERSION, PRICE_STEP, chainInterface, appendMintLogs, deploymentKey, validateDeployment} from './chain-core.js';
 
+const PROFILE_SOURCES=new Set(['manual','magic_forest','opensea']);
+const PROFILE_ADDRESS=/^0x[\da-f]{40}$/;
+
+export async function fetchMinterProfiles(url,{fetchImpl=fetch,timeoutMs=5000}={}){
+  if(!url)return Object.create(null);
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);
+  try{
+    const response=await fetchImpl(url,{cache:'no-store',signal:controller.signal,headers:{Accept:'application/json'}});
+    if(!response.ok)throw Error(`Profile API returned HTTP ${response.status}.`);
+    const payload=await response.json();
+    if(payload?.version!==1||!payload.profiles||typeof payload.profiles!=='object'||Array.isArray(payload.profiles))throw Error('Invalid minter profile response.');
+    const entries=Object.entries(payload.profiles);
+    if(entries.length>50_000)throw Error('Minter profile response is too large.');
+    const profiles=Object.create(null);
+    for(const [rawAddress,profile] of entries){
+      const address=rawAddress.toLowerCase();
+      if(!PROFILE_ADDRESS.test(address)||address!==rawAddress||!profile||typeof profile!=='object'||Array.isArray(profile))continue;
+      const name=profile.displayName;
+      if(typeof name!=='string'||!name.trim()||[...name.trim()].length>80||!PROFILE_SOURCES.has(profile.source))continue;
+      const clean={displayName:name.trim(),source:profile.source};
+      let valid=true;
+      for(const [input,output] of [['profileUrl','profileUrl'],['avatarUrl','avatarUrl']])if(profile[input]!==undefined){try{
+        const parsed=new URL(profile[input]);
+        if(typeof profile[input]!=='string'||profile[input].length>2048||parsed.protocol!=='https:'||parsed.username||parsed.password)throw Error();
+        clean[output]=profile[input];
+      }catch{valid=false;break;}}
+      if(!valid)continue;
+      profiles[address]=Object.freeze(clean);
+    }
+    const maximumExpiry=Date.now()+15*60_000;
+    const expiresAt=Number.isSafeInteger(payload.expiresAt)&&payload.expiresAt>0?Math.min(payload.expiresAt,maximumExpiry):maximumExpiry;
+    const safeProfiles=expiresAt<=Date.now()?Object.create(null):profiles;
+    return Object.freeze({profiles:Object.freeze(safeProfiles),expiresAt});
+  }finally{clearTimeout(timer);}
+}
+
 const hash=value=>typeof value==='string'&&/^0x[\da-f]{64}$/i.test(value);
 const decimal=value=>typeof value==='string'&&/^\d{1,78}$/.test(value);
 const address=value=>typeof value==='string'&&/^0x[\da-f]{40}$/i.test(value);
@@ -39,18 +75,27 @@ export function snapshotFromEnvelope(envelope,deployment,genotypeSpace=Number.MA
   return validateChainSnapshot(envelope.snapshot,deployment,genotypeSpace,traitCounts);
 }
 
-export async function fetchAndSeedSnapshot(reader,url,{fetchImpl=globalThis.fetch,timeoutMs=2500,maxBlockLag=128}={}) {
+export async function fetchAndSeedSnapshot(reader,url,{fetchImpl=globalThis.fetch,timeoutMs=2500,maxBlockLag=128,replace=false}={}) {
   if(typeof fetchImpl!=='function')throw Error('Snapshot fetch is unavailable.');
   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),timeoutMs);
   try{
     const response=await fetchImpl(url,{headers:{accept:'application/json'},signal:controller.signal});
-    if(!response.ok)throw Error('Snapshot API unavailable.');
+    if(!response.ok){
+      const error=Error('Snapshot API unavailable.');error.status=Number(response.status)||0;
+      const retryAfter=response.headers?.get?.('retry-after');
+      if(typeof retryAfter==='string'&&retryAfter.trim()){
+        const trimmed=retryAfter.trim(),seconds=/^(?:0|[1-9]\d*)(?:\.\d+)?$/.test(trimmed)?Number(trimmed):NaN;
+        if(Number.isFinite(seconds))error.retryAfterMs=Math.min(60_000,Math.max(1_000,seconds*1_000));
+        else {const retryAt=Date.parse(trimmed);if(Number.isFinite(retryAt))error.retryAfterMs=Math.min(60_000,Math.max(1_000,retryAt-Date.now()));}
+      }
+      throw error;
+    }
     const envelope=await response.json();
     const snapshot=snapshotFromEnvelope(envelope,reader.deployment,reader.genotypeSpace,reader.traitCounts);
     const [head,block]=await Promise.all([reader.provider.getBlockNumber(),reader.provider.getBlock(snapshot.blockNumber)]);
     if(snapshot.blockNumber>head||head-snapshot.blockNumber>maxBlockLag)throw Error('Snapshot API response is stale.');
     if(!block||!same(block.hash,snapshot.blockHash))throw Error('Snapshot API block is not canonical.');
-    return reader.seedSnapshot(envelope);
+    return reader.seedSnapshot(envelope,{replace});
   }finally{clearTimeout(timeout);}
 }
 
@@ -69,9 +114,12 @@ export class ChainReader {
       this.snapshot=validateChainSnapshot(cached,deployment,genotypeSpace,traitCounts);
     } catch {}
   }
-  seedSnapshot(envelope) {
+  seedSnapshot(envelope,{replace=false}={}) {
     const snapshot=snapshotFromEnvelope(envelope,this.deployment,this.genotypeSpace,this.traitCounts);
-    if(this.snapshot&&this.snapshot.blockNumber>=snapshot.blockNumber)return false;
+    if(this.snapshot&&(
+      this.snapshot.blockNumber>snapshot.blockNumber||
+      (!replace&&this.snapshot.blockNumber===snapshot.blockNumber)
+    ))return false;
     this.snapshot=snapshot;this.persist(snapshot);return true;
   }
   persist(snapshot) {
@@ -102,7 +150,9 @@ export class ChainReader {
     const head=await this.provider.getBlockNumber();
     const end=Math.max(this.deployment.deploymentBlock,head-(this.deployment.chainId===31337?0:2));
     let state=this.snapshot;
-    if (state && (state.blockNumber>end || (await this.provider.getBlock(state.blockNumber))?.hash!==state.blockHash)) state=null;
+    if (state && (state.blockNumber>end || (await this.provider.getBlock(state.blockNumber))?.hash!==state.blockHash)) {
+      state=null;this.snapshot=null;try{this.storage?.removeItem(this.key);}catch{}
+    }
     if(state&&state.blockNumber===end)return state;
     const opts={blockTag:end};
     const [total,cap,publicMinted,allowlistMinted,salePhase,block]=await Promise.all([

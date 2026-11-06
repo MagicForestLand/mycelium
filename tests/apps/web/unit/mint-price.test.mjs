@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {mintActionAvailable,mintBatchPrice,formatMintETH,MINT_PRICE_STEP,saleMintPrice} from '../../../../apps/web/src/mint-price.js';
-test('mint quotes follow chronological prices with exact wei and five decimal ETH display',()=>{
-  for(const [minted,display] of [[0n,'0.00000'],[1n,'0.00010'],[99n,'0.00990'],[999n,'0.09990']])assert.equal(formatMintETH(mintBatchPrice(minted)),display);
+test('mint quotes follow chronological prices with exact wei and compact ETH display',()=>{
+  for(const [minted,display] of [[0n,'0'],[1n,'0.0001'],[42n,'0.0042'],[99n,'0.0099'],[999n,'0.0999']])assert.equal(formatMintETH(mintBatchPrice(minted)),display);
   for(let minted=0n;minted<1000n;minted+=37n)for(let quantity=1n;quantity<=32n;quantity++){
     let expected=0n;for(let i=0n;i<quantity;i++)expected+=(minted+i)*MINT_PRICE_STEP;
     assert.equal(mintBatchPrice(minted,quantity),expected);

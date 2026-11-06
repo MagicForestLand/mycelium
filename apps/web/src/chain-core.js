@@ -75,6 +75,7 @@ export function validateDeployment(d) {
     if(d.explorerUrl&&d.explorerUrl.replace(/\/$/,'')!==d.explorers.etherscan.replace(/\/$/,''))throw Error('Primary explorer must be Etherscan.');
   }
   if (d.snapshotUrl && new URL(d.snapshotUrl).protocol!=='https:') throw Error('Use HTTPS for the snapshot API.');
+  if (d.profilesUrl && new URL(d.profilesUrl).protocol!=='https:') throw Error('Use HTTPS for the minter profile API.');
   if (d.mintEvidenceUrl && new URL(d.mintEvidenceUrl).protocol!=='https:') throw Error('Use HTTPS for the mint evidence API.');
   return d;
 }

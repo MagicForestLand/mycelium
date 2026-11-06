@@ -130,7 +130,7 @@ try{
  checks.push('Footer exposes verified project links, the active network contract and the already-loaded USD/EUR rate without another quote request.');
  const preparedGenotype=(await genotype()).split(',').map(Number);
  await page.evaluate(({deployment,genotype,identity})=>window.dispatchEvent(new CustomEvent('myfriends:state',{detail:{ready:true,busy:false,walletChecking:false,account:'0x2222222222222222222222222222222222222222',deployment,preparedMints:[{genotype,status:'READY TO MINT'}],snapshot:{records:[],total:0,cap:10000,price:'100000000000000',publicOpen:true,salePhase:2,blockNumber:1,blockHash:identity}}})),{deployment:browserConfig.deployments[0],genotype:preparedGenotype,identity});
- assert.equal(await page.title(),'mycelium Friends · 0.00010 ETH');
+ assert.equal(await page.title(),'mycelium Friends · 0.0001 ETH');
  assert.equal(await page.$eval('#previewOwnership',node=>!node.hidden&&node.classList.contains('is-prepared')&&node.title==='Preparation paid · ready to mint'&&Boolean(node.querySelector('svg'))),true);
  assert.equal(await page.$eval('#toggleWishlist',node=>node.hidden),true);
  await page.evaluate(({deployment,identity})=>window.dispatchEvent(new CustomEvent('myfriends:state',{detail:{ready:true,busy:false,walletChecking:false,account:'0x2222222222222222222222222222222222222222',deployment,preparedMints:[],snapshot:{records:[],total:0,cap:10000,price:'100000000000000',publicOpen:true,salePhase:2,blockNumber:1,blockHash:identity}}})),{deployment:browserConfig.deployments[0],identity});
@@ -546,18 +546,87 @@ await page.waitForFunction(() => {
  await page.waitForFunction(()=>document.querySelector('#mobile-trait-cap-4 canvas')?.dataset.painted==='true');
  await page.$eval('#mobileTraitRail',node=>{node.scrollLeft=node.scrollWidth;});await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
  assert.deepEqual(await page.$eval('#mobile-trait-cap-4 canvas',node=>({painted:node.dataset.painted,width:node.width})),{painted:'true',width:96});
- await page.evaluate(()=>{const probe=document.createElement('span');probe.id='performanceNextProbe';probe.className='coming';probe.innerHTML='<canvas width="1" height="1" data-resolution="144" data-genotype="hidden-builder-sentinel"></canvas>';document.querySelector('#nodes').append(probe);});
+ await page.evaluate(({deployment})=>{
+  const owner='0x3333333333333333333333333333333333333333',genotype=window.myFriendsUI.genotype(),records=Array.from({length:61},(_,index)=>({tokenId:String(index+1),genotype:[...genotype],price:String(index*100000000000000),phase:'public',step:index+1,buyer:owner,owner,transactionHash:'0x'+String(index+1).padStart(64,'0'),blockNumber:2}));
+  const mobileDeployment={...deployment,id:deployment.id+'-mobile-lifecycle'};
+  window.__baseMobileDeployment=deployment;
+  window.__mobileSpiralState={ready:true,busy:false,walletChecking:false,account:null,deployment:mobileDeployment,walletEnabled:true,preparedMints:[],snapshot:{records,total:records.length,cap:10000,price:'6100000000000000',publicOpen:true,salePhase:2,blockNumber:2,blockHash:'0x'+'ab'.repeat(32)}};
+  window.__mobileStateLock=event=>{if(event.detail!==window.__mobileSpiralState)event.stopImmediatePropagation();};
+  window.__mobileConfirmed=window.myFriendsUI.confirmed;window.myFriendsUI.confirmed=()=>{};
+  window.addEventListener('myfriends:state',window.__mobileStateLock,true);
+  window.dispatchEvent(new CustomEvent('myfriends:state',{detail:window.__mobileSpiralState}));
+ },{deployment:browserConfig.deployments[0]});
+ const hiddenSpiral=await page.evaluate(()=>({path:Boolean(document.querySelector('#mainSpiral').getAttribute('d')),nodes:document.querySelectorAll('#nodes [data-slot]').length,phase:document.body.dataset.spiralIntro,total:document.querySelector('#stage').dataset.totalPositions,position:document.querySelector('#spiralPosition').textContent}));
+ assert.deepEqual({path:hiddenSpiral.path,nodes:hiddenSpiral.nodes,phase:hiddenSpiral.phase},{path:true,nodes:0,phase:'waiting'},'A snapshot received in Builder keeps the mobile Spiral geometry but creates no hidden canvases or fake positions');
  await page.focus('#mobile-trait-cap-4');await page.keyboard.press('ArrowRight');mobileGenotype[1]='5';mobileGenotypeText=mobileGenotype.join(',');
  assert.equal(await genotype(),mobileGenotypeText);assert.equal(await page.evaluate(()=>document.activeElement.id),'mobile-trait-cap-5');
- assert.equal(await page.$eval('#performanceNextProbe canvas',node=>node.dataset.genotype),'hidden-builder-sentinel','Hidden Spiral preview must not repaint during Builder changes');
- await page.click('[data-mobile-destination="spiral"]');await page.waitForFunction(()=>document.body.dataset.mobileSurface==='spiral');
+ assert.equal(await page.$$eval('#nodes [data-slot]',nodes=>nodes.length),0,'Builder changes must not create or repaint hidden Spiral canvases');
+ await page.click('[data-mobile-destination="about"]');await page.waitForFunction(()=>document.body.dataset.view==='about');
+ const afterAbout=await page.evaluate(()=>({phase:document.body.dataset.spiralIntro,nodes:document.querySelectorAll('#nodes [data-slot]').length,pending:document.querySelector('#stage').classList.contains('spiral-loading-pending'),loading:document.querySelector('#stage').classList.contains('spiral-loading')}));
+ assert.deepEqual(afterAbout,{phase:'waiting',nodes:0,pending:false,loading:false},'Leaving Builder before the first Spiral visit must preserve the pending intro without leaving its thread permanently masked');
+ await page.evaluate(()=>{
+  window.__introReveals=[];window.__introAnimate=Element.prototype.animate;
+  Element.prototype.animate=function(...args){const animation=window.__introAnimate.apply(this,args);if(this.matches?.('#nodes .node'))window.__introReveals.push({slot:Number(this.dataset.slot),createdAt:document.timeline.currentTime,animation});return animation;};
+ });
+ const immediateSpiral=await page.$eval('[data-mobile-destination="spiral"]',link=>{link.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,button:0}));const path=document.querySelector('#mainSpiral').getAttribute('d');return {view:document.body.dataset.view,surface:document.body.dataset.mobileSurface,visible:getComputedStyle(document.querySelector('#universe')).display!=='none',path:Boolean(path),nodes:document.querySelectorAll('#nodes [data-slot]').length,phase:document.body.dataset.spiralIntro};});
+ assert.deepEqual(immediateSpiral,{view:'spiral',surface:'spiral',visible:true,path:true,nodes:0,phase:'waiting'},'A mobile Spiral tap reveals its shell in the input event without synchronously painting hidden canvases');
+ await page.waitForFunction(()=>document.body.dataset.mobileSurface==='spiral');
+ await page.waitForFunction(()=>document.querySelector('#stage').classList.contains('spiral-loading'));
+ const mobileThreadMotion=await page.evaluate(()=>{
+  const stage=document.querySelector('#stage'),main=document.querySelector('#mainSpiral'),back=document.querySelector('#backSpiral');
+  return {mainName:getComputedStyle(main).animationName,mainDuration:getComputedStyle(main).animationDuration,mainFilter:getComputedStyle(main).filter,backName:getComputedStyle(back).animationName,backOpacity:getComputedStyle(back).opacity,start:Number.parseFloat(stage.style.getPropertyValue('--spiral-loading-start')),end:Number.parseFloat(stage.style.getPropertyValue('--spiral-loading-end')),normalized:main.hasAttribute('pathLength')};
+ });
+ assert.equal(mobileThreadMotion.mainName,'spiral-loading-draw','The mobile Spiral keeps the same single-stroke drawing motion as desktop');
+ assert.equal(mobileThreadMotion.mainDuration,'3.2s','The mobile brush must not rush through the visible Spiral');
+ assert.equal(mobileThreadMotion.mainFilter,'none','The moving mobile brush must not ask WebKit to repaint a drop shadow on every frame');
+ assert.equal(mobileThreadMotion.backName,'none','The wide glow line must not be animated in blocks behind the mobile brush');
+ assert.equal(mobileThreadMotion.backOpacity,'0','The wide glow line stays hidden until the clean mobile stroke is complete');
+ assert.equal(mobileThreadMotion.normalized,false,'The mobile brush uses its real pixel length instead of WebKit pathLength normalization');
+ assert.ok(mobileThreadMotion.start>mobileThreadMotion.end&&mobileThreadMotion.end>0,'The mobile brush duration is fitted in real path pixels to the visible path instead of its offscreen safety tail');
+ await page.waitForFunction(()=>document.body.dataset.spiralIntro==='waiting'&&document.querySelector('#nodes .node:not(.empty) canvas')?.dataset.genotype,{timeout:3000}).catch(async error=>{console.error('Thread preparation state:',await page.evaluate(()=>({phase:document.body.dataset.spiralIntro,loading:document.querySelector('#stage').className,nodes:document.querySelectorAll('#nodes .node').length,pending:document.querySelectorAll('#nodes .spiral-art-pending').length,painted:document.querySelectorAll('#nodes canvas.painted').length,snapshot:Boolean(window.__mobileSpiralState?.snapshot)})));throw error;});
+ const threadPreparation=await page.evaluate(()=>({phase:document.body.dataset.spiralIntro,pending:document.querySelectorAll('#nodes .spiral-art-pending').length,ready:document.querySelectorAll('#nodes .spiral-art-ready').length,painted:document.querySelectorAll('#nodes canvas.painted').length,reveals:window.__introReveals.length}));
+ assert.ok(threadPreparation.phase==='waiting'&&threadPreparation.pending>0&&threadPreparation.ready===0&&threadPreparation.painted>0&&threadPreparation.reveals===0,'The drawing thread quietly prepares mobile canvases while every mushroom remains hidden');
+ await page.evaluate(()=>{window.__mobileSpiralStateTimer=setInterval(()=>window.dispatchEvent(new CustomEvent('myfriends:state',{detail:window.__mobileSpiralState})),100);});
+ await page.waitForFunction(()=>document.body.dataset.spiralIntro!=='waiting',{timeout:6000});
+ await page.waitForFunction(()=>document.body.dataset.spiralIntro==='minted'&&document.querySelector('#nodes .node:not(.empty) canvas')?.dataset.genotype,{timeout:6000});
+ await page.waitForFunction(()=>new Set(window.__introReveals.map(item=>item.slot)).size>=4,{timeout:3000});
+ const introRevealCadence=await page.evaluate(()=>{const seen=new Set(),unique=window.__introReveals.filter(item=>!seen.has(item.slot)&&seen.add(item.slot)).slice(0,4);const result=unique.map(item=>{const timing=item.animation.effect.getTiming();return {slot:item.slot,createdAt:item.createdAt,delay:timing.delay,duration:timing.duration,frames:item.animation.effect.getKeyframes()};});Element.prototype.animate=window.__introAnimate;return result;});
+ assert.deepEqual(introRevealCadence.map(item=>item.slot),[1,2,3,4],'The first mobile mushrooms reveal from the Spiral centre in exact numbered order');
+ assert.ok(introRevealCadence.every((item,index)=>index===0||item.createdAt-introRevealCadence[index-1].createdAt>=100),'The first mobile mushroom fades are created on distinct presentation frames without pair-like timing');
+ assert.ok(introRevealCadence.every(item=>item.delay===0),'Mobile reveal animations start when created instead of asking Safari to schedule a future WAAPI batch');
+ assert.ok(introRevealCadence.every(item=>item.duration===400&&item.frames[0].opacity==='0'&&item.frames[0].visibility==='visible'&&item.frames[0].transform.includes('scale(0.84)')),'Each mobile mushroom uses the same compositor-only soft growth from transparent to visible, without a discrete visibility cut');
+ const introBeforeReset=await page.evaluate(()=>({phase:document.body.dataset.spiralIntro,nodes:document.querySelectorAll('#nodes [data-slot]').length,painted:document.querySelectorAll('#nodes canvas.painted').length}));
+ assert.ok(introBeforeReset.phase==='minted'&&introBeforeReset.nodes>0&&introBeforeReset.painted>0,'The visible mobile Spiral starts its ordered mushroom reveal only after the thread and snapshot are ready');
+ await page.evaluate(()=>{
+  clearInterval(window.__mobileSpiralStateTimer);delete window.__mobileSpiralStateTimer;
+  window.__mobileDispatchEvent=window.dispatchEvent;
+  window.dispatchEvent=function(event){return event?.type==='myfriends:state'?true:window.__mobileDispatchEvent.call(this,event);};
+ });
+ await page.click('#reset');
+ const settledAfterReset=await page.evaluate(()=>({phase:document.body.dataset.spiralIntro,nodes:document.querySelectorAll('#nodes [data-slot]').length}));
+ await new Promise(resolve=>setTimeout(resolve,300));
+ assert.deepEqual(await page.evaluate(()=>({phase:document.body.dataset.spiralIntro,nodes:document.querySelectorAll('#nodes [data-slot]').length})),settledAfterReset,'Reset cancels the mobile intro RAF instead of letting it overwrite the stable scene later');
+ assert.equal(settledAfterReset.phase,'done');
+ await page.evaluate(()=>{window.dispatchEvent=window.__mobileDispatchEvent;delete window.__mobileDispatchEvent;});
+ // Keep this synthetic interaction fixture authoritative while the real reader
+ // independently reports the intentionally unavailable local RPC.
+ await page.evaluate(()=>{window.__mobileSpiralState={...window.__mobileSpiralState,deployment:{...window.__mobileSpiralState.deployment,id:window.__mobileSpiralState.deployment.id+'-interaction'}};window.dispatchEvent(new CustomEvent('myfriends:state',{detail:window.__mobileSpiralState}));window.__mobileSpiralStateTimer=setInterval(()=>window.dispatchEvent(new CustomEvent('myfriends:state',{detail:window.__mobileSpiralState})),100);});
+ await page.waitForFunction(()=>{const node=document.querySelector('#nodes .node:not(.empty).spiral-art-ready');return document.body.dataset.spiralIntro==='minted'&&node&&getComputedStyle(node).visibility==='visible';}).catch(async error=>{console.error('Mobile interaction intro state:',await page.evaluate(()=>({phase:document.body.dataset.spiralIntro,view:document.body.dataset.view,surface:document.body.dataset.mobileSurface,hidden:document.hidden,stage:document.querySelector('#stage').className,nodes:document.querySelectorAll('#nodes .node').length,painted:document.querySelectorAll('#nodes canvas.painted').length,hash:location.hash})));throw error;});
+ const interruptedIntro=await page.evaluate(async()=>{const node=document.querySelector('#nodes .node:not(.empty).spiral-art-ready'),slot=node.dataset.slot,position=document.querySelector('#spiralScrub').value;node.focus();await new Promise(resolve=>requestAnimationFrame(resolve));return {connected:node.isConnected,slotStillPresent:Boolean(document.querySelector(`#nodes [data-slot="${slot}"]`)),position,settledPosition:document.querySelector('#spiralScrub').value,phase:document.body.dataset.spiralIntro};});
+ assert.deepEqual(interruptedIntro,{connected:true,slotStillPresent:true,position:interruptedIntro.position,settledPosition:interruptedIntro.position,phase:'done'},'Interrupting the mushroom reveal must settle at its current position so the tapped or focused mushroom does not disappear');
+ await page.evaluate(()=>{clearInterval(window.__mobileSpiralStateTimer);delete window.__mobileSpiralStateTimer;window.removeEventListener('myfriends:state',window.__mobileStateLock,true);delete window.__mobileStateLock;});
+ await page.evaluate(()=>window.dispatchEvent(new CustomEvent('myfriends:state',{detail:{...window.__mobileSpiralState,snapshot:null}})));
+ await page.waitForFunction(()=>document.querySelectorAll('#nodes [data-slot]').length===0);
+ assert.equal(await page.$eval('#spiralPosition',node=>node.textContent),'0 / 0','A temporarily unavailable snapshot must show no fabricated NEXT mushroom or future positions');
+ await page.evaluate(()=>window.dispatchEvent(new CustomEvent('myfriends:state',{detail:window.__mobileSpiralState})));
+ await page.waitForFunction(()=>document.querySelectorAll('#nodes [data-slot]').length>0);
  assert.equal(await page.evaluate(()=>location.hash),'#spiral?genotype='+mobileGenotypeText);
  assert.equal(await page.$eval('[data-mobile-destination="spiral"]',node=>node.getAttribute('aria-current')),'page');
  assert.notEqual(await page.$eval('#universe',node=>getComputedStyle(node).display),'none');
- assert.equal(await page.$eval('#performanceNextProbe canvas',node=>node.dataset.genotype),mobileGenotypeText,'Opening Spiral must synchronize its deferred preview');
- await page.$eval('#performanceNextProbe',node=>node.remove());
+ await page.evaluate(()=>{const snapshot={...window.__mobileSpiralState.snapshot,records:[],total:0,blockNumber:3,blockHash:'0x'+'cd'.repeat(32)};window.__mobileSpiralState={...window.__mobileSpiralState,deployment:window.__baseMobileDeployment,snapshot};window.dispatchEvent(new CustomEvent('myfriends:state',{detail:window.__mobileSpiralState}));document.querySelector('#reset').click();});
  await page.evaluate(()=>{
-  for(let index=0;index<12;index++)window.myFriendsUI.confirmed({tokenId:String(900+index),genotype:[index%29,index%64,index%20,index%19,index%2,index%23],owner:'0x4444444444444444444444444444444444444444',price:'0',transactionHash:'0x'+String(index+1).padStart(64,'0'),phase:'public'});
+  for(let index=0;index<12;index++)window.__mobileConfirmed({tokenId:String(900+index),genotype:[index%29,index%64,index%20,index%19,index%2,index%23],owner:'0x4444444444444444444444444444444444444444',price:'0',transactionHash:'0x'+String(index+1).padStart(64,'0'),phase:'public'});
+  window.myFriendsUI.confirmed=window.__mobileConfirmed;delete window.__mobileConfirmed;
  });
  assert.equal(await page.$eval('#universe',node=>getComputedStyle(node).touchAction),'none');
  assert.deepEqual(await page.$$eval('.spiral-controls button',nodes=>nodes.filter(node=>{const style=getComputedStyle(node),rect=node.getBoundingClientRect();return style.display!=='none'&&rect.width>0&&rect.height>0;}).map(node=>node.id)),['reset']);
@@ -577,7 +646,8 @@ await page.waitForFunction(() => {
  await page.screenshot({path:`${mobilePreviews}/spiral.png`});
  assert.equal(await page.$$eval('.living-star',nodes=>nodes.filter(node=>getComputedStyle(node).display!=='none').length<=40),true);
  assert.equal(await page.$eval('.living-star',node=>getComputedStyle(node).animationName.includes('starFloat')),false);
- await page.goBack();await page.waitForFunction(()=>document.body.dataset.mobileSurface==='builder');
+ await page.goBack();await page.waitForFunction(()=>document.body.dataset.view==='about');
+ await page.goBack();await page.waitForFunction(()=>document.body.dataset.mobileSurface==='builder'&&document.body.dataset.view==='spiral');
  assert.equal(await genotype(),mobileGenotypeText);
  assert.equal(await page.$eval('[data-mobile-destination="builder"]',node=>node.getAttribute('aria-current')),'page');
  for(const [width,height] of [[320,700],[360,800],[375,635],[375,812],[390,844],[430,932],[768,1024],[844,390]]){
@@ -604,20 +674,22 @@ await page.waitForFunction(() => {
  assert.deepEqual(await page.$$eval('[data-mobile-destination="history"],[data-mobile-destination="about"]',nodes=>nodes.map(node=>node.querySelector('svg')?.dataset.icon)),['history','about']);
  assert.equal(await page.$eval('[data-mobile-destination="about"] svg',node=>node.querySelectorAll('circle').length===1&&node.querySelectorAll('path').length===1),true);
  assert.deepEqual(await page.$eval('.protocol-spiral-card',card=>{const copy=card.querySelector(':scope > p').getBoundingClientRect(),steps=card.querySelector('.price-spiral-mini').getBoundingClientRect();return {copyBeforeSteps:copy.bottom<=steps.top,copyOrder:getComputedStyle(card.querySelector(':scope > p')).order,stepsOrder:getComputedStyle(card.querySelector('.price-spiral-mini')).order};}),{copyBeforeSteps:true,copyOrder:'1',stepsOrder:'2'});
- assert.deepEqual(await page.$$eval('.about-footer-links[aria-label="Contacts"] a',nodes=>nodes.map(node=>({label:node.textContent.trim(),icon:node.querySelector('use')?.getAttribute('href')}))),[
-  {label:'MAGIC FOREST',icon:'#icon-forest'},
-  {label:'TWITTER',icon:'#icon-twitter'},
-  {label:'INSTAGRAM',icon:'#icon-instagram'},
-  {label:'YOUTUBE',icon:'#icon-youtube'}
+ assert.deepEqual(await page.$$eval('.about-mobile-primary-links a',nodes=>nodes.map(node=>({label:node.textContent.trim(),icon:node.querySelector('use')?.getAttribute('href'),href:node.getAttribute('href'),hidden:node.hidden}))),[
+  {label:'OPENSEA',icon:'#icon-opensea',href:null,hidden:true},
+  {label:'TWITTER',icon:'#icon-twitter',href:'https://twitter.com/MagicForestLand',hidden:false},
+  {label:'GITHUB',icon:'#icon-github',href:'https://github.com/MagicForestLand/mycelium/',hidden:false}
  ]);
- assert.equal(await page.$eval('#icon-forest',node=>node.querySelectorAll('path').length===2&&node.textContent.trim()===''),true);
- assert.deepEqual(await page.$$eval('.about-footer-links[aria-label="Collection links"] a',nodes=>nodes.map(node=>node.querySelector('use')?.getAttribute('href'))),['#icon-opensea','#icon-etherscan','#icon-evm','#icon-sourcify']);
+ assert.deepEqual(await page.$$eval('.about-footer-links',nodes=>nodes.map(node=>getComputedStyle(node).display)),['block','block']);
+ assert.equal(await page.$eval('.about-mobile-primary-links',node=>node.previousElementSibling?.id),'about-title');
+ assert.equal(await page.$eval('.about-mobile-primary-links a:not([hidden]) .about-icon',node=>node.getBoundingClientRect().width),32);
+ await page.$eval('#about-view',node=>node.scrollTop=0);await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+ await page.screenshot({path:`${mobilePreviews}/about-shortcuts.png`});
  assert.equal(await page.$eval('#aboutFooterContract',node=>node.href),await page.$eval('#footerContract',node=>node.href));
  assert.equal(await page.$eval('#aboutFooterContractSecondary',node=>node.href),await page.$eval('#footerContractSecondary',node=>node.href));
  assert.deepEqual(await page.$eval('#aboutFooterSourcify',node=>({hidden:node.hidden,href:node.getAttribute('href')})),{hidden:true,href:null});
  const aboutMobileBounds=await page.evaluate(()=>{
   const progress=document.querySelector('#forestProgress').getBoundingClientRect(),goal=document.querySelector('.forest-progress-goal strong').getBoundingClientRect(),track=document.querySelector('.forest-progress-track').getBoundingClientRect(),donations=document.querySelector('.forest-progress-marker.is-donations').getBoundingClientRect();
-  return {pageOverflow:document.documentElement.scrollWidth>innerWidth,progressInside:progress.left>=0&&progress.right<=innerWidth,progressHeight:progress.height,goalInside:goal.left>=progress.left&&goal.right<=progress.right,donationClearance:track.top-donations.bottom,socialDisplay:getComputedStyle(document.querySelector('.about-footer-links')).display};
+  return {pageOverflow:document.documentElement.scrollWidth>innerWidth,progressInside:progress.left>=0&&progress.right<=innerWidth,progressHeight:progress.height,goalInside:goal.left>=progress.left&&goal.right<=progress.right,donationClearance:track.top-donations.bottom,socialDisplay:getComputedStyle(document.querySelector('.about-mobile-primary-links')).display};
  });
  assert.equal(aboutMobileBounds.pageOverflow,false);
  assert.equal(aboutMobileBounds.progressInside,true);
@@ -679,8 +751,8 @@ await page.waitForFunction(() => {
  checks.push('The preview die rotates six permanent 3D faces as one rigid solid; pips stay attached, all sampled frames fit its circular button, and the final matrix exposes the expected isometric face values.');
  checks.push('Six 44px trait categories drive one horizontal value rail while preserving genotype URLs, Spiral history and browser Back.');
  checks.push('Trait selection preserves the rail DOM and painted thumbnails while smoothly centering the active value without painting passing traits.');
- checks.push('Mobile Spiral uses one-finger travel, pinch zoom and one reset icon while hiding its desktop transport and zoom controls.');
- checks.push('Mobile About keeps fundraising values inside 320px, exposes circular contact and collection icons, routes its CTAs correctly and gives Magic Forest a dedicated fir-tree icon.');
+ checks.push('Mobile Spiral opens in the tap event, supports one-finger travel and pinch zoom, and shows one reset icon while preserving its living star field.');
+ checks.push('Mobile About keeps fundraising values inside 320px, adds three small OpenSea, Twitter and GitHub shortcuts below its title, and preserves both existing footer link groups.');
  checks.push('About links the Spiral builder and secondary market, separates 1/1 and 10k-collection FOMO, and frames the visible 2^28 horizon as an honest community experiment.');
  checks.push('Fundraising totals and GOAL share the right content edge, while the exchange-rate refresh stays compact and aligned to the text axis.');
  checks.push('Programmatically focused About, Wishlist and History headings retain accessibility focus without painting a stale blue box around editorial text.');
@@ -691,6 +763,9 @@ await page.waitForFunction(() => {
  const mobileGalleryState=async gallery=>page.evaluate(selector=>{const controls=document.querySelector('#gridScaleControls'),grid=document.querySelector(selector),columns=getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean);return {scaleVisible:getComputedStyle(controls).display!=='none'&&controls.getBoundingClientRect().width>0,columns:columns.length};},gallery);
  await page.evaluate(()=>window.myFriendsUI.forest());await page.waitForFunction(()=>!document.querySelector('#forest-view').hidden);
  assert.deepEqual(await mobileGalleryState('#gallery'),{scaleVisible:false,columns:2});
+ assert.equal(await page.$$eval('#gallery .collection-card',cards=>cards.length>0&&cards.every(card=>{const labels=[...card.querySelectorAll('.collection-card-meta dt')].map(node=>node.textContent);return labels.join('|')==='OWNER|MINT PRICE'&&!card.textContent.includes('LISTING')&&!card.textContent.includes('MINTER');})),true);
+ assert.equal(await page.$eval('#forest-view',node=>node.textContent.includes('Live listings are not stored in the NFT contract.')),false);
+ if(!await page.$eval('#privacyNotice',node=>node.hidden))await page.click('#privacyDismiss');
  await page.screenshot({path:`${mobilePreviews}/collection.png`});
  await page.click('[data-mobile-destination="wishlist"]');await page.waitForFunction(()=>!document.querySelector('#wishlist-view').hidden);
  assert.deepEqual(await mobileGalleryState('#wishlist-gallery'),{scaleVisible:false,columns:2});
@@ -703,7 +778,7 @@ await page.waitForFunction(() => {
  assert.equal(await page.$eval('#moreHistory',node=>node.hidden),false);
  await page.click('#moreHistory');assert.equal(await page.$$eval('#history-gallery .history-card',nodes=>nodes.length)>24,true);
  await page.click('[data-mobile-destination="builder"]');await page.waitForFunction(()=>document.body.dataset.mobileSurface==='builder'&&document.body.dataset.view==='spiral');
- checks.push('Collection, Wishlist and History keep a stable two-column mobile grid without desktop artwork-scale controls.');
+ checks.push('Collection keeps only owner and mint price on narrow cards; Collection, Wishlist and History retain a stable two-column mobile grid without desktop artwork-scale controls.');
  checks.push('History renders saved looks in 24-card batches with a smaller viewport-lazy mobile canvas working set.');
  // Exercise actual browser rasterisation and verify the downloaded files, not only button labels.
  downloadPath=await mkdtemp(path.join(os.tmpdir(),'mycelium-mint-downloads-'));

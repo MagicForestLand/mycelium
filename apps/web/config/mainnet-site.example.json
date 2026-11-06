@@ -17,6 +17,7 @@
     "networkName": "Ethereum",
     "rpcUrl": "REPLACE_WITH_PUBLIC_HTTPS_MAINNET_RPC",
     "snapshotUrl": "REPLACE_WITH_REVIEWED_HTTPS_SNAPSHOT_API",
+    "profilesUrl": "REPLACE_WITH_REVIEWED_HTTPS_MINTER_PROFILE_API",
     "mintEvidenceUrl": "REPLACE_WITH_REVIEWED_HTTPS_MINT_EVIDENCE_API",
     "explorers": {
       "etherscan": "https://etherscan.io",
